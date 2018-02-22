@@ -24,9 +24,9 @@ public class Connect
               conn = null;
 	       try
 	       {
-	           String url = "jdbc:mysql://sql12.freesqldatabase.com:3306/sql12220110";
+	           String url = "jdbc:mysql://localhost:3306/gamecenter";
 	           Class.forName("com.mysql.jdbc.Driver");
-	           conn = DriverManager.getConnection (url,"sql12220110","jElKIYIbdH");
+	           conn = DriverManager.getConnection (url,"vipul","mysql");
 	           System.out.println ("Database connection established");
 	       }
 	       catch (Exception e)
