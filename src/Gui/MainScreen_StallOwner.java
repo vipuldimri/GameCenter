@@ -63,11 +63,21 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jPanel8 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jTextField4 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Main Screen ");
 
+        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.setLayout(null);
 
         jPanel4.setBackground(new java.awt.Color(0, 0, 0));
@@ -182,6 +192,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Recharge ", jPanel2);
 
+        jPanel3.setBackground(new java.awt.Color(0, 0, 0));
         jPanel3.setLayout(null);
 
         jPanel6.setBackground(new java.awt.Color(0, 0, 0));
@@ -199,7 +210,60 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
         jPanel6.setBounds(380, 40, 690, 640);
 
         jTabbedPane1.addTab("Today Collection", jPanel3);
-        jTabbedPane1.addTab("Admin", jTabbedPane2);
+
+        jPanel8.setLayout(null);
+
+        jPanel9.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel9.setLayout(null);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1200, Short.MAX_VALUE)
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel9.add(jPanel10);
+        jPanel10.setBounds(0, 310, 1200, 430);
+
+        jButton4.setText("ADD EMPLOYEE");
+        jPanel9.add(jButton4);
+        jButton4.setBounds(130, 80, 150, 40);
+
+        jButton5.setText("DELETE EMPLOYEE");
+        jPanel9.add(jButton5);
+        jButton5.setBounds(320, 80, 180, 40);
+
+        jButton6.setText("UPDATE EMPLOYEE DETAILS ");
+        jPanel9.add(jButton6);
+        jButton6.setBounds(580, 85, 180, 40);
+
+        jButton7.setText("SEARCH");
+        jPanel9.add(jButton7);
+        jButton7.setBounds(130, 260, 79, 25);
+        jPanel9.add(jTextField4);
+        jTextField4.setBounds(240, 260, 380, 22);
+
+        jPanel8.add(jPanel9);
+        jPanel9.setBounds(2, -4, 1200, 740);
+
+        jTabbedPane1.addTab("Admin", jPanel8);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -320,6 +384,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -327,22 +395,27 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }
