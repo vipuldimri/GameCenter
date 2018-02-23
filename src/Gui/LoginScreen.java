@@ -4,6 +4,10 @@ import gamecenter.Stall;
 import gamecenter.User;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.sql.Time;
+import java.time.Clock;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.Date;
@@ -155,9 +159,15 @@ public class LoginScreen extends javax.swing.JFrame
         // TODO add your handling code here:Login button Event
         String username = jTextField1.getText();
         char[] password = jPasswordField1.getPassword();
-        Date date = new Date();
-        Date date2 = new Date();
+        String pass ="";
+        for(int i = 0 ; i <password.length ; i ++)
+        {
+            pass = pass + password[i];
+        }
         
+        //ZoneId.of( "America/Montreal" )
+        //setting india timeZone 
+        LocalDate currentdate = LocalDate.now(  );
         if(username.length() == 0)
         {  
             jLabel5.setText("UserName is Required");
@@ -169,20 +179,59 @@ public class LoginScreen extends javax.swing.JFrame
            return ;
         }
      
-        boolean flag = false;
+        boolean flagUser = false;
+        boolean flagAdmin = false;
+        boolean flagSub = false;
         
-        
-        if(flag)
+        for(User u : users)
         {
-            JOptionPane.showMessageDialog(jPanel1,
-           "Invalid Password or UserName.",
-           "Inane error",
-            JOptionPane.ERROR_MESSAGE);
+         
+            if(u.getName().equals(username) || u.getPassword().equals(pass))
+            {
+                flagUser = true;
+                if(true)
+                {
+                    //code for checking sub is valid or not 
+                     JOptionPane.showMessageDialog(jPanel1,
+                     "Your Subscription is Expired Plz Contact The service Provider.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                     return ;
+                    
+                }
+                
+                if(u.getType().equals("admin"))
+                {
+                    flagAdmin = true;
+                }
+                break;
+            }
+            
+        }
+            
+        
+        
+          
+        
+        if(flagAdmin || flagUser)
+        {
+            if(flagAdmin)
+            {
+                new MainScreen_StallOwner("admin").setVisible(true);
+                setVisible(false);
+            }else{
+                new MainScreen_StallOwner().setVisible(true);
+                setVisible(false);
+            }
+            
         }
         else
         {
-            new MainScreen_StallOwner().setVisible(true);
-            setVisible(false);
+             JOptionPane.showMessageDialog(jPanel1,
+           "Invalid Password or UserName.",
+           "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+           
         }
         
         

@@ -11,6 +11,15 @@ public class MainScreen_Admin extends javax.swing.JFrame
     int y = (int) ((dimension.getHeight() - getHeight()) / 2);
     setLocation(x, y);
     }
+    
+    //Employee view
+      public MainScreen_Admin(String str) {
+        initComponents();
+          Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+    int x = (int) ((dimension.getWidth() - getWidth()) / 2);
+    int y = (int) ((dimension.getHeight() - getHeight()) / 2);
+    setLocation(x, y);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

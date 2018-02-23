@@ -29,6 +29,23 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
         jPanel16.setVisible(false);
         jPanel10.setVisible(false);
     }
+    //employee
+        public MainScreen_StallOwner(String str) {
+        initComponents();
+          Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+          int x = (int) ((dimension.getWidth() - getWidth()) / 2);
+          int y = (int) ((dimension.getHeight() - getHeight()) / 2);
+         setLocation(x, y);
+        buttonGroup1.add(jRadioButton1);
+        buttonGroup1.add(jRadioButton2);
+        buttonGroup1.add(jRadioButton3);
+        buttonGroup1.add(jRadioButton4);
+        
+        
+        jTabbedPane1.setEnabledAt(2, false);
+        //to hide admin
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -88,6 +105,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
         jTextField15 = new javax.swing.JTextField();
         jPanel16 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jTextField7 = new javax.swing.JTextField();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jPanel17 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -315,24 +336,25 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
         jPanel10.add(jTextField15);
         jTextField15.setBounds(90, 370, 210, 50);
 
-        jLabel8.setText("jLabel8");
+        jPanel16.setLayout(null);
 
-        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
-        jPanel16.setLayout(jPanel16Layout);
-        jPanel16Layout.setHorizontalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(362, 362, 362)
-                .addComponent(jLabel8)
-                .addContainerGap(457, Short.MAX_VALUE))
-        );
-        jPanel16Layout.setVerticalGroup(
-            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel8)
-                .addContainerGap(521, Short.MAX_VALUE))
-        );
+        jLabel8.setText("Update / Delete Employee");
+        jPanel16.add(jLabel8);
+        jLabel8.setBounds(362, 23, 148, 16);
+
+        jLabel13.setText("Enter Employee Name ");
+        jPanel16.add(jLabel13);
+        jLabel13.setBounds(95, 76, 130, 16);
+        jPanel16.add(jTextField7);
+        jTextField7.setBounds(95, 110, 210, 50);
+
+        jButton5.setText("Update");
+        jPanel16.add(jButton5);
+        jButton5.setBounds(230, 510, 73, 25);
+
+        jButton6.setText("Delete");
+        jPanel16.add(jButton6);
+        jButton6.setBounds(510, 510, 69, 25);
 
         jPanel17.setLayout(null);
 
@@ -371,7 +393,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 860, Short.MAX_VALUE)
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -379,7 +401,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -684,7 +706,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainScreen_StallOwner().setVisible(true);
+                new MainScreen_StallOwner("asdnk").setVisible(true);
             }
         });
     }
@@ -695,10 +717,13 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -756,5 +781,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
 }

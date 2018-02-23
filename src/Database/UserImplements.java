@@ -29,8 +29,8 @@ public class UserImplements implements UserInterface
                    ResultSet rs = stmt.executeQuery(GetAllUser);
                    while(rs.next())  
                    {
-                    User newuser = new User();
-                    users.add(newuser);
+                    //User newuser = new User();
+                    //users.add(newuser);
                    }
         
         } catch (Exception ex) 
