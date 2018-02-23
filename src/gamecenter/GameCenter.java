@@ -12,17 +12,17 @@ public class GameCenter {
   
         Splash splash = new Splash();
         splash.setVisible(true);
-        GettingUserThread gettingUserThread = new GettingUserThread();
-        gettingUserThread.start();
+        BackGroundThread1 backgroundthread1 = new BackGroundThread1();
+        backgroundthread1.start();
         for(int i= 0 ; i <= 100 ; i ++)
         {
             Thread.sleep(60);
             splash.Loading_Label.setText("Loading .... "+i+" %");
             if(i==100)
             {
-                gettingUserThread.join();
+                backgroundthread1.join();
                 splash.setVisible(false);
-                new LoginScreen().setVisible(true);
+                new LoginScreen(backgroundthread1.users,backgroundthread1.stalls).setVisible(true);
                 break;
             }
         }

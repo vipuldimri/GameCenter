@@ -3,12 +3,12 @@ import java.util.ArrayList;
 import Database.*;
 import Gui.*;
 import java.sql.Connection;
-public class GettingUserThread extends Thread
+public class BackGroundThread1 extends Thread
 {
    
     ArrayList<User> users;
     ArrayList<Stall> stalls;
-    GettingUserThread()
+    BackGroundThread1()
     {
         users = new ArrayList<>();
     }
