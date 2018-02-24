@@ -17,10 +17,11 @@ public class LoginScreen extends javax.swing.JFrame
 
     ArrayList<User> users;
     ArrayList<Stall> stalls;
-    HashMap<Integer, Date> checkSub;
-    //key - Zone Id
-    //Value -EndDate
-     ArrayList<User> currentStallUsers;
+    HashMap<Integer, String> passwordcheck;
+    HashMap<Integer, String> stallMap;
+    Stall currentstall;
+    User currentuser;
+    ArrayList<User> currentStallUsers;
 
     
     public LoginScreen(ArrayList<User> users,ArrayList<Stall> stalls)
@@ -227,7 +228,7 @@ public class LoginScreen extends javax.swing.JFrame
         }
         else
         {
-             JOptionPane.showMessageDialog(jPanel1,
+            JOptionPane.showMessageDialog(jPanel1,
            "Invalid Password or UserName.",
            "Inane error",
             JOptionPane.ERROR_MESSAGE);

@@ -7,6 +7,7 @@ package Gui;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -138,34 +139,37 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(0, 0, 0));
         jPanel4.setLayout(null);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Recharge");
         jPanel4.add(jLabel1);
-        jLabel1.setBounds(0, 0, 54, 33);
+        jLabel1.setBounds(20, 0, 160, 33);
         jPanel4.add(jSeparator1);
-        jSeparator1.setBounds(0, 30, 650, 2);
+        jSeparator1.setBounds(0, 40, 1190, 2);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Amount");
         jPanel4.add(jLabel2);
-        jLabel2.setBounds(120, 140, 70, 30);
+        jLabel2.setBounds(350, 160, 100, 30);
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Card No");
         jPanel4.add(jLabel3);
-        jLabel3.setBounds(120, 70, 80, 20);
+        jLabel3.setBounds(360, 90, 80, 20);
 
-        jTextField1.setText("jTextField1");
+        jTextField1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jPanel4.add(jTextField1);
-        jTextField1.setBounds(410, 70, 69, 22);
+        jTextField1.setBounds(580, 90, 260, 50);
 
-        jTextField2.setText("jTextField2");
+        jTextField2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jPanel4.add(jTextField2);
-        jTextField2.setBounds(420, 140, 69, 22);
+        jTextField2.setBounds(580, 160, 260, 60);
 
         jButton1.setText("jButton1");
         jPanel4.add(jButton1);
-        jButton1.setBounds(150, 290, 79, 25);
+        jButton1.setBounds(220, 370, 130, 40);
 
         jButton2.setText("Recharge ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -174,12 +178,13 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButton2);
-        jButton2.setBounds(289, 275, 110, 40);
+        jButton2.setBounds(540, 380, 110, 40);
 
         jButton3.setText("Reset To Zero");
         jPanel4.add(jButton3);
-        jButton3.setBounds(470, 280, 130, 30);
+        jButton3.setBounds(880, 380, 130, 30);
 
+        jRadioButton1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jRadioButton1.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton1.setText("100");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -188,8 +193,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jRadioButton1);
-        jRadioButton1.setBounds(50, 220, 107, 25);
+        jRadioButton1.setBounds(240, 260, 107, 37);
 
+        jRadioButton2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton2.setText("200");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -198,8 +204,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jRadioButton2);
-        jRadioButton2.setBounds(200, 220, 49, 25);
+        jRadioButton2.setBounds(430, 260, 110, 40);
 
+        jRadioButton3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jRadioButton3.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton3.setText("500");
         jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -208,8 +215,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jRadioButton3);
-        jRadioButton3.setBounds(320, 220, 49, 25);
+        jRadioButton3.setBounds(580, 260, 73, 37);
 
+        jRadioButton4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jRadioButton4.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton4.setText("1000");
         jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -218,10 +226,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jRadioButton4);
-        jRadioButton4.setBounds(470, 220, 57, 25);
+        jRadioButton4.setBounds(780, 260, 89, 37);
 
         jPanel2.add(jPanel4);
-        jPanel4.setBounds(282, 97, 660, 350);
+        jPanel4.setBounds(2, 7, 1200, 440);
 
         jPanel5.setBackground(new java.awt.Color(0, 0, 0));
         jPanel5.setLayout(null);
@@ -524,9 +532,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel21))
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel21)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -635,20 +643,34 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
         {
             if("".equals(cardno))
             {
-                //plz enter card no
+               
+            JOptionPane.showMessageDialog(jPanel1,
+           "Please Enter Card No.",
+           "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+            return ;
 
-            }else{
-                //plz enter amount
-
+            }else
+            {
+                  JOptionPane.showMessageDialog(jPanel1,
+                  "Please Enter Amount.",
+                  "Inane error",
+                  JOptionPane.ERROR_MESSAGE);
+                  return ;
             }
             
         }
        try
        {
            int amt = Integer.parseInt(amount);
+           
        }catch(NumberFormatException e)
        {
            
+                  JOptionPane.showMessageDialog(jPanel1,
+                  "Please Enter A Valid Amount Amount.",
+                  "Inane error",
+                  JOptionPane.ERROR_MESSAGE);
        }
         
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -706,7 +728,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainScreen_StallOwner("asdnk").setVisible(true);
+                new MainScreen_StallOwner().setVisible(true);
             }
         });
     }
