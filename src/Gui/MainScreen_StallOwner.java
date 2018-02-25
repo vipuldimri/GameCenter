@@ -18,6 +18,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
 
     public MainScreen_StallOwner() {
         initComponents();
+        System.out.println("askljaskj");
           Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
           int x = (int) ((dimension.getWidth() - getWidth()) / 2);
           int y = (int) ((dimension.getHeight() - getHeight()) / 2);
@@ -29,9 +30,16 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
         
         jPanel16.setVisible(false);
         jPanel10.setVisible(false);
+         
+        jTabbedPane1.setEnabledAt(2, false);
+        //to hide admin
+        
     }
     //employee
-        public MainScreen_StallOwner(String str) {
+        public MainScreen_StallOwner(String str)
+        {
+            
+            System.out.println(str);
         initComponents();
           Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
           int x = (int) ((dimension.getWidth() - getWidth()) / 2);
@@ -42,10 +50,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
         buttonGroup1.add(jRadioButton3);
         buttonGroup1.add(jRadioButton4);
         
-        
-        jTabbedPane1.setEnabledAt(2, false);
-        //to hide admin
-        
+       
     }
 
     /**
@@ -728,7 +733,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainScreen_StallOwner().setVisible(true);
+               // new MainScreen_StallOwner().setVisible(true);
             }
         });
     }

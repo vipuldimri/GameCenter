@@ -18,6 +18,10 @@ public class LoginScreen extends javax.swing.JFrame
     //All users from  user table
     ArrayList<User> users;
     Stalls_and_SubDate stalls;
+   
+    
+    
+    
     HashMap<Integer, String> passwordcheck;
     HashMap<Integer, String> stallMap;
     Stall currentstall;
@@ -162,16 +166,7 @@ public class LoginScreen extends javax.swing.JFrame
         {
             pass = pass + password[i];
         }
-        //ZoneId.of( "America/Montreal" )
-        //setting india timeZone 
-        
-        
-//        for(Stall s : stalls)
-//        {
-//            System.out.println(s);
-//        }
-        
-        
+
      
        long millis=System.currentTimeMillis();  
        java.sql.Date currentdate=new java.sql.Date(millis);  
@@ -202,11 +197,23 @@ public class LoginScreen extends javax.swing.JFrame
         for(User u : users)
         {
          
-            if(u.getName().equals(username) || u.getPassword().equals(pass))
+            if(u.getName().equals(username) && u.getPassword().equals(pass))
             {
+                
+                System.out.println(u.getName()  +"    "+username);
+                          
+                System.out.println(u.getPassword()+"    "+pass);
+                
+                
                 flagUser = true;
                 gamezoneid = u.getGameZoneID();
                 java.sql.Date sub_enddate = stalls.subdate.get(gamezoneid);
+                
+                System.out.println(cur_date);
+                System.out.println(sub_enddate);
+                
+                
+                
                 String s =sub_enddate.toString();
                 String end_Year = s.substring(0,4);
                 String end_Month = s.substring(5,7);
@@ -237,7 +244,7 @@ public class LoginScreen extends javax.swing.JFrame
                 
                 
                 //code for checking sub is valid or not 
-                if(y > e_y || m > e_m  || d > e_d )
+                if(y > e_y )
                 {
                     JOptionPane.showMessageDialog(jPanel1,
                      "Your Subscription has Expired Plz Contact The service Provider.",
@@ -247,11 +254,36 @@ public class LoginScreen extends javax.swing.JFrame
                      return ;
                     
                 }
+                if( m > e_m && y == e_y )
+                {
+                    JOptionPane.showMessageDialog(jPanel1,
+                     "Your Subscription has Expired Plz Contact The service Provider.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                
+                     return ;
+                    
+                }
+                if(   d > e_d  &&  y == e_y &&   m == e_m)
+                {
+                    JOptionPane.showMessageDialog(jPanel1,
+                     "Your Subscription has Expired Plz Contact The service Provider.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                
+                     return ;
+                    
+                }
+                
+                
+                
+               
               
                  
                     
                 if(u.getType().equals("admin"))
                 {
+                   
                     flagAdmin = true;
                 }
                 break;
@@ -267,9 +299,11 @@ public class LoginScreen extends javax.swing.JFrame
         {
             if(flagAdmin)
             {
+              
                 new MainScreen_StallOwner("admin").setVisible(true);
                 setVisible(false);
             }else{
+                 
                 new MainScreen_StallOwner().setVisible(true);
                 setVisible(false);
             }
