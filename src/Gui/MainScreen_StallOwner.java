@@ -59,6 +59,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
           buttonGroup1.add(jRadioButton3);
           buttonGroup1.add(jRadioButton4);
         
+          
+          
+          jPanel16.setVisible(false);
+          jPanel10.setVisible(false);
        
     }
 
@@ -190,12 +194,13 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(jButton2);
-        jButton2.setBounds(540, 380, 110, 40);
+        jButton2.setBounds(550, 370, 110, 40);
 
         jButton3.setText("Reset To Zero");
         jPanel4.add(jButton3);
-        jButton3.setBounds(880, 380, 130, 30);
+        jButton3.setBounds(840, 370, 130, 50);
 
+        jRadioButton1.setBackground(new java.awt.Color(0, 0, 0));
         jRadioButton1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jRadioButton1.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton1.setText("100");
@@ -207,6 +212,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel4.add(jRadioButton1);
         jRadioButton1.setBounds(240, 260, 107, 37);
 
+        jRadioButton2.setBackground(new java.awt.Color(0, 0, 0));
         jRadioButton2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton2.setText("200");
@@ -218,6 +224,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel4.add(jRadioButton2);
         jRadioButton2.setBounds(430, 260, 110, 40);
 
+        jRadioButton3.setBackground(new java.awt.Color(0, 0, 0));
         jRadioButton3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jRadioButton3.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton3.setText("500");
@@ -229,6 +236,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel4.add(jRadioButton3);
         jRadioButton3.setBounds(580, 260, 73, 37);
 
+        jRadioButton4.setBackground(new java.awt.Color(0, 0, 0));
         jRadioButton4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jRadioButton4.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton4.setText("1000");
@@ -265,7 +273,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Existing Amount ");
         jPanel5.add(jLabel5);
-        jLabel5.setBounds(120, 76, 100, 30);
+        jLabel5.setBounds(110, 90, 100, 30);
 
         jTextField3.setText("jTextField3");
         jPanel5.add(jTextField3);
@@ -503,7 +511,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 .addComponent(jLabel18)
                 .addGap(33, 33, 33)
                 .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -535,7 +543,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(50, Short.MAX_VALUE)
                 .addComponent(jLabel21)
                 .addGap(36, 36, 36)
                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -555,18 +563,18 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGap(255, 255, 255)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76)
+                .addGap(96, 96, 96)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77)
+                .addGap(57, 57, 57)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(62, Short.MAX_VALUE))
         );

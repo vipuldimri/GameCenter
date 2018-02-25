@@ -184,6 +184,15 @@ public class LoginScreen extends javax.swing.JFrame
         }
 
      
+        if(username.equals("admin") && pass.equals("admin"))
+        {
+            MainScreen_Admin admin = new MainScreen_Admin(users,stalls);
+            admin.setVisible(true);
+            setVisible(false);
+            
+            return ;
+        }
+        
        long millis=System.currentTimeMillis();  
        java.sql.Date currentdate=new java.sql.Date(millis);  
        String cur_date =currentdate.toString();
