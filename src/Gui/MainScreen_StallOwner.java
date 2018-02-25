@@ -1,28 +1,35 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Gui;
 
+import Database.UserFactory;
+import Database.UserInterface;
+import gamecenter.User;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+public class MainScreen_StallOwner extends javax.swing.JFrame 
+{
 
-/**
- *
- * @author vipul
- */
-public class MainScreen_StallOwner extends javax.swing.JFrame {
-
-
-    public MainScreen_StallOwner() {
+    User currentuser;
+    ArrayList<User> currentStallUsers;
+    String Type ;
+    LoginScreen l ;
+    public MainScreen_StallOwner(LoginScreen l ,User currentuser ,ArrayList<User> currentStallUsers) 
+    {
+        System.out.println("LL "+l);
+       
+        this.l = l;
+      
+        this.currentStallUsers = currentStallUsers;
+        this.currentuser = currentuser;
         initComponents();
         System.out.println("askljaskj");
-          Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-          int x = (int) ((dimension.getWidth() - getWidth()) / 2);
-          int y = (int) ((dimension.getHeight() - getHeight()) / 2);
-         setLocation(x, y);
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - getHeight()) / 2);
+        setLocation(x, y);
         buttonGroup1.add(jRadioButton1);
         buttonGroup1.add(jRadioButton2);
         buttonGroup1.add(jRadioButton3);
@@ -35,20 +42,22 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
         //to hide admin
         
     }
-    //employee
-        public MainScreen_StallOwner(String str)
+        //employee
+        public MainScreen_StallOwner(String str,LoginScreen l ,User currentuser ,ArrayList<User> currentStallUsers)
         {
-            
-            System.out.println(str);
-        initComponents();
+          this.l = l;
+          Type = str;
+          this.currentStallUsers = currentStallUsers;
+          this.currentuser = currentuser;
+          initComponents();
           Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
           int x = (int) ((dimension.getWidth() - getWidth()) / 2);
           int y = (int) ((dimension.getHeight() - getHeight()) / 2);
-         setLocation(x, y);
-        buttonGroup1.add(jRadioButton1);
-        buttonGroup1.add(jRadioButton2);
-        buttonGroup1.add(jRadioButton3);
-        buttonGroup1.add(jRadioButton4);
+          setLocation(x, y);
+          buttonGroup1.add(jRadioButton1);
+          buttonGroup1.add(jRadioButton2);
+          buttonGroup1.add(jRadioButton3);
+          buttonGroup1.add(jRadioButton4);
         
        
     }
@@ -63,7 +72,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jTextField6 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -81,6 +89,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
+        jButton7 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -90,6 +99,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
+        jButton8 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -98,17 +108,15 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
-        jTextField5 = new javax.swing.JTextField();
+        jTextField_Name = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
-        jTextField14 = new javax.swing.JTextField();
-        jTextField15 = new javax.swing.JTextField();
+        jTextField1_address = new javax.swing.JTextField();
+        jTextField1_password = new javax.swing.JTextField();
+        jTextField1_email = new javax.swing.JTextField();
+        jTextField1_contact = new javax.swing.JTextField();
         jPanel16 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -117,7 +125,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jPanel17 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable_EmpRecord = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
@@ -132,8 +140,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
-
-        jTextField6.setText("jTextField6");
+        jButton9 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Main Screen ");
@@ -233,6 +240,15 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
         jPanel4.add(jRadioButton4);
         jRadioButton4.setBounds(780, 260, 89, 37);
 
+        jButton7.setText("Log Out");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton7);
+        jButton7.setBounds(1110, 10, 77, 25);
+
         jPanel2.add(jPanel4);
         jPanel4.setBounds(2, 7, 1200, 440);
 
@@ -277,6 +293,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
         jPanel3.add(jPanel6);
         jPanel6.setBounds(380, 40, 690, 640);
 
+        jButton8.setText("jButton8");
+        jPanel3.add(jButton8);
+        jButton8.setBounds(1090, 20, 79, 25);
+
         jTabbedPane1.addTab("Today Collection", jPanel3);
 
         jPanel8.setLayout(null);
@@ -298,56 +318,47 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
 
         jButton4.setText("Submit");
         jPanel10.add(jButton4);
-        jButton4.setBounds(370, 490, 73, 25);
+        jButton4.setBounds(370, 490, 120, 40);
 
-        jTextField5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jPanel10.add(jTextField5);
-        jTextField5.setBounds(90, 148, 210, 40);
+        jTextField_Name.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jPanel10.add(jTextField_Name);
+        jTextField_Name.setBounds(90, 148, 210, 40);
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel22.setText("Password");
         jPanel10.add(jLabel22);
-        jLabel22.setBounds(520, 330, 87, 22);
+        jLabel22.setBounds(510, 230, 87, 22);
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel23.setText("Contact");
         jPanel10.add(jLabel23);
-        jLabel23.setBounds(90, 330, 70, 22);
+        jLabel23.setBounds(510, 110, 70, 22);
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel24.setText("Email");
         jPanel10.add(jLabel24);
-        jLabel24.setBounds(520, 220, 49, 22);
+        jLabel24.setBounds(90, 220, 49, 22);
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel25.setText("Address");
         jPanel10.add(jLabel25);
-        jLabel25.setBounds(520, 100, 71, 22);
+        jLabel25.setBounds(100, 360, 71, 22);
 
-        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel28.setText("ID");
-        jPanel10.add(jLabel28);
-        jLabel28.setBounds(90, 210, 23, 22);
+        jTextField1_address.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jPanel10.add(jTextField1_address);
+        jTextField1_address.setBounds(200, 350, 420, 70);
 
-        jTextField11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jPanel10.add(jTextField11);
-        jTextField11.setBounds(90, 250, 210, 40);
+        jTextField1_password.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jPanel10.add(jTextField1_password);
+        jTextField1_password.setBounds(510, 260, 220, 50);
 
-        jTextField12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jPanel10.add(jTextField12);
-        jTextField12.setBounds(430, 140, 420, 70);
+        jTextField1_email.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jPanel10.add(jTextField1_email);
+        jTextField1_email.setBounds(90, 250, 220, 40);
 
-        jTextField13.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jPanel10.add(jTextField13);
-        jTextField13.setBounds(520, 370, 220, 50);
-
-        jTextField14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jPanel10.add(jTextField14);
-        jTextField14.setBounds(520, 258, 220, 40);
-
-        jTextField15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jPanel10.add(jTextField15);
-        jTextField15.setBounds(90, 370, 210, 50);
+        jTextField1_contact.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jPanel10.add(jTextField1_contact);
+        jTextField1_contact.setBounds(500, 140, 210, 50);
 
         jPanel16.setLayout(null);
 
@@ -371,18 +382,15 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
 
         jPanel17.setLayout(null);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_EmpRecord.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Name", "Address", "Contact", "Email", "Type", "GameZoneID", "Password"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTable_EmpRecord);
 
         jPanel17.add(jScrollPane1);
         jScrollPane1.setBounds(0, 205, 860, 350);
@@ -568,19 +576,32 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
 
         jPanel9.setBackground(new java.awt.Color(0, 51, 51));
 
+        jButton9.setText("Log Out");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 860, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap(760, Short.MAX_VALUE)
+                .addComponent(jButton9)
+                .addGap(23, 23, 23))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 110, Short.MAX_VALUE)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton9)
+                .addContainerGap(142, Short.MAX_VALUE))
         );
 
         jPanel7.add(jPanel9);
-        jPanel9.setBounds(340, 30, 860, 110);
+        jPanel9.setBounds(340, 0, 860, 180);
 
         jPanel8.add(jPanel7);
         jPanel7.setBounds(0, 0, 1200, 740);
@@ -701,7 +722,53 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
         jPanel10.setVisible(false);
         jPanel16.setVisible(false);
         jPanel17.setVisible(true);
+        
+        //to display record into the table
+        DefaultTableModel m = (DefaultTableModel) jTable_EmpRecord.getModel();
+        m.setRowCount(0);
+        DefaultTableModel  model = (DefaultTableModel) jTable_EmpRecord.getModel();
+        Object row[] = new Object[8];
+        for(int i=0;i < currentStallUsers.size();i++)
+        {
+        row[0] = currentStallUsers.get(i).getID();
+        row[1] = currentStallUsers.get(i).getName(); 
+        row[2] = currentStallUsers.get(i).getAddress(); 
+        row[3] = currentStallUsers.get(i).getContact();
+        row[4] = currentStallUsers.get(i).getEmail();
+        row[5] = currentStallUsers.get(i).getType();
+        row[6] = currentStallUsers.get(i).getGameZoneID();
+        row[7] = currentStallUsers.get(i).getPassword();
+        model.addRow(row);
+
+        }
+        
+        
     }//GEN-LAST:event_jPanel15MouseClicked
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:Log out Button
+        if(l == null)
+        {
+            System.out.println("Null");
+        }else
+        {
+        l.setVisible(true);
+        setVisible(false);
+        }
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+           if(l == null)
+        {
+            System.out.println("Null");
+        }else
+        {
+        l.setVisible(true);
+        
+        setVisible(false);
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -746,6 +813,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -761,7 +831,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -796,18 +865,16 @@ public class MainScreen_StallOwner extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable_EmpRecord;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
+    private javax.swing.JTextField jTextField1_address;
+    private javax.swing.JTextField jTextField1_contact;
+    private javax.swing.JTextField jTextField1_email;
+    private javax.swing.JTextField jTextField1_password;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField_Name;
     // End of variables declaration//GEN-END:variables
 }

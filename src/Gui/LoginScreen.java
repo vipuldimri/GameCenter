@@ -5,6 +5,7 @@ import gamecenter.User;
 import gamecenter.Stalls_and_SubDate;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.sql.Time;
 import java.time.Clock;
 import java.time.LocalDate;
@@ -24,7 +25,13 @@ public class LoginScreen extends javax.swing.JFrame
     
     HashMap<Integer, String> passwordcheck;
     HashMap<Integer, String> stallMap;
+    
+    
+    
+    
     Stall currentstall;
+   
+    
     User currentuser;
     ArrayList<User> currentStallUsers;
 
@@ -40,7 +47,11 @@ public class LoginScreen extends javax.swing.JFrame
     setLocation(x, y);
     
     
-
+     currentStallUsers = new ArrayList<>();
+     currentstall = new Stall();
+     currentuser = new User();
+     
+    
     
     }
 
@@ -65,6 +76,11 @@ public class LoginScreen extends javax.swing.JFrame
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPanel1KeyPressed(evt);
+            }
+        });
         jPanel1.setLayout(null);
 
         jPanel2.setBackground(new java.awt.Color(153, 0, 0));
@@ -200,8 +216,17 @@ public class LoginScreen extends javax.swing.JFrame
             if(u.getName().equals(username) && u.getPassword().equals(pass))
             {
                 
-                System.out.println(u.getName()  +"    "+username);
-                          
+                currentuser.setID(u.getID());
+                currentuser.setAddress(u.getAddress());
+                currentuser.setContact(u.getContact());
+                
+                currentuser.setEmail(u.getEmail());
+                currentuser.setName(u.getName());
+                currentuser.setPassword(u.getPassword());
+                currentuser.setType(u.getType());
+                currentuser.setGameZoneID(u.getGameZoneID()); 
+                
+                System.out.println(u.getName()  +"    "+username);     
                 System.out.println(u.getPassword()+"    "+pass);
                 
                 
@@ -283,7 +308,7 @@ public class LoginScreen extends javax.swing.JFrame
                     
                 if(u.getType().equals("admin"))
                 {
-                   
+                  
                     flagAdmin = true;
                 }
                 break;
@@ -300,11 +325,25 @@ public class LoginScreen extends javax.swing.JFrame
             if(flagAdmin)
             {
               
-                new MainScreen_StallOwner("admin").setVisible(true);
+                
+                for (User u : users) 
+                {
+                  if(u.getGameZoneID() == currentuser.getGameZoneID())
+                  {
+                      currentStallUsers.add(u);
+                      
+                  }
+                    
+                }
+                jTextField1.setText("");
+                jPasswordField1.setText("");
+                new MainScreen_StallOwner("admin",this,currentuser,currentStallUsers).setVisible(true);
                 setVisible(false);
             }else{
-                 
-                new MainScreen_StallOwner().setVisible(true);
+                 //here currentStallUsers is null because emp has no rights to see emps
+                jTextField1.setText("");
+                jPasswordField1.setText("");
+                 new MainScreen_StallOwner(this,currentuser,currentStallUsers).setVisible(true);
                 setVisible(false);
             }
             
@@ -338,6 +377,13 @@ public class LoginScreen extends javax.swing.JFrame
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jPanel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyPressed
+        // TODO add your handling code here:
+        
+        
+        System.out.println(evt.getKeyCode());
+    }//GEN-LAST:event_jPanel1KeyPressed
 
     /**
      * @param args the command line arguments

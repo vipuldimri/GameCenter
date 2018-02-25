@@ -65,5 +65,43 @@ public class Stall
         
         return getID()+getName()+getOwnerName()+getAddress()+getContact()+getPassword()+getSubStartDate()+getSubEndDate();
     }
+
+    public Stall() {
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public void setName(String Name) {
+        this.Name = Name;
+    }
+
+    public void setOwnerName(String OwnerName) {
+        this.OwnerName = OwnerName;
+    }
+
+    public void setAddress(String Address) {
+        this.Address = Address;
+    }
+
+    public void setContact(String Contact) {
+        this.Contact = Contact;
+    }
+
+    public void setPassword(String Password) {
+        this.Password = Password;
+    }
+
+    public void setSubStartDate(Date SubStartDate) {
+        this.SubStartDate = SubStartDate;
+    }
+
+    public void setSubEndDate(Date SubEndDate) {
+        this.SubEndDate = SubEndDate;
+    }
+    
+    
+    
     
 }

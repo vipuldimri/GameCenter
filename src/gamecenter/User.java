@@ -63,6 +63,41 @@ public class User
         return getID()+getName()+getAddress()+getContact()+getEmail()+getType()+getGameZoneID()+getPassword();
     }
 
+    public User() {
+    }
 
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public void setName(String Name) {
+        this.Name = Name;
+    }
+
+    public void setAddress(String Address) {
+        this.Address = Address;
+    }
+
+    public void setContact(String Contact) {
+        this.Contact = Contact;
+    }
+
+    public void setEmail(String Email) {
+        this.Email = Email;
+    }
+
+    public void setType(String Type) {
+        this.Type = Type;
+    }
+
+    public void setGameZoneID(int GameZoneID) {
+        this.GameZoneID = GameZoneID;
+    }
+
+    public void setPassword(String Password) {
+        this.Password = Password;
+    }
+
+   
     
 }

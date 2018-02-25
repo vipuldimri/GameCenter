@@ -22,7 +22,8 @@ public class GameCenter {
             {
                 backgroundthread1.join();
                 splash.setVisible(false);
-                new LoginScreen(backgroundthread1.users,backgroundthread1.stalls).setVisible(true);
+                LoginScreen l = new LoginScreen(backgroundthread1.users,backgroundthread1.stalls);
+                l.setVisible(true);
                 break;
             }
         }
