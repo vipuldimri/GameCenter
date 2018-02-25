@@ -2,6 +2,7 @@
 package Gui;
 import gamecenter.Stall;
 import gamecenter.User;
+import gamecenter.Stalls_and_SubDate;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.sql.Time;
@@ -14,9 +15,9 @@ import java.util.Date;
 import java.util.HashMap;
 public class LoginScreen extends javax.swing.JFrame 
 {
-
+    //All users from  user table
     ArrayList<User> users;
-    ArrayList<Stall> stalls;
+    Stalls_and_SubDate stalls;
     HashMap<Integer, String> passwordcheck;
     HashMap<Integer, String> stallMap;
     Stall currentstall;
@@ -24,7 +25,7 @@ public class LoginScreen extends javax.swing.JFrame
     ArrayList<User> currentStallUsers;
 
     
-    public LoginScreen(ArrayList<User> users,ArrayList<Stall> stalls)
+    public LoginScreen(ArrayList<User> users,Stalls_and_SubDate stalls)
     {
     this.users = users;
     this.stalls = stalls;
@@ -35,11 +36,7 @@ public class LoginScreen extends javax.swing.JFrame
     setLocation(x, y);
     
     
-    //getting Sub for all stalls
-    for(int i =0 ;i<3 ;i++)
-    {
-        
-    }
+
     
     }
 
@@ -165,10 +162,27 @@ public class LoginScreen extends javax.swing.JFrame
         {
             pass = pass + password[i];
         }
-        
         //ZoneId.of( "America/Montreal" )
         //setting india timeZone 
-        LocalDate currentdate = LocalDate.now(  );
+        
+        
+//        for(Stall s : stalls)
+//        {
+//            System.out.println(s);
+//        }
+        
+        
+     
+       long millis=System.currentTimeMillis();  
+       java.sql.Date currentdate=new java.sql.Date(millis);  
+       String cur_date =currentdate.toString();
+       String Year = cur_date.substring(0,4);
+       String Month = cur_date.substring(5,7);
+       String Day = cur_date.substring(8);
+       
+        
+       
+        
         if(username.length() == 0)
         {  
             jLabel5.setText("UserName is Required");
@@ -183,6 +197,7 @@ public class LoginScreen extends javax.swing.JFrame
         boolean flagUser = false;
         boolean flagAdmin = false;
         boolean flagSub = false;
+        int gamezoneid ;
         
         for(User u : users)
         {
@@ -190,17 +205,51 @@ public class LoginScreen extends javax.swing.JFrame
             if(u.getName().equals(username) || u.getPassword().equals(pass))
             {
                 flagUser = true;
-                if(true)
+                gamezoneid = u.getGameZoneID();
+                java.sql.Date sub_enddate = stalls.subdate.get(gamezoneid);
+                String s =sub_enddate.toString();
+                String end_Year = s.substring(0,4);
+                String end_Month = s.substring(5,7);
+                String end_Day = s.substring(8);
+                
+                    int y = 0 ;
+                    int m =0;
+                    int d = 0;
+                    int e_y = 0;
+                    int e_m = 0;
+                    int e_d = 0;
+                
+                try
                 {
-                    //code for checking sub is valid or not 
-                     JOptionPane.showMessageDialog(jPanel1,
-                     "Your Subscription is Expired Plz Contact The service Provider.",
-                     "Inane error",
-                      JOptionPane.ERROR_MESSAGE);
-                     return ;
+                     y = Integer.parseInt(Year);
+                     m = Integer.parseInt(Month);
+                     d = Integer.parseInt(Day);
+                     e_y = Integer.parseInt(end_Year);
+                     e_m = Integer.parseInt(end_Month);
+                     e_d = Integer.parseInt(end_Day);
+                              
+                    
+                }catch(NumberFormatException e)
+                {
+                    System.out.println(e);
                     
                 }
                 
+                
+                //code for checking sub is valid or not 
+                if(y > e_y || m > e_m  || d > e_d )
+                {
+                    JOptionPane.showMessageDialog(jPanel1,
+                     "Your Subscription has Expired Plz Contact The service Provider.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                
+                     return ;
+                    
+                }
+              
+                 
+                    
                 if(u.getType().equals("admin"))
                 {
                     flagAdmin = true;

@@ -57,7 +57,11 @@ public class User
     }
 
     
-    
+   @Override
+    public String toString()
+    {
+        return getID()+getName()+getAddress()+getContact()+getEmail()+getType()+getGameZoneID()+getPassword();
+    }
 
 
     

@@ -7,10 +7,12 @@ public class BackGroundThread1 extends Thread
 {
    
     ArrayList<User> users;
-    ArrayList<Stall> stalls;
+ 
+    Stalls_and_SubDate   stalls; 
     BackGroundThread1()
     {
         users = new ArrayList<>();
+        stalls = new Stalls_and_SubDate();
     }
     public void run()
     {

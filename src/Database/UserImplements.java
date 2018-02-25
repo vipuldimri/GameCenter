@@ -3,6 +3,7 @@ package Database;
 
 import gamecenter.Stall;
 import gamecenter.User;
+import gamecenter.Stalls_and_SubDate;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -29,8 +30,8 @@ public class UserImplements implements UserInterface
                    ResultSet rs = stmt.executeQuery(GetAllUser);
                    while(rs.next())  
                    {
-                    //User newuser = new User();
-                    //users.add(newuser);
+                    User newuser = new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getInt(7),rs.getString(8));
+                    users.add(newuser);
                    }
         
         } catch (Exception ex) 
@@ -41,17 +42,17 @@ public class UserImplements implements UserInterface
     }
 
     @Override
-    public ArrayList<Stall> getAllStall()
+    public Stalls_and_SubDate getAllStall()
     {
-      
-     ArrayList<Stall> stalls = new ArrayList<>();
+         Stalls_and_SubDate obj = new Stalls_and_SubDate();
          try {
                    Statement stmt=conn.createStatement();  
                    ResultSet rs = stmt.executeQuery(GetAllStalls);
                    while(rs.next())  
                    {
-                    Stall newstall = new Stall();
-                    stalls.add(newstall);
+                    Stall newstall = new Stall(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getDate(7),rs.getDate(8));
+                    obj.stalls.add(newstall);
+                    obj.subdate.put(rs.getInt(1), rs.getDate(8));
                    }
         
         } catch (Exception ex) 
@@ -65,7 +66,7 @@ public class UserImplements implements UserInterface
                 System.out.println("BBB "+ex);
      
         }
-        return stalls;
+        return obj;
     }
     
 }
