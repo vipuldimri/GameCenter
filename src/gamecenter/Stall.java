@@ -3,7 +3,9 @@ package gamecenter;
 
 import java.sql.Date;
 
-
+/*
+This class Represent An instance of GameeZone(Stall)
+*/
 public class Stall 
 {
     

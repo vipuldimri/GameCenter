@@ -14,6 +14,9 @@ import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+/*
+Login frame Class
+*/
 public class LoginScreen extends javax.swing.JFrame 
 {
     //All users from  user table
@@ -22,31 +25,35 @@ public class LoginScreen extends javax.swing.JFrame
    
     
     
-    
+    //used
     HashMap<Integer, String> passwordcheck;
     HashMap<Integer, String> stallMap;
     
     
     
-    
+    //detail about current stall
     Stall currentstall;
-   
-    
+    //detail about current user
     User currentuser;
+    //Details about users stall users 
     ArrayList<User> currentStallUsers;
 
     
     public LoginScreen(ArrayList<User> users,Stalls_and_SubDate stalls)
     {
+    //getting data from thread
     this.users = users;
     this.stalls = stalls;
+    //init components 
     initComponents();
+    //Displaying the screen in the center of the screen
     Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
     int x = (int) ((dimension.getWidth() - getWidth()) / 2);
     int y = (int) ((dimension.getHeight() - getHeight()) / 2);
     setLocation(x, y);
     
     
+     //instance created
      currentStallUsers = new ArrayList<>();
      currentstall = new Stall();
      currentuser = new User();
@@ -174,7 +181,8 @@ public class LoginScreen extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:Login button Event
+        // TODO add your handling code here: Login button Event 
+        //store username and  password from the GUI
         String username = jTextField1.getText();
         char[] password = jPasswordField1.getPassword();
         String pass ="";
@@ -184,6 +192,7 @@ public class LoginScreen extends javax.swing.JFrame
         }
 
      
+        //Checking if admin login
         if(username.equals("admin") && pass.equals("admin"))
         {
             MainScreen_Admin admin = new MainScreen_Admin(users,stalls);
@@ -193,16 +202,18 @@ public class LoginScreen extends javax.swing.JFrame
             return ;
         }
         
+        
+        //Getting current time and then converting it into String for easy comparision
        long millis=System.currentTimeMillis();  
        java.sql.Date currentdate=new java.sql.Date(millis);  
        String cur_date =currentdate.toString();
        String Year = cur_date.substring(0,4);
        String Month = cur_date.substring(5,7);
        String Day = cur_date.substring(8);
-       
+       // year , month , day represent current time   
         
        
-        
+        //Validation 
         if(username.length() == 0)
         {  
             jLabel5.setText("UserName is Required");
@@ -214,21 +225,24 @@ public class LoginScreen extends javax.swing.JFrame
            return ;
         }
      
+        //flag used for login
         boolean flagUser = false;
         boolean flagAdmin = false;
         boolean flagSub = false;
         int gamezoneid ;
         
+        
+       // traversing users list to check password and user name exits or not ;
         for(User u : users)
         {
          
             if(u.getName().equals(username) && u.getPassword().equals(pass))
             {
                 
+                // if user name and password match storing the info of logedin user into currentuser
                 currentuser.setID(u.getID());
                 currentuser.setAddress(u.getAddress());
                 currentuser.setContact(u.getContact());
-                
                 currentuser.setEmail(u.getEmail());
                 currentuser.setName(u.getName());
                 currentuser.setPassword(u.getPassword());
@@ -240,6 +254,7 @@ public class LoginScreen extends javax.swing.JFrame
                 
                 
                 flagUser = true;
+                //Now getting current stall Endsub data and converting it into String to check if sub is valid or not for the gamezone
                 gamezoneid = u.getGameZoneID();
                 java.sql.Date sub_enddate = stalls.subdate.get(gamezoneid);
                 
@@ -310,11 +325,11 @@ public class LoginScreen extends javax.swing.JFrame
                 }
                 
                 
-                
+                ///Checking complete for sub
                
               
                  
-                    
+                //checking if current user is admin or emp    
                 if(u.getType().equals("admin"))
                 {
                   
@@ -331,6 +346,7 @@ public class LoginScreen extends javax.swing.JFrame
         
         if(flagAdmin || flagUser)
         {
+            // if current user is admin
             if(flagAdmin)
             {
               
@@ -348,7 +364,9 @@ public class LoginScreen extends javax.swing.JFrame
                 jPasswordField1.setText("");
                 new MainScreen_StallOwner("admin",this,currentuser,currentStallUsers).setVisible(true);
                 setVisible(false);
-            }else{
+            }else
+            {
+                 //if current user is normal employee
                  //here currentStallUsers is null because emp has no rights to see emps
                 jTextField1.setText("");
                 jPasswordField1.setText("");
@@ -357,6 +375,7 @@ public class LoginScreen extends javax.swing.JFrame
             }
             
         }
+        //No user found with provided usernmae and password
         else
         {
             JOptionPane.showMessageDialog(jPanel1,

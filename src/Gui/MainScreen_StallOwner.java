@@ -9,6 +9,7 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+//Main screen for every GameZone
 public class MainScreen_StallOwner extends javax.swing.JFrame 
 {
 

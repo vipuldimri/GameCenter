@@ -1,6 +1,10 @@
 
 package gamecenter;
 
+/* 
+this class represent User Login - (Admin and Emp)
+*/
+
 
 public class User 
 {
