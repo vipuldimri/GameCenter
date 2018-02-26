@@ -9,11 +9,12 @@ package Database;
  *
  * @author vipul
  */
+import java.util.ArrayList;
 import gamecenter.Recharge;
 public interface TransactionInterface 
 {
     
     
     public void Recharge(Recharge rec,String TableName);
-    
+    public ArrayList<Recharge> GetTransactionDetails(String TableName);
 }

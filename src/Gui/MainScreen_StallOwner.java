@@ -5,14 +5,24 @@ import Database.TransactionFactory;
 import Database.TransactionInterface;
 import Database.UserFactory;
 import Database.UserInterface;
+import gamecenter.Background_GetTransactionDetails;
 import gamecenter.Recharge;
 import gamecenter.User;
+import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.AbstractButton;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 //Main screen for every GameZone
 public class MainScreen_StallOwner extends javax.swing.JFrame 
@@ -23,6 +33,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     String Type ;
     LoginScreen l ;
     String currentstallname;
+    ArrayList<Recharge> transactiondetails;
     public MainScreen_StallOwner(LoginScreen l ,User currentuser ,ArrayList<User> currentStallUsers,String currentstallname) 
     {
         System.out.println("LL "+l);
@@ -47,6 +58,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel19.setVisible(false);
         jTabbedPane1.setEnabledAt(2, false);
         //to hide admin
+             // Gettingdata.setVisible(false);
         
     }
         //employee
@@ -68,7 +80,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
           buttonGroup1.add(jRadioButton4);
         
           
-          
+               // Gettingdata.setVisible(false);
           jPanel16.setVisible(false);
           jPanel10.setVisible(false);
        
@@ -142,7 +154,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel19 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable_transactionDetails = new javax.swing.JTable();
+        jPanel20 = new javax.swing.JPanel();
+        jProgressBar1 = new javax.swing.JProgressBar();
         jPanel12 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -421,9 +435,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         jLabel15.setText("Transaction History");
         jPanel19.add(jLabel15);
-        jLabel15.setBounds(318, 13, 110, 16);
+        jLabel15.setBounds(340, 10, 110, 16);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_transactionDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -431,10 +445,36 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 "ID", "CardNo", "EmpName", "Amount", "Date"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(jTable_transactionDetails);
 
         jPanel19.add(jScrollPane2);
-        jScrollPane2.setBounds(0, 160, 860, 402);
+        jScrollPane2.setBounds(0, 160, 880, 402);
+
+        jPanel20.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
+        jPanel20.setLayout(jPanel20Layout);
+        jPanel20Layout.setHorizontalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 350, Short.MAX_VALUE)
+            .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel20Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel20Layout.setVerticalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 210, Short.MAX_VALUE)
+            .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel20Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        jPanel19.add(jPanel20);
+        jPanel20.setBounds(260, 220, 350, 210);
 
         jLayeredPane1.setLayer(jPanel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jPanel16, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -836,12 +876,89 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jPanel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel18MouseClicked
-        // TODO add your handling code here:Transaction Details
+        // TODO add your handling code here:Transaction Details Panel Table Left Side 
         
+       
         jPanel10.setVisible(false);
         jPanel16.setVisible(false);
         jPanel17.setVisible(false);
         jPanel19.setVisible(true);
+     
+        
+        
+        
+	            SwingWorker work = new SwingWorker< ArrayList<Recharge> , Integer>() {
+	            @Override
+	            protected  ArrayList<Recharge>  doInBackground() throws Exception 
+	            {
+	              
+          
+                    TransactionInterface Dao = TransactionFactory.getInstance();
+                    ArrayList<Recharge> transactiondetails  = Dao.GetTransactionDetails("");
+
+	                return transactiondetails;
+	            }
+
+
+	            @Override
+	            protected void done()
+                    {
+                        try {
+                            transactiondetails = get();
+                            System.out.println(transactiondetails.size());
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (ExecutionException ex) {
+                            Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+	                boolean bStatus = false;
+	              
+	                System.out.println("Finished with status " + bStatus);
+                        //Gettingdata.setVisible(false);
+	            }
+	        };
+        
+        
+           work.execute();
+           
+          int n = 11;
+          while(true)
+          {
+          
+          JOptionPane.showMessageDialog(this,
+        "Wait Getting data from Server");
+          if(transactiondetails != null)
+          {
+              
+              break;
+          }
+          }
+        System.out.println(n);
+          
+          
+        DefaultTableModel m = (DefaultTableModel) jTable_transactionDetails.getModel();
+        m.setRowCount(0);
+        
+        DefaultTableModel  model = (DefaultTableModel) jTable_transactionDetails.getModel();
+        Object row[] = new Object[5];
+        
+        if(transactiondetails != null)
+        {
+               for(int i = 0;i < transactiondetails.size();i++)
+        {
+        row[0] = transactiondetails.get(i).getID();
+        row[1] = transactiondetails.get(i).getCardNo(); 
+        row[2] = transactiondetails.get(i).getEmpName(); 
+        row[3] = transactiondetails.get(i).getAmount();
+        row[4] = transactiondetails.get(i).getDate();
+
+        model.addRow(row);
+
+        }
+     
+        }
+        
+        
         
     }//GEN-LAST:event_jPanel18MouseClicked
 
@@ -925,6 +1042,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -932,6 +1050,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
@@ -942,8 +1061,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable_EmpRecord;
+    private javax.swing.JTable jTable_transactionDetails;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField1_address;
     private javax.swing.JTextField jTextField1_contact;

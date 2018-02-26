@@ -11,6 +11,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.ArrayList;
+import gamecenter.Recharge;
+import gamecenter.Stall;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  *
@@ -20,6 +25,7 @@ public class TransactionImplementation implements TransactionInterface
 {
     
     static  String Rech = "";
+    static String TransDetails = "";
     Connection conn;
     TransactionImplementation()
     {
@@ -59,6 +65,43 @@ public class TransactionImplementation implements TransactionInterface
             Logger.getLogger(TransactionImplementation.class.getName()).log(Level.SEVERE, null, ex);
         }
    
+        
+    }
+
+    @Override
+    public ArrayList<Recharge> GetTransactionDetails(String TableName)
+    {
+        
+        ArrayList<Recharge> transactiondetails = new ArrayList<>();
+        
+        TransDetails = "SELECT * FROM GameZoneDB.abc_transaction";
+           try {
+                   Statement stmt=conn.createStatement();  
+                   ResultSet rs = stmt.executeQuery(TransDetails);
+                   while(rs.next())  
+                   {
+                       Recharge rec = new Recharge();
+                       rec.setID(rs.getInt(1));
+                       rec.setEmpName(rs.getString(3));
+                       rec.setCardNo(rs.getString(2));
+                       rec.setDate(rs.getTimestamp(5));
+                       rec.setAmount(rs.getInt(4));
+                       transactiondetails.add(rec);
+                  
+                   }
+        
+        } catch (Exception ex) 
+        {
+                System.out.println("AAA "+ex);
+        }
+           
+           
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(TransactionImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return transactiondetails;
         
     }
     
