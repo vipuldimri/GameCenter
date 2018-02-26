@@ -58,6 +58,7 @@ public class UserImplements implements UserInterface
                     Stall newstall = new Stall(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getDate(7),rs.getDate(8));
                     obj.stalls.add(newstall);
                     obj.subdate.put(rs.getInt(1), rs.getDate(8));
+                    obj.stallIdandName.put(rs.getInt(1),rs.getString(2) );
                     //End date for every stall corres to their ID
                    }
         
@@ -102,6 +103,12 @@ public class UserImplements implements UserInterface
             return false;
         }
    
+        
+        try {
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserImplements.class.getName()).log(Level.SEVERE, null, ex);
+        }
         System.out.println("Inserted");
         
         return true;

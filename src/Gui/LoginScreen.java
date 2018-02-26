@@ -32,12 +32,16 @@ public class LoginScreen extends javax.swing.JFrame
     
     
     //detail about current stall
-    Stall currentstall;
+    //String  currentstall;
+    
+
     //detail about current user
     User currentuser;
     //Details about users stall users 
     ArrayList<User> currentStallUsers;
 
+    
+    static String currentstallname;
     
     public LoginScreen(ArrayList<User> users,Stalls_and_SubDate stalls)
     {
@@ -55,7 +59,7 @@ public class LoginScreen extends javax.swing.JFrame
     
      //instance created
      currentStallUsers = new ArrayList<>();
-     currentstall = new Stall();
+     //currentstall = new Stall();
      currentuser = new User();
      
     
@@ -257,7 +261,8 @@ public class LoginScreen extends javax.swing.JFrame
                 //Now getting current stall Endsub data and converting it into String to check if sub is valid or not for the gamezone
                 gamezoneid = u.getGameZoneID();
                 java.sql.Date sub_enddate = stalls.subdate.get(gamezoneid);
-                
+                currentstallname = stalls.stallIdandName.get(gamezoneid);
+                System.out.println(currentstallname);
                 System.out.println(cur_date);
                 System.out.println(sub_enddate);
                 
@@ -362,7 +367,7 @@ public class LoginScreen extends javax.swing.JFrame
                 }
                 jTextField1.setText("");
                 jPasswordField1.setText("");
-                new MainScreen_StallOwner("admin",this,currentuser,currentStallUsers).setVisible(true);
+                new MainScreen_StallOwner("admin",this,currentuser,currentStallUsers,currentstallname).setVisible(true);
                 setVisible(false);
             }else
             {
@@ -370,7 +375,7 @@ public class LoginScreen extends javax.swing.JFrame
                  //here currentStallUsers is null because emp has no rights to see emps
                 jTextField1.setText("");
                 jPasswordField1.setText("");
-                 new MainScreen_StallOwner(this,currentuser,currentStallUsers).setVisible(true);
+                 new MainScreen_StallOwner(this,currentuser,currentStallUsers,currentstallname).setVisible(true);
                 setVisible(false);
             }
             

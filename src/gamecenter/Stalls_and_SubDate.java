@@ -16,11 +16,16 @@ public class Stalls_and_SubDate
     public ArrayList<Stall> stalls;
     //Contains Endsub for all the Gamezones
     public HashMap<Integer, java.sql.Date> subdate;
+    
+    public HashMap<Integer,String> stallIdandName;
+    
+    
 
     public Stalls_and_SubDate()
     {
         stalls = new ArrayList<>();
         subdate = new HashMap<>();
+        stallIdandName = new HashMap<>();
     }
     
 }

@@ -13,7 +13,6 @@ public class Connect
               conn = null;
 	       try
 	       {
-                   String test = "";
 	           String url = "jdbc:mysql://gamezone.cn406nlqr1z7.us-east-2.rds.amazonaws.com:3306/GameZoneDB";
 	           Class.forName("com.mysql.jdbc.Driver");
 	           conn = DriverManager.getConnection (url,"vipuldimri","gamezone");
