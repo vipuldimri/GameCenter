@@ -7,7 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 public class StallImplements implements StallInterface
 {
- static final String AddEmp = "INSERT INTO gamecenter.users (Name,Address,Contact,Email,Type,GameZoneID,Password) VALUES(?,?,?,?,?,?,?)";
+ static final String AddEmp = "INSERT INTO GameZoneDB.users (Name,Address,Contact,Email,Type,GameZoneID,Password) VALUES(?,?,?,?,?,?,?)";
     
     @Override
     public void AddGameZone(StallInterface stall)

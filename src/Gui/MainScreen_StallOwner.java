@@ -94,7 +94,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
-        jButton7 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -104,7 +103,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel6 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        jButton8 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -145,7 +143,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
-        jButton9 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Main Screen ");
@@ -249,15 +246,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel4.add(jRadioButton4);
         jRadioButton4.setBounds(780, 260, 89, 37);
 
-        jButton7.setText("Log Out");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jButton7);
-        jButton7.setBounds(1110, 10, 77, 25);
-
         jPanel2.add(jPanel4);
         jPanel4.setBounds(2, 7, 1200, 440);
 
@@ -302,10 +290,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel3.add(jPanel6);
         jPanel6.setBounds(380, 40, 690, 640);
 
-        jButton8.setText("jButton8");
-        jPanel3.add(jButton8);
-        jButton8.setBounds(1090, 20, 79, 25);
-
         jTabbedPane1.addTab("Today Collection", jPanel3);
 
         jPanel8.setLayout(null);
@@ -326,6 +310,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel12.setBounds(90, 100, 53, 22);
 
         jButton4.setText("Submit");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jPanel10.add(jButton4);
         jButton4.setBounds(370, 490, 120, 40);
 
@@ -585,28 +574,15 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         jPanel9.setBackground(new java.awt.Color(0, 51, 51));
 
-        jButton9.setText("Log Out");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                .addContainerGap(760, Short.MAX_VALUE)
-                .addComponent(jButton9)
-                .addGap(23, 23, 23))
+            .addGap(0, 860, Short.MAX_VALUE)
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton9)
-                .addContainerGap(142, Short.MAX_VALUE))
+            .addGap(0, 180, Short.MAX_VALUE)
         );
 
         jPanel7.add(jPanel9);
@@ -754,30 +730,21 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
     }//GEN-LAST:event_jPanel15MouseClicked
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:Log out Button
-        if(l == null)
-        {
-            System.out.println("Null");
-        }else
-        {
-        l.setVisible(true);
-        setVisible(false);
-        }
-    }//GEN-LAST:event_jButton9ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-           if(l == null)
-        {
-            System.out.println("Null");
-        }else
-        {
-        l.setVisible(true);
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:ADD button to add Employee
         
-        setVisible(false);
-        }
-    }//GEN-LAST:event_jButton7ActionPerformed
+           User newuser = new User();
+           newuser.setName(jTextField_Name.getText());
+           newuser.setType("emp");
+           newuser.setGameZoneID(currentuser.getGameZoneID());
+           newuser.setAddress(jTextField1_address.getText());
+           newuser.setContact(jTextField1_contact.getText());
+           newuser.setEmail(jTextField1_email.getText());
+           newuser.setPassword(jTextField1_password.getText());
+           
+           UserInterface Dao   = UserFactory.getInstance();
+           Dao.AddEmp(newuser);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -822,9 +789,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

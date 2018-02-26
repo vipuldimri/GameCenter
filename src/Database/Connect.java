@@ -13,9 +13,9 @@ public class Connect
               conn = null;
 	       try
 	       {
-	           String url = "jdbc:mysql://localhost:3306/gamecenter";
+	           String url = "jdbc:mysql://gamezone.cn406nlqr1z7.us-east-2.rds.amazonaws.com:3306/GameZoneDB";
 	           Class.forName("com.mysql.jdbc.Driver");
-	           conn = DriverManager.getConnection (url,"vipul","mysql");
+	           conn = DriverManager.getConnection (url,"vipuldimri","gamezone");
 	           System.out.println ("Database connection established");
 	       }
 	       catch (Exception e)

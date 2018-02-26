@@ -16,9 +16,9 @@ import java.util.logging.Logger;
 public class UserImplements implements UserInterface
 {
 
-    static final String GetAllUser = "SELECT * FROM gamecenter.users";
-    static final String GetAllStalls = "SELECT * FROM gamecenter.gamezone;";
-    static  final String AddEmp = "INSERT INTO gamecenter.users (Name,Address,Contact,Email,Type,GameZoneID,Password) VALUES(?,?,?,?,?,?,?)";
+    static final String GetAllUser = "SELECT * FROM GameZoneDB.users";
+    static final String GetAllStalls = "SELECT * FROM GameZoneDB.gamezone;";
+    static  final String AddEmp = "INSERT INTO GameZoneDB.users (Name,Address,Contact,Email,Type,GameZoneID,Password) VALUES(?,?,?,?,?,?,?)";
     Connection conn;
     UserImplements()
     {
@@ -78,7 +78,7 @@ public class UserImplements implements UserInterface
     @Override
     public boolean AddEmp(User user) 
     {
-        
+        System.out.println("Inside ADD");
          
         try {
            
@@ -102,7 +102,7 @@ public class UserImplements implements UserInterface
             return false;
         }
    
-        
+        System.out.println("Inserted");
         
         return true;
     }
