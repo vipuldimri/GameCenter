@@ -1,10 +1,15 @@
 package Gui;
+import gamecenter.Stall;
 import gamecenter.Stalls_and_SubDate;
 import gamecenter.User;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.sql.Date;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import Database.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 public class MainScreen_Admin extends javax.swing.JFrame 
 {
     //Containsa all the Users of the System
@@ -66,19 +71,19 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        jLabel_Sub = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTextField_GameZoneAddress = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
+        jComboBox_sub = new javax.swing.JComboBox<>();
+        jTextField_GameZoneName = new javax.swing.JTextField();
+        jTextField_GameZoneOwnerName = new javax.swing.JTextField();
+        jTextField_GameZoneOwnerContact = new javax.swing.JTextField();
+        jTextField_GameZoneOwnerPassword = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_Gamezone = new javax.swing.JTable();
@@ -160,10 +165,10 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jPanel3.add(jLabel7);
         jLabel7.setBounds(359, 25, 116, 16);
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel8.setText("Sub Yr");
-        jPanel3.add(jLabel8);
-        jLabel8.setBounds(490, 350, 140, 50);
+        jLabel_Sub.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel_Sub.setText("Sub Yr");
+        jPanel3.add(jLabel_Sub);
+        jLabel_Sub.setBounds(490, 350, 140, 50);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel11.setText("Owner Name");
@@ -185,9 +190,9 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jPanel3.add(jLabel14);
         jLabel14.setBounds(70, 70, 220, 60);
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jPanel3.add(jTextField2);
-        jTextField2.setBounds(500, 130, 350, 80);
+        jTextField_GameZoneAddress.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jPanel3.add(jTextField_GameZoneAddress);
+        jTextField_GameZoneAddress.setBounds(500, 130, 350, 80);
 
         jButton1.setText("Add GameZone");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -203,26 +208,26 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jPanel3.add(jLabel9);
         jLabel9.setBounds(500, 200, 170, 60);
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 yr", "2 yr", "3 yr", "4 yr", " " }));
-        jPanel3.add(jComboBox1);
-        jComboBox1.setBounds(590, 350, 140, 40);
+        jComboBox_sub.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jComboBox_sub.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 yr", "2 yr", "3 yr", "4 yr", " " }));
+        jPanel3.add(jComboBox_sub);
+        jComboBox_sub.setBounds(590, 350, 140, 40);
 
-        jTextField6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jPanel3.add(jTextField6);
-        jTextField6.setBounds(70, 140, 230, 40);
+        jTextField_GameZoneName.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jPanel3.add(jTextField_GameZoneName);
+        jTextField_GameZoneName.setBounds(70, 140, 230, 40);
 
-        jTextField7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jPanel3.add(jTextField7);
-        jTextField7.setBounds(70, 260, 230, 40);
+        jTextField_GameZoneOwnerName.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jPanel3.add(jTextField_GameZoneOwnerName);
+        jTextField_GameZoneOwnerName.setBounds(70, 260, 230, 40);
 
-        jTextField8.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jPanel3.add(jTextField8);
-        jTextField8.setBounds(70, 370, 230, 40);
+        jTextField_GameZoneOwnerContact.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jPanel3.add(jTextField_GameZoneOwnerContact);
+        jTextField_GameZoneOwnerContact.setBounds(70, 370, 230, 40);
 
-        jTextField9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jPanel3.add(jTextField9);
-        jTextField9.setBounds(500, 270, 230, 40);
+        jTextField_GameZoneOwnerPassword.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jPanel3.add(jTextField_GameZoneOwnerPassword);
+        jTextField_GameZoneOwnerPassword.setBounds(500, 270, 230, 40);
 
         jPanel4.setLayout(null);
 
@@ -317,6 +322,51 @@ public class MainScreen_Admin extends javax.swing.JFrame
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:Create button 
+        /*
+        Code for Submit Button ADD GameZone
+        */
+        String Gamezonename = jTextField_GameZoneName.getText();
+        String Conact = jTextField_GameZoneOwnerContact.getText();
+        String Password = jTextField_GameZoneOwnerPassword.getText();
+        String OwnerName = jTextField_GameZoneOwnerName.getText();
+        String address = jTextField_GameZoneAddress.getText();
+        
+        String select = jComboBox_sub.getSelectedItem().toString();
+        int subyears = Integer.parseInt(select.substring(0,1));
+        
+        long millis=System.currentTimeMillis();  
+        java.sql.Date currentdate=new java.sql.Date(millis);
+        String currentdateString = currentdate.toString();
+        String TempStr = currentdateString.substring(4);
+        //2015-03-30 format is this 
+        int currentyr = Integer.parseInt(currentdateString.substring(0,4));
+        int Endsubyr = currentyr + subyears;
+        
+        String FinalEndsubString = Endsubyr+TempStr;
+        java.sql.Date finalEndsubDate   =  java.sql.Date.valueOf(FinalEndsubString);        
+        
+        
+        Stall newgamezone = new Stall();
+        newgamezone.setAddress(address);
+        newgamezone.setContact(Conact);
+        newgamezone.setName(Gamezonename);
+        newgamezone.setPassword(Password);
+        newgamezone.setOwnerName(OwnerName);
+        newgamezone.setSubStartDate(currentdate);
+        newgamezone.setSubEndDate(finalEndsubDate);
+        
+        //Completed getting data from GUI and storing into obbject of stall type
+        MainAdminInterface Dao = null;
+        try {
+            Dao = MainAdminFactory.getInstance();
+        } catch (Exception ex) 
+        {
+            //inCase of any errot in Adding new GameZone
+            Logger.getLogger(MainScreen_Admin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Dao.AddGameZone(newgamezone);
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
@@ -400,7 +450,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox_sub;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -412,8 +462,8 @@ public class MainScreen_Admin extends javax.swing.JFrame
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel_Sub;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -427,10 +477,10 @@ public class MainScreen_Admin extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable_Gamezone;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField jTextField_GameZoneAddress;
+    private javax.swing.JTextField jTextField_GameZoneName;
+    private javax.swing.JTextField jTextField_GameZoneOwnerContact;
+    private javax.swing.JTextField jTextField_GameZoneOwnerName;
+    private javax.swing.JTextField jTextField_GameZoneOwnerPassword;
     // End of variables declaration//GEN-END:variables
 }

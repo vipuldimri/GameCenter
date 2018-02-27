@@ -9,13 +9,9 @@ package Database;
  *
  * @author vipul
  */
-public class TransactionFactory
+import gamecenter.Stall;
+public interface MainAdminInterface 
 {
-    
-     public static TransactionInterface getInstance() throws Exception
-    {
-        return new TransactionImplementation();
-    }
-    
+    public void AddGameZone(Stall newgamezone);
     
 }

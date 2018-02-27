@@ -9,13 +9,11 @@ package Database;
  *
  * @author vipul
  */
-public class TransactionFactory
-{
+public class MainAdminFactory {
+   
     
-     public static TransactionInterface getInstance() throws Exception
+    public static MainAdminInterface getInstance() throws Exception
     {
-        return new TransactionImplementation();
+        return new MainAdmin();
     }
-    
-    
 }
