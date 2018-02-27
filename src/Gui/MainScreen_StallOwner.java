@@ -15,6 +15,7 @@ import java.awt.Window;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,6 +35,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     LoginScreen l ;
     String currentstallname;
     ArrayList<Recharge> transactiondetails;
+    JDialog dialog;
+    CountDownLatch loginSignal;
     public MainScreen_StallOwner(LoginScreen l ,User currentuser ,ArrayList<User> currentStallUsers,String currentstallname) 
     {
         System.out.println("LL "+l);
@@ -59,6 +62,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jTabbedPane1.setEnabledAt(2, false);
         //to hide admin
              // Gettingdata.setVisible(false);
+             loginSignal = new CountDownLatch(1);
         
     }
         //employee
@@ -83,6 +87,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                // Gettingdata.setVisible(false);
           jPanel16.setVisible(false);
           jPanel10.setVisible(false);
+           loginSignal = new CountDownLatch(1);
        
     }
 
@@ -871,7 +876,12 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
            newuser.setEmail(jTextField1_email.getText());
            newuser.setPassword(jTextField1_password.getText());
            
-           UserInterface Dao   = UserFactory.getInstance();
+           UserInterface Dao = null;
+        try {
+            Dao = UserFactory.getInstance();
+        } catch (Exception ex) {
+            Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
+        }
            Dao.AddEmp(newuser);
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -887,54 +897,76 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
         
         
-	            SwingWorker work = new SwingWorker< ArrayList<Recharge> , Integer>() {
+	            SwingWorker work = new SwingWorker<String , Integer>() {
 	            @Override
-	            protected  ArrayList<Recharge>  doInBackground() throws Exception 
+	            protected  String  doInBackground() throws Exception 
 	            {
 	              
-          
-                    TransactionInterface Dao = TransactionFactory.getInstance();
-                    ArrayList<Recharge> transactiondetails  = Dao.GetTransactionDetails("");
-
-	                return transactiondetails;
+                        System.out.println("Back ground starts");
+                      TransactionInterface Dao = TransactionFactory.getInstance();
+                     transactiondetails  = Dao.GetTransactionDetails("");
+                         
+                        System.out.println("Ends");
+                        System.out.println(transactiondetails.size()); 
+                        loginSignal.countDown();
+                        dialog.dispose();
+                        return "end";
+	                
 	            }
 
 
 	            @Override
 	            protected void done()
                     {
-                        try {
-                            transactiondetails = get();
-                            System.out.println(transactiondetails.size());
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (ExecutionException ex) {
-                            Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                        System.out.println("Done");
+                        System.out.println(transactiondetails.size());
 	                boolean bStatus = false;
-	              
 	                System.out.println("Finished with status " + bStatus);
-                        //Gettingdata.setVisible(false);
+                       
+
+        
 	            }
 	        };
         
         
            work.execute();
-           
-          int n = 11;
-          while(true)
-          {
+          Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+         int x = (int) ((dimension.getWidth() - getWidth()) / 2);
+         int y = (int) ((dimension.getHeight() - getHeight()) / 2);
+     
+          final JOptionPane optionPane = new JOptionPane("Loading Data", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
           
-          JOptionPane.showMessageDialog(this,
-        "Wait Getting data from Server");
-          if(transactiondetails != null)
-          {
-              
-              break;
-          }
-          }
-        System.out.println(n);
+          optionPane.setLocation(1000, 500);
+    
+          dialog = new JDialog();
+          dialog.setTitle("WAIt ");
+          dialog.setModal(true);
+                
+         dialog.setContentPane(optionPane);
+
+         dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+         dialog.pack();
+          dialog.setLocation(x,y);   
+         dialog.setVisible(true);
+        // dialog.setLocation(100, 500);
+      
+           System.out.println("Starts");
+        try {
+            loginSignal.await();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
+        }
           
+    
+
+          if(transactiondetails == null)
+          {
+                        
+           JOptionPane.showMessageDialog(this,
+           "Error Connecting Server ");
+              return;
+          }
+       
           
         DefaultTableModel m = (DefaultTableModel) jTable_transactionDetails.getModel();
         m.setRowCount(0);
@@ -942,6 +974,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         DefaultTableModel  model = (DefaultTableModel) jTable_transactionDetails.getModel();
         Object row[] = new Object[5];
         
+      
+        System.out.println("Final "+transactiondetails.size());
         if(transactiondetails != null)
         {
                for(int i = 0;i < transactiondetails.size();i++)

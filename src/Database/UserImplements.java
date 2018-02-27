@@ -20,7 +20,7 @@ public class UserImplements implements UserInterface
     static final String GetAllStalls = "SELECT * FROM GameZoneDB.gamezone;";
     static  final String AddEmp = "INSERT INTO GameZoneDB.users (Name,Address,Contact,Email,Type,GameZoneID,Password) VALUES(?,?,?,?,?,?,?)";
     Connection conn;
-    UserImplements()
+    UserImplements()throws Exception
     {
          Connect connect = new Connect();
          conn = connect.getconnection();

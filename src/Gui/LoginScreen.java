@@ -14,6 +14,11 @@ import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.concurrent.CountDownLatch;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import sun.audio.AudioPlayer;
+import gamecenter.LoadingTHREAD;
 /*
 Login frame Class
 */
@@ -187,6 +192,17 @@ public class LoginScreen extends javax.swing.JFrame
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here: Login button Event 
         //store username and  password from the GUI
+      
+//        CountDownLatch loginSignal = new CountDownLatch(1);
+//     
+//        LoadingTHREAD t = new LoadingTHREAD();
+//        t.start();
+//        try {
+//            loginSignal.await();
+//        } catch (InterruptedException ex) {
+//            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
         String username = jTextField1.getText();
         char[] password = jPasswordField1.getPassword();
         String pass ="";

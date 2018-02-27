@@ -2,6 +2,11 @@ package gamecenter;
 
 import java.sql.Date;
 
+
+/*
+Class for Reacharges and all the transaction done .
+Object of this class is used for storing transaction details into the database
+*/
 public class Recharge 
 {
     

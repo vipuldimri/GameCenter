@@ -27,7 +27,7 @@ public class TransactionImplementation implements TransactionInterface
     static  String Rech = "";
     static String TransDetails = "";
     Connection conn;
-    TransactionImplementation()
+    TransactionImplementation()throws Exception
     {
         
          Connect connect = new Connect();

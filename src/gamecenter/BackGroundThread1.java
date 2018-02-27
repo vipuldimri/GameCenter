@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import Database.*;
 import Gui.*;
 import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /*
 Thread for gtting users  and stall (GameZone ) information from the database .
 
@@ -20,14 +22,21 @@ public class BackGroundThread1 extends Thread
         users = new ArrayList<>();
         stalls = new Stalls_and_SubDate();
     }
+    @Override
     public void run()
     {
    
-         UserInterface Dao   = UserFactory.getInstance();
-         users = Dao.getAllUsers();
-         stalls = Dao.getAllStall();
-        
-        
+        try 
+        {
+            UserInterface Dao   = UserFactory.getInstance();
+            users = Dao.getAllUsers();
+            stalls = Dao.getAllStall();
+        } catch (Exception ex) 
+        {
+          
+            System.out.println("ERROR "+ex);
+           
+        }   
         
     }
     

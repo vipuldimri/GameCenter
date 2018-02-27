@@ -9,10 +9,10 @@ import Database.TransactionFactory;
 import Database.TransactionInterface;
 import java.util.ArrayList;
 
-/**
- *
- * @author vipul
- */
+/*
+
+This class is for test purpose not used in the project
+*/
 public class Background_GetTransactionDetails extends  Thread
 {
    public ArrayList<Recharge> transactiondetails;

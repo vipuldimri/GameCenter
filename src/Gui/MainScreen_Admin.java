@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 public class MainScreen_Admin extends javax.swing.JFrame 
 {
+    //Containsa all the Users of the System
     ArrayList<User> users;
+    //Contains GameZones Details
     Stalls_and_SubDate stalls;
    
     
@@ -20,10 +22,10 @@ public class MainScreen_Admin extends javax.swing.JFrame
         this.users = users;
         initComponents();
         
-          Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-    int x = (int) ((dimension.getWidth() - getWidth()) / 2);
-    int y = (int) ((dimension.getHeight() - getHeight()) / 2);
-    setLocation(x, y);
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - getHeight()) / 2);
+        setLocation(x, y);
     
     
         jPanel3.setVisible(true);
@@ -328,7 +330,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
         //display registered GameZone
        
         
-        //to display record into the table
+        //Displaying All the Registered GameZones Into JTABLE
         DefaultTableModel m = (DefaultTableModel) jTable_Gamezone.getModel();
         m.setRowCount(0);
         DefaultTableModel  model = (DefaultTableModel) jTable_Gamezone.getModel();
@@ -345,6 +347,9 @@ public class MainScreen_Admin extends javax.swing.JFrame
         row[7] = stalls.stalls.get(i).getSubEndDate();
       
         model.addRow(row);
+        
+        
+        
 
         }
         

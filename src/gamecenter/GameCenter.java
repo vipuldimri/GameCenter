@@ -3,13 +3,12 @@ package gamecenter;
 
 import Gui.LoginScreen;
 import Gui.Splash;
+import javax.swing.JOptionPane;
 
 
 /*
 This is the Main class Staring og the Project
 Threading is used for getting the data from the database
-
-
 */
 public class GameCenter {
 
@@ -31,7 +30,18 @@ public class GameCenter {
             {
                 backgroundthread1.join();
                 splash.setVisible(false);
-                //Sending Users and stall details to the login screen
+               
+                //Code If Unable to connect Online Database Server 
+                if(backgroundthread1.users.size() == 0 || backgroundthread1.stalls == null)
+                {
+
+                     JOptionPane.showMessageDialog(splash,
+                     "Unable To Connect Server Please Check Your Internet Connection.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);   
+                   //   break; this break is Mandatory Do not Comment this
+                }
+                //Sending Users and stall details to the login screen after Getting Users and GameZone Data 
                 LoginScreen l = new LoginScreen(backgroundthread1.users,backgroundthread1.stalls);
                 l.setVisible(true);
                 break;
