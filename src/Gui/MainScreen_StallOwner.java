@@ -8,7 +8,6 @@ import Database.UserInterface;
 import gamecenter.Background_GetTransactionDetails;
 import gamecenter.Recharge;
 import gamecenter.User;
-import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Window;
@@ -37,10 +36,13 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     ArrayList<Recharge> transactiondetails;
     JDialog dialog;
     CountDownLatch loginSignal;
+    ArrayList<Recharge> transdetailscomplete;
     public MainScreen_StallOwner(LoginScreen l ,User currentuser ,ArrayList<User> currentStallUsers,String currentstallname) 
     {
         System.out.println("LL "+l);
         this.currentstallname = currentstallname;
+ 
+     
         this.l = l;
       
         this.currentStallUsers = currentStallUsers;
@@ -61,14 +63,47 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel19.setVisible(false);
         jTabbedPane1.setEnabledAt(2, false);
         //to hide admin
-             // Gettingdata.setVisible(false);
-             loginSignal = new CountDownLatch(1);
+        // Gettingdata.setVisible(false);
+        loginSignal = new CountDownLatch(1);
+        jLabel_OwnerName.setText(this.currentuser.getName());
+        jLabel_GameZoneNAme.setText(currentstallname);
+             
+        //Background thread for getting transaction details         
+        Background_GetTransactionDetails background_GetTransactionDetails = new Background_GetTransactionDetails(loginSignal,currentstallname);
+        background_GetTransactionDetails.start();
+        try
+        {
+      
+            
+            loginSignal.await();
+        } catch (InterruptedException ex)
+        {
+            Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
+        transdetailscomplete = background_GetTransactionDetails.transactiondetails; 
+        if(null == transdetailscomplete || background_GetTransactionDetails.ErrorMessage.equals("TransactionError"))
+        {
+            
+              //Error 
+                JOptionPane.showMessageDialog(jPanel1,
+                "No internet Connection.",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+                System.exit(0);
+            
+            
+        }
+        
+        jLabel_currentEMpName.setText(currentuser.getName());
+        jLabel_currentempname2.setText(currentuser.getName());
         
     }
         //employee
         public MainScreen_StallOwner(String str,LoginScreen l ,User currentuser ,ArrayList<User> currentStallUsers,String currentstallname)
         {
             this.currentstallname = currentstallname;
+     
           this.l = l;
           Type = str;
           this.currentStallUsers = currentStallUsers;
@@ -84,11 +119,44 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
           buttonGroup1.add(jRadioButton4);
         
           
-               // Gettingdata.setVisible(false);
+          // Gettingdata.setVisible(false);
           jPanel16.setVisible(false);
           jPanel10.setVisible(false);
-           loginSignal = new CountDownLatch(1);
+          loginSignal = new CountDownLatch(1);
+          jLabel_OwnerName.setText(this.currentuser.getName());
+          jLabel_GameZoneNAme.setText(currentstallname);
+
+         //background thread for getting data 
+         Background_GetTransactionDetails background_GetTransactionDetails = new Background_GetTransactionDetails(loginSignal,currentstallname);
+         background_GetTransactionDetails.start();
+         try {
+      
+            
+            loginSignal.await();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
+        transdetailscomplete = background_GetTransactionDetails.transactiondetails; 
        
+        
+        if(null == transdetailscomplete || background_GetTransactionDetails.ErrorMessage.equals("TransactionError"))
+        {
+            
+              //Error 
+              JOptionPane.showMessageDialog(jPanel1,
+                  "No internet Connection.",
+                  "Inane error",
+                  JOptionPane.ERROR_MESSAGE);
+                  System.exit(0);
+            
+            
+        }
+        
+        
+       
+     jLabel_currentEMpName.setText(currentuser.getName());
+     jLabel_currentempname2.setText(currentuser.getName());
     }
 
     /**
@@ -118,6 +186,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel_currentEMpName = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -127,6 +197,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel6 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel_currentEMpName1 = new javax.swing.JLabel();
+        jLabel_currentempname2 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable_transactionDetailsEmp = new javax.swing.JTable();
         jPanel8 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -174,10 +249,20 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel21 = new javax.swing.JLabel();
         jPanel18 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
+        jLabel_GameZoneNAme = new javax.swing.JLabel();
+        jLabel_OwnerName = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Main Screen ");
+
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.setLayout(null);
@@ -227,6 +312,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jButton2.setBounds(550, 370, 110, 40);
 
         jButton3.setText("Reset To Zero");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel4.add(jButton3);
         jButton3.setBounds(840, 370, 130, 50);
 
@@ -278,6 +368,17 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel4.add(jRadioButton4);
         jRadioButton4.setBounds(780, 260, 89, 37);
 
+        jLabel27.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel27.setText("Welcome");
+        jPanel4.add(jLabel27);
+        jLabel27.setBounds(820, 0, 110, 30);
+
+        jLabel_currentEMpName.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_currentEMpName.setText("jLabel28");
+        jPanel4.add(jLabel_currentEMpName);
+        jLabel_currentEMpName.setBounds(1010, 10, 48, 16);
+
         jPanel2.add(jPanel4);
         jPanel4.setBounds(2, 7, 1200, 440);
 
@@ -317,10 +418,39 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel6.add(jLabel6);
         jLabel6.setBounds(0, 13, 94, 16);
         jPanel6.add(jSeparator3);
-        jSeparator3.setBounds(-380, 40, 1070, 2);
+        jSeparator3.setBounds(-380, 40, 1430, 2);
+
+        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel28.setText("Welcome");
+        jPanel6.add(jLabel28);
+        jLabel28.setBounds(710, 0, 110, 30);
+
+        jLabel_currentEMpName1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_currentEMpName1.setText("jLabel28");
+        jPanel6.add(jLabel_currentEMpName1);
+        jLabel_currentEMpName1.setBounds(1010, 10, 48, 20);
+
+        jLabel_currentempname2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_currentempname2.setText("jLabel29");
+        jPanel6.add(jLabel_currentempname2);
+        jLabel_currentempname2.setBounds(890, 10, 48, 16);
+
+        jTable_transactionDetailsEmp.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "CardNo", "EmpName", "Amount", "Date"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable_transactionDetailsEmp);
+
+        jPanel6.add(jScrollPane3);
+        jScrollPane3.setBounds(0, 240, 1010, 402);
 
         jPanel3.add(jPanel6);
-        jPanel6.setBounds(380, 40, 690, 640);
+        jPanel6.setBounds(60, 40, 1010, 640);
 
         jTabbedPane1.addTab("Today Collection", jPanel3);
 
@@ -642,21 +772,30 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Transaction Details");
 
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/transaction.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel16)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58))
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel14)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel16))
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel14)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -679,7 +818,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jPanel7.add(jPanel12);
@@ -687,15 +826,43 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         jPanel9.setBackground(new java.awt.Color(0, 51, 51));
 
+        jLabel_GameZoneNAme.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel_GameZoneNAme.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_GameZoneNAme.setText("jLabel26");
+
+        jLabel_OwnerName.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel_OwnerName.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_OwnerName.setText("jLabel26");
+
+        jLabel26.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel26.setText("Welcome");
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 860, Short.MAX_VALUE)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap(355, Short.MAX_VALUE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                        .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel_OwnerName, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(119, 119, 119))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                        .addComponent(jLabel_GameZoneNAme, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(286, 286, 286))))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 180, Short.MAX_VALUE)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addComponent(jLabel_GameZoneNAme, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_OwnerName, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10))
         );
 
         jPanel7.add(jPanel9);
@@ -710,13 +877,13 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 767, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -812,9 +979,35 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
        rec.setDate(date);
        
         String TableName = currentstallname+"_transaction";
-        TransactionInterface Dao = TransactionFactory.getInstance();
-        Dao.Recharge(rec, TableName);
-        
+        TransactionInterface Dao = null ;
+        try {
+            Dao = TransactionFactory.getInstance();
+        } catch (Exception ex) {
+            //Error In Transaction 
+            Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("yha a gai");
+        try {
+            Dao.Recharge(rec, TableName);
+        } catch (Exception ex) 
+        {
+            //Error 
+            System.out.println("Error in recharge");
+             JOptionPane.showMessageDialog(jPanel1,
+           "Recharge Failed",
+           "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
+            return ;
+        }
+            
+            JOptionPane.showMessageDialog(jPanel1,
+           "Recharge Success",
+           "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+      jTextField1.setText("");
+      jTextField2.setText("");
+      
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jPanel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel13MouseClicked
@@ -894,8 +1087,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel17.setVisible(false);
         jPanel19.setVisible(true);
      
-        
-        
+        System.out.println(transdetailscomplete.size()+"   size hai bhai  sub thik");
+        /*
         
 	            SwingWorker work = new SwingWorker<String , Integer>() {
 	            @Override
@@ -903,8 +1096,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 	            {
 	              
                         System.out.println("Back ground starts");
-                      TransactionInterface Dao = TransactionFactory.getInstance();
-                     transactiondetails  = Dao.GetTransactionDetails("");
+                        TransactionInterface Dao = TransactionFactory.getInstance();
+                        //Arguments is table Name
+                        String TransactionTableName = currentstallname+"_transaction";
+                        transactiondetails  = Dao.GetTransactionDetails(TransactionTableName);
                          
                         System.out.println("Ends");
                         System.out.println(transactiondetails.size()); 
@@ -967,7 +1162,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
               return;
           }
        
-          
+          */
         DefaultTableModel m = (DefaultTableModel) jTable_transactionDetails.getModel();
         m.setRowCount(0);
         
@@ -975,26 +1170,54 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         Object row[] = new Object[5];
         
       
-        System.out.println("Final "+transactiondetails.size());
-        if(transactiondetails != null)
+        System.out.println("Final "+transdetailscomplete.size());
+    
+        for(int i = 0;i < transdetailscomplete.size();i++)
         {
-               for(int i = 0;i < transactiondetails.size();i++)
-        {
-        row[0] = transactiondetails.get(i).getID();
-        row[1] = transactiondetails.get(i).getCardNo(); 
-        row[2] = transactiondetails.get(i).getEmpName(); 
-        row[3] = transactiondetails.get(i).getAmount();
-        row[4] = transactiondetails.get(i).getDate();
+        row[0] = transdetailscomplete.get(i).getID();
+        row[1] = transdetailscomplete.get(i).getCardNo(); 
+        row[2] = transdetailscomplete.get(i).getEmpName(); 
+        row[3] = transdetailscomplete.get(i).getAmount();
+        row[4] = transdetailscomplete.get(i).getDate();
 
         model.addRow(row);
-
-        }
-     
         }
         
         
-        
+       // transactiondetails
     }//GEN-LAST:event_jPanel18MouseClicked
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        // TODO add your handling code here:Employee tab clicked
+                DefaultTableModel m = (DefaultTableModel) jTable_transactionDetailsEmp.getModel();
+        m.setRowCount(0);
+        
+        DefaultTableModel  model = (DefaultTableModel) jTable_transactionDetailsEmp.getModel();
+        Object row[] = new Object[5];
+        
+      
+        System.out.println("Final "+transdetailscomplete.size());
+    
+        for(int i = 0;i < transdetailscomplete.size();i++)
+        {
+            if( transdetailscomplete.get(i).getEmpName().equals(currentuser.getName()))
+            {
+        row[0] = transdetailscomplete.get(i).getID();
+        row[1] = transdetailscomplete.get(i).getCardNo(); 
+        row[2] = transdetailscomplete.get(i).getEmpName(); 
+        row[3] = transdetailscomplete.get(i).getAmount();
+        row[4] = transdetailscomplete.get(i).getDate();
+
+        model.addRow(row);
+            }
+        }
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here://Reset button code
+          jTextField1.setText("");
+          jTextField2.setText("");
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1046,6 +1269,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -1056,6 +1280,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1063,6 +1290,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel_GameZoneNAme;
+    private javax.swing.JLabel jLabel_OwnerName;
+    private javax.swing.JLabel jLabel_currentEMpName;
+    private javax.swing.JLabel jLabel_currentEMpName1;
+    private javax.swing.JLabel jLabel_currentempname2;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -1091,12 +1323,14 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable_EmpRecord;
     private javax.swing.JTable jTable_transactionDetails;
+    private javax.swing.JTable jTable_transactionDetailsEmp;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField1_address;
     private javax.swing.JTextField jTextField1_contact;

@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import sun.audio.AudioPlayer;
 import gamecenter.LoadingTHREAD;
+import javax.swing.JDialog;
 /*
 Login frame Class
 */
@@ -47,7 +48,7 @@ public class LoginScreen extends javax.swing.JFrame
 
     
     static String currentstallname;
-    
+    JDialog dialog;
     public LoginScreen(ArrayList<User> users,Stalls_and_SubDate stalls)
     {
     //getting data from thread
@@ -383,8 +384,11 @@ public class LoginScreen extends javax.swing.JFrame
                 }
                 jTextField1.setText("");
                 jPasswordField1.setText("");
-                new MainScreen_StallOwner("admin",this,currentuser,currentStallUsers,currentstallname).setVisible(true);
-                setVisible(false);
+              
+           final JOptionPane optionPane = new JOptionPane("Loging You in", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+             MainScreen_StallOwner mainScreen_StallOwner =  new MainScreen_StallOwner("admin",this,currentuser,currentStallUsers,currentstallname); 
+          mainScreen_StallOwner.setVisible(true);
+          setVisible(false);
             }else
             {
                  //if current user is normal employee
@@ -392,7 +396,7 @@ public class LoginScreen extends javax.swing.JFrame
                 jTextField1.setText("");
                 jPasswordField1.setText("");
                  new MainScreen_StallOwner(this,currentuser,currentStallUsers,currentstallname).setVisible(true);
-                setVisible(false);
+                  setVisible(false);
             }
             
         }

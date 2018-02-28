@@ -102,6 +102,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jPanel2.setBackground(new java.awt.Color(102, 0, 153));
         jPanel2.setLayout(null);
 
+        jPanel6.setBackground(new java.awt.Color(0, 0, 0));
         jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel6MouseClicked(evt);
@@ -109,17 +110,20 @@ public class MainScreen_Admin extends javax.swing.JFrame
         });
         jPanel6.setLayout(null);
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Add GameZone");
         jPanel6.add(jLabel1);
         jLabel1.setBounds(130, 30, 87, 16);
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("jLabel4");
         jPanel6.add(jLabel4);
         jLabel4.setBounds(50, 30, 41, 16);
 
         jPanel2.add(jPanel6);
-        jPanel6.setBounds(0, 168, 300, 80);
+        jPanel6.setBounds(0, 300, 300, 110);
 
+        jPanel7.setBackground(new java.awt.Color(0, 0, 0));
         jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel7MouseClicked(evt);
@@ -127,17 +131,20 @@ public class MainScreen_Admin extends javax.swing.JFrame
         });
         jPanel7.setLayout(null);
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("View Registeed GameZones");
         jPanel7.add(jLabel2);
         jLabel2.setBounds(120, 30, 170, 20);
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("jLabel5");
         jPanel7.add(jLabel5);
         jLabel5.setBounds(30, 30, 41, 16);
 
         jPanel2.add(jPanel7);
-        jPanel7.setBounds(0, 370, 300, 80);
+        jPanel7.setBounds(0, 450, 300, 100);
 
+        jPanel8.setBackground(new java.awt.Color(0, 0, 0));
         jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel8MouseClicked(evt);
@@ -145,16 +152,18 @@ public class MainScreen_Admin extends javax.swing.JFrame
         });
         jPanel8.setLayout(null);
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Records");
         jPanel8.add(jLabel3);
         jLabel3.setBounds(180, 20, 60, 30);
 
-        jLabel6.setText("jLabel6");
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/viewrecordadmin.png"))); // NOI18N
         jPanel8.add(jLabel6);
-        jLabel6.setBounds(40, 30, 41, 16);
+        jLabel6.setBounds(60, 10, 70, 70);
 
         jPanel2.add(jPanel8);
-        jPanel8.setBounds(0, 530, 300, 70);
+        jPanel8.setBounds(0, 600, 300, 100);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 0, 300, 730);
@@ -168,7 +177,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jLabel_Sub.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel_Sub.setText("Sub Yr");
         jPanel3.add(jLabel_Sub);
-        jLabel_Sub.setBounds(490, 350, 140, 50);
+        jLabel_Sub.setBounds(500, 350, 140, 50);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel11.setText("Owner Name");
@@ -206,12 +215,12 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel9.setText("Passsword");
         jPanel3.add(jLabel9);
-        jLabel9.setBounds(500, 200, 170, 60);
+        jLabel9.setBounds(500, 210, 170, 60);
 
         jComboBox_sub.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jComboBox_sub.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 yr", "2 yr", "3 yr", "4 yr", " " }));
         jPanel3.add(jComboBox_sub);
-        jComboBox_sub.setBounds(590, 350, 140, 40);
+        jComboBox_sub.setBounds(610, 360, 140, 40);
 
         jTextField_GameZoneName.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jPanel3.add(jTextField_GameZoneName);

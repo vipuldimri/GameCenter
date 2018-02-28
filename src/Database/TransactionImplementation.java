@@ -35,7 +35,7 @@ public class TransactionImplementation implements TransactionInterface
     }
     
     @Override
-    public void Recharge(gamecenter.Recharge rec, String TableName) 
+    public void Recharge(gamecenter.Recharge rec, String TableName) throws Exception
     {
        
         Rech = "INSERT INTO "+TableName+" (CardNo,EmpName,Amount,Date)VALUES(?,?,?,?)";
@@ -69,13 +69,13 @@ public class TransactionImplementation implements TransactionInterface
     }
 
     @Override
-    public ArrayList<Recharge> GetTransactionDetails(String TableName)
+    public ArrayList<Recharge> GetTransactionDetails(String TableName)throws Exception
     {
         
         ArrayList<Recharge> transactiondetails = new ArrayList<>();
         
-        TransDetails = "SELECT * FROM GameZoneDB.abc_transaction";
-           try {
+        TransDetails = "SELECT * FROM GameZoneDB."+TableName;
+        
                    Statement stmt=conn.createStatement();  
                    ResultSet rs = stmt.executeQuery(TransDetails);
                    while(rs.next())  
@@ -90,11 +90,7 @@ public class TransactionImplementation implements TransactionInterface
                   
                    }
         
-        } catch (Exception ex) 
-        {
-                System.out.println("AAA "+ex);
-        }
-           
+        
            
         try {
             conn.close();
