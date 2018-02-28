@@ -43,7 +43,7 @@ public class Background_GetTransactionDetails extends  Thread
            transactiondetails  = Dao.GetTransactionDetails(TransactionTableName);
        } catch (Exception ex)
        {
-           System.out.println("ERROR IN THREAD");
+           System.out.println("ERROR IN THREAD "+ex);
            ErrorMessage = "TransactionError";
            //Logger.getLogger(Background_GetTransactionDetails.class.getName()).log(Level.SEVERE, null, ex);
        }

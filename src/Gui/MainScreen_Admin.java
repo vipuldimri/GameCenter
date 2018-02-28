@@ -10,6 +10,9 @@ import javax.swing.table.DefaultTableModel;
 import Database.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import gamecenter.Background_GetTransactionDetails;
+import gamecenter.Recharge;
+import java.util.concurrent.CountDownLatch;
 public class MainScreen_Admin extends javax.swing.JFrame 
 {
     //Containsa all the Users of the System
@@ -36,16 +39,19 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jPanel3.setVisible(true);
         jPanel4.setVisible(false);
         jPanel5.setVisible(false);
-        
+        jComboBox_allgamezones.addItem("Select GameZone");
+       
     }
     
     //Employee view
       public MainScreen_Admin(String str) {
         initComponents();
           Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-    int x = (int) ((dimension.getWidth() - getWidth()) / 2);
-    int y = (int) ((dimension.getHeight() - getHeight()) / 2);
-    setLocation(x, y);
+         int x = (int) ((dimension.getWidth() - getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - getHeight()) / 2);
+        setLocation(x, y);
+    
+    
     }
 
     /**
@@ -89,7 +95,9 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jTable_Gamezone = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable_transaction = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
+        jComboBox_allgamezones = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -153,9 +161,9 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jPanel8.setLayout(null);
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Records");
+        jLabel3.setText("Transaction Records");
         jPanel8.add(jLabel3);
-        jLabel3.setBounds(180, 20, 60, 30);
+        jLabel3.setBounds(140, 20, 140, 30);
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/viewrecordadmin.png"))); // NOI18N
@@ -253,29 +261,44 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jPanel4.add(jScrollPane2);
         jScrollPane2.setBounds(0, 242, 900, 300);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_transaction.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "CardN0", "EmpName", "Amount", "Date"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTable_transaction);
+
+        jLabel8.setText("Select GameZone");
+
+        jComboBox_allgamezones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_allgamezonesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addComponent(jLabel8)
+                .addGap(53, 53, 53)
+                .addComponent(jComboBox_allgamezones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(0, 109, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jComboBox_allgamezones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -419,8 +442,53 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jPanel3.setVisible(false);
         jPanel4.setVisible(false);
         jPanel5.setVisible(true);
-        
+          
+       for(Stall gamezone :stalls.stalls)
+       {
+        jComboBox_allgamezones.addItem(gamezone.getName());
+       }
     }//GEN-LAST:event_jPanel8MouseClicked
+
+    private void jComboBox_allgamezonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_allgamezonesActionPerformed
+        // TODO add your handling code here:action event on conbo box
+        String GamezoneName = jComboBox_allgamezones.getSelectedItem().toString();
+        if(GamezoneName.equals("Select GameZone"))
+        {
+            return ;
+        }
+     
+        CountDownLatch StopGUIrefresh = new CountDownLatch(1);
+        Background_GetTransactionDetails background_GetTransactionDetails = new Background_GetTransactionDetails(StopGUIrefresh, GamezoneName);
+        background_GetTransactionDetails.start();
+        try {
+            StopGUIrefresh.await();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MainScreen_Admin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ArrayList<Recharge> transactionlist = background_GetTransactionDetails.transactiondetails;
+        
+        
+        DefaultTableModel m = (DefaultTableModel) jTable_transaction.getModel();
+        m.setRowCount(0);
+        DefaultTableModel  model = (DefaultTableModel) jTable_transaction.getModel();
+        Object row[] = new Object[5];
+        for(int i=0;i < transactionlist.size();i++)
+        {
+        row[0] = transactionlist.get(i).getID();
+        row[1] = transactionlist.get(i).getCardNo(); 
+        row[2] = transactionlist.get(i).getEmpName(); 
+        row[3] = transactionlist.get(i).getAmount();
+        row[4] = transactionlist.get(i).getDate();
+      
+      
+        model.addRow(row);
+        
+        
+        
+
+        }
+        
+    }//GEN-LAST:event_jComboBox_allgamezonesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -459,6 +527,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox_allgamezones;
     private javax.swing.JComboBox<String> jComboBox_sub;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -471,6 +540,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel_Sub;
     private javax.swing.JLayeredPane jLayeredPane1;
@@ -484,8 +554,8 @@ public class MainScreen_Admin extends javax.swing.JFrame
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable_Gamezone;
+    private javax.swing.JTable jTable_transaction;
     private javax.swing.JTextField jTextField_GameZoneAddress;
     private javax.swing.JTextField jTextField_GameZoneName;
     private javax.swing.JTextField jTextField_GameZoneOwnerContact;
