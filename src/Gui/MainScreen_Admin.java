@@ -13,17 +13,21 @@ import java.util.logging.Logger;
 import gamecenter.Background_GetTransactionDetails;
 import gamecenter.Recharge;
 import java.util.concurrent.CountDownLatch;
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 public class MainScreen_Admin extends javax.swing.JFrame 
 {
     //Containsa all the Users of the System
     ArrayList<User> users;
     //Contains GameZones Details
     Stalls_and_SubDate stalls;
-   
+   JDialog jDialog;
     
-    
-    
-    
+    String ErrorMessage;
+    TransactionInterface Dao;
+    ArrayList<Recharge> transactionlist;
     public MainScreen_Admin( ArrayList<User> users , Stalls_and_SubDate stalls)
     {
         this.stalls = stalls;
@@ -124,9 +128,9 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jLabel1.setBounds(130, 30, 87, 16);
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("jLabel4");
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Add gamezone.png"))); // NOI18N
         jPanel6.add(jLabel4);
-        jLabel4.setBounds(50, 30, 41, 16);
+        jLabel4.setBounds(30, 10, 80, 80);
 
         jPanel2.add(jPanel6);
         jPanel6.setBounds(0, 300, 300, 110);
@@ -145,9 +149,9 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jLabel2.setBounds(120, 30, 170, 20);
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("jLabel5");
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/View gamezones.png"))); // NOI18N
         jPanel7.add(jLabel5);
-        jLabel5.setBounds(30, 30, 41, 16);
+        jLabel5.setBounds(30, 20, 70, 60);
 
         jPanel2.add(jPanel7);
         jPanel7.setBounds(0, 450, 300, 100);
@@ -168,7 +172,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/viewrecordadmin.png"))); // NOI18N
         jPanel8.add(jLabel6);
-        jLabel6.setBounds(60, 10, 70, 70);
+        jLabel6.setBounds(30, 10, 70, 70);
 
         jPanel2.add(jPanel8);
         jPanel8.setBounds(0, 600, 300, 100);
@@ -178,9 +182,10 @@ public class MainScreen_Admin extends javax.swing.JFrame
 
         jPanel3.setLayout(null);
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel7.setText("Add New GameZone");
         jPanel3.add(jLabel7);
-        jLabel7.setBounds(359, 25, 116, 16);
+        jLabel7.setBounds(319, 14, 320, 40);
 
         jLabel_Sub.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel_Sub.setText("Sub Yr");
@@ -457,17 +462,57 @@ public class MainScreen_Admin extends javax.swing.JFrame
             return ;
         }
      
-        CountDownLatch StopGUIrefresh = new CountDownLatch(1);
-        Background_GetTransactionDetails background_GetTransactionDetails = new Background_GetTransactionDetails(StopGUIrefresh, GamezoneName);
-        background_GetTransactionDetails.start();
-        try {
-            StopGUIrefresh.await();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(MainScreen_Admin.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        ArrayList<Recharge> transactionlist = background_GetTransactionDetails.transactiondetails;
+      
+        //Background worker for getting the data from the server 
+        SwingWorker work = new SwingWorker<String , Integer>() {
+	            @Override
+	            protected  String  doInBackground() throws Exception 
+	            {
+	              
+                     try 
+                      {
+                       Dao = TransactionFactory.getInstance();
+                       } 
+                     catch (Exception ex) 
+                      {
+                           System.out.println(ex);
+                           Logger.getLogger(Background_GetTransactionDetails.class.getName()).log(Level.SEVERE, null, ex);
+                      }
+                        //Arguments is table Name
+               
+                        String TransactionTableName = GamezoneName+"_transaction";
+                        try 
+                       {
+                       transactionlist  = Dao.GetTransactionDetails(TransactionTableName);
+                       } catch (Exception ex)
+                         {
+                           System.out.println("ERROR IN THREAD "+ex);
+                               ErrorMessage = "TransactionError";
+          
+                              }
+                                  ;           
+                                  jDialog.dispose();
+                        return "end";
+	                
+	            }//do backgrounf ENDS
+
+
+	            @Override
+	            protected void done()
+                    {
+                        
         
-        
+	            }
+	        };
+        final ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/Images/Loading.gif"));
+        work.execute();
+        JOptionPane pane = new JOptionPane("", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon,new Object[]{}, null);
+        jDialog = pane.createDialog(this,"Loading Date");
+        jDialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        jDialog.show();
+ 
+                
+        //Filling the Jtable 
         DefaultTableModel m = (DefaultTableModel) jTable_transaction.getModel();
         m.setRowCount(0);
         DefaultTableModel  model = (DefaultTableModel) jTable_transaction.getModel();

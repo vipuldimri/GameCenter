@@ -18,7 +18,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import sun.audio.AudioPlayer;
-import gamecenter.LoadingTHREAD;
+
 import javax.swing.JDialog;
 /*
 Login frame Class
