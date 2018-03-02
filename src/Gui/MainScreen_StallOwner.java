@@ -19,6 +19,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractButton;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -37,6 +38,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     JDialog dialog;
     CountDownLatch loginSignal;
     ArrayList<Recharge> transdetailscomplete;
+    
+    JDialog refresh;
+    
     public MainScreen_StallOwner(LoginScreen l ,User currentuser ,ArrayList<User> currentStallUsers,String currentstallname) 
     {
         System.out.println("LL "+l);
@@ -126,7 +130,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
           jLabel_OwnerName.setText(this.currentuser.getName());
           jLabel_GameZoneNAme.setText(currentstallname);
 
-         //background thread for getting data 
+         //background thread for getting data New Refresh Data
          Background_GetTransactionDetails background_GetTransactionDetails = new Background_GetTransactionDetails(loginSignal,currentstallname);
          background_GetTransactionDetails.start();
          try {
@@ -254,6 +258,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel_GameZoneNAme = new javax.swing.JLabel();
         jLabel_OwnerName = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Main Screen ");
@@ -372,7 +379,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
         jLabel27.setText("Welcome");
         jPanel4.add(jLabel27);
-        jLabel27.setBounds(820, 0, 110, 30);
+        jLabel27.setBounds(890, 0, 110, 30);
 
         jLabel_currentEMpName.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_currentEMpName.setText("jLabel28");
@@ -447,7 +454,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jScrollPane3.setViewportView(jTable_transactionDetailsEmp);
 
         jPanel6.add(jScrollPane3);
-        jScrollPane3.setBounds(0, 240, 1010, 402);
+        jScrollPane3.setBounds(0, 220, 1010, 402);
 
         jPanel3.add(jPanel6);
         jPanel6.setBounds(60, 40, 1010, 640);
@@ -675,7 +682,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55))
         );
@@ -803,18 +810,18 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addGap(83, 83, 83)
+                .addGap(158, 158, 158)
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(112, 112, 112)
+                .addGap(60, 60, 60)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(96, 96, 96)
+                .addGap(73, 73, 73)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -888,6 +895,21 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        jMenu1.setText("File");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setText("Refresh ");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -902,131 +924,130 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:100 radio button
-        jTextField2.setText("100");
-        
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        // TODO add your handling code here:Employee tab clicked
+        DefaultTableModel m = (DefaultTableModel) jTable_transactionDetailsEmp.getModel();
+        m.setRowCount(0);
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:200 rs
-                jTextField2.setText("200");
+        DefaultTableModel  model = (DefaultTableModel) jTable_transactionDetailsEmp.getModel();
+        Object row[] = new Object[5];
 
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+        System.out.println("Final "+transdetailscomplete.size());
 
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
-        // TODO add your handling code here:500rs
-                jTextField2.setText("500");
-
-    }//GEN-LAST:event_jRadioButton3ActionPerformed
-
-    private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
-        // TODO add your handling code here:1000rs
-                jTextField2.setText("1000");
-
-    }//GEN-LAST:event_jRadioButton4ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:Recharge Button
-        String cardno = jTextField1.getText();
-        String amount = jTextField2.getText();
-        int amt =0;
-        
-        //validation code
-        if("".equals(cardno) || "".equals(amount))
+        for(int i = 0;i < transdetailscomplete.size();i++)
         {
-            if("".equals(cardno))
+            if( transdetailscomplete.get(i).getEmpName().equals(currentuser.getName()))
             {
-               
-            JOptionPane.showMessageDialog(jPanel1,
-           "Please Enter Card No.",
-           "Inane error",
-            JOptionPane.ERROR_MESSAGE);
-            return ;
+                row[0] = transdetailscomplete.get(i).getID();
+                row[1] = transdetailscomplete.get(i).getCardNo();
+                row[2] = transdetailscomplete.get(i).getEmpName();
+                row[3] = transdetailscomplete.get(i).getAmount();
+                row[4] = transdetailscomplete.get(i).getDate();
 
-            }else
-            {
-                  JOptionPane.showMessageDialog(jPanel1,
-                  "Please Enter Amount.",
-                  "Inane error",
-                  JOptionPane.ERROR_MESSAGE);
-                  return ;
+                model.addRow(row);
             }
-            
         }
-       try
-       {
-           //Converting String amount into Integer value
-            amt = Integer.parseInt(amount);
-           
-       }catch(NumberFormatException e)
-       {
-           
-                  JOptionPane.showMessageDialog(jPanel1,
-                  "Please Enter A Valid Amount Amount.",
-                  "Inane error",
-                  JOptionPane.ERROR_MESSAGE);
-       }
-       
-       //now doing recharge
-       
-       Recharge rec = new Recharge();
-       long millis=System.currentTimeMillis();  
-       java.sql.Timestamp date = new Timestamp(millis);
-       rec.setAmount(amt);
-       rec.setCardNo(cardno);
-       rec.setEmpName(currentuser.getName());
-       rec.setDate(date);
-       
-        String TableName = currentstallname+"_transaction";
-        TransactionInterface Dao = null ;
-        try {
-            Dao = TransactionFactory.getInstance();
-        } catch (Exception ex) {
-            //Error In Transaction 
-            Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("yha a gai");
-        try {
-            Dao.Recharge(rec, TableName);
-        } catch (Exception ex) 
-        {
-            //Error 
-            System.out.println("Error in recharge");
-             JOptionPane.showMessageDialog(jPanel1,
-           "Recharge Failed",
-           "Inane error",
-            JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
-            return ;
-        }
-            
-            JOptionPane.showMessageDialog(jPanel1,
-           "Recharge Success",
-           "Inane error",
-            JOptionPane.ERROR_MESSAGE);
-      jTextField1.setText("");
-      jTextField2.setText("");
-      
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
 
-    private void jPanel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel13MouseClicked
-        // TODO add your handling code here:option 1
-         
-        jPanel10.setVisible(true);
+    private void jPanel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel18MouseClicked
+        // TODO add your handling code here:Transaction Details Panel Table Left Side
+
+        jPanel10.setVisible(false);
         jPanel16.setVisible(false);
         jPanel17.setVisible(false);
-           jPanel19.setVisible(false);
-    }//GEN-LAST:event_jPanel13MouseClicked
+        jPanel19.setVisible(true);
 
-    private void jPanel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel14MouseClicked
-        // TODO add your handling code here:option2
-        jPanel10.setVisible(false);
-        jPanel16.setVisible(true);
-        jPanel17.setVisible(false);
-           jPanel19.setVisible(false);
-        
-    }//GEN-LAST:event_jPanel14MouseClicked
+        System.out.println(transdetailscomplete.size()+"   size hai bhai  sub thik");
+        /*
+
+        SwingWorker work = new SwingWorker<String , Integer>() {
+            @Override
+            protected  String  doInBackground() throws Exception
+            {
+
+                System.out.println("Back ground starts");
+                TransactionInterface Dao = TransactionFactory.getInstance();
+                //Arguments is table Name
+                String TransactionTableName = currentstallname+"_transaction";
+                transactiondetails  = Dao.GetTransactionDetails(TransactionTableName);
+
+                System.out.println("Ends");
+                System.out.println(transactiondetails.size());
+                loginSignal.countDown();
+                dialog.dispose();
+                return "end";
+
+            }
+
+            @Override
+            protected void done()
+            {
+                System.out.println("Done");
+                System.out.println(transactiondetails.size());
+                boolean bStatus = false;
+                System.out.println("Finished with status " + bStatus);
+
+            }
+        };
+
+        work.execute();
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - getHeight()) / 2);
+
+        final JOptionPane optionPane = new JOptionPane("Loading Data", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+
+        optionPane.setLocation(1000, 500);
+
+        dialog = new JDialog();
+        dialog.setTitle("WAIt ");
+        dialog.setModal(true);
+
+        dialog.setContentPane(optionPane);
+
+        dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        dialog.pack();
+        dialog.setLocation(x,y);
+        dialog.setVisible(true);
+        // dialog.setLocation(100, 500);
+
+        System.out.println("Starts");
+        try {
+            loginSignal.await();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        if(transactiondetails == null)
+        {
+
+            JOptionPane.showMessageDialog(this,
+                "Error Connecting Server ");
+            return;
+        }
+
+        */
+        DefaultTableModel m = (DefaultTableModel) jTable_transactionDetails.getModel();
+        m.setRowCount(0);
+
+        DefaultTableModel  model = (DefaultTableModel) jTable_transactionDetails.getModel();
+        Object row[] = new Object[5];
+
+        System.out.println("Final "+transdetailscomplete.size());
+
+        for(int i = 0;i < transdetailscomplete.size();i++)
+        {
+            row[0] = transdetailscomplete.get(i).getID();
+            row[1] = transdetailscomplete.get(i).getCardNo();
+            row[2] = transdetailscomplete.get(i).getEmpName();
+            row[3] = transdetailscomplete.get(i).getAmount();
+            row[4] = transdetailscomplete.get(i).getDate();
+
+            model.addRow(row);
+        }
+
+        // transactiondetails
+    }//GEN-LAST:event_jPanel18MouseClicked
 
     private void jPanel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel15MouseClicked
         // TODO add your handling code here:
@@ -1034,7 +1055,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel16.setVisible(false);
         jPanel19.setVisible(false);
         jPanel17.setVisible(true);
-        
+
         //to display record into the table
         DefaultTableModel m = (DefaultTableModel) jTable_EmpRecord.getModel();
         m.setRowCount(0);
@@ -1042,182 +1063,226 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         Object row[] = new Object[8];
         for(int i=0;i < currentStallUsers.size();i++)
         {
-        row[0] = currentStallUsers.get(i).getID();
-        row[1] = currentStallUsers.get(i).getName(); 
-        row[2] = currentStallUsers.get(i).getAddress(); 
-        row[3] = currentStallUsers.get(i).getContact();
-        row[4] = currentStallUsers.get(i).getEmail();
-        row[5] = currentStallUsers.get(i).getType();
-        row[6] = currentStallUsers.get(i).getGameZoneID();
-        row[7] = currentStallUsers.get(i).getPassword();
-        model.addRow(row);
+            row[0] = currentStallUsers.get(i).getID();
+            row[1] = currentStallUsers.get(i).getName();
+            row[2] = currentStallUsers.get(i).getAddress();
+            row[3] = currentStallUsers.get(i).getContact();
+            row[4] = currentStallUsers.get(i).getEmail();
+            row[5] = currentStallUsers.get(i).getType();
+            row[6] = currentStallUsers.get(i).getGameZoneID();
+            row[7] = currentStallUsers.get(i).getPassword();
+            model.addRow(row);
 
         }
-        
-        
+
     }//GEN-LAST:event_jPanel15MouseClicked
+
+    private void jPanel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel14MouseClicked
+        // TODO add your handling code here:option2
+        jPanel10.setVisible(false);
+        jPanel16.setVisible(true);
+        jPanel17.setVisible(false);
+        jPanel19.setVisible(false);
+
+    }//GEN-LAST:event_jPanel14MouseClicked
+
+    private void jPanel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel13MouseClicked
+        // TODO add your handling code here:option 1
+
+        jPanel10.setVisible(true);
+        jPanel16.setVisible(false);
+        jPanel17.setVisible(false);
+        jPanel19.setVisible(false);
+    }//GEN-LAST:event_jPanel13MouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:ADD button to add Employee
-        
-           User newuser = new User();
-           newuser.setName(jTextField_Name.getText());
-           newuser.setType("emp");
-           newuser.setGameZoneID(currentuser.getGameZoneID());
-           newuser.setAddress(jTextField1_address.getText());
-           newuser.setContact(jTextField1_contact.getText());
-           newuser.setEmail(jTextField1_email.getText());
-           newuser.setPassword(jTextField1_password.getText());
-           
-           UserInterface Dao = null;
+
+        User newuser = new User();
+        newuser.setName(jTextField_Name.getText());
+        newuser.setType("emp");
+        newuser.setGameZoneID(currentuser.getGameZoneID());
+        newuser.setAddress(jTextField1_address.getText());
+        newuser.setContact(jTextField1_contact.getText());
+        newuser.setEmail(jTextField1_email.getText());
+        newuser.setPassword(jTextField1_password.getText());
+
+        UserInterface Dao = null;
         try {
             Dao = UserFactory.getInstance();
         } catch (Exception ex) {
             Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
         }
-           Dao.AddEmp(newuser);
+        Dao.AddEmp(newuser);
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jPanel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel18MouseClicked
-        // TODO add your handling code here:Transaction Details Panel Table Left Side 
+    private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
+        // TODO add your handling code here:1000rs
+        jTextField2.setText("1000");
+    }//GEN-LAST:event_jRadioButton4ActionPerformed
+
+    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+        // TODO add your handling code here:500rs
+        jTextField2.setText("500");
+    }//GEN-LAST:event_jRadioButton3ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:200 rs
+        jTextField2.setText("200");
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:100 radio button
+        jTextField2.setText("100");
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here://Reset button code
+        jTextField1.setText("");
+        jTextField2.setText("");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:Recharge Button
+        String cardno = jTextField1.getText();
+        String amount = jTextField2.getText();
+        int amt =0;
+
+        //validation code
+        if("".equals(cardno) || "".equals(amount))
+        {
+            if("".equals(cardno))
+            {
+
+                JOptionPane.showMessageDialog(jPanel1,
+                    "Please Enter Card No.",
+                    "Inane error",
+                    JOptionPane.ERROR_MESSAGE);
+                return ;
+
+            }else
+            {
+                JOptionPane.showMessageDialog(jPanel1,
+                    "Please Enter Amount.",
+                    "Inane error",
+                    JOptionPane.ERROR_MESSAGE);
+                return ;
+            }
+
+        }
+        try
+        {
+            //Converting String amount into Integer value
+            amt = Integer.parseInt(amount);
+
+        }catch(NumberFormatException e)
+        {
+
+            JOptionPane.showMessageDialog(jPanel1,
+                "Please Enter A Valid Amount Amount.",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+        }
+
+        //now doing recharge
+
+        Recharge rec = new Recharge();
+        long millis=System.currentTimeMillis();
+        java.sql.Timestamp date = new Timestamp(millis);
+        rec.setAmount(amt);
+        rec.setCardNo(cardno);
+        rec.setEmpName(currentuser.getName());
+        rec.setDate(date);
+
+        String TableName = currentstallname+"_transaction";
+
+        TransactionInterface Dao = null ;
+        try {
+            Dao = TransactionFactory.getInstance();
+        } catch (Exception ex) {
+            //Error In Transaction
+            Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("yha a gai");
+        try {
+            Dao.Recharge(rec, TableName);
+        } catch (Exception ex)
+        {
+            //Error
+            System.out.println("Error in recharge");
+            JOptionPane.showMessageDialog(jPanel1,
+                "Recharge Failed",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
+            return ;
+        }
+
+        JOptionPane.showMessageDialog(jPanel1,
+            "Recharge Success",
+            "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+        jTextField1.setText("");
+        jTextField2.setText("");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:Refresh Button Code
         
+        System.out.println("Refresh");
+        final ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/Images/Refresh.gif"));
        
-        jPanel10.setVisible(false);
-        jPanel16.setVisible(false);
-        jPanel17.setVisible(false);
-        jPanel19.setVisible(true);
      
-        System.out.println(transdetailscomplete.size()+"   size hai bhai  sub thik");
-        /*
-        
-	            SwingWorker work = new SwingWorker<String , Integer>() {
+        //Background worker for getting the data from the server 
+                  SwingWorker work = new SwingWorker<String , Integer>() {
 	            @Override
 	            protected  String  doInBackground() throws Exception 
 	            {
-	              
-                        System.out.println("Back ground starts");
-                        TransactionInterface Dao = TransactionFactory.getInstance();
-                        //Arguments is table Name
+	                //Thing to update when refresh button is clicked 
+                        //1 .Transaction Details
+                        //2 .CurrentGameZone users
+                        //For now only Transaction is refreshed
+                        try
+                        {
+                            
+                        TransactionInterface Dao = new TransactionFactory().getInstance();
                         String TransactionTableName = currentstallname+"_transaction";
-                        transactiondetails  = Dao.GetTransactionDetails(TransactionTableName);
-                         
-                        System.out.println("Ends");
-                        System.out.println(transactiondetails.size()); 
-                        loginSignal.countDown();
-                        dialog.dispose();
+                        transdetailscomplete = Dao.GetTransactionDetails(TransactionTableName);
+                                
+                            
+                        }
+                        catch(Exception ex)
+                        {
+                            System.out.println(ex);
+                        }
+             
+                    
+                        
                         return "end";
 	                
-	            }
+	            }//do backgrounf ENDS
 
 
 	            @Override
 	            protected void done()
                     {
-                        System.out.println("Done");
-                        System.out.println(transactiondetails.size());
-	                boolean bStatus = false;
-	                System.out.println("Finished with status " + bStatus);
-                       
-
-        
+                        refresh.dispose();
+                      
 	            }
 	        };
-        
-        
-           work.execute();
-          Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-         int x = (int) ((dimension.getWidth() - getWidth()) / 2);
-         int y = (int) ((dimension.getHeight() - getHeight()) / 2);
-     
-          final JOptionPane optionPane = new JOptionPane("Loading Data", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
-          
-          optionPane.setLocation(1000, 500);
     
-          dialog = new JDialog();
-          dialog.setTitle("WAIt ");
-          dialog.setModal(true);
-                
-         dialog.setContentPane(optionPane);
-
-         dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-         dialog.pack();
-          dialog.setLocation(x,y);   
-         dialog.setVisible(true);
-        // dialog.setLocation(100, 500);
+             work.execute();
+        JOptionPane pane = new JOptionPane("", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon,new Object[]{}, null);
+        refresh = pane.createDialog(this,"Refreshing Date");
+        refresh.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
       
-           System.out.println("Starts");
-        try {
-            loginSignal.await();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
-        }
-          
-    
-
-          if(transactiondetails == null)
-          {
-                        
-           JOptionPane.showMessageDialog(this,
-           "Error Connecting Server ");
-              return;
-          }
-       
-          */
-        DefaultTableModel m = (DefaultTableModel) jTable_transactionDetails.getModel();
-        m.setRowCount(0);
-        
-        DefaultTableModel  model = (DefaultTableModel) jTable_transactionDetails.getModel();
-        Object row[] = new Object[5];
-        
-      
-        System.out.println("Final "+transdetailscomplete.size());
-    
-        for(int i = 0;i < transdetailscomplete.size();i++)
-        {
-        row[0] = transdetailscomplete.get(i).getID();
-        row[1] = transdetailscomplete.get(i).getCardNo(); 
-        row[2] = transdetailscomplete.get(i).getEmpName(); 
-        row[3] = transdetailscomplete.get(i).getAmount();
-        row[4] = transdetailscomplete.get(i).getDate();
-
-        model.addRow(row);
-        }
+        //jDialog.show();  this method is depricated there using setVisible method for showing the dialoge box 
+        refresh.setVisible(true);
         
         
-       // transactiondetails
-    }//GEN-LAST:event_jPanel18MouseClicked
-
-    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
-        // TODO add your handling code here:Employee tab clicked
-                DefaultTableModel m = (DefaultTableModel) jTable_transactionDetailsEmp.getModel();
-        m.setRowCount(0);
         
-        DefaultTableModel  model = (DefaultTableModel) jTable_transactionDetailsEmp.getModel();
-        Object row[] = new Object[5];
         
-      
-        System.out.println("Final "+transdetailscomplete.size());
-    
-        for(int i = 0;i < transdetailscomplete.size();i++)
-        {
-            if( transdetailscomplete.get(i).getEmpName().equals(currentuser.getName()))
-            {
-        row[0] = transdetailscomplete.get(i).getID();
-        row[1] = transdetailscomplete.get(i).getCardNo(); 
-        row[2] = transdetailscomplete.get(i).getEmpName(); 
-        row[3] = transdetailscomplete.get(i).getAmount();
-        row[4] = transdetailscomplete.get(i).getDate();
-
-        model.addRow(row);
-            }
-        }
-    }//GEN-LAST:event_jTabbedPane1MouseClicked
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here://Reset button code
-          jTextField1.setText("");
-          jTextField2.setText("");
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1296,6 +1361,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JLabel jLabel_currentEMpName1;
     private javax.swing.JLabel jLabel_currentempname2;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;

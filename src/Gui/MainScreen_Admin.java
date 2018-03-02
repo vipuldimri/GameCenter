@@ -393,6 +393,12 @@ public class MainScreen_Admin extends javax.swing.JFrame
         newgamezone.setSubEndDate(finalEndsubDate);
         
         //Completed getting data from GUI and storing into obbject of stall type
+        
+        //Now using backgrounf to add New gamezone
+        
+        
+        
+        
         MainAdminInterface Dao = null;
         try {
             Dao = MainAdminFactory.getInstance();
@@ -509,7 +515,9 @@ public class MainScreen_Admin extends javax.swing.JFrame
         JOptionPane pane = new JOptionPane("", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon,new Object[]{}, null);
         jDialog = pane.createDialog(this,"Loading Date");
         jDialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-        jDialog.show();
+      
+        //jDialog.show();  this method is depricated there using setVisible method for showing the dialoge box 
+        jDialog.setVisible(true);
  
                 
         //Filling the Jtable 

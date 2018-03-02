@@ -87,6 +87,7 @@ public class LoginScreen extends javax.swing.JFrame
         jPasswordField1 = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1208, 668));
@@ -175,6 +176,18 @@ public class LoginScreen extends javax.swing.JFrame
         jLabel5.setText("*");
         jPanel1.add(jLabel5);
         jLabel5.setBounds(860, 270, 230, 16);
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/showpassword.png"))); // NOI18N
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel6MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jLabel6MouseReleased(evt);
+            }
+        });
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(1100, 360, 32, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -438,6 +451,19 @@ public class LoginScreen extends javax.swing.JFrame
         System.out.println(evt.getKeyCode());
     }//GEN-LAST:event_jPanel1KeyPressed
 
+    //Below two function is for showpassword peek button
+    private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
+        // TODO add your handling code here:show password mouse enter
+        
+        jPasswordField1.setEchoChar((char) 0);
+    }//GEN-LAST:event_jLabel6MousePressed
+
+    private void jLabel6MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseReleased
+        // TODO add your handling code here:show password mouse released
+        
+         jPasswordField1.setEchoChar('*');
+    }//GEN-LAST:event_jLabel6MouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -480,6 +506,7 @@ public class LoginScreen extends javax.swing.JFrame
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPasswordField1;
