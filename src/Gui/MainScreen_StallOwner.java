@@ -17,6 +17,7 @@ import java.awt.Window;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
@@ -46,6 +47,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     ArrayList<String> CurrentStallGames;
     ArrayList<JTextField> testfields;
     
+    
+    //flag for checking wheather recharge is done corect or not 
+    Boolean rech_flag = false;
+    
+    JDialog recharge;
     public MainScreen_StallOwner(LoginScreen l ,User currentuser ,ArrayList<User> currentStallUsers,String currentstallname, ArrayList<String> CurrentStallGames) 
     {
         System.out.println("LL "+l);
@@ -122,6 +128,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
         
         }
+          recharge = new JDialog();
         
     }
         //employee
@@ -138,7 +145,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
           this.currentStallUsers = currentStallUsers;
           this.currentuser = currentuser;
           initComponents();
-          jPanel21.setLayout(new GridLayout(3,3));
+         
+          
+          jPanel21.setLayout(new GridLayout(6,2));
+          
           Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
           int x = (int) ((dimension.getWidth() - getWidth()) / 2);
           int y = (int) ((dimension.getHeight() - getHeight()) / 2);
@@ -211,24 +221,28 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
           jComboBox_GamesList.addItem("Select Game");   
           for(String game : CurrentStallGames)
           {
-           jComboBox_GamesList.addItem(game);
+              //adding game to chombo Box
+             jComboBox_GamesList.addItem(game);
              
              JLabel j = new JLabel(game);
-             JTextField jt = new JTextField();
-             jt.setText(game);
-             
-             JTextField jt2 = new JTextField();
-             jt2.setText(game);
-             
-             testfields.add(jt);
-             testfields.add(jt2);
-             
              j.setFont(new java.awt.Font("Tahoma", 1, 18)); 
              j.setForeground(new java.awt.Color(255, 255, 255));
              
+             JTextField jt = new JTextField();
+             jt.setText(game);
+             jt.setFont(new java.awt.Font("Tahoma", 1, 18));
+             jt.setBounds(50,50,50,50);
+             
+       
+             
+             testfields.add(jt);
+           
+             
+        
+             
              jPanel21.add(j);
              jPanel21.add(jt);
-             jPanel21.add(jt2);
+             
          
           }
         
@@ -236,7 +250,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         }
        
        
-      
+        recharge = new JDialog();
        
     }
 
@@ -541,7 +555,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
             },
             new String [] {
-                "ID", "CardNo", "EmpName", "Amount", "Date"
+                "ID", "CardNo", "EmpName", "Amount", "Date", "GameName"
             }
         ));
         jScrollPane3.setViewportView(jTable_transactionDetailsEmp);
@@ -1067,6 +1081,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         // TODO add your handling code here:Employee tab clicked (Today recharge )
         
         
+        int collection[] = new int[testfields.size()];
+        HashMap<String,Long> collect = new HashMap<>();
+        
         
     
         
@@ -1074,7 +1091,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         m.setRowCount(0);
 
         DefaultTableModel  model = (DefaultTableModel) jTable_transactionDetailsEmp.getModel();
-        Object row[] = new Object[5];
+        Object row[] = new Object[6];
 
         System.out.println("Final "+transdetailscomplete.size());
 
@@ -1087,10 +1104,30 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 row[2] = transdetailscomplete.get(i).getEmpName();
                 row[3] = transdetailscomplete.get(i).getAmount();
                 row[4] = transdetailscomplete.get(i).getDate();
-
+                row[5] = transdetailscomplete.get(i).getGameName();
+                if(collect.containsKey(transdetailscomplete.get(i).getGameName()))
+                {
+                 Long amount = collect.get(transdetailscomplete.get(i).getGameName());
+                 collect.put(transdetailscomplete.get(i).getGameName(),(long)transdetailscomplete.get(i).getAmount()+amount); 
+                    
+                }else{
+                collect.put(transdetailscomplete.get(i).getGameName(),(long)transdetailscomplete.get(i).getAmount());    
+                }
+                
                 model.addRow(row);
             }
         }
+        
+        
+        for (int ii =0 ; ii < CurrentStallGames.size() ; ii++)
+        {
+           String game = CurrentStallGames.get(ii);
+           Long amount = collect.get(game);
+           testfields.get(ii).setText(amount+"");
+            
+        }
+        
+        
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     private void jPanel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel18MouseClicked
@@ -1356,34 +1393,78 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         rec.setDate(date);
         rec.setGameName(gameselected);
         
-        String TableName = currentstallname+"_transaction";
+        
+        
+        
+                 SwingWorker work = new SwingWorker<String , Integer>() 
+                 {
+	            @Override
+	            protected  String  doInBackground() throws Exception 
+	            {
+	              String TableName = currentstallname+"_transaction";
 
-        TransactionInterface Dao = null ;
-        try {
-            Dao = TransactionFactory.getInstance();
-        } catch (Exception ex) {
-            //Error In Transaction
-            Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("yha a gai");
-        try {
-            Dao.Recharge(rec, TableName);
-        } catch (Exception ex)
-        {
-            //Error
-            System.out.println("Error in recharge");
-            JOptionPane.showMessageDialog(jPanel1,
+                     TransactionInterface Dao = null ;
+                  try {
+                          Dao = TransactionFactory.getInstance();
+                       } catch (Exception ex) {
+                       //Error In Transaction
+                        Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                     System.out.println("yha a gai");
+                    try {
+                     
+                        Dao.Recharge(rec, TableName);
+                        rech_flag = true;
+                      } 
+                      catch (Exception ex)
+                      {
+          
+                     
+                      }
+
+                        return "end";
+	                
+	            }//do backgrounf ENDS
+
+
+	            @Override
+	            protected void done()
+                    {
+                        
+                      recharge.dispose();
+	            }
+	        };
+        
+                 
+        final ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/Images/recharge.gif"));
+        work.execute();
+        JOptionPane pane = new JOptionPane("", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon,new Object[]{}, null);
+        recharge = pane.createDialog(this,"Please wait ");
+        recharge.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+      
+        //jDialog.show();  this method is depricated there using setVisible method for showing the dialoge box 
+        recharge.setVisible(true);   
+                 
+     
+          if(rech_flag == false)
+          {
+                System.out.println("Error in recharge");
+                JOptionPane.showMessageDialog(jPanel1,
                 "Recharge Failed",
                 "Inane error",
                 JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
+           
             return ;
-        }
-
+          }else
+          {
+        
         JOptionPane.showMessageDialog(jPanel1,
             "Recharge Success",
             "Inane error",
             JOptionPane.ERROR_MESSAGE);
+          }
+        
+        
         jTextField1.setText("");
         jTextField2.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed

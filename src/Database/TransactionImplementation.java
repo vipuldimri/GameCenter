@@ -87,7 +87,7 @@ public class TransactionImplementation implements TransactionInterface
                        rec.setCardNo(rs.getString(2));
                        rec.setDate(rs.getTimestamp(5));
                        rec.setAmount(rs.getInt(4));
-                       rec.setGameName(rs.getString(5));
+                       rec.setGameName(rs.getString(6));
                        transactiondetails.add(rec);
                   
                    }
