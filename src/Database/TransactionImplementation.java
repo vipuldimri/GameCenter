@@ -38,7 +38,7 @@ public class TransactionImplementation implements TransactionInterface
     public void Recharge(gamecenter.Recharge rec, String TableName) throws Exception
     {
        
-        Rech = "INSERT INTO "+TableName+" (CardNo,EmpName,Amount,Date)VALUES(?,?,?,?)";
+        Rech = "INSERT INTO "+TableName+" (CardNo,EmpName,Amount,Date,GameName)VALUES(?,?,?,?,?)";
           try {
            
             PreparedStatement pstmt = conn.prepareStatement(Rech);
@@ -46,6 +46,7 @@ public class TransactionImplementation implements TransactionInterface
             pstmt.setString(2, rec.getEmpName());
             pstmt.setInt(3,rec.getAmount());
             pstmt.setTimestamp(4, rec.getDate());
+            pstmt.setString(5, rec.getGameName());
           
             pstmt.executeUpdate();
            
@@ -86,6 +87,7 @@ public class TransactionImplementation implements TransactionInterface
                        rec.setCardNo(rs.getString(2));
                        rec.setDate(rs.getTimestamp(5));
                        rec.setAmount(rs.getInt(4));
+                       rec.setGameName(rs.getString(5));
                        transactiondetails.add(rec);
                   
                    }

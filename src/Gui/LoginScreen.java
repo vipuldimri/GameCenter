@@ -49,6 +49,10 @@ public class LoginScreen extends javax.swing.JFrame
     
     static String currentstallname;
     JDialog dialog;
+    ArrayList<String> CurrentStallGames;
+    
+    
+    
     public LoginScreen(ArrayList<User> users,Stalls_and_SubDate stalls)
     {
     //getting data from thread
@@ -68,7 +72,7 @@ public class LoginScreen extends javax.swing.JFrame
      //currentstall = new Stall();
      currentuser = new User();
      
-    
+    CurrentStallGames = new ArrayList<>();
     
     }
 
@@ -79,6 +83,9 @@ public class LoginScreen extends javax.swing.JFrame
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -103,15 +110,44 @@ public class LoginScreen extends javax.swing.JFrame
 
         jPanel2.setBackground(new java.awt.Color(153, 0, 0));
 
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Follow Us on Facebook");
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Facebook.png"))); // NOI18N
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Contact Us");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 695, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8))
+                    .addComponent(jLabel9))
+                .addContainerGap(397, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(511, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel9)
+                        .addGap(22, 22, 22))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(67, 67, 67))))
         );
 
         jPanel1.add(jPanel2);
@@ -138,6 +174,11 @@ public class LoginScreen extends javax.swing.JFrame
                 jTextField1ActionPerformed(evt);
             }
         });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+        });
         jPanel1.add(jTextField1);
         jTextField1.setBounds(860, 200, 230, 60);
 
@@ -151,6 +192,11 @@ public class LoginScreen extends javax.swing.JFrame
                 jButton1ActionPerformed(evt);
             }
         });
+        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton1KeyPressed(evt);
+            }
+        });
         jPanel1.add(jButton1);
         jButton1.setBounds(860, 450, 270, 80);
 
@@ -162,6 +208,11 @@ public class LoginScreen extends javax.swing.JFrame
         jPasswordField1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jPasswordField1FocusGained(evt);
+            }
+        });
+        jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPasswordField1KeyPressed(evt);
             }
         });
         jPanel1.add(jPasswordField1);
@@ -288,10 +339,49 @@ public class LoginScreen extends javax.swing.JFrame
                 
                 
                 flagUser = true;
-                //Now getting current stall Endsub data and converting it into String to check if sub is valid or not for the gamezone
+              
+//code for getting Game zone
+
+
+
+//Now getting current stall Endsub data and converting it into String to check if sub is valid or not for the gamezone
                 gamezoneid = u.getGameZoneID();
+            
+                for(int d = 0 ; d < stalls.stalls.size() ; d++)
+                {
+                    if(stalls.stalls.get(d).getID() == gamezoneid)
+                    {
+                        if(stalls.stalls.get(d).getBasket_Ball() == 1)
+                        {
+                            
+                            CurrentStallGames.add("Basket Ball");
+                        }
+                        if(stalls.stalls.get(d).getAir_Hockey()== 1)
+                        {
+                            CurrentStallGames.add(" Air Hockey");
+                        }
+                        if(stalls.stalls.get(d).getCatch_Light()== 1)
+                        {
+                            CurrentStallGames.add("Catch Light");
+                        }
+                        if(stalls.stalls.get(d).getDance()== 1)
+                        {
+                            CurrentStallGames.add("Dance");
+                        }
+                        if(stalls.stalls.get(d).getSpeed_Ball()== 1)
+                        {
+                            CurrentStallGames.add("Speed Ball");
+                        }
+                        
+                    }
+                    
+                }
+                
                 java.sql.Date sub_enddate = stalls.subdate.get(gamezoneid);
                 currentstallname = stalls.stallIdandName.get(gamezoneid);
+                
+                
+                
                 System.out.println(currentstallname);
                 System.out.println(cur_date);
                 System.out.println(sub_enddate);
@@ -399,7 +489,7 @@ public class LoginScreen extends javax.swing.JFrame
                 jPasswordField1.setText("");
               
            final JOptionPane optionPane = new JOptionPane("Loging You in", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
-             MainScreen_StallOwner mainScreen_StallOwner =  new MainScreen_StallOwner("admin",this,currentuser,currentStallUsers,currentstallname); 
+             MainScreen_StallOwner mainScreen_StallOwner =  new MainScreen_StallOwner("admin",this,currentuser,currentStallUsers,currentstallname,CurrentStallGames); 
           mainScreen_StallOwner.setVisible(true);
           setVisible(false);
             }else
@@ -408,7 +498,7 @@ public class LoginScreen extends javax.swing.JFrame
                  //here currentStallUsers is null because emp has no rights to see emps
                 jTextField1.setText("");
                 jPasswordField1.setText("");
-                 new MainScreen_StallOwner(this,currentuser,currentStallUsers,currentstallname).setVisible(true);
+                 new MainScreen_StallOwner(this,currentuser,currentStallUsers,currentstallname,CurrentStallGames).setVisible(true);
                   setVisible(false);
             }
             
@@ -464,6 +554,770 @@ public class LoginScreen extends javax.swing.JFrame
          jPasswordField1.setEchoChar('*');
     }//GEN-LAST:event_jLabel6MouseReleased
 
+    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+        // TODO add your handling code here:Key presses for Enter Button
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+        { 
+                
+        String username = jTextField1.getText();
+        char[] password = jPasswordField1.getPassword();
+        String pass ="";
+        for(int i = 0 ; i <password.length ; i ++)
+        {
+            pass = pass + password[i];
+        }
+
+     
+        //Checking if admin login
+        if(username.equals("admin") && pass.equals("admin"))
+        {
+            MainScreen_Admin admin = new MainScreen_Admin(users,stalls);
+            admin.setVisible(true);
+            setVisible(false);
+            
+            return ;
+        }
+        
+        
+        //Getting current time and then converting it into String for easy comparision
+       long millis=System.currentTimeMillis();  
+       java.sql.Date currentdate=new java.sql.Date(millis);  
+       String cur_date =currentdate.toString();
+       String Year = cur_date.substring(0,4);
+       String Month = cur_date.substring(5,7);
+       String Day = cur_date.substring(8);
+       // year , month , day represent current time   
+        
+       
+        //Validation 
+        if(username.length() == 0)
+        {  
+            jLabel5.setText("UserName is Required");
+            return ;
+        }
+        if(password.length == 0)
+        {  
+            jLabel4.setText("Password is Required");
+           return ;
+        }
+     
+        //flag used for login
+        boolean flagUser = false;
+        boolean flagAdmin = false;
+        boolean flagSub = false;
+        int gamezoneid ;
+        
+        
+       // traversing users list to check password and user name exits or not ;
+        for(User u : users)
+        {
+         
+            if(u.getName().equals(username) && u.getPassword().equals(pass))
+            {
+                
+                // if user name and password match storing the info of logedin user into currentuser
+                currentuser.setID(u.getID());
+                currentuser.setAddress(u.getAddress());
+                currentuser.setContact(u.getContact());
+                currentuser.setEmail(u.getEmail());
+                currentuser.setName(u.getName());
+                currentuser.setPassword(u.getPassword());
+                currentuser.setType(u.getType());
+                currentuser.setGameZoneID(u.getGameZoneID()); 
+                
+                System.out.println(u.getName()  +"    "+username);     
+                System.out.println(u.getPassword()+"    "+pass);
+                
+                
+                flagUser = true;
+              
+//code for getting Game zone
+
+
+
+//Now getting current stall Endsub data and converting it into String to check if sub is valid or not for the gamezone
+                gamezoneid = u.getGameZoneID();
+            
+                for(int d = 0 ; d < stalls.stalls.size() ; d++)
+                {
+                    if(stalls.stalls.get(d).getID() == gamezoneid)
+                    {
+                        if(stalls.stalls.get(d).getBasket_Ball() == 1)
+                        {
+                            
+                            CurrentStallGames.add("Basket Ball");
+                        }
+                        if(stalls.stalls.get(d).getAir_Hockey()== 1)
+                        {
+                            CurrentStallGames.add(" Air Hockey");
+                        }
+                        if(stalls.stalls.get(d).getCatch_Light()== 1)
+                        {
+                            CurrentStallGames.add("Catch Light");
+                        }
+                        if(stalls.stalls.get(d).getDance()== 1)
+                        {
+                            CurrentStallGames.add("Dance");
+                        }
+                        if(stalls.stalls.get(d).getSpeed_Ball()== 1)
+                        {
+                            CurrentStallGames.add("Speed Ball");
+                        }
+                        
+                    }
+                    
+                }
+                
+                java.sql.Date sub_enddate = stalls.subdate.get(gamezoneid);
+                currentstallname = stalls.stallIdandName.get(gamezoneid);
+                
+                
+                
+                System.out.println(currentstallname);
+                System.out.println(cur_date);
+                System.out.println(sub_enddate);
+                
+                
+                
+                String s =sub_enddate.toString();
+                String end_Year = s.substring(0,4);
+                String end_Month = s.substring(5,7);
+                String end_Day = s.substring(8);
+                
+                    int y = 0 ;
+                    int m =0;
+                    int d = 0;
+                    int e_y = 0;
+                    int e_m = 0;
+                    int e_d = 0;
+                
+                try
+                {
+                     y = Integer.parseInt(Year);
+                     m = Integer.parseInt(Month);
+                     d = Integer.parseInt(Day);
+                     e_y = Integer.parseInt(end_Year);
+                     e_m = Integer.parseInt(end_Month);
+                     e_d = Integer.parseInt(end_Day);
+                              
+                    
+                }catch(NumberFormatException e)
+                {
+                    System.out.println(e);
+                    
+                }
+                
+                
+                //code for checking sub is valid or not 
+                if(y > e_y )
+                {
+                    JOptionPane.showMessageDialog(jPanel1,
+                     "Your Subscription has Expired Plz Contact The service Provider.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                
+                     return ;
+                    
+                }
+                if( m > e_m && y == e_y )
+                {
+                    JOptionPane.showMessageDialog(jPanel1,
+                     "Your Subscription has Expired Plz Contact The service Provider.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                
+                     return ;
+                    
+                }
+                if(   d > e_d  &&  y == e_y &&   m == e_m)
+                {
+                    JOptionPane.showMessageDialog(jPanel1,
+                     "Your Subscription has Expired Plz Contact The service Provider.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                
+                     return ;
+                    
+                }
+                
+                
+                ///Checking complete for sub
+               
+              
+                 
+                //checking if current user is admin or emp    
+                if(u.getType().equals("admin"))
+                {
+                  
+                    flagAdmin = true;
+                }
+                break;
+            }
+            
+        }
+            
+        
+        
+          
+        
+        if(flagAdmin || flagUser)
+        {
+            // if current user is admin
+            if(flagAdmin)
+            {
+              
+                
+                for (User u : users) 
+                {
+                  if(u.getGameZoneID() == currentuser.getGameZoneID())
+                  {
+                      currentStallUsers.add(u);
+                      
+                  }
+                    
+                }
+                jTextField1.setText("");
+                jPasswordField1.setText("");
+              
+           final JOptionPane optionPane = new JOptionPane("Loging You in", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+             MainScreen_StallOwner mainScreen_StallOwner =  new MainScreen_StallOwner("admin",this,currentuser,currentStallUsers,currentstallname,CurrentStallGames); 
+          mainScreen_StallOwner.setVisible(true);
+          setVisible(false);
+            }else
+            {
+                 //if current user is normal employee
+                 //here currentStallUsers is null because emp has no rights to see emps
+                jTextField1.setText("");
+                jPasswordField1.setText("");
+                 new MainScreen_StallOwner(this,currentuser,currentStallUsers,currentstallname,CurrentStallGames).setVisible(true);
+                  setVisible(false);
+            }
+            
+        }
+        //No user found with provided usernmae and password
+        else
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+           "Invalid Password or UserName.",
+           "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+           
+        }
+   
+        } 
+        
+        
+    }//GEN-LAST:event_jButton1KeyPressed
+
+    private void jPasswordField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+        { 
+                
+        String username = jTextField1.getText();
+        char[] password = jPasswordField1.getPassword();
+        String pass ="";
+        for(int i = 0 ; i <password.length ; i ++)
+        {
+            pass = pass + password[i];
+        }
+
+     
+        //Checking if admin login
+        if(username.equals("admin") && pass.equals("admin"))
+        {
+            MainScreen_Admin admin = new MainScreen_Admin(users,stalls);
+            admin.setVisible(true);
+            setVisible(false);
+            
+            return ;
+        }
+        
+        
+        //Getting current time and then converting it into String for easy comparision
+       long millis=System.currentTimeMillis();  
+       java.sql.Date currentdate=new java.sql.Date(millis);  
+       String cur_date =currentdate.toString();
+       String Year = cur_date.substring(0,4);
+       String Month = cur_date.substring(5,7);
+       String Day = cur_date.substring(8);
+       // year , month , day represent current time   
+        
+       
+        //Validation 
+        if(username.length() == 0)
+        {  
+            jLabel5.setText("UserName is Required");
+            return ;
+        }
+        if(password.length == 0)
+        {  
+            jLabel4.setText("Password is Required");
+           return ;
+        }
+     
+        //flag used for login
+        boolean flagUser = false;
+        boolean flagAdmin = false;
+        boolean flagSub = false;
+        int gamezoneid ;
+        
+        
+       // traversing users list to check password and user name exits or not ;
+        for(User u : users)
+        {
+         
+            if(u.getName().equals(username) && u.getPassword().equals(pass))
+            {
+                
+                // if user name and password match storing the info of logedin user into currentuser
+                currentuser.setID(u.getID());
+                currentuser.setAddress(u.getAddress());
+                currentuser.setContact(u.getContact());
+                currentuser.setEmail(u.getEmail());
+                currentuser.setName(u.getName());
+                currentuser.setPassword(u.getPassword());
+                currentuser.setType(u.getType());
+                currentuser.setGameZoneID(u.getGameZoneID()); 
+                
+                System.out.println(u.getName()  +"    "+username);     
+                System.out.println(u.getPassword()+"    "+pass);
+                
+                
+                flagUser = true;
+              
+//code for getting Game zone
+
+
+
+//Now getting current stall Endsub data and converting it into String to check if sub is valid or not for the gamezone
+                gamezoneid = u.getGameZoneID();
+            
+                for(int d = 0 ; d < stalls.stalls.size() ; d++)
+                {
+                    if(stalls.stalls.get(d).getID() == gamezoneid)
+                    {
+                        if(stalls.stalls.get(d).getBasket_Ball() == 1)
+                        {
+                            
+                            CurrentStallGames.add("Basket Ball");
+                        }
+                        if(stalls.stalls.get(d).getAir_Hockey()== 1)
+                        {
+                            CurrentStallGames.add(" Air Hockey");
+                        }
+                        if(stalls.stalls.get(d).getCatch_Light()== 1)
+                        {
+                            CurrentStallGames.add("Catch Light");
+                        }
+                        if(stalls.stalls.get(d).getDance()== 1)
+                        {
+                            CurrentStallGames.add("Dance");
+                        }
+                        if(stalls.stalls.get(d).getSpeed_Ball()== 1)
+                        {
+                            CurrentStallGames.add("Speed Ball");
+                        }
+                        
+                    }
+                    
+                }
+                
+                java.sql.Date sub_enddate = stalls.subdate.get(gamezoneid);
+                currentstallname = stalls.stallIdandName.get(gamezoneid);
+                
+                
+                
+                System.out.println(currentstallname);
+                System.out.println(cur_date);
+                System.out.println(sub_enddate);
+                
+                
+                
+                String s =sub_enddate.toString();
+                String end_Year = s.substring(0,4);
+                String end_Month = s.substring(5,7);
+                String end_Day = s.substring(8);
+                
+                    int y = 0 ;
+                    int m =0;
+                    int d = 0;
+                    int e_y = 0;
+                    int e_m = 0;
+                    int e_d = 0;
+                
+                try
+                {
+                     y = Integer.parseInt(Year);
+                     m = Integer.parseInt(Month);
+                     d = Integer.parseInt(Day);
+                     e_y = Integer.parseInt(end_Year);
+                     e_m = Integer.parseInt(end_Month);
+                     e_d = Integer.parseInt(end_Day);
+                              
+                    
+                }catch(NumberFormatException e)
+                {
+                    System.out.println(e);
+                    
+                }
+                
+                
+                //code for checking sub is valid or not 
+                if(y > e_y )
+                {
+                    JOptionPane.showMessageDialog(jPanel1,
+                     "Your Subscription has Expired Plz Contact The service Provider.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                
+                     return ;
+                    
+                }
+                if( m > e_m && y == e_y )
+                {
+                    JOptionPane.showMessageDialog(jPanel1,
+                     "Your Subscription has Expired Plz Contact The service Provider.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                
+                     return ;
+                    
+                }
+                if(   d > e_d  &&  y == e_y &&   m == e_m)
+                {
+                    JOptionPane.showMessageDialog(jPanel1,
+                     "Your Subscription has Expired Plz Contact The service Provider.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                
+                     return ;
+                    
+                }
+                
+                
+                ///Checking complete for sub
+               
+              
+                 
+                //checking if current user is admin or emp    
+                if(u.getType().equals("admin"))
+                {
+                  
+                    flagAdmin = true;
+                }
+                break;
+            }
+            
+        }
+            
+        
+        
+          
+        
+        if(flagAdmin || flagUser)
+        {
+            // if current user is admin
+            if(flagAdmin)
+            {
+              
+                
+                for (User u : users) 
+                {
+                  if(u.getGameZoneID() == currentuser.getGameZoneID())
+                  {
+                      currentStallUsers.add(u);
+                      
+                  }
+                    
+                }
+                jTextField1.setText("");
+                jPasswordField1.setText("");
+              
+           final JOptionPane optionPane = new JOptionPane("Loging You in", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+             MainScreen_StallOwner mainScreen_StallOwner =  new MainScreen_StallOwner("admin",this,currentuser,currentStallUsers,currentstallname,CurrentStallGames); 
+          mainScreen_StallOwner.setVisible(true);
+          setVisible(false);
+            }else
+            {
+                 //if current user is normal employee
+                 //here currentStallUsers is null because emp has no rights to see emps
+                jTextField1.setText("");
+                jPasswordField1.setText("");
+                 new MainScreen_StallOwner(this,currentuser,currentStallUsers,currentstallname,CurrentStallGames).setVisible(true);
+                  setVisible(false);
+            }
+            
+        }
+        //No user found with provided usernmae and password
+        else
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+           "Invalid Password or UserName.",
+           "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+           
+        }
+   
+        } 
+        
+    }//GEN-LAST:event_jPasswordField1KeyPressed
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+        // TODO add your handling code here:
+        
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+        { 
+               
+        String username = jTextField1.getText();
+        char[] password = jPasswordField1.getPassword();
+        String pass ="";
+        for(int i = 0 ; i <password.length ; i ++)
+        {
+            pass = pass + password[i];
+        }
+
+     
+        //Checking if admin login
+        if(username.equals("admin") && pass.equals("admin"))
+        {
+            MainScreen_Admin admin = new MainScreen_Admin(users,stalls);
+            admin.setVisible(true);
+            setVisible(false);
+            
+            return ;
+        }
+        
+        
+        //Getting current time and then converting it into String for easy comparision
+       long millis=System.currentTimeMillis();  
+       java.sql.Date currentdate=new java.sql.Date(millis);  
+       String cur_date =currentdate.toString();
+       String Year = cur_date.substring(0,4);
+       String Month = cur_date.substring(5,7);
+       String Day = cur_date.substring(8);
+       // year , month , day represent current time   
+        
+       
+        //Validation 
+        if(username.length() == 0)
+        {  
+            jLabel5.setText("UserName is Required");
+            return ;
+        }
+        if(password.length == 0)
+        {  
+            jLabel4.setText("Password is Required");
+           return ;
+        }
+     
+        //flag used for login
+        boolean flagUser = false;
+        boolean flagAdmin = false;
+        boolean flagSub = false;
+        int gamezoneid ;
+        
+        
+       // traversing users list to check password and user name exits or not ;
+        for(User u : users)
+        {
+         
+            if(u.getName().equals(username) && u.getPassword().equals(pass))
+            {
+                
+                // if user name and password match storing the info of logedin user into currentuser
+                currentuser.setID(u.getID());
+                currentuser.setAddress(u.getAddress());
+                currentuser.setContact(u.getContact());
+                currentuser.setEmail(u.getEmail());
+                currentuser.setName(u.getName());
+                currentuser.setPassword(u.getPassword());
+                currentuser.setType(u.getType());
+                currentuser.setGameZoneID(u.getGameZoneID()); 
+                
+                System.out.println(u.getName()  +"    "+username);     
+                System.out.println(u.getPassword()+"    "+pass);
+                
+                
+                flagUser = true;
+              
+//code for getting Game zone
+
+
+
+//Now getting current stall Endsub data and converting it into String to check if sub is valid or not for the gamezone
+                gamezoneid = u.getGameZoneID();
+            
+                for(int d = 0 ; d < stalls.stalls.size() ; d++)
+                {
+                    if(stalls.stalls.get(d).getID() == gamezoneid)
+                    {
+                        if(stalls.stalls.get(d).getBasket_Ball() == 1)
+                        {
+                            
+                            CurrentStallGames.add("Basket Ball");
+                        }
+                        if(stalls.stalls.get(d).getAir_Hockey()== 1)
+                        {
+                            CurrentStallGames.add(" Air Hockey");
+                        }
+                        if(stalls.stalls.get(d).getCatch_Light()== 1)
+                        {
+                            CurrentStallGames.add("Catch Light");
+                        }
+                        if(stalls.stalls.get(d).getDance()== 1)
+                        {
+                            CurrentStallGames.add("Dance");
+                        }
+                        if(stalls.stalls.get(d).getSpeed_Ball()== 1)
+                        {
+                            CurrentStallGames.add("Speed Ball");
+                        }
+                        
+                    }
+                    
+                }
+                
+                java.sql.Date sub_enddate = stalls.subdate.get(gamezoneid);
+                currentstallname = stalls.stallIdandName.get(gamezoneid);
+                
+                
+                
+                System.out.println(currentstallname);
+                System.out.println(cur_date);
+                System.out.println(sub_enddate);
+                
+                
+                
+                String s =sub_enddate.toString();
+                String end_Year = s.substring(0,4);
+                String end_Month = s.substring(5,7);
+                String end_Day = s.substring(8);
+                
+                    int y = 0 ;
+                    int m =0;
+                    int d = 0;
+                    int e_y = 0;
+                    int e_m = 0;
+                    int e_d = 0;
+                
+                try
+                {
+                     y = Integer.parseInt(Year);
+                     m = Integer.parseInt(Month);
+                     d = Integer.parseInt(Day);
+                     e_y = Integer.parseInt(end_Year);
+                     e_m = Integer.parseInt(end_Month);
+                     e_d = Integer.parseInt(end_Day);
+                              
+                    
+                }catch(NumberFormatException e)
+                {
+                    System.out.println(e);
+                    
+                }
+                
+                
+                //code for checking sub is valid or not 
+                if(y > e_y )
+                {
+                    JOptionPane.showMessageDialog(jPanel1,
+                     "Your Subscription has Expired Plz Contact The service Provider.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                
+                     return ;
+                    
+                }
+                if( m > e_m && y == e_y )
+                {
+                    JOptionPane.showMessageDialog(jPanel1,
+                     "Your Subscription has Expired Plz Contact The service Provider.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                
+                     return ;
+                    
+                }
+                if(   d > e_d  &&  y == e_y &&   m == e_m)
+                {
+                    JOptionPane.showMessageDialog(jPanel1,
+                     "Your Subscription has Expired Plz Contact The service Provider.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                
+                     return ;
+                    
+                }
+                
+                
+                ///Checking complete for sub
+               
+              
+                 
+                //checking if current user is admin or emp    
+                if(u.getType().equals("admin"))
+                {
+                  
+                    flagAdmin = true;
+                }
+                break;
+            }
+            
+        }
+            
+        
+        
+          
+        
+        if(flagAdmin || flagUser)
+        {
+            // if current user is admin
+            if(flagAdmin)
+            {
+              
+                
+                for (User u : users) 
+                {
+                  if(u.getGameZoneID() == currentuser.getGameZoneID())
+                  {
+                      currentStallUsers.add(u);
+                      
+                  }
+                    
+                }
+                jTextField1.setText("");
+                jPasswordField1.setText("");
+              
+           final JOptionPane optionPane = new JOptionPane("Loging You in", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+             MainScreen_StallOwner mainScreen_StallOwner =  new MainScreen_StallOwner("admin",this,currentuser,currentStallUsers,currentstallname,CurrentStallGames); 
+          mainScreen_StallOwner.setVisible(true);
+          setVisible(false);
+            }else
+            {
+                 //if current user is normal employee
+                 //here currentStallUsers is null because emp has no rights to see emps
+                jTextField1.setText("");
+                jPasswordField1.setText("");
+                 new MainScreen_StallOwner(this,currentuser,currentStallUsers,currentstallname,CurrentStallGames).setVisible(true);
+                  setVisible(false);
+            }
+            
+        }
+        //No user found with provided usernmae and password
+        else
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+           "Invalid Password or UserName.",
+           "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+           
+        }
+   
+        } 
+        
+    }//GEN-LAST:event_jTextField1KeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -507,6 +1361,9 @@ public class LoginScreen extends javax.swing.JFrame
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPasswordField1;

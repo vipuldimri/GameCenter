@@ -94,6 +94,12 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jTextField_GameZoneOwnerName = new javax.swing.JTextField();
         jTextField_GameZoneOwnerContact = new javax.swing.JTextField();
         jTextField_GameZoneOwnerPassword = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jCheckBox_Airhockey = new javax.swing.JCheckBox();
+        jcheckbox_basketball = new javax.swing.JCheckBox();
+        jCheckBox_CatchLight = new javax.swing.JCheckBox();
+        jCheckBox_dance = new javax.swing.JCheckBox();
+        jCheckBox_speedball = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_Gamezone = new javax.swing.JTable();
@@ -190,31 +196,31 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jLabel_Sub.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel_Sub.setText("Sub Yr");
         jPanel3.add(jLabel_Sub);
-        jLabel_Sub.setBounds(500, 350, 140, 50);
+        jLabel_Sub.setBounds(500, 210, 140, 50);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel11.setText("Owner Name");
         jPanel3.add(jLabel11);
-        jLabel11.setBounds(70, 190, 220, 60);
+        jLabel11.setBounds(70, 150, 220, 60);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel12.setText("Contact No");
         jPanel3.add(jLabel12);
-        jLabel12.setBounds(70, 300, 220, 60);
+        jLabel12.setBounds(70, 250, 220, 60);
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel13.setText("Address");
+        jLabel13.setText("Check Avilable Games");
         jPanel3.add(jLabel13);
-        jLabel13.setBounds(500, 70, 220, 60);
+        jLabel13.setBounds(500, 260, 310, 60);
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel14.setText("GameZone Name");
         jPanel3.add(jLabel14);
-        jLabel14.setBounds(70, 70, 220, 60);
+        jLabel14.setBounds(70, 50, 220, 60);
 
         jTextField_GameZoneAddress.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jPanel3.add(jTextField_GameZoneAddress);
-        jTextField_GameZoneAddress.setBounds(500, 130, 350, 80);
+        jTextField_GameZoneAddress.setBounds(500, 110, 350, 80);
 
         jButton1.setText("Add GameZone");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -223,33 +229,58 @@ public class MainScreen_Admin extends javax.swing.JFrame
             }
         });
         jPanel3.add(jButton1);
-        jButton1.setBounds(350, 455, 230, 50);
+        jButton1.setBounds(350, 470, 230, 50);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel9.setText("Passsword");
         jPanel3.add(jLabel9);
-        jLabel9.setBounds(500, 210, 170, 60);
+        jLabel9.setBounds(70, 340, 170, 60);
 
         jComboBox_sub.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jComboBox_sub.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 yr", "2 yr", "3 yr", "4 yr", " " }));
         jPanel3.add(jComboBox_sub);
-        jComboBox_sub.setBounds(610, 360, 140, 40);
+        jComboBox_sub.setBounds(600, 210, 140, 40);
 
         jTextField_GameZoneName.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jPanel3.add(jTextField_GameZoneName);
-        jTextField_GameZoneName.setBounds(70, 140, 230, 40);
+        jTextField_GameZoneName.setBounds(70, 110, 230, 40);
 
         jTextField_GameZoneOwnerName.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jPanel3.add(jTextField_GameZoneOwnerName);
-        jTextField_GameZoneOwnerName.setBounds(70, 260, 230, 40);
+        jTextField_GameZoneOwnerName.setBounds(70, 210, 230, 40);
 
         jTextField_GameZoneOwnerContact.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jPanel3.add(jTextField_GameZoneOwnerContact);
-        jTextField_GameZoneOwnerContact.setBounds(70, 370, 230, 40);
+        jTextField_GameZoneOwnerContact.setBounds(70, 310, 230, 40);
 
         jTextField_GameZoneOwnerPassword.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jPanel3.add(jTextField_GameZoneOwnerPassword);
-        jTextField_GameZoneOwnerPassword.setBounds(500, 270, 230, 40);
+        jTextField_GameZoneOwnerPassword.setBounds(70, 400, 230, 40);
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel15.setText("Address");
+        jPanel3.add(jLabel15);
+        jLabel15.setBounds(500, 60, 220, 60);
+
+        jCheckBox_Airhockey.setText("Air Hockey");
+        jPanel3.add(jCheckBox_Airhockey);
+        jCheckBox_Airhockey.setBounds(500, 390, 89, 25);
+
+        jcheckbox_basketball.setText("Basket Ball");
+        jPanel3.add(jcheckbox_basketball);
+        jcheckbox_basketball.setBounds(500, 360, 89, 25);
+
+        jCheckBox_CatchLight.setText("Catch Light");
+        jPanel3.add(jCheckBox_CatchLight);
+        jCheckBox_CatchLight.setBounds(670, 360, 91, 25);
+
+        jCheckBox_dance.setText("Dance");
+        jPanel3.add(jCheckBox_dance);
+        jCheckBox_dance.setBounds(670, 330, 63, 25);
+
+        jCheckBox_speedball.setText("Speed Ball");
+        jPanel3.add(jCheckBox_speedball);
+        jCheckBox_speedball.setBounds(500, 330, 89, 25);
 
         jPanel4.setLayout(null);
 
@@ -358,10 +389,34 @@ public class MainScreen_Admin extends javax.swing.JFrame
     }//GEN-LAST:event_jPanel6MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:Create button 
+        // TODO add your handling code here:Create button  Main Add new GameZoneButton
         /*
         Code for Submit Button ADD GameZone
         */
+        
+        if(jCheckBox_Airhockey.isSelected())
+        {
+            
+        }
+        if(jCheckBox_dance.isSelected())
+        {
+            
+        }
+        if(jCheckBox_speedball.isSelected())
+        {
+            
+        }
+        if(jCheckBox_CatchLight.isSelected())
+        {
+            
+        }
+        if(jcheckbox_basketball.isSelected())
+        {
+            
+        }
+        
+        
+        
         String Gamezonename = jTextField_GameZoneName.getText();
         String Conact = jTextField_GameZoneOwnerContact.getText();
         String Password = jTextField_GameZoneOwnerPassword.getText();
@@ -580,6 +635,10 @@ public class MainScreen_Admin extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBox jCheckBox_Airhockey;
+    private javax.swing.JCheckBox jCheckBox_CatchLight;
+    private javax.swing.JCheckBox jCheckBox_dance;
+    private javax.swing.JCheckBox jCheckBox_speedball;
     private javax.swing.JComboBox<String> jComboBox_allgamezones;
     private javax.swing.JComboBox<String> jComboBox_sub;
     private javax.swing.JLabel jLabel1;
@@ -587,6 +646,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -614,5 +674,6 @@ public class MainScreen_Admin extends javax.swing.JFrame
     private javax.swing.JTextField jTextField_GameZoneOwnerContact;
     private javax.swing.JTextField jTextField_GameZoneOwnerName;
     private javax.swing.JTextField jTextField_GameZoneOwnerPassword;
+    private javax.swing.JCheckBox jcheckbox_basketball;
     // End of variables declaration//GEN-END:variables
 }

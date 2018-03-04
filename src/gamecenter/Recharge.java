@@ -15,7 +15,18 @@ public class Recharge
     private String EmpName;
     private int Amount;
     private java.sql.Timestamp Date;
+    private String GameName;
 
+    public String getGameName() {
+        return GameName;
+    }
+
+    public void setGameName(String GameName) {
+        this.GameName = GameName;
+    }
+    
+
+    
     public int getID() {
         return ID;
     }

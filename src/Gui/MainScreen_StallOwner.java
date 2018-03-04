@@ -8,7 +8,10 @@ import Database.UserInterface;
 import gamecenter.Background_GetTransactionDetails;
 import gamecenter.Recharge;
 import gamecenter.User;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
+import javax.swing.*;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.sql.Date;
@@ -40,12 +43,14 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     ArrayList<Recharge> transdetailscomplete;
     
     JDialog refresh;
+    ArrayList<String> CurrentStallGames;
+    ArrayList<JTextField> testfields;
     
-    public MainScreen_StallOwner(LoginScreen l ,User currentuser ,ArrayList<User> currentStallUsers,String currentstallname) 
+    public MainScreen_StallOwner(LoginScreen l ,User currentuser ,ArrayList<User> currentStallUsers,String currentstallname, ArrayList<String> CurrentStallGames) 
     {
         System.out.println("LL "+l);
         this.currentstallname = currentstallname;
- 
+        this.CurrentStallGames = CurrentStallGames;
      
         this.l = l;
       
@@ -56,6 +61,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - getWidth()) / 2);
         int y = (int) ((dimension.getHeight() - getHeight()) / 2);
+        
+        
+        //int framesizeh = dimension.height*8/10;
+        //int framesizew = dimension.width*8/10;
+        //setBounds(framesizew/8,framesizeh/8,framesizew,framesizeh);
         setLocation(x, y);
         buttonGroup1.add(jRadioButton1);
         buttonGroup1.add(jRadioButton2);
@@ -101,22 +111,53 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
         jLabel_currentEMpName.setText(currentuser.getName());
         jLabel_currentempname2.setText(currentuser.getName());
+          if(CurrentStallGames.size() > 0)
+        {
+            
+          jComboBox_GamesList.addItem("Select Game");    
+        for(String game : CurrentStallGames)
+        {
+             jComboBox_GamesList.addItem(game);    
+        }
+        
+        
+        }
         
     }
         //employee
-        public MainScreen_StallOwner(String str,LoginScreen l ,User currentuser ,ArrayList<User> currentStallUsers,String currentstallname)
+        public MainScreen_StallOwner(String str,LoginScreen l ,User currentuser ,ArrayList<User> currentStallUsers,String currentstallname,ArrayList<String> CurrentStallGames)
         {
-            this.currentstallname = currentstallname;
-     
+            
+          testfields = new ArrayList<>();
+          this.CurrentStallGames = CurrentStallGames;
+          
+          
+          this.currentstallname = currentstallname;
           this.l = l;
           Type = str;
           this.currentStallUsers = currentStallUsers;
           this.currentuser = currentuser;
           initComponents();
+          jPanel21.setLayout(new GridLayout(3,3));
           Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
           int x = (int) ((dimension.getWidth() - getWidth()) / 2);
           int y = (int) ((dimension.getHeight() - getHeight()) / 2);
-          setLocation(x, y);
+          int framesizeh = dimension.height*8/10;
+          int framesizew = dimension.width*8/10;
+         
+           setLocation(x, y);
+
+          
+//          setBounds(framesizew/8,framesizeh/8,framesizew,framesizeh);
+//          jPanel1.setBounds(framesizew/8,framesizeh/8,framesizew,framesizeh);
+//          jPanel2.setBounds(framesizew/8,framesizeh/8,framesizew,framesizeh);
+//          jPanel3.setBounds(framesizew/8,framesizeh/8,framesizew,framesizeh);
+//          jPanel4.setBounds(framesizew/8,framesizeh/8,framesizew,framesizeh);
+//            pack();
+//          
+//          
+          
+          
           buttonGroup1.add(jRadioButton1);
           buttonGroup1.add(jRadioButton2);
           buttonGroup1.add(jRadioButton3);
@@ -137,8 +178,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
       
             
             loginSignal.await();
-        } catch (InterruptedException ex) {
+        } catch (InterruptedException ex)
+        {
             Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
+        
         }
       
         transdetailscomplete = background_GetTransactionDetails.transactiondetails; 
@@ -161,6 +204,40 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
        
      jLabel_currentEMpName.setText(currentuser.getName());
      jLabel_currentempname2.setText(currentuser.getName());
+       if(CurrentStallGames.size() > 0)
+        {
+            
+           
+          jComboBox_GamesList.addItem("Select Game");   
+          for(String game : CurrentStallGames)
+          {
+           jComboBox_GamesList.addItem(game);
+             
+             JLabel j = new JLabel(game);
+             JTextField jt = new JTextField();
+             jt.setText(game);
+             
+             JTextField jt2 = new JTextField();
+             jt2.setText(game);
+             
+             testfields.add(jt);
+             testfields.add(jt2);
+             
+             j.setFont(new java.awt.Font("Tahoma", 1, 18)); 
+             j.setForeground(new java.awt.Color(255, 255, 255));
+             
+             jPanel21.add(j);
+             jPanel21.add(jt);
+             jPanel21.add(jt2);
+         
+          }
+        
+        
+        }
+       
+       
+      
+       
     }
 
     /**
@@ -192,6 +269,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jRadioButton4 = new javax.swing.JRadioButton();
         jLabel27 = new javax.swing.JLabel();
         jLabel_currentEMpName = new javax.swing.JLabel();
+        jComboBox_GamesList = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -206,6 +284,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel_currentempname2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable_transactionDetailsEmp = new javax.swing.JTable();
+        jPanel21 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -241,6 +320,13 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jTable_transactionDetails = new javax.swing.JTable();
         jPanel20 = new javax.swing.JPanel();
         jProgressBar1 = new javax.swing.JProgressBar();
+        jDateChooser_StartDate = new com.toedter.calendar.JDateChooser();
+        jDateChooser_EndDate = new com.toedter.calendar.JDateChooser();
+        jButton7 = new javax.swing.JButton();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel3_totalTransaction = new javax.swing.JLabel();
+        jLabel_validDate = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -261,9 +347,13 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Main Screen ");
+        setResizable(false);
+
+        jPanel1.setOpaque(false);
 
         jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -386,6 +476,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel4.add(jLabel_currentEMpName);
         jLabel_currentEMpName.setBounds(1010, 10, 48, 16);
 
+        jPanel4.add(jComboBox_GamesList);
+        jComboBox_GamesList.setBounds(910, 190, 100, 22);
+
         jPanel2.add(jPanel4);
         jPanel4.setBounds(2, 7, 1200, 440);
 
@@ -454,10 +547,15 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jScrollPane3.setViewportView(jTable_transactionDetailsEmp);
 
         jPanel6.add(jScrollPane3);
-        jScrollPane3.setBounds(0, 220, 1010, 402);
+        jScrollPane3.setBounds(0, 100, 1200, 200);
 
         jPanel3.add(jPanel6);
-        jPanel6.setBounds(60, 40, 1010, 640);
+        jPanel6.setBounds(0, 0, 1200, 280);
+
+        jPanel21.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel21.setLayout(new java.awt.GridLayout(6, 3));
+        jPanel3.add(jPanel21);
+        jPanel21.setBounds(180, 320, 860, 400);
 
         jTabbedPane1.addTab("Today Collection", jPanel3);
 
@@ -617,6 +715,38 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         jPanel19.add(jPanel20);
         jPanel20.setBounds(260, 220, 350, 210);
+        jPanel19.add(jDateChooser_StartDate);
+        jDateChooser_StartDate.setBounds(150, 70, 100, 22);
+        jPanel19.add(jDateChooser_EndDate);
+        jDateChooser_EndDate.setBounds(150, 110, 100, 22);
+
+        jButton7.setText("Search");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        jPanel19.add(jButton7);
+        jButton7.setBounds(300, 90, 110, 25);
+
+        jLabel29.setText("Start Date");
+        jPanel19.add(jLabel29);
+        jLabel29.setBounds(40, 70, 80, 16);
+
+        jLabel30.setText("End Date");
+        jPanel19.add(jLabel30);
+        jLabel30.setBounds(40, 120, 70, 16);
+
+        jLabel3_totalTransaction.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3_totalTransaction.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        jLabel3_totalTransaction.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel3_totalTransaction.setText("TotalMoney");
+        jPanel19.add(jLabel3_totalTransaction);
+        jLabel3_totalTransaction.setBounds(510, 60, 330, 70);
+
+        jLabel_validDate.setForeground(new java.awt.Color(255, 0, 0));
+        jPanel19.add(jLabel_validDate);
+        jLabel_validDate.setBounds(40, 30, 110, 20);
 
         jLayeredPane1.setLayer(jPanel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jPanel16, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -906,6 +1036,15 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         });
         jMenu1.add(jMenuItem1);
 
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItem2.setText("Exit");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -925,7 +1064,12 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
-        // TODO add your handling code here:Employee tab clicked
+        // TODO add your handling code here:Employee tab clicked (Today recharge )
+        
+        
+        
+    
+        
         DefaultTableModel m = (DefaultTableModel) jTable_transactionDetailsEmp.getModel();
         m.setRowCount(0);
 
@@ -952,6 +1096,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private void jPanel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel18MouseClicked
         // TODO add your handling code here:Transaction Details Panel Table Left Side
 
+        
+        jDateChooser_EndDate.setDate(null);
+        jDateChooser_StartDate.setDate(null);
         jPanel10.setVisible(false);
         jPanel16.setVisible(false);
         jPanel17.setVisible(false);
@@ -1035,6 +1182,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         System.out.println("Final "+transdetailscomplete.size());
 
+        long totaltransaction = 0l;
         for(int i = 0;i < transdetailscomplete.size();i++)
         {
             row[0] = transdetailscomplete.get(i).getID();
@@ -1042,11 +1190,12 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             row[2] = transdetailscomplete.get(i).getEmpName();
             row[3] = transdetailscomplete.get(i).getAmount();
             row[4] = transdetailscomplete.get(i).getDate();
-
+            totaltransaction  = transdetailscomplete.get(i).getAmount() + totaltransaction;
             model.addRow(row);
         }
 
         // transactiondetails
+        jLabel3_totalTransaction.setText(""+totaltransaction);
     }//GEN-LAST:event_jPanel18MouseClicked
 
     private void jPanel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel15MouseClicked
@@ -1146,6 +1295,17 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         // TODO add your handling code here:Recharge Button
         String cardno = jTextField1.getText();
         String amount = jTextField2.getText();
+        String gameselected = jComboBox_GamesList.getSelectedItem().toString();
+        
+        //validating wheather selected game is propper or not 
+        if(gameselected.equals("Select Game"))
+        {
+                    JOptionPane.showMessageDialog(jPanel1,
+                    "Please Select a Game .",
+                    "Inane error",
+                    JOptionPane.ERROR_MESSAGE);
+                return ;
+        }
         int amt =0;
 
         //validation code
@@ -1182,6 +1342,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 "Please Enter A Valid Amount Amount.",
                 "Inane error",
                 JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
         //now doing recharge
@@ -1193,7 +1354,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         rec.setCardNo(cardno);
         rec.setEmpName(currentuser.getName());
         rec.setDate(date);
-
+        rec.setGameName(gameselected);
+        
         String TableName = currentstallname+"_transaction";
 
         TransactionInterface Dao = null ;
@@ -1284,6 +1446,76 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:Exit button
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:search button to search transaction between perticular dates 
+        java.util.Date startdate;
+        java.util.Date enddate;
+        if(jDateChooser_StartDate.getDate() == null || jDateChooser_EndDate.getDate() == null)
+        {
+            jLabel_validDate.setText("Enter Valid Dates");
+            return;
+        }
+        
+        try{
+         startdate  = jDateChooser_StartDate.getDate(); 
+         enddate =jDateChooser_EndDate.getDate();
+        }
+        catch(Exception e)
+        {
+            
+            jLabel_validDate.setText("Enter Valid Dates");
+            return;
+        }
+      
+        
+        java.sql.Timestamp statTimestamp = convert(startdate);
+        java.sql.Timestamp endTimestamp = convert(enddate);
+
+        
+        System.out.println(statTimestamp+"  "+endTimestamp);
+        
+        
+        
+        DefaultTableModel m = (DefaultTableModel) jTable_transactionDetails.getModel();
+        m.setRowCount(0);
+
+        DefaultTableModel  model = (DefaultTableModel) jTable_transactionDetails.getModel();
+        Object row[] = new Object[5];
+
+       
+            long totaltransaction = 0l;
+        for(int i = 0;i < transdetailscomplete.size();i++)
+        {
+            java.sql.Timestamp trans_date = transdetailscomplete.get(i).getDate();
+            
+            if(  trans_date.after(statTimestamp) && trans_date.before(endTimestamp)   )
+            {
+            row[0] = transdetailscomplete.get(i).getID();
+            row[1] = transdetailscomplete.get(i).getCardNo();
+            row[2] = transdetailscomplete.get(i).getEmpName();
+            row[3] = transdetailscomplete.get(i).getAmount();
+            row[4] = transdetailscomplete.get(i).getDate();
+            totaltransaction  = transdetailscomplete.get(i).getAmount() + totaltransaction;
+
+            model.addRow(row);
+            }
+        
+        }
+        
+        jLabel3_totalTransaction.setText(""+totaltransaction);
+        jLabel_validDate.setText("");
+        
+    }//GEN-LAST:event_jButton7ActionPerformed
+ 	public static java.sql.Timestamp convert(java.util.Date date)
+	{
+		return new java.sql.Timestamp(date.getTime());
+	}
+
     /**
      * @param args the command line arguments
      */
@@ -1327,6 +1559,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JComboBox<String> jComboBox_GamesList;
+    private com.toedter.calendar.JDateChooser jDateChooser_EndDate;
+    private com.toedter.calendar.JDateChooser jDateChooser_StartDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1348,7 +1584,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel3_totalTransaction;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1360,10 +1599,12 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JLabel jLabel_currentEMpName;
     private javax.swing.JLabel jLabel_currentEMpName1;
     private javax.swing.JLabel jLabel_currentempname2;
+    private javax.swing.JLabel jLabel_validDate;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -1377,6 +1618,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;

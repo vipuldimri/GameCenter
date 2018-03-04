@@ -53,7 +53,7 @@ public class MainAdmin implements MainAdminInterface
               String temp ="CREATE TABLE IF NOT EXISTS "+FinalTableName+" (\n";
               String sql =temp
                 + "  ID int(11) NOT NULL AUTO_INCREMENT,\n"
-                + "  CardNo varchar(45) DEFAULT NULL,\n" 
+                + "  CardNo varchar(45)DEFAULT NULL,\\ n" 
                 + "  EmpName varchar(45) DEFAULT NULL,\n"
                 + "  Amount int(11) DEFAULT NULL,\n"
                 + "  Date  datetime(6) DEFAULT NULL,\n"
