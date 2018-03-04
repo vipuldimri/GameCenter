@@ -12,6 +12,6 @@ package Database;
 import gamecenter.Stall;
 public interface MainAdminInterface 
 {
-    public void AddGameZone(Stall newgamezone);
+    public void AddGameZone(Stall newgamezone,int ID);
     
 }

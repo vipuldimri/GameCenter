@@ -32,7 +32,7 @@ public class GameCenter {
                 splash.setVisible(false);
                
                 //Code If Unable to connect Online Database Server 
-                if(backgroundthread1.users.size() == 0 || backgroundthread1.stalls == null)
+                if(backgroundthread1.users == null || backgroundthread1.stalls == null)
                 {
 
                      JOptionPane.showMessageDialog(splash,

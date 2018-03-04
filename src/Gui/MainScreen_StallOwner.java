@@ -56,7 +56,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     JDialog recharge;
     public MainScreen_StallOwner(LoginScreen l ,User currentuser ,ArrayList<User> currentStallUsers,String currentstallname, ArrayList<String> CurrentStallGames) 
     {
-        System.out.println("LL "+l);
+            
+        
+             testfields = new ArrayList<>();
+         
+      //  System.out.println("LL "+l);
         this.currentstallname = currentstallname;
         this.CurrentStallGames = CurrentStallGames;
      
@@ -69,7 +73,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - getWidth()) / 2);
         int y = (int) ((dimension.getHeight() - getHeight()) / 2);
-        
+                
+          
+          jPanel21.setLayout(new GridLayout(6,2));
         
         //int framesizeh = dimension.height*8/10;
         //int framesizew = dimension.width*8/10;
@@ -119,19 +125,43 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
         jLabel_currentEMpName.setText(currentuser.getName());
         jLabel_currentempname2.setText(currentuser.getName());
-          if(CurrentStallGames.size() > 0)
+       if(CurrentStallGames.size() > 0)
         {
             
-          jComboBox_GamesList.addItem("Select Game");    
-        for(String game : CurrentStallGames)
-        {
-             jComboBox_GamesList.addItem(game);    
-        }
+           
+          jComboBox_GamesList.addItem("Select Game");   
+          for(String game : CurrentStallGames)
+          {
+              //adding game to chombo Box
+             jComboBox_GamesList.addItem(game);
+             
+             JLabel j = new JLabel(game);
+             j.setFont(new java.awt.Font("Tahoma", 1, 18)); 
+             j.setForeground(new java.awt.Color(255, 255, 255));
+             
+             JTextField jt = new JTextField();
+             jt.setText(game);
+             jt.setFont(new java.awt.Font("Tahoma", 1, 18));
+             jt.setBounds(50,50,50,50);
+             
+       
+             
+             testfields.add(jt);
+           
+             
+        
+             
+             jPanel21.add(j);
+             jPanel21.add(jt);
+             
+         
+          }
         
         
         }
-          recharge = new JDialog();
-        
+       
+       
+        recharge = new JDialog();
     }
         //employee
         public MainScreen_StallOwner(String str,LoginScreen l ,User currentuser ,ArrayList<User> currentStallUsers,String currentstallname,ArrayList<String> CurrentStallGames)
@@ -411,9 +441,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel4.add(jTextField2);
         jTextField2.setBounds(580, 160, 260, 60);
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Reset To Zero");
         jPanel4.add(jButton1);
-        jButton1.setBounds(220, 370, 130, 40);
+        jButton1.setBounds(830, 370, 130, 40);
 
         jButton2.setText("Recharge ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -424,14 +454,14 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel4.add(jButton2);
         jButton2.setBounds(550, 370, 110, 40);
 
-        jButton3.setText("Reset To Zero");
+        jButton3.setText("Reset");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
         jPanel4.add(jButton3);
-        jButton3.setBounds(840, 370, 130, 50);
+        jButton3.setBounds(270, 360, 130, 50);
 
         jRadioButton1.setBackground(new java.awt.Color(0, 0, 0));
         jRadioButton1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -492,8 +522,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel4.add(jLabel_currentEMpName);
         jLabel_currentEMpName.setBounds(1010, 10, 48, 16);
 
+        jComboBox_GamesList.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jPanel4.add(jComboBox_GamesList);
-        jComboBox_GamesList.setBounds(910, 190, 100, 22);
+        jComboBox_GamesList.setBounds(900, 180, 210, 35);
 
         jPanel2.add(jPanel4);
         jPanel4.setBounds(2, 7, 1200, 440);
@@ -512,10 +543,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel5.setText("Existing Amount ");
         jPanel5.add(jLabel5);
         jLabel5.setBounds(110, 90, 100, 30);
-
-        jTextField3.setText("jTextField3");
         jPanel5.add(jTextField3);
-        jTextField3.setBounds(350, 80, 69, 22);
+        jTextField3.setBounds(320, 62, 290, 60);
 
         jPanel2.add(jPanel5);
         jPanel5.setBounds(280, 470, 660, 190);
@@ -1161,7 +1190,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                  Long amount = collect.get(transdetailscomplete.get(i).getGameName());
                  collect.put(transdetailscomplete.get(i).getGameName(),(long)transdetailscomplete.get(i).getAmount()+amount); 
                     
-                }else{
+                }else
+                {
                 collect.put(transdetailscomplete.get(i).getGameName(),(long)transdetailscomplete.get(i).getAmount());    
                 }
                 
@@ -1176,6 +1206,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         {
            String game = CurrentStallGames.get(ii);
            Long amount = collect.get(game);
+           if(amount == null)
+           {
+               testfields.get(ii).setText("0");
+               continue;
+           }
            testfields.get(ii).setText(amount+"");
             
         }

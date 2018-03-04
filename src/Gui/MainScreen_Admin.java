@@ -28,7 +28,9 @@ public class MainScreen_Admin extends javax.swing.JFrame
     String ErrorMessage;
     TransactionInterface Dao;
     ArrayList<Recharge> transactionlist;
-    public MainScreen_Admin( ArrayList<User> users , Stalls_and_SubDate stalls)
+    
+    int LastId ;
+    public MainScreen_Admin(ArrayList<User> users , Stalls_and_SubDate stalls)
     {
         this.stalls = stalls;
         this.users = users;
@@ -44,7 +46,14 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jPanel4.setVisible(false);
         jPanel5.setVisible(false);
         jComboBox_allgamezones.addItem("Select GameZone");
-       
+        
+        
+         if(stalls.stalls.size()==0)
+         {
+             LastId = 0;
+         }else{
+         LastId  = stalls.stalls.get(stalls.stalls.size()-1).getID();
+         }
     }
     
     //Employee view
@@ -394,25 +403,32 @@ public class MainScreen_Admin extends javax.swing.JFrame
         Code for Submit Button ADD GameZone
         */
         
+        
+            int    Basket_Ball  =0 ;  
+            int    Speed_Ball   =0 ;
+            int    Air_Hockey   =0 ;
+            int    Dance        =0 ;
+            int    Catch_Light  =0;
+        
         if(jCheckBox_Airhockey.isSelected())
         {
-            
+            Air_Hockey = 1;
         }
         if(jCheckBox_dance.isSelected())
         {
-            
+            Dance = 1;
         }
         if(jCheckBox_speedball.isSelected())
         {
-            
+            Speed_Ball = 1;
         }
         if(jCheckBox_CatchLight.isSelected())
         {
-            
+            Catch_Light =1 ;
         }
         if(jcheckbox_basketball.isSelected())
         {
-            
+            Basket_Ball = 1;
         }
         
         
@@ -446,14 +462,14 @@ public class MainScreen_Admin extends javax.swing.JFrame
         newgamezone.setOwnerName(OwnerName);
         newgamezone.setSubStartDate(currentdate);
         newgamezone.setSubEndDate(finalEndsubDate);
-        
+        newgamezone.setAir_Hockey(Air_Hockey);
+        newgamezone.setBasket_Ball(Basket_Ball);
+        newgamezone.setCatch_Light(Catch_Light);
+        newgamezone.setSpeed_Ball(Speed_Ball);
+        newgamezone.setDance(Dance);
         //Completed getting data from GUI and storing into obbject of stall type
-        
         //Now using backgrounf to add New gamezone
-        
-        
-        
-        
+
         MainAdminInterface Dao = null;
         try {
             Dao = MainAdminFactory.getInstance();
@@ -462,7 +478,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
             //inCase of any errot in Adding new GameZone
             Logger.getLogger(MainScreen_Admin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Dao.AddGameZone(newgamezone);
+        Dao.AddGameZone(newgamezone,LastId);
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -578,6 +594,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
         //Filling the Jtable 
         DefaultTableModel m = (DefaultTableModel) jTable_transaction.getModel();
         m.setRowCount(0);
+        
         DefaultTableModel  model = (DefaultTableModel) jTable_transaction.getModel();
         Object row[] = new Object[5];
         for(int i=0;i < transactionlist.size();i++)
