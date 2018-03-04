@@ -17,6 +17,8 @@ import java.awt.Window;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
@@ -1094,11 +1096,60 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         Object row[] = new Object[6];
 
         System.out.println("Final "+transdetailscomplete.size());
+        
+        
+        //Getting Today Date 
+          Calendar c = new GregorianCalendar();
+          c.set(Calendar.HOUR_OF_DAY, 0); //anything 0 - 23
+          c.set(Calendar.MINUTE, 0);
+          c.set(Calendar.SECOND, 0);
+        
+        // 1) create a java calendar instance
+       Calendar calendar = Calendar.getInstance();
 
+// 2) get a java.util.Date from the calendar instance.
+//    this date will represent the current instant, or "now".
+        java.util.Date now = c.getTime();
+
+// 3) a java current time (now) instance
+        java.sql.Timestamp currentTimestampDaystart = new java.sql.Timestamp(now.getTime());  
+          
+        
+        
+        Calendar c2= new GregorianCalendar();
+        c2.set(Calendar.HOUR_OF_DAY, 23); //anything 0 - 23
+        c2.set(Calendar.MINUTE, 60);
+        c2.set(Calendar.SECOND, 60);
+        
+             
+
+// 2) get a java.util.Date from the calendar instance.
+//    this date will represent the current instant, or "now".
+        java.util.Date now2 = c2.getTime();
+
+// 3) a java current time (now) instance
+        java.sql.Timestamp currentTimestampDayend = new java.sql.Timestamp(now2.getTime());  
+          
+        
+        
+        
+        java.sql.Timestamp currentTimestamp2 = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
+        System.out.println("current timestemp "+currentTimestamp2); 
+                System.out.println("current timestemp "+currentTimestampDaystart); 
+          System.out.println("current timestemp "+currentTimestampDayend); 
+                
         for(int i = 0;i < transdetailscomplete.size();i++)
         {
+            
+            
+            //loop of getting today result
+                if(  currentTimestamp2.after(currentTimestampDaystart) && currentTimestamp2.before(currentTimestampDayend)   )
+                {
+            
+            //loop for getting today resut of logedin employee
             if( transdetailscomplete.get(i).getEmpName().equals(currentuser.getName()))
             {
+                
                 row[0] = transdetailscomplete.get(i).getID();
                 row[1] = transdetailscomplete.get(i).getCardNo();
                 row[2] = transdetailscomplete.get(i).getEmpName();
@@ -1116,6 +1167,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 
                 model.addRow(row);
             }
+            
+                }
         }
         
         
