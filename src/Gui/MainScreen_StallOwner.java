@@ -52,12 +52,16 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     
     //flag for checking wheather recharge is done corect or not 
     Boolean rech_flag = false;
+    Boolean AddEmp_flag = false;
+    Boolean UpdateEmp_flag = false;
     
+    //forchecing if password and username combination is present or not
+    HashMap<String,String> passwordcheeck;
     JDialog recharge;
     public MainScreen_StallOwner(LoginScreen l ,User currentuser ,ArrayList<User> currentStallUsers,String currentstallname, ArrayList<String> CurrentStallGames) 
     {
             
-        
+       // this.passwordcheeck = passwordcheeck;
              testfields = new ArrayList<>();
          
       //  System.out.println("LL "+l);
@@ -75,7 +79,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         int y = (int) ((dimension.getHeight() - getHeight()) / 2);
                 
           
-          jPanel21.setLayout(new GridLayout(6,2));
+         // jPanel21.setLayout(new GridLayout(6,2));
         
         //int framesizeh = dimension.height*8/10;
         //int framesizew = dimension.width*8/10;
@@ -167,6 +171,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         public MainScreen_StallOwner(String str,LoginScreen l ,User currentuser ,ArrayList<User> currentStallUsers,String currentstallname,ArrayList<String> CurrentStallGames)
         {
             
+            
+        //this.passwordcheeck = passwordcheeck;
           testfields = new ArrayList<>();
           this.CurrentStallGames = CurrentStallGames;
           
@@ -179,7 +185,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
           initComponents();
          
           
-          jPanel21.setLayout(new GridLayout(6,2));
+          //jPanel21.setLayout(new GridLayout(6,2));
           
           Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
           int x = (int) ((dimension.getWidth() - getWidth()) / 2);
@@ -592,15 +598,15 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jScrollPane3.setViewportView(jTable_transactionDetailsEmp);
 
         jPanel6.add(jScrollPane3);
-        jScrollPane3.setBounds(0, 100, 1200, 200);
+        jScrollPane3.setBounds(40, 70, 1200, 70);
 
         jPanel3.add(jPanel6);
-        jPanel6.setBounds(0, 0, 1200, 280);
+        jPanel6.setBounds(80, 10, 990, 90);
 
         jPanel21.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel21.setLayout(new java.awt.GridLayout(6, 3));
+        jPanel21.setLayout(new java.awt.GridLayout(6, 2));
         jPanel3.add(jPanel21);
-        jPanel21.setBounds(180, 320, 860, 400);
+        jPanel21.setBounds(100, 120, 990, 610);
 
         jTabbedPane1.addTab("Today Collection", jPanel3);
 
@@ -1372,6 +1378,29 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:ADD button to add Employee
 
+        
+        
+        String username = jTextField_Name.getText();
+        String password = jTextField1_password.getText();
+        
+        if(username.length() == 0 || password.length() == 0)
+        {
+            
+            return ;
+        }
+        
+        //user usernmae and combination already exits
+        //if(passwordcheeck.containsKey(username))
+        //{
+//                String existencepassword = passwordcheeck.get(username)
+//                if()
+//                {
+//                    
+//                }
+            
+       // }
+    
+        
         User newuser = new User();
         newuser.setName(jTextField_Name.getText());
         newuser.setType("emp");
@@ -1381,13 +1410,74 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         newuser.setEmail(jTextField1_email.getText());
         newuser.setPassword(jTextField1_password.getText());
 
-        UserInterface Dao = null;
-        try {
-            Dao = UserFactory.getInstance();
-        } catch (Exception ex) {
-            Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
+        
+              SwingWorker work = new SwingWorker<String , Integer>() 
+                 {
+	            @Override
+	            protected  String  doInBackground() throws Exception 
+	            {
+	             
+
+                   
+                    UserInterface Dao = null;
+                    try {
+                    Dao = UserFactory.getInstance();
+                    } catch (Exception ex) {
+                    Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+                    try {
+                     
+                         Dao.AddEmp(newuser);
+                         AddEmp_flag = true;
+                         
+                      } 
+                      catch (Exception ex)
+                      {
+          
+                     
+                      }
+
+                        return "end";
+	                
+	            }//do backgrounf ENDS
+
+
+	            @Override
+	            protected void done()
+                    {
+                        
+                      recharge.dispose();
+	            }
+	        };
+        final ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/Images/recharge.gif"));
+        work.execute();
+        JOptionPane pane = new JOptionPane("", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon,new Object[]{}, null);
+        recharge = pane.createDialog(this,"Please wait ");
+        recharge.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+      
+        //jDialog.show();  this method is depricated there using setVisible method for showing the dialoge box 
+        recharge.setVisible(true);   
+                 
+        
+        if(AddEmp_flag == false)
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+                     "Adding Employee Failed.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+            return;
+        }else{
+                      JOptionPane.showMessageDialog(jPanel1,
+                     "Adding Employee Success.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
         }
-        Dao.AddEmp(newuser);
+                 
+        jTextField_Name.setText("");
+        jTextField1_address.setText("");
+        jTextField1_password.setText("");
+        jTextField1_email.setText("");
+        jTextField1_contact.setText("");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed

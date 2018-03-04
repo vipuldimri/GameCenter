@@ -59,6 +59,7 @@ public class UserImplements implements UserInterface
                     obj.stalls.add(newstall);
                     obj.subdate.put(rs.getInt(1), rs.getDate(8));
                     obj.stallIdandName.put(rs.getInt(1),rs.getString(2) );
+                    obj.PasswordCheck.put(rs.getString(2), rs.getString(8));
                     //End date for every stall corres to their ID
                    }
         

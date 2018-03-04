@@ -19,6 +19,7 @@ public class Stalls_and_SubDate
     
     public HashMap<Integer,String> stallIdandName;
     
+    public HashMap<String,String> PasswordCheck;
     
 
     public Stalls_and_SubDate()
@@ -26,6 +27,7 @@ public class Stalls_and_SubDate
         stalls = new ArrayList<>();
         subdate = new HashMap<>();
         stallIdandName = new HashMap<>();
+        PasswordCheck = new HashMap<>();
     }
     
 }

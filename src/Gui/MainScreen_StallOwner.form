@@ -479,7 +479,7 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="0" y="0" width="1200" height="280"/>
+                      <AbsoluteConstraints x="80" y="10" width="990" height="90"/>
                     </Constraint>
                   </Constraints>
 
@@ -555,7 +555,7 @@
                       </AuxValues>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="0" y="100" width="1200" height="200"/>
+                          <AbsoluteConstraints x="40" y="70" width="1200" height="70"/>
                         </Constraint>
                       </Constraints>
 
@@ -587,12 +587,12 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="180" y="320" width="860" height="400"/>
+                      <AbsoluteConstraints x="100" y="120" width="990" height="610"/>
                     </Constraint>
                   </Constraints>
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-                    <Property name="columns" type="int" value="3"/>
+                    <Property name="columns" type="int" value="2"/>
                     <Property name="rows" type="int" value="6"/>
                   </Layout>
                 </Container>

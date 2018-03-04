@@ -317,7 +317,7 @@ public class LoginScreen extends javax.swing.JFrame
         int gamezoneid ;
         
         
-       // traversing users list to check password and user name exits or not ;
+        // traversing users list to check password and user name exits or not ;
         for(User u : users)
         {
          
@@ -340,11 +340,8 @@ public class LoginScreen extends javax.swing.JFrame
                 
                 flagUser = true;
               
-//code for getting Game zone
-
-
-
-//Now getting current stall Endsub data and converting it into String to check if sub is valid or not for the gamezone
+               //code for getting Game zone
+               //Now getting current stall Endsub data and converting it into String to check if sub is valid or not for the gamezone
                 gamezoneid = u.getGameZoneID();
             
                 for(int d = 0 ; d < stalls.stalls.size() ; d++)
