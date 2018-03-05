@@ -11,9 +11,14 @@ import gamecenter.User;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.PointerInfo;
 import javax.swing.*;
 import java.awt.Toolkit;
 import java.awt.Window;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -302,6 +307,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -360,6 +368,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jTextField7 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel17 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_EmpRecord = new javax.swing.JTable();
@@ -400,6 +411,26 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+
+        jMenuItem3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/deleteicon.png"))); // NOI18N
+        jMenuItem3.setText("Delete Emplyee");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem3);
+
+        jMenuItem4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/update.png"))); // NOI18N
+        jMenuItem4.setText("Update Employee");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem4);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Main Screen ");
@@ -678,15 +709,16 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         jPanel16.setLayout(null);
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel8.setText("Update / Delete Employee");
         jPanel16.add(jLabel8);
-        jLabel8.setBounds(362, 23, 148, 16);
+        jLabel8.setBounds(280, 20, 280, 50);
 
         jLabel13.setText("Enter Employee Name ");
         jPanel16.add(jLabel13);
         jLabel13.setBounds(95, 76, 130, 16);
         jPanel16.add(jTextField7);
-        jTextField7.setBounds(95, 110, 210, 50);
+        jTextField7.setBounds(90, 100, 210, 50);
 
         jButton5.setText("Update");
         jPanel16.add(jButton5);
@@ -696,6 +728,28 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel16.add(jButton6);
         jButton6.setBounds(510, 510, 69, 25);
 
+        jButton8.setText("Search");
+        jPanel16.add(jButton8);
+        jButton8.setBounds(400, 110, 73, 25);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Name", "Address", "Contact", "Email", "Type", "Password"
+            }
+        ));
+        jScrollPane4.setViewportView(jTable1);
+
+        jPanel16.add(jScrollPane4);
+        jScrollPane4.setBounds(0, 170, 860, 290);
+
+        jPanel17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel17MouseClicked(evt);
+            }
+        });
         jPanel17.setLayout(null);
 
         jTable_EmpRecord.setModel(new javax.swing.table.DefaultTableModel(
@@ -706,6 +760,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 "ID", "Name", "Address", "Contact", "Email", "Type", "GameZoneID", "Password"
             }
         ));
+        jTable_EmpRecord.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable_EmpRecordMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable_EmpRecord);
 
         jPanel17.add(jScrollPane1);
@@ -842,6 +901,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel11.setBounds(340, 180, 860, 560);
 
         jPanel12.setBackground(new java.awt.Color(102, 0, 153));
+        jPanel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel12MouseClicked(evt);
+            }
+        });
 
         jPanel13.setBackground(new java.awt.Color(0, 0, 0));
         jPanel13.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1013,6 +1077,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel12.setBounds(0, 0, 340, 740);
 
         jPanel9.setBackground(new java.awt.Color(0, 51, 51));
+        jPanel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel9MouseClicked(evt);
+            }
+        });
 
         jLabel_GameZoneNAme.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel_GameZoneNAme.setForeground(new java.awt.Color(255, 255, 255));
@@ -1227,7 +1296,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private void jPanel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel18MouseClicked
         // TODO add your handling code here:Transaction Details Panel Table Left Side
 
-        
+         jPopupMenu1.setVisible(false);
         jDateChooser_EndDate.setDate(null);
         jDateChooser_StartDate.setDate(null);
         jPanel10.setVisible(false);
@@ -1335,7 +1404,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel16.setVisible(false);
         jPanel19.setVisible(false);
         jPanel17.setVisible(true);
-
+ jPopupMenu1.setVisible(false);
         //to display record into the table
         DefaultTableModel m = (DefaultTableModel) jTable_EmpRecord.getModel();
         m.setRowCount(0);
@@ -1363,12 +1432,12 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel16.setVisible(true);
         jPanel17.setVisible(false);
         jPanel19.setVisible(false);
-
+ jPopupMenu1.setVisible(false);
     }//GEN-LAST:event_jPanel14MouseClicked
 
     private void jPanel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel13MouseClicked
         // TODO add your handling code here:option 1
-
+ jPopupMenu1.setVisible(false);
         jPanel10.setVisible(true);
         jPanel16.setVisible(false);
         jPanel17.setVisible(false);
@@ -1770,6 +1839,61 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel_validDate.setText("");
         
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jTable_EmpRecordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_EmpRecordMouseClicked
+        // TODO add your handling code here:
+        if(evt.getButton() == MouseEvent.BUTTON1)
+        {
+            return ;
+        }
+        
+        int r = jTable_EmpRecord.rowAtPoint(evt.getPoint());
+        if (r >= 0 && r < jTable_EmpRecord.getRowCount()) {
+            jTable_EmpRecord.setRowSelectionInterval(r, r);
+        } else {
+            jTable_EmpRecord.clearSelection();
+        }
+        //for getting locatiopn
+        PointerInfo a = MouseInfo.getPointerInfo();
+        Point b = a.getLocation();
+        int x = (int) b.getX();
+        int y = (int) b.getY();
+        jPopupMenu1.setLocation(x, y);
+        jMenuItem3.setText("Delete Employee");
+        jMenuItem4.setText("Update Employee");
+        
+        jPopupMenu1.setVisible(true);
+        
+    }//GEN-LAST:event_jTable_EmpRecordMouseClicked
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:Delete Code PopUpMenu
+        
+        System.out.println(   jTable_EmpRecord.getSelectedRow());
+            jPopupMenu1.setVisible(false);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:Update Code POpUpmenu
+           System.out.println(   jTable_EmpRecord.getSelectedRow());
+               jPopupMenu1.setVisible(false);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jPanel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel12MouseClicked
+        // TODO add your handling code here:
+         jPopupMenu1.setVisible(false);
+    }//GEN-LAST:event_jPanel12MouseClicked
+
+    private void jPanel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel17MouseClicked
+        // TODO add your handling code here:
+         jPopupMenu1.setVisible(false);
+    }//GEN-LAST:event_jPanel17MouseClicked
+
+    private void jPanel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel9MouseClicked
+        // TODO add your handling code here:
+        
+         jPopupMenu1.setVisible(false);
+    }//GEN-LAST:event_jPanel9MouseClicked
  	public static java.sql.Timestamp convert(java.util.Date date)
 	{
 		return new java.sql.Timestamp(date.getTime());
@@ -1819,6 +1943,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JComboBox<String> jComboBox_GamesList;
     private com.toedter.calendar.JDateChooser jDateChooser_EndDate;
     private com.toedter.calendar.JDateChooser jDateChooser_StartDate;
@@ -1864,6 +1989,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -1885,6 +2012,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
@@ -1893,10 +2021,12 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable_EmpRecord;
     private javax.swing.JTable jTable_transactionDetails;
     private javax.swing.JTable jTable_transactionDetailsEmp;
