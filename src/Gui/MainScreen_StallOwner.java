@@ -294,7 +294,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
        
        
         recharge = new JDialog();
-       
+       jLabel_GameZoneNAme.setText(currentstallname);
+       jLabel_OwnerName.setText(currentuser.getName());
+       jLabel_Label.setText("Transaction Details");
     }
 
     /**
@@ -350,7 +352,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel11 = new javax.swing.JPanel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel10 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jTextField_Name = new javax.swing.JTextField();
@@ -363,7 +364,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jTextField1_email = new javax.swing.JTextField();
         jTextField1_contact = new javax.swing.JTextField();
         jPanel16 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
@@ -403,10 +403,12 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel18 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
+        jSeparator4 = new javax.swing.JSeparator();
         jLabel_GameZoneNAme = new javax.swing.JLabel();
         jLabel_OwnerName = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
+        jLabel_OwnerName1 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel_Label = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -643,20 +645,15 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         jPanel8.setLayout(null);
 
-        jPanel7.setBackground(new java.awt.Color(153, 0, 153));
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setLayout(null);
 
         jPanel10.setLayout(null);
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
-        jLabel7.setText("Add new Employee");
-        jPanel10.add(jLabel7);
-        jLabel7.setBounds(240, -10, 380, 100);
-
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel12.setText("Name");
         jPanel10.add(jLabel12);
-        jLabel12.setBounds(90, 100, 53, 22);
+        jLabel12.setBounds(90, 30, 53, 22);
 
         jButton4.setText("Submit");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -665,60 +662,56 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel10.add(jButton4);
-        jButton4.setBounds(370, 490, 120, 40);
+        jButton4.setBounds(380, 440, 120, 40);
 
         jTextField_Name.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jPanel10.add(jTextField_Name);
-        jTextField_Name.setBounds(90, 148, 210, 40);
+        jTextField_Name.setBounds(90, 70, 210, 40);
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel22.setText("Password");
         jPanel10.add(jLabel22);
-        jLabel22.setBounds(510, 230, 87, 22);
+        jLabel22.setBounds(480, 160, 87, 22);
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel23.setText("Contact");
         jPanel10.add(jLabel23);
-        jLabel23.setBounds(510, 110, 70, 22);
+        jLabel23.setBounds(480, 30, 70, 22);
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel24.setText("Email");
         jPanel10.add(jLabel24);
-        jLabel24.setBounds(90, 220, 49, 22);
+        jLabel24.setBounds(90, 160, 49, 22);
 
         jLabel25.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel25.setText("Address");
         jPanel10.add(jLabel25);
-        jLabel25.setBounds(100, 360, 71, 22);
+        jLabel25.setBounds(100, 320, 71, 22);
 
         jTextField1_address.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jPanel10.add(jTextField1_address);
-        jTextField1_address.setBounds(200, 350, 420, 70);
+        jTextField1_address.setBounds(190, 300, 510, 70);
 
         jTextField1_password.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jPanel10.add(jTextField1_password);
-        jTextField1_password.setBounds(510, 260, 220, 50);
+        jTextField1_password.setBounds(480, 200, 220, 50);
 
         jTextField1_email.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jPanel10.add(jTextField1_email);
-        jTextField1_email.setBounds(90, 250, 220, 40);
+        jTextField1_email.setBounds(90, 200, 220, 40);
 
         jTextField1_contact.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jPanel10.add(jTextField1_contact);
-        jTextField1_contact.setBounds(500, 140, 210, 50);
+        jTextField1_contact.setBounds(480, 70, 210, 40);
 
+        jPanel16.setBackground(new java.awt.Color(255, 255, 255));
         jPanel16.setLayout(null);
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel8.setText("Update / Delete Employee");
-        jPanel16.add(jLabel8);
-        jLabel8.setBounds(280, 20, 280, 50);
 
         jLabel13.setText("Enter Employee Name ");
         jPanel16.add(jLabel13);
-        jLabel13.setBounds(95, 76, 130, 16);
+        jLabel13.setBounds(100, 20, 130, 16);
         jPanel16.add(jTextField7);
-        jTextField7.setBounds(90, 100, 210, 50);
+        jTextField7.setBounds(100, 50, 210, 50);
 
         jButton5.setText("Update");
         jPanel16.add(jButton5);
@@ -730,7 +723,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         jButton8.setText("Search");
         jPanel16.add(jButton8);
-        jButton8.setBounds(400, 110, 73, 25);
+        jButton8.setBounds(390, 45, 120, 40);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -740,10 +733,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 "ID", "Name", "Address", "Contact", "Email", "Type", "Password"
             }
         ));
+        jTable1.setSelectionBackground(new java.awt.Color(112, 72, 215));
         jScrollPane4.setViewportView(jTable1);
 
         jPanel16.add(jScrollPane4);
-        jScrollPane4.setBounds(0, 170, 860, 290);
+        jScrollPane4.setBounds(0, 140, 860, 320);
 
         jPanel17.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -752,6 +746,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         });
         jPanel17.setLayout(null);
 
+        jTable_EmpRecord.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTable_EmpRecord.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -760,6 +755,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 "ID", "Name", "Address", "Contact", "Email", "Type", "GameZoneID", "Password"
             }
         ));
+        jTable_EmpRecord.setRowHeight(22);
+        jTable_EmpRecord.setRowMargin(3);
+        jTable_EmpRecord.setSelectionBackground(new java.awt.Color(153, 153, 255));
         jTable_EmpRecord.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable_EmpRecordMouseClicked(evt);
@@ -900,14 +898,14 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel7.add(jPanel11);
         jPanel11.setBounds(340, 180, 860, 560);
 
-        jPanel12.setBackground(new java.awt.Color(102, 0, 153));
+        jPanel12.setBackground(new java.awt.Color(54, 33, 89));
         jPanel12.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel12MouseClicked(evt);
             }
         });
 
-        jPanel13.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel13.setBackground(new java.awt.Color(54, 33, 89));
         jPanel13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel13MouseClicked(evt);
@@ -926,10 +924,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55))
+                .addGap(76, 76, 76))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -943,7 +941,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 .addContainerGap())
         );
 
-        jPanel14.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel14.setBackground(new java.awt.Color(54, 33, 89));
         jPanel14.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel14MouseClicked(evt);
@@ -954,7 +952,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setText("UPDATE / DELETE");
+        jLabel19.setText("UPDATE / DELETE Employee");
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -963,9 +961,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addComponent(jLabel18)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(23, 23, 23))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -974,21 +972,22 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 .addComponent(jLabel18)
                 .addContainerGap())
             .addGroup(jPanel14Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel15.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel15.setBackground(new java.awt.Color(54, 33, 89));
         jPanel15.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel15MouseClicked(evt);
             }
         });
 
+        jLabel20.setBackground(new java.awt.Color(54, 33, 89));
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel20.setText("RECORDS");
+        jLabel20.setText("Employees RECORDS");
 
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/View Record.png"))); // NOI18N
 
@@ -997,23 +996,23 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                .addContainerGap(50, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel21)
                 .addGap(36, 36, 36)
                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
+                .addGap(69, 69, 69))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(23, 23, 23)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel21)
                     .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel18.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel18.setBackground(new java.awt.Color(54, 33, 89));
         jPanel18.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel18MouseClicked(evt);
@@ -1047,8 +1046,20 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                     .addGroup(jPanel18Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jLabel14)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jLabel_GameZoneNAme.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel_GameZoneNAme.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_GameZoneNAme.setText("GameZone Name");
+
+        jLabel_OwnerName.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel_OwnerName.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_OwnerName.setText("User Name");
+
+        jLabel_OwnerName1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel_OwnerName1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_OwnerName1.setText("Exit");
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -1058,72 +1069,61 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             .addComponent(jPanel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(jLabel_GameZoneNAme, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel_OwnerName1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel_OwnerName, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addGap(158, 158, 158)
-                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
-                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73)
-                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57)
-                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addComponent(jLabel_GameZoneNAme)
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 215, Short.MAX_VALUE)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_OwnerName, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_OwnerName1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23))
         );
 
         jPanel7.add(jPanel12);
         jPanel12.setBounds(0, 0, 340, 740);
 
-        jPanel9.setBackground(new java.awt.Color(0, 51, 51));
+        jPanel9.setBackground(new java.awt.Color(110, 89, 222));
         jPanel9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel9MouseClicked(evt);
             }
         });
+        jPanel9.setLayout(null);
 
-        jLabel_GameZoneNAme.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel_GameZoneNAme.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_GameZoneNAme.setText("jLabel26");
-
-        jLabel_OwnerName.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel_OwnerName.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_OwnerName.setText("jLabel26");
-
-        jLabel26.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel26.setText("Welcome");
-
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addContainerGap(355, Short.MAX_VALUE)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                        .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel_OwnerName, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(119, 119, 119))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                        .addComponent(jLabel_GameZoneNAme, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(286, 286, 286))))
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel9Layout.createSequentialGroup()
-                .addComponent(jLabel_GameZoneNAme, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
-                .addGap(29, 29, 29)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_OwnerName, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10))
-        );
+        jLabel_Label.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel_Label.setText("Update / Delete Employee");
+        jPanel9.add(jLabel_Label);
+        jLabel_Label.setBounds(290, 20, 280, 50);
 
         jPanel7.add(jPanel9);
-        jPanel9.setBounds(340, 0, 860, 180);
+        jPanel9.setBounds(340, 70, 860, 110);
 
         jPanel8.add(jPanel7);
         jPanel7.setBounds(0, 0, 1200, 740);
@@ -1186,7 +1186,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
         // TODO add your handling code here:Employee tab clicked (Today recharge )
         
-        
+        jPanel10.setVisible(false);
+        jPanel16.setVisible(false);
+        jPanel17.setVisible(false);
+        jPanel19.setVisible(true);
+        jPanel18.setBackground(new Color(110, 89,222));
         int collection[] = new int[testfields.size()];
         HashMap<String,Long> collect = new HashMap<>();
         
@@ -1209,7 +1213,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
           c.set(Calendar.SECOND, 0);
         
         // 1) create a java calendar instance
-       Calendar calendar = Calendar.getInstance();
+         Calendar calendar = Calendar.getInstance();
 
 // 2) get a java.util.Date from the calendar instance.
 //    this date will represent the current instant, or "now".
@@ -1294,9 +1298,14 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     private void jPanel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel18MouseClicked
-        // TODO add your handling code here:Transaction Details Panel Table Left Side
-
-         jPopupMenu1.setVisible(false);
+         // TODO add your handling code here:Transaction Details Panel Table Left Side
+        jPanel18.setBackground(new Color(110, 89,222));
+        jPanel13.setBackground(new Color(54, 33,89));
+        jPanel14.setBackground(new Color(54, 33,89));
+        jPanel15.setBackground(new Color(54, 33,89)); 
+       //above code for changesing color or side panels  
+        jLabel_Label.setText("Transaction Details");
+        jPopupMenu1.setVisible(false);
         jDateChooser_EndDate.setDate(null);
         jDateChooser_StartDate.setDate(null);
         jPanel10.setVisible(false);
@@ -1400,6 +1409,14 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
     private void jPanel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel15MouseClicked
         // TODO add your handling code here:
+        //13 14 15 18
+        //362159
+        jPanel18.setBackground(new Color(54, 33,89));
+        jPanel13.setBackground(new Color(54, 33,89));
+        jPanel14.setBackground(new Color(54, 33,89));
+        jPanel15.setBackground(new Color(110, 89,222)); 
+      
+        jLabel_Label.setText("Employees Records");
         jPanel10.setVisible(false);
         jPanel16.setVisible(false);
         jPanel19.setVisible(false);
@@ -1428,6 +1445,14 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
     private void jPanel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel14MouseClicked
         // TODO add your handling code here:option2
+          jPanel18.setBackground(new Color(54, 33,89));
+        jPanel13.setBackground(new Color(54, 33,89));
+        jPanel14.setBackground(new Color(110, 89,222));
+        jPanel15.setBackground(new Color(54, 33,89)); 
+        
+        jLabel_Label.setText("Update/Delete Employee");
+        
+        
         jPanel10.setVisible(false);
         jPanel16.setVisible(true);
         jPanel17.setVisible(false);
@@ -1437,6 +1462,13 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
     private void jPanel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel13MouseClicked
         // TODO add your handling code here:option 1
+        jPanel18.setBackground(new Color(54, 33,89));
+        jPanel13.setBackground(new Color(110, 89,222));
+        jPanel14.setBackground(new Color(54, 33,89));
+        jPanel15.setBackground(new Color(54, 33,89)); 
+      jLabel_Label.setText("Add New Employee");
+        
+        
  jPopupMenu1.setVisible(false);
         jPanel10.setVisible(true);
         jPanel16.setVisible(false);
@@ -1842,27 +1874,29 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
     private void jTable_EmpRecordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_EmpRecordMouseClicked
         // TODO add your handling code here:
-        if(evt.getButton() == MouseEvent.BUTTON1)
-        {
-            return ;
-        }
         
-        int r = jTable_EmpRecord.rowAtPoint(evt.getPoint());
-        if (r >= 0 && r < jTable_EmpRecord.getRowCount()) {
-            jTable_EmpRecord.setRowSelectionInterval(r, r);
-        } else {
-            jTable_EmpRecord.clearSelection();
-        }
-        //for getting locatiopn
-        PointerInfo a = MouseInfo.getPointerInfo();
-        Point b = a.getLocation();
-        int x = (int) b.getX();
-        int y = (int) b.getY();
-        jPopupMenu1.setLocation(x, y);
-        jMenuItem3.setText("Delete Employee");
-        jMenuItem4.setText("Update Employee");
-        
-        jPopupMenu1.setVisible(true);
+       
+//        if(evt.getButton() == MouseEvent.BUTTON1)
+//        {
+//            return ;
+//        }
+//        
+//        int r = jTable_EmpRecord.rowAtPoint(evt.getPoint());
+//        if (r >= 0 && r < jTable_EmpRecord.getRowCount()) {
+//            jTable_EmpRecord.setRowSelectionInterval(r, r);
+//        } else {
+//            jTable_EmpRecord.clearSelection();
+//        }
+//        //for getting locatiopn
+//        PointerInfo a = MouseInfo.getPointerInfo();
+//        Point b = a.getLocation();
+//        int x = (int) b.getX();
+//        int y = (int) b.getY();
+//        jPopupMenu1.setLocation(x, y);
+//        jMenuItem3.setText("Delete Employee");
+//        jMenuItem4.setText("Update Employee");
+//        
+//        jPopupMenu1.setVisible(true);
         
     }//GEN-LAST:event_jTable_EmpRecordMouseClicked
 
@@ -1965,7 +1999,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
@@ -1975,11 +2008,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel_GameZoneNAme;
+    private javax.swing.JLabel jLabel_Label;
     private javax.swing.JLabel jLabel_OwnerName;
+    private javax.swing.JLabel jLabel_OwnerName1;
     private javax.swing.JLabel jLabel_currentEMpName;
     private javax.swing.JLabel jLabel_currentEMpName1;
     private javax.swing.JLabel jLabel_currentempname2;
@@ -2025,6 +2058,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable_EmpRecord;
