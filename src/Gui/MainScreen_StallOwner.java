@@ -10,6 +10,7 @@ import gamecenter.Recharge;
 import gamecenter.User;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.MouseInfo;
 import java.awt.Point;
@@ -648,6 +649,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setLayout(null);
 
+        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
         jPanel10.setLayout(null);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -734,11 +736,17 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         ));
         jTable1.setSelectionBackground(new java.awt.Color(112, 72, 215));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(jTable1);
 
         jPanel16.add(jScrollPane4);
         jScrollPane4.setBounds(0, 140, 860, 320);
 
+        jPanel17.setBackground(new java.awt.Color(255, 255, 255));
         jPanel17.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel17MouseClicked(evt);
@@ -779,6 +787,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel17.add(jTextField4);
         jTextField4.setBounds(40, 120, 190, 40);
 
+        jPanel19.setBackground(new java.awt.Color(255, 255, 255));
         jPanel19.setLayout(null);
 
         jLabel15.setText("Transaction History");
@@ -916,7 +925,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("ADD EMPLOYEE");
 
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Add Employee.png"))); // NOI18N
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/user.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -1118,7 +1127,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel9.setLayout(null);
 
         jLabel_Label.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel_Label.setText("Update / Delete Employee");
+        jLabel_Label.setText("Heading");
         jPanel9.add(jLabel_Label);
         jLabel_Label.setBounds(290, 20, 280, 50);
 
@@ -1458,6 +1467,25 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel17.setVisible(false);
         jPanel19.setVisible(false);
  jPopupMenu1.setVisible(false);
+ 
+ 
+ DefaultTableModel m = (DefaultTableModel) jTable1.getModel();
+        m.setRowCount(0);
+        DefaultTableModel  model = (DefaultTableModel) jTable1.getModel();
+        Object row[] = new Object[8];
+        for(int i=0;i < currentStallUsers.size();i++)
+        {
+            row[0] = currentStallUsers.get(i).getID();
+            row[1] = currentStallUsers.get(i).getName();
+            row[2] = currentStallUsers.get(i).getAddress();
+            row[3] = currentStallUsers.get(i).getContact();
+            row[4] = currentStallUsers.get(i).getEmail();
+            row[5] = currentStallUsers.get(i).getType();
+            row[6] = currentStallUsers.get(i).getGameZoneID();
+            row[7] = currentStallUsers.get(i).getPassword();
+            model.addRow(row);
+
+        }
     }//GEN-LAST:event_jPanel14MouseClicked
 
     private void jPanel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel13MouseClicked
@@ -1928,6 +1956,28 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
          jPopupMenu1.setVisible(false);
     }//GEN-LAST:event_jPanel9MouseClicked
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:Mouse Click on Update / Delete Jtable
+        
+        JPanel pan=new JPanel();
+        pan.setLayout(new FlowLayout());
+
+
+
+       pan.add(new JLabel("label"));
+       pan.add(new JButton("button"));
+
+
+        JDialog jd=new JDialog(new Updata_DeleteEmployee(),true);
+        jd.pack();
+      
+     
+        jd.setVisible(true);
+        
+        
+        
+    }//GEN-LAST:event_jTable1MouseClicked
  	public static java.sql.Timestamp convert(java.util.Date date)
 	{
 		return new java.sql.Timestamp(date.getTime());
