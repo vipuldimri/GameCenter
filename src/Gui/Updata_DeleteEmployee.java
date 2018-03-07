@@ -47,6 +47,7 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 500));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setMinimumSize(new java.awt.Dimension(500, 500));
 
         jLabel1.setText("jLabel1");
