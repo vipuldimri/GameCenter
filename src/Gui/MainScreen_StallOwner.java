@@ -2012,10 +2012,23 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         // TODO add your handling code here:Mouse Click on Update / Delete Jtable
         
         //Code for popup window for deleting and updating the employess
-        int column = 0; 
-        
+       
+         User user = new User(); 
         int row = jTable_updatedelete.getSelectedRow();
-        String value = jTable_updatedelete.getModel().getValueAt(row, column).toString();
+       
+        
+         String value = jTable_updatedelete.getModel().getValueAt(row, 0).toString();
+         String value = jTable_updatedelete.getModel().getValueAt(row, 1).toString();
+         String value = jTable_updatedelete.getModel().getValueAt(row, 2).toString();
+         String value = jTable_updatedelete.getModel().getValueAt(row, 3).toString();
+         String value = jTable_updatedelete.getModel().getValueAt(row, 4).toString();
+         String value = jTable_updatedelete.getModel().getValueAt(row, 5).toString();
+         String value = jTable_updatedelete.getModel().getValueAt(row, col).toString();
+         String value = jTable_updatedelete.getModel().getValueAt(row, col).toString();
+            
+        
+        
+       
         
         Updata_DeleteEmployee newframe = new Updata_DeleteEmployee();
         newframe.setVisible(true);
