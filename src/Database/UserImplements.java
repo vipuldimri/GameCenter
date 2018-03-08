@@ -114,5 +114,28 @@ public class UserImplements implements UserInterface
         
         return true;
     }
+
+    @Override
+    public boolean UpdateEmp(User user)
+    {
+        return true;
+        
+    }
+
+    @Override
+    public boolean DeleteEmp(int id) 
+    {
+        
+        
+        try
+        {
+            
+        }catch(Exception e)
+        {
+            
+        }
+        
+    return true;
+    }
     
 }

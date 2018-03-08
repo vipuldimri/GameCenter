@@ -9,5 +9,6 @@ public interface UserInterface
     public ArrayList<User> getAllUsers();
     public Stalls_and_SubDate getAllStall();
     public boolean AddEmp(User user);
-    
+    public boolean UpdateEmp(User user);
+    public boolean DeleteEmp(int id);
 }

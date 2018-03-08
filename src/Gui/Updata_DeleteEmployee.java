@@ -29,6 +29,10 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
      */
     User current;
     JFrame previous;
+    User updateemp;
+    boolean updateEmp_flag = false;
+    boolean deleteEmp_flag = false;
+    JDialog update;
     public Updata_DeleteEmployee(User current,JFrame previous)
     {
         this.current = current;
@@ -44,6 +48,8 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
         jTextField1_empaddress.setText(current.getAddress());
         jTextField1_empcontact.setText(current.getContact());
         jTextField1_emppassword.setText(current.getPassword());
+        
+        update = new JDialog();
     }
 
     /**
@@ -88,7 +94,7 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(140, 430, 113, 23);
+        jButton1.setBounds(130, 430, 113, 23);
 
         jButton2.setText("Delete Employee");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -97,7 +103,7 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(340, 430, 113, 23);
+        jButton2.setBounds(370, 430, 113, 23);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel12.setText("Password");
@@ -151,7 +157,7 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton3);
-        jButton3.setBounds(540, 430, 65, 23);
+        jButton3.setBounds(620, 430, 65, 23);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -173,24 +179,31 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:update button event 
         
-        /*
+        
         String username = jTextField1_empname.getText();
         String password = jTextField1_empaddress.getText();
         
         if(username.length() == 0 || password.length() == 0)
         {
-            
+           JOptionPane.showMessageDialog(jPanel1,
+           "Enter Complete Details.",
+           "Inane error",
+            JOptionPane.ERROR_MESSAGE);
             return ;
         }
 
-        User newuser = new User();
-        newuser.setName(username);
-        newuser.setType("emp");
-        newuser.setGameZoneID(currentuser.getGameZoneID());
-        newuser.setAddress(jTextField1_address.getText());
-        newuser.setContact(jTextField1_contact.getText());
-        newuser.setEmail(jTextField1_empname.getText());
-        newuser.setPassword(jTextField1_password.getText());
+        String address = jTextField1_empaddress.getText();
+        String email = jTextField1_empemail.getText();
+        String contact = jTextField1_empcontact.getText();
+        updateemp = new User();
+        updateemp.setName(username);
+        updateemp.setType("emp");
+        //To be Find
+        //updateemp.setGameZoneID();
+        updateemp.setAddress(address);
+        updateemp.setContact(contact);
+        updateemp.setEmail(email);
+        updateemp.setPassword(password);
 
         
               SwingWorker work = new SwingWorker<String , Integer>() 
@@ -209,8 +222,8 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
                    }
                     try {
                      
-                         Dao.AddEmp(newuser);
-                         AddEmp_flag = true;
+                         Dao.UpdateEmp(updateemp);
+                         updateEmp_flag = true;
                          
                       } 
                       catch (Exception ex)
@@ -228,38 +241,112 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
 	            protected void done()
                     {
                         
-                      recharge.dispose();
+                      update.dispose();
 	            }
 	        };
         final ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/Images/recharge.gif"));
         work.execute();
         JOptionPane pane = new JOptionPane("", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon,new Object[]{}, null);
-        recharge = pane.createDialog(this,"Please wait ");
-        recharge.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        update = pane.createDialog(this,"Please wait ");
+        update.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
       
         //jDialog.show();  this method is depricated there using setVisible method for showing the dialoge box 
-        recharge.setVisible(true);   
+        update.setVisible(true);   
                  
         
-        if(AddEmp_flag == false)
+        if(updateEmp_flag == false)
         {
             JOptionPane.showMessageDialog(jPanel1,
-                     "Adding Employee Failed.",
+                     "Update Employee Failed.",
                      "Inane error",
                       JOptionPane.ERROR_MESSAGE);
-            return;
+                   return;
         }else{
                       JOptionPane.showMessageDialog(jPanel1,
-                     "Adding Employee Success.",
+                     "Update Employee Success.",
                      "Inane error",
                       JOptionPane.ERROR_MESSAGE);
         }
-        */
+        
+        updateEmp_flag = false;
       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:Delete Button Event
+        
+        JOptionPane.showMessageDialog(jPanel1,
+           "Confirm Deletion Operation.",
+           "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+        
+        
+        
+        //above for confirming the 
+                 SwingWorker work = new SwingWorker<String , Integer>() 
+                 {
+	            @Override
+	            protected  String  doInBackground() throws Exception 
+	            {
+	             
+
+                   
+                    UserInterface Dao = null;
+                    try {
+                    Dao = UserFactory.getInstance();
+                    } catch (Exception ex) {
+                    Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+                    try {
+                     
+                         int id =1;
+                         Dao.DeleteEmp(id);
+                         deleteEmp_flag = true;
+                         
+                      } 
+                      catch (Exception ex)
+                      {
+          
+                     
+                      }
+
+                        return "end";
+	                
+	            }//do backgrounf ENDS
+
+
+	            @Override
+	            protected void done()
+                    {
+                        
+                      update.dispose();
+	            }
+	        };
+        final ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/Images/recharge.gif"));
+        work.execute();
+        JOptionPane pane = new JOptionPane("", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon,new Object[]{}, null);
+        update = pane.createDialog(this,"Please wait ");
+        update.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+      
+        //jDialog.show();  this method is depricated there using setVisible method for showing the dialoge box 
+        update.setVisible(true);   
+                 
+        
+        if(deleteEmp_flag == false)
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+                     "Update Employee Failed.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                   return;
+        }else{
+                      JOptionPane.showMessageDialog(jPanel1,
+                     "Update Employee Success.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+        }
+        deleteEmp_flag = false;
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

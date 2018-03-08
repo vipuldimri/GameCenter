@@ -390,13 +390,17 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel3_totalTransaction = new javax.swing.JLabel();
         jLabel_validDate = new javax.swing.JLabel();
         Customer = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jPanel19 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
+        jTextField6 = new javax.swing.JTextField();
+        jTextField8 = new javax.swing.JTextField();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -857,69 +861,58 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         });
         Customer.setLayout(null);
 
-        jLabel7.setText("Add Customer ");
+        jLabel33.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel33.setText("Email");
+        Customer.add(jLabel33);
+        jLabel33.setBounds(150, 200, 49, 22);
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jLabel7)
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jLabel7)
-                .addContainerGap(45, Short.MAX_VALUE))
-        );
+        jLabel34.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel34.setText("Contact");
+        Customer.add(jLabel34);
+        jLabel34.setBounds(150, 130, 120, 50);
 
-        Customer.add(jPanel10);
-        jPanel10.setBounds(170, 70, 170, 98);
+        jLabel36.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel36.setText("Register Customer ");
+        Customer.add(jLabel36);
+        jLabel36.setBounds(370, 20, 180, 40);
 
-        jLabel8.setText("UpDate customer");
+        jLabel37.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel37.setText("Name");
+        Customer.add(jLabel37);
+        jLabel37.setBounds(150, 80, 53, 22);
 
-        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
-        jPanel19.setLayout(jPanel19Layout);
-        jPanel19Layout.setHorizontalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel19Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel8)
-                .addContainerGap(40, Short.MAX_VALUE))
-        );
-        jPanel19Layout.setVerticalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
-                .addContainerGap(47, Short.MAX_VALUE)
-                .addComponent(jLabel8)
-                .addGap(37, 37, 37))
-        );
+        jTextField5.setText("jTextField5");
+        Customer.add(jTextField5);
+        jTextField5.setBounds(250, 80, 140, 20);
 
-        Customer.add(jPanel19);
-        jPanel19.setBounds(470, 70, 170, 98);
+        jTextField6.setText("jTextField6");
+        Customer.add(jTextField6);
+        jTextField6.setBounds(250, 140, 140, 20);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTextField8.setText("jTextField8");
+        Customer.add(jTextField8);
+        jTextField8.setBounds(250, 200, 140, 20);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Name", "Contact", "Email"
             }
         ));
-        jScrollPane5.setViewportView(jTable2);
+        jScrollPane6.setViewportView(jTable1);
 
-        Customer.add(jScrollPane5);
-        jScrollPane5.setBounds(0, 270, 860, 290);
+        Customer.add(jScrollPane6);
+        jScrollPane6.setBounds(0, 290, 860, 270);
 
-        jLabel32.setText("Existing Customer");
-        Customer.add(jLabel32);
-        jLabel32.setBounds(350, 206, 200, 40);
+        jButton9.setText("Register ");
+        Customer.add(jButton9);
+        jButton9.setBounds(540, 80, 90, 23);
+
+        jButton10.setText("Reset");
+        Customer.add(jButton10);
+        jButton10.setBounds(540, 140, 90, 23);
 
         jLayeredPane1.setLayer(AddEmployee, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(AddUpateEmployee, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -1687,6 +1680,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jTextField1_password.setText("");
         jTextField1_email.setText("");
         jTextField1_contact.setText("");
+        
+        AddEmp_flag = false;
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
@@ -2101,6 +2096,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JPanel Emprecords;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -2108,6 +2104,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JComboBox<String> jComboBox_GamesList;
     private com.toedter.calendar.JDateChooser jDateChooser_EndDate;
     private com.toedter.calendar.JDateChooser jDateChooser_StartDate;
@@ -2136,13 +2133,14 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel3_totalTransaction;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel_GameZoneNAme;
     private javax.swing.JLabel jLabel_Label;
@@ -2158,14 +2156,12 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
@@ -2186,13 +2182,13 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable_EmpRecord;
     private javax.swing.JTable jTable_transactionDetails;
     private javax.swing.JTable jTable_transactionDetailsEmp;
@@ -2205,7 +2201,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField_Name;
     private javax.swing.JPanel transaction;
     // End of variables declaration//GEN-END:variables
