@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
@@ -26,12 +27,23 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
     /**
      * Creates new form Updata_DeleteEmployee
      */
-    public Updata_DeleteEmployee() {
+    User current;
+    JFrame previous;
+    public Updata_DeleteEmployee(User current,JFrame previous)
+    {
+        this.current = current;
+        this.previous = previous;
         initComponents();
-         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-    int x = (int) ((dimension.getWidth() - getWidth()) / 2);
-    int y = (int) ((dimension.getHeight() - getHeight()) / 2);
-    setLocation(x, y);
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - getHeight()) / 2);
+        setLocation(x, y);
+        
+        jTextField1_empname.setText(current.getName());
+        jTextField1_empemail.setText(current.getEmail());
+        jTextField1_empaddress.setText(current.getAddress());
+        jTextField1_empcontact.setText(current.getContact());
+        jTextField1_emppassword.setText(current.getPassword());
     }
 
     /**
@@ -53,13 +65,17 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jTextField1_empname = new javax.swing.JTextField();
         jTextField1_empcontact = new javax.swing.JTextField();
-        jTextField1_empopassword = new javax.swing.JTextField();
+        jTextField1_empaddress = new javax.swing.JTextField();
         jTextField1_empemail = new javax.swing.JTextField();
         jTextField1_emppassword = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 500));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setMinimumSize(new java.awt.Dimension(500, 500));
@@ -116,9 +132,9 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
         jPanel1.add(jTextField1_empcontact);
         jTextField1_empcontact.setBounds(480, 90, 220, 40);
 
-        jTextField1_empopassword.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jPanel1.add(jTextField1_empopassword);
-        jTextField1_empopassword.setBounds(130, 310, 570, 80);
+        jTextField1_empaddress.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jPanel1.add(jTextField1_empaddress);
+        jTextField1_empaddress.setBounds(130, 310, 570, 80);
 
         jTextField1_empemail.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jPanel1.add(jTextField1_empemail);
@@ -157,8 +173,9 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:update button event 
         
+        /*
         String username = jTextField1_empname.getText();
-        String password = jTextField1_empopassword.getText();
+        String password = jTextField1_empaddress.getText();
         
         if(username.length() == 0 || password.length() == 0)
         {
@@ -237,6 +254,7 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
                      "Inane error",
                       JOptionPane.ERROR_MESSAGE);
         }
+        */
       
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -247,8 +265,14 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:cancel button
         setVisible(false);
+        previous.setVisible(true);
         
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+      previous.setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -280,7 +304,7 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Updata_DeleteEmployee().setVisible(true);
+//                new Updata_DeleteEmployee();
             }
         });
     }
@@ -295,10 +319,10 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextField1_empaddress;
     private javax.swing.JTextField jTextField1_empcontact;
     private javax.swing.JTextField jTextField1_empemail;
     private javax.swing.JTextField jTextField1_empname;
-    private javax.swing.JTextField jTextField1_empopassword;
     private javax.swing.JTextField jTextField1_emppassword;
     // End of variables declaration//GEN-END:variables
 }

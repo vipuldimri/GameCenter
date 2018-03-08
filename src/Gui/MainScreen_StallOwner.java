@@ -721,7 +721,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
             },
             new String [] {
-                "ID", "Name", "Address", "Contact", "Email", "Type", "Password"
+                "ID", "Name", "Address", "Contact", "Email", "Type", "GameZoneId", "Passoword"
             }
         ));
         jTable_updatedelete.setSelectionBackground(new java.awt.Color(112, 72, 215));
@@ -1557,10 +1557,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         AddUpateEmployee.setVisible(true);
         Emprecords.setVisible(false);
         transaction.setVisible(false);
-         Customer.setVisible(false);
+        Customer.setVisible(false);
  
  
- DefaultTableModel m = (DefaultTableModel) jTable_updatedelete.getModel();
+        DefaultTableModel m = (DefaultTableModel) jTable_updatedelete.getModel();
         m.setRowCount(0);
         DefaultTableModel  model = (DefaultTableModel) jTable_updatedelete.getModel();
         Object row[] = new Object[8];
@@ -1585,7 +1585,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel13.setBackground(new Color(110, 89,222));
         jPanel14.setBackground(new Color(54, 33,89));
         jPanel15.setBackground(new Color(54, 33,89)); 
-      jLabel_Label.setText("Add New Employee");
+        jLabel_Label.setText("Add New Employee");
         
         
  
@@ -2014,23 +2014,30 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         //Code for popup window for deleting and updating the employess
        
          User user = new User(); 
-        int row = jTable_updatedelete.getSelectedRow();
+         int row = jTable_updatedelete.getSelectedRow();
+       
+         String ID = jTable_updatedelete.getModel().getValueAt(row, 0).toString();
+         String Name = jTable_updatedelete.getModel().getValueAt(row, 1).toString();
+         String addres = jTable_updatedelete.getModel().getValueAt(row, 2).toString();
+         String contact = jTable_updatedelete.getModel().getValueAt(row, 3).toString();
+         String email = jTable_updatedelete.getModel().getValueAt(row, 4).toString();
+         String type = jTable_updatedelete.getModel().getValueAt(row, 5).toString();
+         String gamezoneid = jTable_updatedelete.getModel().getValueAt(row, 6).toString();
+         String password = jTable_updatedelete.getModel().getValueAt(row, 7).toString();
+          
+         user.setID(Integer.parseInt(ID ));
+         user.setEmail(email);
+         user.setName(Name);
+         user.setContact(contact);
+         user.setType(type);
+         user.setPassword(password);
+         user.setAddress(addres);
+         user.setGameZoneID(Integer.parseInt(gamezoneid));
+         
+        
        
         
-         String value = jTable_updatedelete.getModel().getValueAt(row, 0).toString();
-         String value = jTable_updatedelete.getModel().getValueAt(row, 1).toString();
-         String value = jTable_updatedelete.getModel().getValueAt(row, 2).toString();
-         String value = jTable_updatedelete.getModel().getValueAt(row, 3).toString();
-         String value = jTable_updatedelete.getModel().getValueAt(row, 4).toString();
-         String value = jTable_updatedelete.getModel().getValueAt(row, 5).toString();
-         String value = jTable_updatedelete.getModel().getValueAt(row, col).toString();
-         String value = jTable_updatedelete.getModel().getValueAt(row, col).toString();
-            
-        
-        
-       
-        
-        Updata_DeleteEmployee newframe = new Updata_DeleteEmployee();
+        Updata_DeleteEmployee newframe = new Updata_DeleteEmployee(user,this);
         newframe.setVisible(true);
         setVisible(false);
         
