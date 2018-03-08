@@ -369,7 +369,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jButton6 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable_updatedelete = new javax.swing.JTable();
         Emprecords = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_EmpRecord = new javax.swing.JTable();
@@ -526,7 +526,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(jRadioButton3);
-        jRadioButton3.setBounds(580, 260, 73, 37);
+        jRadioButton3.setBounds(580, 260, 71, 37);
 
         jRadioButton4.setBackground(new java.awt.Color(0, 0, 0));
         jRadioButton4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -538,7 +538,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(jRadioButton4);
-        jRadioButton4.setBounds(780, 260, 89, 37);
+        jRadioButton4.setBounds(780, 260, 85, 37);
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
@@ -549,7 +549,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel_currentEMpName.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_currentEMpName.setText("jLabel28");
         jPanel4.add(jLabel_currentEMpName);
-        jLabel_currentEMpName.setBounds(1010, 10, 48, 16);
+        jLabel_currentEMpName.setBounds(1010, 10, 40, 14);
 
         jComboBox_GamesList.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jPanel4.add(jComboBox_GamesList);
@@ -590,7 +590,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Today Collection");
         jPanel6.add(jLabel6);
-        jLabel6.setBounds(0, 13, 94, 16);
+        jLabel6.setBounds(0, 13, 79, 14);
         jPanel6.add(jSeparator3);
         jSeparator3.setBounds(-380, 40, 1430, 2);
 
@@ -603,12 +603,12 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel_currentEMpName1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_currentEMpName1.setText("jLabel28");
         jPanel6.add(jLabel_currentEMpName1);
-        jLabel_currentEMpName1.setBounds(1010, 10, 48, 20);
+        jLabel_currentEMpName1.setBounds(1010, 10, 40, 20);
 
         jLabel_currentempname2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_currentempname2.setText("jLabel29");
         jPanel6.add(jLabel_currentempname2);
-        jLabel_currentempname2.setBounds(890, 10, 48, 16);
+        jLabel_currentempname2.setBounds(890, 10, 40, 14);
 
         jTable_transactionDetailsEmp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -700,23 +700,23 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         jLabel13.setText("Enter Employee Name ");
         AddUpateEmployee.add(jLabel13);
-        jLabel13.setBounds(100, 20, 130, 16);
+        jLabel13.setBounds(100, 20, 108, 14);
         AddUpateEmployee.add(jTextField7);
         jTextField7.setBounds(100, 50, 210, 50);
 
         jButton5.setText("Update");
         AddUpateEmployee.add(jButton5);
-        jButton5.setBounds(230, 510, 73, 25);
+        jButton5.setBounds(230, 510, 67, 23);
 
         jButton6.setText("Delete");
         AddUpateEmployee.add(jButton6);
-        jButton6.setBounds(510, 510, 69, 25);
+        jButton6.setBounds(510, 510, 63, 23);
 
         jButton8.setText("Search");
         AddUpateEmployee.add(jButton8);
         jButton8.setBounds(390, 45, 120, 40);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_updatedelete.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -724,13 +724,13 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 "ID", "Name", "Address", "Contact", "Email", "Type", "Password"
             }
         ));
-        jTable1.setSelectionBackground(new java.awt.Color(112, 72, 215));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTable_updatedelete.setSelectionBackground(new java.awt.Color(112, 72, 215));
+        jTable_updatedelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                jTable_updatedeleteMouseClicked(evt);
             }
         });
-        jScrollPane4.setViewportView(jTable1);
+        jScrollPane4.setViewportView(jTable_updatedelete);
 
         AddUpateEmployee.add(jScrollPane4);
         jScrollPane4.setBounds(0, 140, 860, 320);
@@ -762,7 +762,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         jLabel10.setText("Employee Record");
         Emprecords.add(jLabel10);
-        jLabel10.setBounds(370, 20, 130, 16);
+        jLabel10.setBounds(370, 20, 130, 14);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel11.setText("Search for Employee");
@@ -776,7 +776,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         jLabel15.setText("Transaction History");
         transaction.add(jLabel15);
-        jLabel15.setBounds(340, 10, 110, 16);
+        jLabel15.setBounds(340, 10, 93, 14);
 
         jTable_transactionDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -817,9 +817,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         transaction.add(jPanel20);
         jPanel20.setBounds(260, 220, 350, 210);
         transaction.add(jDateChooser_StartDate);
-        jDateChooser_StartDate.setBounds(150, 70, 100, 22);
+        jDateChooser_StartDate.setBounds(150, 70, 91, 20);
         transaction.add(jDateChooser_EndDate);
-        jDateChooser_EndDate.setBounds(150, 110, 100, 22);
+        jDateChooser_EndDate.setBounds(150, 110, 91, 20);
 
         jButton7.setText("Search");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -828,15 +828,15 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         transaction.add(jButton7);
-        jButton7.setBounds(300, 90, 110, 25);
+        jButton7.setBounds(300, 90, 110, 23);
 
         jLabel29.setText("Start Date");
         transaction.add(jLabel29);
-        jLabel29.setBounds(40, 70, 80, 16);
+        jLabel29.setBounds(40, 70, 80, 14);
 
         jLabel30.setText("End Date");
         transaction.add(jLabel30);
-        jLabel30.setBounds(40, 120, 70, 16);
+        jLabel30.setBounds(40, 120, 70, 14);
 
         jLabel3_totalTransaction.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3_totalTransaction.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
@@ -877,7 +877,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         );
 
         Customer.add(jPanel10);
-        jPanel10.setBounds(170, 70, 170, 100);
+        jPanel10.setBounds(170, 70, 170, 98);
 
         jLabel8.setText("UpDate customer");
 
@@ -899,7 +899,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         );
 
         Customer.add(jPanel19);
-        jPanel19.setBounds(470, 70, 170, 100);
+        jPanel19.setBounds(470, 70, 170, 98);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1560,9 +1560,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
          Customer.setVisible(false);
  
  
- DefaultTableModel m = (DefaultTableModel) jTable1.getModel();
+ DefaultTableModel m = (DefaultTableModel) jTable_updatedelete.getModel();
         m.setRowCount(0);
-        DefaultTableModel  model = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel  model = (DefaultTableModel) jTable_updatedelete.getModel();
         Object row[] = new Object[8];
         for(int i=0;i < currentStallUsers.size();i++)
         {
@@ -1609,19 +1609,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             
             return ;
         }
-        
-        //user usernmae and combination already exits
-        //if(passwordcheeck.containsKey(username))
-        //{
-//                String existencepassword = passwordcheeck.get(username)
-//                if()
-//                {
-//                    
-//                }
-            
-       // }
-    
-        
+
         User newuser = new User();
         newuser.setName(jTextField_Name.getText());
         newuser.setType("emp");
@@ -2020,27 +2008,20 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
     }//GEN-LAST:event_jTable_EmpRecordMouseClicked
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    private void jTable_updatedeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_updatedeleteMouseClicked
         // TODO add your handling code here:Mouse Click on Update / Delete Jtable
         
-        JPanel pan=new JPanel();
-        pan.setLayout(new FlowLayout());
-
-
-
-       pan.add(new JLabel("label"));
-       pan.add(new JButton("button"));
-
-
-        JDialog jd=new JDialog(new Updata_DeleteEmployee(),true);
-        jd.pack();
-      
-     
-        jd.setVisible(true);
+        //Code for popup window for deleting and updating the employess
+        int column = 0; 
         
+        int row = jTable_updatedelete.getSelectedRow();
+        String value = jTable_updatedelete.getModel().getValueAt(row, column).toString();
         
+        Updata_DeleteEmployee newframe = new Updata_DeleteEmployee();
+        newframe.setVisible(true);
+        setVisible(false);
         
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_jTable_updatedeleteMouseClicked
 
     private void jPanel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel22MouseClicked
         // TODO add your handling code here:
@@ -2191,11 +2172,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable_EmpRecord;
     private javax.swing.JTable jTable_transactionDetails;
     private javax.swing.JTable jTable_transactionDetailsEmp;
+    private javax.swing.JTable jTable_updatedelete;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField1_address;
     private javax.swing.JTextField jTextField1_contact;
