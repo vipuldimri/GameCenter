@@ -60,6 +60,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     Boolean rech_flag = false;
     Boolean AddEmp_flag = false;
     Boolean UpdateEmp_flag = false;
+    Boolean RegisterCustomer = false;
     
     //forchecing if password and username combination is present or not
     HashMap<String,String> passwordcheeck;
@@ -394,9 +395,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel34 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
+        jTextField_regname = new javax.swing.JTextField();
+        jTextField_regcontact = new javax.swing.JTextField();
+        jTextField_regemail = new javax.swing.JTextField();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton9 = new javax.swing.JButton();
@@ -880,18 +881,12 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel37.setText("Name");
         Customer.add(jLabel37);
         jLabel37.setBounds(150, 80, 53, 22);
-
-        jTextField5.setText("jTextField5");
-        Customer.add(jTextField5);
-        jTextField5.setBounds(250, 80, 140, 20);
-
-        jTextField6.setText("jTextField6");
-        Customer.add(jTextField6);
-        jTextField6.setBounds(250, 140, 140, 20);
-
-        jTextField8.setText("jTextField8");
-        Customer.add(jTextField8);
-        jTextField8.setBounds(250, 200, 140, 20);
+        Customer.add(jTextField_regname);
+        jTextField_regname.setBounds(250, 80, 140, 20);
+        Customer.add(jTextField_regcontact);
+        jTextField_regcontact.setBounds(250, 140, 140, 20);
+        Customer.add(jTextField_regemail);
+        jTextField_regemail.setBounds(250, 200, 140, 20);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -907,12 +902,22 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jScrollPane6.setBounds(0, 290, 860, 270);
 
         jButton9.setText("Register ");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
         Customer.add(jButton9);
-        jButton9.setBounds(540, 80, 90, 23);
+        jButton9.setBounds(540, 120, 90, 23);
 
         jButton10.setText("Reset");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
         Customer.add(jButton10);
-        jButton10.setBounds(540, 140, 90, 23);
+        jButton10.setBounds(540, 170, 90, 23);
 
         jLayeredPane1.setLayer(AddEmployee, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(AddUpateEmployee, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -1846,7 +1851,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             JOptionPane.ERROR_MESSAGE);
           }
         
-        
+        rech_flag = false;
         jTextField1.setText("");
         jTextField2.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -2049,6 +2054,101 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private void CustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CustomerMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_CustomerMouseClicked
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:Register Customer button
+        String contact =jTextField_regcontact.getText();
+        String email   =jTextField_regemail.getText();
+        String name = jTextField_regname.getText();
+        
+        if(contact.length() == 0 || name.length() == 0)
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+           "Name and Contact are Mandatory",
+           "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+            return;
+            
+        }
+        
+        
+        
+                 SwingWorker work = new SwingWorker<String , Integer>() 
+                 {
+	            @Override
+	            protected  String  doInBackground() throws Exception 
+	            {
+	            
+                  try {
+                      
+                       } catch (Exception ex) {
+                       
+                    }
+                     System.out.println("yha a gai");
+                    try {
+                     
+                   
+                      } 
+                      catch (Exception ex)
+                      {
+          
+                     
+                      }
+
+                        return "end";
+	                
+	            }//do backgrounf ENDS
+
+
+	            @Override
+	            protected void done()
+                    {
+                        
+                     
+	            }
+	        };
+        
+                 
+        final ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/Images/recharge.gif"));
+        work.execute();
+        JOptionPane pane = new JOptionPane("", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon,new Object[]{}, null);
+        recharge = pane.createDialog(this,"Please wait ");
+        recharge.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+      
+        //jDialog.show();  this method is depricated there using setVisible method for showing the dialoge box 
+        recharge.setVisible(true);   
+                 
+     
+          if(rech_flag == false)
+          {
+                System.out.println("Error in recharge");
+                JOptionPane.showMessageDialog(jPanel1,
+                "Recharge Failed",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+           
+            return ;
+          }else
+          {
+        
+        JOptionPane.showMessageDialog(jPanel1,
+            "Recharge Success",
+            "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+          }
+        
+
+        
+        
+        
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here: reset button register customer
+        jTextField_regcontact.setText("");
+        jTextField_regemail.setText("");
+        jTextField_regname.setText("");
+    }//GEN-LAST:event_jButton10ActionPerformed
  	public static java.sql.Timestamp convert(java.util.Date date)
 	{
 		return new java.sql.Timestamp(date.getTime());
@@ -2201,11 +2301,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField_Name;
+    private javax.swing.JTextField jTextField_regcontact;
+    private javax.swing.JTextField jTextField_regemail;
+    private javax.swing.JTextField jTextField_regname;
     private javax.swing.JPanel transaction;
     // End of variables declaration//GEN-END:variables
 }
