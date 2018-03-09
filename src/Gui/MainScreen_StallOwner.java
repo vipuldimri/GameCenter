@@ -1,6 +1,8 @@
 
 package Gui;
 
+import Database.CustomerInterface;
+import Database.Customerfactory;
 import Database.TransactionFactory;
 import Database.TransactionInterface;
 import Database.UserFactory;
@@ -37,6 +39,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
+import gamecenter.Customers;
 //Main screen for every GameZone
 public class MainScreen_StallOwner extends javax.swing.JFrame 
 {
@@ -366,8 +369,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         AddUpateEmployee = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jTextField7 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable_updatedelete = new javax.swing.JTable();
@@ -709,17 +710,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         AddUpateEmployee.add(jTextField7);
         jTextField7.setBounds(100, 50, 210, 50);
 
-        jButton5.setText("Update");
-        AddUpateEmployee.add(jButton5);
-        jButton5.setBounds(230, 510, 67, 23);
-
-        jButton6.setText("Delete");
-        AddUpateEmployee.add(jButton6);
-        jButton6.setBounds(510, 510, 63, 23);
-
         jButton8.setText("Search");
         AddUpateEmployee.add(jButton8);
-        jButton8.setBounds(390, 45, 120, 40);
+        jButton8.setBounds(410, 60, 120, 40);
 
         jTable_updatedelete.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -738,7 +731,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jScrollPane4.setViewportView(jTable_updatedelete);
 
         AddUpateEmployee.add(jScrollPane4);
-        jScrollPane4.setBounds(0, 140, 860, 320);
+        jScrollPane4.setBounds(0, 140, 860, 420);
 
         Emprecords.setBackground(new java.awt.Color(255, 255, 255));
         Emprecords.setLayout(null);
@@ -979,7 +972,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("ADD EMPLOYEE");
 
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/user.png"))); // NOI18N
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/newAddemp.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -1011,7 +1004,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
 
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/update Record.png"))); // NOI18N
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/newupdatedelleteemp.png"))); // NOI18N
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
@@ -1022,21 +1015,19 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addGap(67, 67, 67)
                 .addComponent(jLabel18)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(23, 23, 23))
+                .addGap(27, 27, 27)
+                .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel18)
-                .addContainerGap())
             .addGroup(jPanel14Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1052,7 +1043,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("Employees RECORDS");
 
-        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/View Record.png"))); // NOI18N
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/newemprecords.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -1060,18 +1051,18 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel21)
-                .addGap(36, 36, 36)
+                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69))
+                .addGap(60, 60, 60))
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel21)
-                    .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1086,29 +1077,26 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Transaction Details");
 
-        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/transaction.png"))); // NOI18N
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/newtransaction (2).png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addGap(70, 70, 70)
                 .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel18Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel16))
-                    .addGroup(jPanel18Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabel14)))
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel14))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1136,27 +1124,28 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel26.setForeground(new java.awt.Color(255, 255, 255));
         jLabel26.setText("Register new Customer");
 
-        jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/View Record.png"))); // NOI18N
+        jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/newCustomer.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
         jPanel22Layout.setHorizontalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel22Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel31)
-                .addGap(48, 48, 48)
+                .addContainerGap(52, Short.MAX_VALUE)
+                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel26)
-                .addGap(73, 73, 73))
+                .addGap(40, 40, 40))
         );
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel31)
-                    .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel22Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -1178,10 +1167,12 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel_OwnerName1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel_OwnerName, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jPanel22, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jLabel_OwnerName1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel_OwnerName, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1191,16 +1182,16 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
-                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
-                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
+                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_OwnerName, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_OwnerName1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2045,6 +2036,14 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
     private void jPanel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel22MouseClicked
         // TODO add your handling code here:
+        jPanel18.setBackground(new Color(54, 33,89));
+        jPanel13.setBackground(new Color(54, 33,89));
+        jPanel14.setBackground(new Color(54, 33,89));
+        jPanel15.setBackground(new Color(54, 33,89)); 
+        jPanel22.setBackground(new Color(110, 89,222));
+        
+        
+        
          AddEmployee.setVisible(false);
          AddUpateEmployee.setVisible(false);
          Emprecords.setVisible(false);
@@ -2072,6 +2071,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         }
         
         
+        Customers newcustomer = new Customers();
+        newcustomer.setName(name);
+        newcustomer.setContact(contact);
+        newcustomer.setEmailId(email);
         
                  SwingWorker work = new SwingWorker<String , Integer>() 
                  {
@@ -2079,22 +2082,22 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 	            protected  String  doInBackground() throws Exception 
 	            {
 	            
-                  try {
-                      
-                       } catch (Exception ex) {
+                    try 
+                    {
+                        CustomerInterface Dao = Customerfactory.getInstance();
+                        boolean respponce =  Dao.registerEmp(newcustomer,currentstallname+"_customers");
+                         if(respponce == false)
+                         {
+                             RegisterCustomer = false;
+                         }else{
+                             RegisterCustomer = true;
+                         }
+                         } catch (Exception ex) {
                        
-                    }
-                     System.out.println("yha a gai");
-                    try {
-                     
-                   
-                      } 
-                      catch (Exception ex)
-                      {
-          
-                     
-                      }
-
+                             RegisterCustomer = false;
+                         }
+                  
+                       
                         return "end";
 	                
 	            }//do backgrounf ENDS
@@ -2104,7 +2107,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 	            protected void done()
                     {
                         
-                     
+                     recharge.setVisible(false);
 	            }
 	        };
         
@@ -2123,7 +2126,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
           {
                 System.out.println("Error in recharge");
                 JOptionPane.showMessageDialog(jPanel1,
-                "Recharge Failed",
+                "Registeration Failed",
                 "Inane error",
                 JOptionPane.ERROR_MESSAGE);
            
@@ -2131,15 +2134,15 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
           }else
           {
         
-        JOptionPane.showMessageDialog(jPanel1,
-            "Recharge Success",
+            JOptionPane.showMessageDialog(jPanel1,
+            "Customer Registered Success",
             "Inane error",
             JOptionPane.ERROR_MESSAGE);
           }
         
 
         
-        
+        RegisterCustomer = false;
         
     }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -2200,8 +2203,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;

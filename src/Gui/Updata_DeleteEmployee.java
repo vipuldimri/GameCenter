@@ -35,6 +35,7 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
     JDialog update;
     public Updata_DeleteEmployee(User current,JFrame previous)
     {
+       
         this.current = current;
         this.previous = previous;
         initComponents();

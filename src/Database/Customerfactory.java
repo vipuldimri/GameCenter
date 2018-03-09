@@ -11,7 +11,7 @@ package Database;
  */
 public class Customerfactory 
 {
-    public CustomerInterface getInstance()
+    public static CustomerInterface getInstance()
     {
         return new CustomerImplementation();
     }

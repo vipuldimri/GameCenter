@@ -12,7 +12,7 @@ package Database;
 import gamecenter.Customers;
 public interface CustomerInterface 
 {
-    public boolean registerEmp(Customers cust);
-    public boolean deleteEmp(int ID);
+    public boolean registerEmp(Customers cust,String TableName);
+    public boolean deleteEmp(int ID,String TableName);
     
 }

@@ -15,15 +15,23 @@ public class CustomerImplementation implements CustomerInterface
 {
     
 
+     
     @Override
-    public boolean registerEmp(Customers cust) 
+    public boolean registerEmp(Customers cust,String TableName) 
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        
+        final String Register = "INSERT INTO "+TableName+"() VALUES()";
+        
+        
+        
+       return true;
     }
 
     @Override
-    public boolean deleteEmp(int ID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean deleteEmp(int ID,String TableName) 
+    {
+       return true;
     }
     
 }
