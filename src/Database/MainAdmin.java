@@ -19,8 +19,7 @@ public class MainAdmin implements MainAdminInterface
     Connection conn;
     MainAdmin() throws Exception
     {
-        Connect connect = new Connect();
-        conn = connect.getconnection();
+        conn = Connect.getconnection();
     }
     @Override
     public void AddGameZone(Stall newgamezone,int ID) 
@@ -94,13 +93,7 @@ public class MainAdmin implements MainAdminInterface
         }
            
         
-        try {
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(MainAdmin.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
+       }
     
     
 }

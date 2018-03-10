@@ -17,25 +17,18 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
+class Updata_DeleteEmployee extends javax.swing.JFrame {
 
-/**
- *
- * @author vipul
- */
-public class Updata_DeleteEmployee extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Updata_DeleteEmployee
-     */
     User current;
     JFrame previous;
     User updateemp;
     boolean updateEmp_flag = false;
     boolean deleteEmp_flag = false;
     JDialog update;
-    public Updata_DeleteEmployee(User current,JFrame previous)
+    String currentstallname;
+    public Updata_DeleteEmployee(User current,JFrame previous,String currentstallname)
     {
-       
+        this.currentstallname = currentstallname;
         this.current = current;
         this.previous = previous;
         initComponents();
@@ -77,6 +70,7 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
         jTextField1_emppassword = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 500));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -95,7 +89,7 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(130, 430, 113, 23);
+        jButton1.setBounds(130, 430, 129, 25);
 
         jButton2.setText("Delete Employee");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -104,7 +98,7 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(370, 430, 113, 23);
+        jButton2.setBounds(370, 430, 127, 25);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel12.setText("Password");
@@ -158,7 +152,7 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton3);
-        jButton3.setBounds(620, 430, 65, 23);
+        jButton3.setBounds(620, 430, 71, 25);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -182,7 +176,7 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
         
         
         String username = jTextField1_empname.getText();
-        String password = jTextField1_empaddress.getText();
+        String password = jTextField1_emppassword.getText();
         
         if(username.length() == 0 || password.length() == 0)
         {
@@ -196,15 +190,17 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
         String address = jTextField1_empaddress.getText();
         String email = jTextField1_empemail.getText();
         String contact = jTextField1_empcontact.getText();
+      
+        
         updateemp = new User();
         updateemp.setName(username);
-        updateemp.setType("emp");
-        //To be Find
-        //updateemp.setGameZoneID();
+        updateemp.setType(current.getType());
         updateemp.setAddress(address);
         updateemp.setContact(contact);
         updateemp.setEmail(email);
         updateemp.setPassword(password);
+        updateemp.setID(current.getID());
+        updateemp.setGameZoneID(current.getGameZoneID());
 
         
               SwingWorker work = new SwingWorker<String , Integer>() 
@@ -216,22 +212,18 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
 
                    
                     UserInterface Dao = null;
-                    try {
+                    try 
+                    {
                     Dao = UserFactory.getInstance();
-                    } catch (Exception ex) {
+                    Dao.UpdateEmp(updateemp);
+                    updateEmp_flag = true;
+                    
+                    } catch (Exception ex) 
+                    {
                     Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
+                    updateEmp_flag = false;
                    }
-                    try {
-                     
-                         Dao.UpdateEmp(updateemp);
-                         updateEmp_flag = true;
-                         
-                      } 
-                      catch (Exception ex)
-                      {
-          
-                     
-                      }
+                
 
                         return "end";
 	                
@@ -270,20 +262,22 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
         }
         
         updateEmp_flag = false;
+        previous.setVisible(true);
+        dispose();
       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:Delete Button Event
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+       int dialogResult = JOptionPane.showConfirmDialog (null, "Delete confirm  ???","Warning",dialogButton);
+       if(dialogResult == JOptionPane.NO_OPTION)
+       {
+                     return ;
+       }
         
-        JOptionPane.showMessageDialog(jPanel1,
-           "Confirm Deletion Operation.",
-           "Inane error",
-            JOptionPane.ERROR_MESSAGE);
         
-        
-        
-        //above for confirming the 
+                 //above for confirming the 
                  SwingWorker work = new SwingWorker<String , Integer>() 
                  {
 	            @Override
@@ -295,21 +289,14 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
                     UserInterface Dao = null;
                     try {
                     Dao = UserFactory.getInstance();
-                    } catch (Exception ex) {
+                    Dao.DeleteEmp(current.getID());
+                    deleteEmp_flag = true;
+                    } catch (Exception ex) 
+                    {
+                        deleteEmp_flag = false;
                     Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
                    }
-                    try {
-                     
-                         int id =1;
-                         Dao.DeleteEmp(id);
-                         deleteEmp_flag = true;
-                         
-                      } 
-                      catch (Exception ex)
-                      {
-          
-                     
-                      }
+                
 
                         return "end";
 	                
@@ -336,17 +323,19 @@ public class Updata_DeleteEmployee extends javax.swing.JFrame {
         if(deleteEmp_flag == false)
         {
             JOptionPane.showMessageDialog(jPanel1,
-                     "Update Employee Failed.",
+                     "Delete Employee Failed.",
                      "Inane error",
                       JOptionPane.ERROR_MESSAGE);
                    return;
         }else{
-                      JOptionPane.showMessageDialog(jPanel1,
-                     "Update Employee Success.",
+                     JOptionPane.showMessageDialog(jPanel1,
+                     "Employee Deleted.",
                      "Inane error",
-                      JOptionPane.ERROR_MESSAGE);
+                     JOptionPane.ERROR_MESSAGE);
         }
         deleteEmp_flag = false;
+        previous.setVisible(true);
+        dispose();
         
     }//GEN-LAST:event_jButton2ActionPerformed
 

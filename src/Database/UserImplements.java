@@ -22,8 +22,8 @@ public class UserImplements implements UserInterface
     Connection conn;
     UserImplements()throws Exception
     {
-         Connect connect = new Connect();
-         conn = connect.getconnection();
+        
+         conn = Connect.getconnection();
     }
     
     @Override
@@ -67,13 +67,7 @@ public class UserImplements implements UserInterface
         {
                 System.out.println("AAA "+ex);
         }
-        try {
-            conn.close();
-        } catch (Exception ex) 
-        {
-                System.out.println("BBB "+ex);
-     
-        }
+    
         return obj;
     }
 
@@ -105,37 +99,41 @@ public class UserImplements implements UserInterface
         }
    
         
-        try {
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(UserImplements.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("Inserted");
-        
+   
         return true;
     }
 
     @Override
-    public boolean UpdateEmp(User user)
+    public boolean UpdateEmp(User user)throws Exception
     {
+        String  query = "UPDATE `GameZoneDB`.`users` SET `Name` = ?,`Address` = ?,`Contact` = ?,`Email` = ?,`Type` =? ,`GameZoneID` = ?,`Password` =? WHERE `ID` = ?;";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setString(1, user.getName());
+        pstmt.setString(2, user.getAddress());
+        pstmt.setString(3, user.getContact());
+        pstmt.setString(4, user.getEmail());
+        pstmt.setString(5, user.getType());
+        pstmt.setInt(6, user.getGameZoneID());
+        pstmt.setString(7, user.getPassword());
+        pstmt.setInt(8, user.getID());
+
+        pstmt.executeUpdate();
         return true;
         
     }
 
     @Override
-    public boolean DeleteEmp(int id) 
+    public boolean DeleteEmp(int id) throws Exception
     {
+        String query = "DELETE FROM `GameZoneDB`.`users` WHERE ID = ?;";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setInt(1, id);
+
+
+        pstmt.executeUpdate();
         
         
-        try
-        {
-            
-        }catch(Exception e)
-        {
-            
-        }
-        
-    return true;
+              return true;
     }
     
 }

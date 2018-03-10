@@ -6,7 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 public class Connect 
 {
-    Connection conn ;
+    public static Connection conn ;
     public Connect()throws Exception
     {
         
@@ -22,7 +22,7 @@ public class Connect
                
             
     }
-    public Connection getconnection()
+    public static Connection getconnection()
     {
         return conn;
     }  

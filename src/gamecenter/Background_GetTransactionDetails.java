@@ -30,22 +30,23 @@ public class Background_GetTransactionDetails extends  Thread
    }
     public void run()
     {
-                        TransactionInterface Dao = null;
+          TransactionInterface Dao = null;
        try {
            Dao = TransactionFactory.getInstance();
-       } catch (Exception ex) {
+           } catch (Exception ex)
+           {
            Logger.getLogger(Background_GetTransactionDetails.class.getName()).log(Level.SEVERE, null, ex);
-       }
-                        //Arguments is table Name
+           }
+           //Arguments is table Name
                
-                        String TransactionTableName = TableName+"_transaction";
+            String TransactionTableName = TableName+"_transaction";
        try {
            transactiondetails  = Dao.GetTransactionDetails(TransactionTableName);
        } catch (Exception ex)
        {
            System.out.println("ERROR IN THREAD "+ex);
            ErrorMessage = "TransactionError";
-           //Logger.getLogger(Background_GetTransactionDetails.class.getName()).log(Level.SEVERE, null, ex);
+          
        }
         
        StopGUIrefresh.countDown();

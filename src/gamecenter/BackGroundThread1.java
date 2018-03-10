@@ -19,6 +19,8 @@ public class BackGroundThread1 extends Thread
     Stalls_and_SubDate   stalls; 
     BackGroundThread1()
     {
+
+       
         users = new ArrayList<>();
         stalls = new Stalls_and_SubDate();
     }
@@ -26,6 +28,11 @@ public class BackGroundThread1 extends Thread
     public void run()
     {
    
+         try {
+            Connect con = new Connect();
+        } catch (Exception ex) {
+            Logger.getLogger(BackGroundThread1.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try 
         {
             UserInterface Dao   = UserFactory.getInstance();

@@ -115,8 +115,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         background_GetTransactionDetails.start();
         try
         {
-      
-            
             loginSignal.await();
         } catch (InterruptedException ex)
         {
@@ -2028,7 +2026,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
        
         
-        Updata_DeleteEmployee newframe = new Updata_DeleteEmployee(user,this);
+        Updata_DeleteEmployee newframe = new Updata_DeleteEmployee(user,this,currentstallname);
         newframe.setVisible(true);
         setVisible(false);
         

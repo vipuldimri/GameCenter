@@ -29,9 +29,8 @@ public class TransactionImplementation implements TransactionInterface
     Connection conn;
     TransactionImplementation()throws Exception
     {
-        
-         Connect connect = new Connect();
-         conn = connect.getconnection();
+
+         conn = Connect.getconnection();
     }
     
     @Override
@@ -59,13 +58,7 @@ public class TransactionImplementation implements TransactionInterface
             Logger.getLogger(UserImplements.class.getName()).log(Level.SEVERE, null, ex);
             
         }
-          
-        try {
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(TransactionImplementation.class.getName()).log(Level.SEVERE, null, ex);
-        }
-   
+
         
     }
 
@@ -94,11 +87,7 @@ public class TransactionImplementation implements TransactionInterface
         
         
            
-        try {
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(TransactionImplementation.class.getName()).log(Level.SEVERE, null, ex);
-        }
+  
         return transactiondetails;
         
     }
