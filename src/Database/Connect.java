@@ -15,12 +15,7 @@ public class Connect
 	           Class.forName("com.mysql.jdbc.Driver");
 	           conn = DriverManager.getConnection (url,"vipuldimri","gamezone");
 	           System.out.println ("Database connection established");
-        
-       
-	 
-	       
-               
-            
+
     }
     public static Connection getconnection()
     {

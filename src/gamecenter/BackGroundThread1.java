@@ -17,6 +17,7 @@ public class BackGroundThread1 extends Thread
  
     //All gamezone data and their Endsub details 
     Stalls_and_SubDate   stalls; 
+    boolean error_flag = false;
     BackGroundThread1()
     {
 
@@ -28,10 +29,15 @@ public class BackGroundThread1 extends Thread
     public void run()
     {
    
-         try {
+        try 
+        {
             Connect con = new Connect();
-        } catch (Exception ex) {
+        } catch (Exception ex) 
+        {
+            System.out.println("Error Connectiing");
+            error_flag= true;
             Logger.getLogger(BackGroundThread1.class.getName()).log(Level.SEVERE, null, ex);
+            return ;
         }
         try 
         {
@@ -40,8 +46,8 @@ public class BackGroundThread1 extends Thread
             stalls = Dao.getAllStall();
         } catch (Exception ex) 
         {
-          
-            System.out.println("ERROR "+ex);
+           error_flag =true;
+           System.out.println("ERROR ");
            
         }   
         

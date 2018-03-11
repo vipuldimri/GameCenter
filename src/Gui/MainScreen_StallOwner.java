@@ -1,6 +1,7 @@
 
 package Gui;
 
+import Database.Connect;
 import Database.CustomerInterface;
 import Database.Customerfactory;
 import Database.TransactionFactory;
@@ -40,6 +41,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import gamecenter.Customers;
+import java.sql.Connection;
+import  gamecenter.BackgroundAutocomplete;
 //Main screen for every GameZone
 public class MainScreen_StallOwner extends javax.swing.JFrame 
 {
@@ -55,7 +58,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     ArrayList<Recharge> transdetailscomplete;
     
     JDialog refresh;
-    ArrayList<String> CurrentStallGames;
     ArrayList<JTextField> testfields;
     
     
@@ -71,16 +73,16 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     
     
     ArrayList<Customers> custlist;
+    
+    
     public MainScreen_StallOwner(LoginScreen l ,User currentuser ,ArrayList<User> currentStallUsers,String currentstallname, ArrayList<String> CurrentStallGames) 
     {
             
-       // this.passwordcheeck = passwordcheeck;
-             testfields = new ArrayList<>();
+      //this.passwordcheeck = passwordcheeck;
+        testfields = new ArrayList<>();
          
-      //  System.out.println("LL "+l);
+      //System.out.println("LL "+l);
         this.currentstallname = currentstallname;
-        this.CurrentStallGames = CurrentStallGames;
-     
         this.l = l;
       
         this.currentStallUsers = currentStallUsers;
@@ -140,40 +142,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
         jLabel_currentEMpName.setText(currentuser.getName());
         jLabel_currentempname2.setText(currentuser.getName());
-       if(CurrentStallGames.size() > 0)
-        {
-            
-           
-          jComboBox_GamesList.addItem("Select Game");   
-          for(String game : CurrentStallGames)
-          {
-              //adding game to chombo Box
-             jComboBox_GamesList.addItem(game);
-             
-             JLabel j = new JLabel(game);
-             j.setFont(new java.awt.Font("Tahoma", 1, 18)); 
-             j.setForeground(new java.awt.Color(255, 255, 255));
-             
-             JTextField jt = new JTextField();
-             jt.setText(game);
-             jt.setFont(new java.awt.Font("Tahoma", 1, 18));
-             jt.setBounds(50,50,50,50);
-             
-       
-             
-             testfields.add(jt);
-           
-             
-        
-             
-             jPanel21.add(j);
-             jPanel21.add(jt);
-             
-         
-          }
-        
-        
-        }
        
        
         recharge = new JDialog();
@@ -185,7 +153,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             
          //this.passwordcheeck = passwordcheeck;
           testfields = new ArrayList<>();
-          this.CurrentStallGames = CurrentStallGames;
+          
           
           
           this.currentstallname = currentstallname;
@@ -204,19 +172,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
           int framesizeh = dimension.height*8/10;
           int framesizew = dimension.width*8/10;
          
-           setLocation(x, y);
+          setLocation(x, y);
 
-          
-//          setBounds(framesizew/8,framesizeh/8,framesizew,framesizeh);
-//          jPanel1.setBounds(framesizew/8,framesizeh/8,framesizew,framesizeh);
-//          jPanel2.setBounds(framesizew/8,framesizeh/8,framesizew,framesizeh);
-//          jPanel3.setBounds(framesizew/8,framesizeh/8,framesizew,framesizeh);
-//          jPanel4.setBounds(framesizew/8,framesizeh/8,framesizew,framesizeh);
-//            pack();
-//          
-//          
-          
-          
+
           buttonGroup1.add(jRadioButton1);
           buttonGroup1.add(jRadioButton2);
           buttonGroup1.add(jRadioButton3);
@@ -224,8 +182,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
           
           // Gettingdata.setVisible(false);
-          AddUpateEmployee.setVisible(false);
-          AddEmployee.setVisible(false);
+          
           loginSignal = new CountDownLatch(1);
           jLabel_OwnerName.setText(this.currentuser.getName());
           jLabel_GameZoneNAme.setText(currentstallname);
@@ -261,49 +218,16 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
         
        
-     jLabel_currentEMpName.setText(currentuser.getName());
-     jLabel_currentempname2.setText(currentuser.getName());
-       if(CurrentStallGames.size() > 0)
-        {
-            
-           
-          jComboBox_GamesList.addItem("Select Game");   
-          for(String game : CurrentStallGames)
-          {
-              //adding game to chombo Box
-             jComboBox_GamesList.addItem(game);
-             
-             JLabel j = new JLabel(game);
-             j.setFont(new java.awt.Font("Tahoma", 1, 18)); 
-             j.setForeground(new java.awt.Color(255, 255, 255));
-             
-             JTextField jt = new JTextField();
-             jt.setText(game);
-             jt.setFont(new java.awt.Font("Tahoma", 1, 18));
-             jt.setBounds(50,50,50,50);
-             
+          jLabel_currentEMpName.setText(currentuser.getName());
+          jLabel_currentempname2.setText(currentuser.getName());
        
-             
-             testfields.add(jt);
-           
-             
-        
-             
-             jPanel21.add(j);
-             jPanel21.add(jt);
-             
-         
-          }
-        
-        
-        }
        
        
         recharge = new JDialog();
-       jLabel_GameZoneNAme.setText(currentstallname);
-       jLabel_OwnerName.setText(currentuser.getName());
-       jLabel_Label.setText("Transaction Details");
-       Customer.setVisible(true);
+        jLabel_GameZoneNAme.setText(currentstallname);
+        jLabel_OwnerName.setText(currentuser.getName());
+        jLabel_Label.setText("Employee Records");
+         
       
     }
 
@@ -336,7 +260,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jRadioButton4 = new javax.swing.JRadioButton();
         jLabel27 = new javax.swing.JLabel();
         jLabel_currentEMpName = new javax.swing.JLabel();
-        jComboBox_GamesList = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -349,8 +272,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel28 = new javax.swing.JLabel();
         jLabel_currentEMpName1 = new javax.swing.JLabel();
         jLabel_currentempname2 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable_transactionDetailsEmp = new javax.swing.JTable();
         jPanel21 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -377,9 +298,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         Emprecords = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_EmpRecord = new javax.swing.JTable();
-        jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
+        list_empsearch = new java.awt.List();
         transaction = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -437,12 +358,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         setResizable(false);
 
         jPanel1.setOpaque(false);
-
-        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTabbedPane1MouseClicked(evt);
-            }
-        });
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.setLayout(null);
@@ -559,10 +474,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel4.add(jLabel_currentEMpName);
         jLabel_currentEMpName.setBounds(1010, 10, 48, 16);
 
-        jComboBox_GamesList.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jPanel4.add(jComboBox_GamesList);
-        jComboBox_GamesList.setBounds(900, 180, 210, 35);
-
         jPanel2.add(jPanel4);
         jPanel4.setBounds(2, 7, 1200, 440);
 
@@ -618,26 +529,13 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel6.add(jLabel_currentempname2);
         jLabel_currentempname2.setBounds(890, 10, 48, 16);
 
-        jTable_transactionDetailsEmp.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "CardNo", "EmpName", "Amount", "Date", "GameName"
-            }
-        ));
-        jScrollPane3.setViewportView(jTable_transactionDetailsEmp);
-
-        jPanel6.add(jScrollPane3);
-        jScrollPane3.setBounds(40, 70, 1200, 70);
-
         jPanel3.add(jPanel6);
-        jPanel6.setBounds(80, 10, 990, 90);
+        jPanel6.setBounds(0, 10, 1180, 50);
 
         jPanel21.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel21.setLayout(new java.awt.GridLayout(6, 2));
+        jPanel21.setLayout(new java.awt.GridLayout(1, 0));
         jPanel3.add(jPanel21);
-        jPanel21.setBounds(100, 120, 990, 610);
+        jPanel21.setBounds(0, 140, 1190, 600);
 
         jTabbedPane1.addTab("Today Collection", jPanel3);
 
@@ -760,16 +658,28 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         Emprecords.add(jScrollPane1);
         jScrollPane1.setBounds(0, 205, 860, 350);
 
-        jLabel10.setText("Employee Record");
-        Emprecords.add(jLabel10);
-        jLabel10.setBounds(370, 20, 130, 16);
-
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel11.setText("Search for Employee");
         Emprecords.add(jLabel11);
-        jLabel11.setBounds(40, 70, 220, 60);
+        jLabel11.setBounds(30, 20, 220, 60);
+
+        jTextField4.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField4FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField4FocusLost(evt);
+            }
+        });
+        jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField4KeyReleased(evt);
+            }
+        });
         Emprecords.add(jTextField4);
-        jTextField4.setBounds(40, 120, 190, 40);
+        jTextField4.setBounds(30, 80, 190, 40);
+        Emprecords.add(list_empsearch);
+        list_empsearch.setBounds(30, 120, 190, 80);
 
         transaction.setBackground(new java.awt.Color(255, 255, 255));
         transaction.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -794,7 +704,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jScrollPane2.setViewportView(jTable_transactionDetails);
 
         transaction.add(jScrollPane2);
-        jScrollPane2.setBounds(0, 160, 880, 402);
+        jScrollPane2.setBounds(0, 160, 860, 402);
 
         jPanel20.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -1118,6 +1028,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel_OwnerName1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel_OwnerName1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_OwnerName1.setText("Exit");
+        jLabel_OwnerName1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel_OwnerName1MouseClicked(evt);
+            }
+        });
 
         jPanel22.setBackground(new java.awt.Color(54, 33, 89));
         jPanel22.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1164,20 +1079,20 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel_OwnerName1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel_OwnerName, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel22, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addGap(71, 71, 71)
                         .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
+                        .addContainerGap()
                         .addComponent(jLabel_GameZoneNAme, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel_OwnerName1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel_OwnerName, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jPanel22, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1196,7 +1111,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_OwnerName, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_OwnerName1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1212,10 +1127,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel_Label.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel_Label.setText("Heading");
         jPanel9.add(jLabel_Label);
-        jLabel_Label.setBounds(290, 20, 280, 50);
+        jLabel_Label.setBounds(350, 60, 280, 60);
 
         jPanel7.add(jPanel9);
-        jPanel9.setBounds(340, 70, 860, 110);
+        jPanel9.setBounds(340, 0, 860, 180);
 
         jPanel8.add(jPanel7);
         jPanel7.setBounds(0, 0, 1200, 740);
@@ -1274,120 +1189,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
-        // TODO add your handling code here:Employee tab clicked (Today recharge )
-        
-        AddEmployee.setVisible(false);
-        AddUpateEmployee.setVisible(false);
-        Emprecords.setVisible(false);
-        transaction.setVisible(true);
-        jPanel18.setBackground(new Color(110, 89,222));
-        int collection[] = new int[testfields.size()];
-        HashMap<String,Long> collect = new HashMap<>();
-        
-        
-    
-        
-        DefaultTableModel m = (DefaultTableModel) jTable_transactionDetailsEmp.getModel();
-        m.setRowCount(0);
-
-        DefaultTableModel  model = (DefaultTableModel) jTable_transactionDetailsEmp.getModel();
-        Object row[] = new Object[6];
-
-        System.out.println("Final "+transdetailscomplete.size());
-        
-        
-        //Getting Today Date 
-          Calendar c = new GregorianCalendar();
-          c.set(Calendar.HOUR_OF_DAY, 0); //anything 0 - 23
-          c.set(Calendar.MINUTE, 0);
-          c.set(Calendar.SECOND, 0);
-        
-        // 1) create a java calendar instance
-         Calendar calendar = Calendar.getInstance();
-
-// 2) get a java.util.Date from the calendar instance.
-//    this date will represent the current instant, or "now".
-        java.util.Date now = c.getTime();
-
-// 3) a java current time (now) instance
-        java.sql.Timestamp currentTimestampDaystart = new java.sql.Timestamp(now.getTime());  
-          
-        
-        
-        Calendar c2= new GregorianCalendar();
-        c2.set(Calendar.HOUR_OF_DAY, 23); //anything 0 - 23
-        c2.set(Calendar.MINUTE, 60);
-        c2.set(Calendar.SECOND, 60);
-        
-             
-
-// 2) get a java.util.Date from the calendar instance.
-//    this date will represent the current instant, or "now".
-        java.util.Date now2 = c2.getTime();
-
-// 3) a java current time (now) instance
-        java.sql.Timestamp currentTimestampDayend = new java.sql.Timestamp(now2.getTime());  
-          
-        
-        
-        
-        java.sql.Timestamp currentTimestamp2 = new java.sql.Timestamp(Calendar.getInstance().getTime().getTime());
-        System.out.println("current timestemp "+currentTimestamp2); 
-                System.out.println("current timestemp "+currentTimestampDaystart); 
-          System.out.println("current timestemp "+currentTimestampDayend); 
-                
-        for(int i = 0;i < transdetailscomplete.size();i++)
-        {
-            
-            
-            //loop of getting today result
-                if(  currentTimestamp2.after(currentTimestampDaystart) && currentTimestamp2.before(currentTimestampDayend)   )
-                {
-            
-            //loop for getting today resut of logedin employee
-            if( transdetailscomplete.get(i).getEmpName().equals(currentuser.getName()))
-            {
-                
-                row[0] = transdetailscomplete.get(i).getID();
-                row[1] = transdetailscomplete.get(i).getCardNo();
-                row[2] = transdetailscomplete.get(i).getEmpName();
-                row[3] = transdetailscomplete.get(i).getAmount();
-                row[4] = transdetailscomplete.get(i).getDate();
-                row[5] = transdetailscomplete.get(i).getGameName();
-                if(collect.containsKey(transdetailscomplete.get(i).getGameName()))
-                {
-                 Long amount = collect.get(transdetailscomplete.get(i).getGameName());
-                 collect.put(transdetailscomplete.get(i).getGameName(),(long)transdetailscomplete.get(i).getAmount()+amount); 
-                    
-                }else
-                {
-                collect.put(transdetailscomplete.get(i).getGameName(),(long)transdetailscomplete.get(i).getAmount());    
-                }
-                
-                model.addRow(row);
-            }
-            
-                }
-        }
-        
-        
-        for (int ii =0 ; ii < CurrentStallGames.size() ; ii++)
-        {
-           String game = CurrentStallGames.get(ii);
-           Long amount = collect.get(game);
-           if(amount == null)
-           {
-               testfields.get(ii).setText("0");
-               continue;
-           }
-           testfields.get(ii).setText(amount+"");
-            
-        }
-        
-        
-    }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     private void jPanel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel18MouseClicked
          // TODO add your handling code here:Transaction Details Panel Table Left Side
@@ -1719,17 +1520,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         // TODO add your handling code here:Recharge Button
         String cardno = jTextField1.getText();
         String amount = jTextField2.getText();
-        String gameselected = jComboBox_GamesList.getSelectedItem().toString();
-        
-        //validating wheather selected game is propper or not 
-        if(gameselected.equals("Select Game"))
-        {
-                    JOptionPane.showMessageDialog(jPanel1,
-                    "Please Select a Game .",
-                    "Inane error",
-                    JOptionPane.ERROR_MESSAGE);
-                return ;
-        }
+      
         int amt =0;
 
         //validation code
@@ -1778,7 +1569,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         rec.setCardNo(cardno);
         rec.setEmpName(currentuser.getName());
         rec.setDate(date);
-        rec.setGameName(gameselected);
+      
         
         
         
@@ -2199,6 +1990,36 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private void transactionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transactionMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_transactionMouseClicked
+
+    private void jLabel_OwnerName1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_OwnerName1MouseClicked
+        // TODO add your handling code here:exit button 
+        Connection conn = Connect.getconnection();
+        
+        try{conn.close();}
+        catch(Exception e)
+        {
+            System.out.println("e");
+        }
+        System.exit(0);
+    }//GEN-LAST:event_jLabel_OwnerName1MouseClicked
+
+    private void jTextField4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyReleased
+        // TODO add your handling code here:Autocomplete
+        
+        BackgroundAutocomplete background = new BackgroundAutocomplete(jTextField4, list_empsearch);
+        background.start();
+        
+    }//GEN-LAST:event_jTextField4KeyReleased
+
+    private void jTextField4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusLost
+        // TODO add your handling code here:
+        list_empsearch.setVisible(false);
+    }//GEN-LAST:event_jTextField4FocusLost
+
+    private void jTextField4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusGained
+        // TODO add your handling code here:
+         list_empsearch.setVisible(true);
+    }//GEN-LAST:event_jTextField4FocusGained
  	public static java.sql.Timestamp convert(java.util.Date date)
 	{
 		return new java.sql.Timestamp(date.getTime());
@@ -2253,11 +2074,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox_GamesList;
     private com.toedter.calendar.JDateChooser jDateChooser_EndDate;
     private com.toedter.calendar.JDateChooser jDateChooser_StartDate;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -2328,7 +2147,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
@@ -2339,7 +2157,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JTable jTable_EmpRecord;
     private javax.swing.JTable jTable_customers;
     private javax.swing.JTable jTable_transactionDetails;
-    private javax.swing.JTable jTable_transactionDetailsEmp;
     private javax.swing.JTable jTable_updatedelete;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField1_address;
@@ -2354,6 +2171,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JTextField jTextField_regcontact;
     private javax.swing.JTextField jTextField_regemail;
     private javax.swing.JTextField jTextField_regname;
+    private java.awt.List list_empsearch;
     private javax.swing.JPanel transaction;
     // End of variables declaration//GEN-END:variables
 }

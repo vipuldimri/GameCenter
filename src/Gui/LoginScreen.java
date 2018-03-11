@@ -1,5 +1,6 @@
 
 package Gui;
+import DataStructure.Trie;
 import gamecenter.Stall;
 import gamecenter.User;
 import gamecenter.Stalls_and_SubDate;
@@ -51,6 +52,8 @@ public class LoginScreen extends javax.swing.JFrame
     JDialog dialog;
     ArrayList<String> CurrentStallGames;
     
+    //trie
+    static public Trie trienames = new Trie();
     
     
     public LoginScreen(ArrayList<User> users,Stalls_and_SubDate stalls)
@@ -73,6 +76,8 @@ public class LoginScreen extends javax.swing.JFrame
      currentuser = new User();
      
     CurrentStallGames = new ArrayList<>();
+    
+        
     
     }
 
@@ -1278,6 +1283,7 @@ public class LoginScreen extends javax.swing.JFrame
                 {
                   if(u.getGameZoneID() == currentuser.getGameZoneID())
                   {
+                      trienames.addWord(u.getName());
                       currentStallUsers.add(u);
                       
                   }

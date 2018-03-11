@@ -35,13 +35,14 @@ public class GameCenter
                 splash.setVisible(false);
                
                 //Code If Unable to connect Online Database Server 
-                if(backgroundthread1.users == null || backgroundthread1.stalls == null)
+                if(backgroundthread1.users == null || backgroundthread1.stalls == null ||backgroundthread1.error_flag == true)
                 {
 
                      JOptionPane.showMessageDialog(splash,
                      "Unable To Connect Server Please Check Your Internet Connection.",
                      "Inane error",
-                      JOptionPane.ERROR_MESSAGE);   
+                      JOptionPane.ERROR_MESSAGE);
+                      System.exit(0);
                    //   break; this break is Mandatory Do not Comment this
                 }
                 //Sending Users and stall details to the login screen after Getting Users and GameZone Data 

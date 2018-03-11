@@ -45,7 +45,7 @@ public class TransactionImplementation implements TransactionInterface
             pstmt.setString(2, rec.getEmpName());
             pstmt.setInt(3,rec.getAmount());
             pstmt.setTimestamp(4, rec.getDate());
-            pstmt.setString(5, rec.getGameName());
+         
           
             pstmt.executeUpdate();
            
@@ -80,7 +80,7 @@ public class TransactionImplementation implements TransactionInterface
                        rec.setCardNo(rs.getString(2));
                        rec.setDate(rs.getTimestamp(5));
                        rec.setAmount(rs.getInt(4));
-                       rec.setGameName(rs.getString(6));
+              
                        transactiondetails.add(rec);
                   
                    }
