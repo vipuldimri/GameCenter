@@ -68,6 +68,8 @@ class Updata_DeleteEmployee extends javax.swing.JFrame {
         jTextField1_empemail = new javax.swing.JTextField();
         jTextField1_emppassword = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        jTextField1_emppassword1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 500));
@@ -112,7 +114,7 @@ class Updata_DeleteEmployee extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel14.setText("Address");
         jPanel1.add(jLabel14);
-        jLabel14.setBounds(140, 280, 140, 22);
+        jLabel14.setBounds(480, 280, 140, 22);
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel15.setText("Email");
@@ -134,7 +136,7 @@ class Updata_DeleteEmployee extends javax.swing.JFrame {
 
         jTextField1_empaddress.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jPanel1.add(jTextField1_empaddress);
-        jTextField1_empaddress.setBounds(130, 310, 570, 80);
+        jTextField1_empaddress.setBounds(480, 320, 310, 80);
 
         jTextField1_empemail.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jPanel1.add(jTextField1_empemail);
@@ -142,7 +144,7 @@ class Updata_DeleteEmployee extends javax.swing.JFrame {
 
         jTextField1_emppassword.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jPanel1.add(jTextField1_emppassword);
-        jTextField1_emppassword.setBounds(130, 200, 220, 40);
+        jTextField1_emppassword.setBounds(130, 210, 220, 40);
 
         jButton3.setText("Cancel");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -153,14 +155,22 @@ class Updata_DeleteEmployee extends javax.swing.JFrame {
         jPanel1.add(jButton3);
         jButton3.setBounds(620, 430, 71, 25);
 
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel17.setText("UserName");
+        jPanel1.add(jLabel17);
+        jLabel17.setBounds(130, 280, 140, 22);
+
+        jTextField1_emppassword1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jPanel1.add(jTextField1_emppassword1);
+        jTextField1_emppassword1.setBounds(130, 320, 220, 40);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 823, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 835, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -394,11 +404,13 @@ class Updata_DeleteEmployee extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1_empaddress;
     private javax.swing.JTextField jTextField1_empcontact;
     private javax.swing.JTextField jTextField1_empemail;
     private javax.swing.JTextField jTextField1_empname;
     private javax.swing.JTextField jTextField1_emppassword;
+    private javax.swing.JTextField jTextField1_emppassword1;
     // End of variables declaration//GEN-END:variables
 }

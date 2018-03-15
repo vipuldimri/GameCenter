@@ -45,7 +45,7 @@ public class BackGroundThread1 extends Thread
             UserInterface Dao   = UserFactory.getInstance();
             users = Dao.getAllUsers("GameZone1");
             //above lines gets all the users for current GameZone;
-             currentgamezone = Dao.getGameZoneDetails("GameZone1");
+            currentgamezone = Dao.getGameZoneDetails(1);
         } catch (Exception ex) 
         {
            error_flag =true;

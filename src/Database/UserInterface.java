@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public interface UserInterface 
 {
     public ArrayList<User> getAllUsers(String GameZoneName);
-    public Stall getGameZoneDetails(String GameZoneName);
+    public Stall getGameZoneDetails(int GameZoneNameId);
     public boolean AddEmp(User user);
     
     public boolean UpdateEmp(User user)throws Exception;
