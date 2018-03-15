@@ -43,7 +43,7 @@ public class GameCenter
                      "Inane error",
                       JOptionPane.ERROR_MESSAGE);
                       System.exit(0);
-                   //   break; this break is Mandatory Do not Comment this
+                      //break; this break is Mandatory Do not Comment this
                 }
                 //Sending Users and stall details to the login screen after Getting Users and GameZone Data 
                 LoginScreen l = new LoginScreen(backgroundthread1.users,backgroundthread1.currentgamezone);

@@ -5,7 +5,6 @@
  */
 package Database;
 
-import static Database.UserImplements.GetAllUser;
 import gamecenter.Customers;
 import gamecenter.User;
 import java.sql.Connection;

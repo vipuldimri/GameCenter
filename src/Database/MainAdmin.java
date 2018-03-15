@@ -2,7 +2,6 @@
 package Database;
 
 import static Database.TransactionImplementation.Rech;
-import static Database.UserImplements.GetAllUser;
 import gamecenter.Stall;
 import gamecenter.User;
 import java.sql.Connection;

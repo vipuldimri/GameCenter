@@ -1,10 +1,7 @@
 
 package Database;
-import static Database.UserImplements.AddEmp;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.*;
+import gamecenter.*;
 public class StallImplements implements StallInterface
 {
  static final String AddEmp = "INSERT INTO GameZoneDB.users (Name,Address,Contact,Email,Type,GameZoneID,Password) VALUES(?,?,?,?,?,?,?)";
@@ -36,6 +33,16 @@ public class StallImplements implements StallInterface
         }
    
         */
+    }
+
+    @Override
+    public ArrayList<Stall> GetAllGameZone() 
+    {
+        ArrayList<Stall> gamzonelist =  null;
+        
+        
+        return gamzonelist;
+     
     }
     
 }

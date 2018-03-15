@@ -1,6 +1,5 @@
 package Gui;
 import gamecenter.Stall;
-import gamecenter.Stalls_and_SubDate;
 import gamecenter.User;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -19,21 +18,36 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 public class MainScreen_Admin extends javax.swing.JFrame 
 {
+    
+    //List for all register GameZone
+    ArrayList<Stall> GameZoneList;
+    
+    
+    
+    
     //Containsa all the Users of the System
     ArrayList<User> users;
     //Contains GameZones Details
-    Stalls_and_SubDate stalls;
-   JDialog jDialog;
+    
+    JDialog jDialog;
     
     String ErrorMessage;
     TransactionInterface Dao;
+    
     ArrayList<Recharge> transactionlist;
     
+    
+    
+    
+    
     int LastId ;
-    public MainScreen_Admin(ArrayList<User> users , Stalls_and_SubDate stalls)
+    public MainScreen_Admin()
     {
-        this.stalls = stalls;
-        this.users = users;
+      
+       
+        StallInterface Dao = StallFactory.getInstance();
+        GameZoneList = Dao.GetAllGameZone();
+   
         initComponents();
         
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -48,24 +62,10 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jComboBox_allgamezones.addItem("Select GameZone");
         
         
-         if(stalls.stalls.size()==0)
-         {
-             LastId = 0;
-         }else{
-         LastId  = stalls.stalls.get(stalls.stalls.size()-1).getID();
-         }
+       
     }
     
-    //Employee view
-      public MainScreen_Admin(String str) {
-        initComponents();
-          Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-         int x = (int) ((dimension.getWidth() - getWidth()) / 2);
-        int y = (int) ((dimension.getHeight() - getHeight()) / 2);
-        setLocation(x, y);
     
-    
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -499,16 +499,16 @@ public class MainScreen_Admin extends javax.swing.JFrame
         m.setRowCount(0);
         DefaultTableModel  model = (DefaultTableModel) jTable_Gamezone.getModel();
         Object row[] = new Object[8];
-        for(int i=0;i < stalls.stalls.size();i++)
+        for(int i=0;i < GameZoneList.size();i++)
         {
-        row[0] = stalls.stalls.get(i).getID();
-        row[1] = stalls.stalls.get(i).getName(); 
-        row[2] = stalls.stalls.get(i).getOwnerName(); 
-        row[3] = stalls.stalls.get(i).getAddress();
-        row[4] = stalls.stalls.get(i).getContact();
-        row[5] = stalls.stalls.get(i).getPassword();
-        row[6] = stalls.stalls.get(i).getSubStartDate();
-        row[7] = stalls.stalls.get(i).getSubEndDate();
+        row[0] = GameZoneList.get(i).getID();
+        row[1] = GameZoneList.get(i).getName(); 
+        row[2] = GameZoneList.get(i).getOwnerName(); 
+        row[3] = GameZoneList.get(i).getAddress();
+        row[4] = GameZoneList.get(i).getContact();
+        row[5] = GameZoneList.get(i).getPassword();
+        row[6] = GameZoneList.get(i).getSubStartDate();
+        row[7] = GameZoneList.get(i).getSubEndDate();
       
         model.addRow(row);
         
@@ -521,6 +521,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
 
     private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
         // TODO add your handling code here:
+       /*
         jPanel3.setVisible(false);
         jPanel4.setVisible(false);
         jPanel5.setVisible(true);
@@ -529,6 +530,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
        {
         jComboBox_allgamezones.addItem(gamezone.getName());
        }
+       */
     }//GEN-LAST:event_jPanel8MouseClicked
 
     private void jComboBox_allgamezonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_allgamezonesActionPerformed
