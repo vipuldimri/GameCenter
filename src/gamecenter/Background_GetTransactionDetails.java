@@ -28,10 +28,16 @@ public class Background_GetTransactionDetails extends  Thread
        transactiondetails = new ArrayList<>();
        this.TableName = TableName;
    }
+    public Background_GetTransactionDetails(String TableName)
+    {
+     
+       transactiondetails = new ArrayList<>();
+       this.TableName = TableName;
+    }
     public void run()
     {
           TransactionInterface Dao = null;
-       try {
+         try {
            Dao = TransactionFactory.getInstance();
            } catch (Exception ex)
            {
