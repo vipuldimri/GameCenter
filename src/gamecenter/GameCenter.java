@@ -35,7 +35,7 @@ public class GameCenter
                 splash.setVisible(false);
                
                 //Code If Unable to connect Online Database Server 
-                if(backgroundthread1.users == null || backgroundthread1.stalls == null ||backgroundthread1.error_flag == true)
+                if(backgroundthread1.users == null || backgroundthread1.currentgamezone == null || backgroundthread1.error_flag == true)
                 {
 
                      JOptionPane.showMessageDialog(splash,
@@ -46,7 +46,7 @@ public class GameCenter
                    //   break; this break is Mandatory Do not Comment this
                 }
                 //Sending Users and stall details to the login screen after Getting Users and GameZone Data 
-                LoginScreen l = new LoginScreen(backgroundthread1.users,backgroundthread1.stalls);
+                LoginScreen l = new LoginScreen(backgroundthread1.users,backgroundthread1.currentgamezone);
                 l.setVisible(true);
                 break;
             }

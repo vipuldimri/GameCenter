@@ -3,7 +3,7 @@ package Gui;
 import DataStructure.Trie;
 import gamecenter.Stall;
 import gamecenter.User;
-import gamecenter.Stalls_and_SubDate;
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -27,40 +27,18 @@ Login frame Class
 public class LoginScreen extends javax.swing.JFrame 
 {
     //All users from  user table
-    ArrayList<User> users;
-    Stalls_and_SubDate stalls;
-   
-    
-    
-    //used
-    HashMap<Integer, String> passwordcheck;
-    HashMap<Integer, String> stallMap;
-    
-    
-    
-    //detail about current stall
-    //String  currentstall;
-    
-
-    //detail about current user
+    ArrayList<User> currentgamezoneusers;
+    Stall currentgamezone;
     User currentuser;
-    //Details about users stall users 
-    ArrayList<User> currentStallUsers;
 
-    
-    static String currentstallname;
-    JDialog dialog;
-    ArrayList<String> CurrentStallGames;
-    
-    //trie
     static public Trie trienames = new Trie();
     
     
-    public LoginScreen(ArrayList<User> users,Stalls_and_SubDate stalls)
+    public LoginScreen(ArrayList<User> currentgamezoneusers,Stall currentgamezone)
     {
     //getting data from thread
-    this.users = users;
-    this.stalls = stalls;
+    this.currentgamezoneusers = currentgamezoneusers;
+    this.currentgamezone = currentgamezone;
     //init components 
     initComponents();
     //Displaying the screen in the center of the screen
@@ -69,14 +47,7 @@ public class LoginScreen extends javax.swing.JFrame
     int y = (int) ((dimension.getHeight() - getHeight()) / 2);
     setLocation(x, y);
     
-    
-     //instance created
-     currentStallUsers = new ArrayList<>();
-     //currentstall = new Stall();
-     currentuser = new User();
-     
-    CurrentStallGames = new ArrayList<>();
-    
+    currentuser = new User();
         
     
     }
@@ -285,11 +256,11 @@ public class LoginScreen extends javax.swing.JFrame
         //Checking if admin login
         if(username.equals("admin") && pass.equals("admin"))
         {
-            MainScreen_Admin admin = new MainScreen_Admin(users,stalls);
-            admin.setVisible(true);
-            setVisible(false);
+           // MainScreen_Admin admin = new MainScreen_Admin(users,stalls);
+          //  admin.setVisible(true);
+          //  setVisible(false);
             
-            return ;
+          //  return ;
         }
         
         
@@ -323,10 +294,10 @@ public class LoginScreen extends javax.swing.JFrame
         
         
         // traversing users list to check password and user name exits or not ;
-        for(User u : users)
+        for(User u : currentgamezoneusers)
         {
          
-            if(u.getName().equals(username) && u.getPassword().equals(pass))
+            if(u.getUserName().equals(username) && u.getPassword().equals(pass))
             {
                 
                 // if user name and password match storing the info of logedin user into currentuser
@@ -338,6 +309,7 @@ public class LoginScreen extends javax.swing.JFrame
                 currentuser.setPassword(u.getPassword());
                 currentuser.setType(u.getType());
                 currentuser.setGameZoneID(u.getGameZoneID()); 
+                currentuser.setUserName(u.getUserName());
                 
                 System.out.println(u.getName()  +"    "+username);     
                 System.out.println(u.getPassword()+"    "+pass);
@@ -348,7 +320,7 @@ public class LoginScreen extends javax.swing.JFrame
                //code for getting Game zone
                //Now getting current stall Endsub data and converting it into String to check if sub is valid or not for the gamezone
                 gamezoneid = u.getGameZoneID();
-            
+            /*
                 for(int d = 0 ; d < stalls.stalls.size() ; d++)
                 {
                     if(stalls.stalls.get(d).getID() == gamezoneid)
@@ -378,13 +350,12 @@ public class LoginScreen extends javax.swing.JFrame
                     }
                     
                 }
+                */
+            
+                //Checking for GameZoneSubcription
+                java.sql.Date sub_enddate = currentgamezone.getSubEndDate();
+    
                 
-                java.sql.Date sub_enddate = stalls.subdate.get(gamezoneid);
-                currentstallname = stalls.stallIdandName.get(gamezoneid);
-                
-                
-                
-                System.out.println(currentstallname);
                 System.out.println(cur_date);
                 System.out.println(sub_enddate);
                 
@@ -476,31 +447,23 @@ public class LoginScreen extends javax.swing.JFrame
             // if current user is admin
             if(flagAdmin)
             {
-              
-                
-                for (User u : users) 
-                {
-                  if(u.getGameZoneID() == currentuser.getGameZoneID())
-                  {
-                      currentStallUsers.add(u);
-                      
-                  }
-                    
-                }
+             
                 jTextField1.setText("");
                 jPasswordField1.setText("");
               
-           final JOptionPane optionPane = new JOptionPane("Loging You in", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
-             MainScreen_StallOwner mainScreen_StallOwner =  new MainScreen_StallOwner("admin",this,currentuser,currentStallUsers,currentstallname,CurrentStallGames); 
-          mainScreen_StallOwner.setVisible(true);
-          setVisible(false);
-            }else
+      
+           MainScreen_StallOwner mainScreen_StallOwner =  new MainScreen_StallOwner("admin",this,currentgamezoneusers,currentgamezone,currentuser); 
+           mainScreen_StallOwner.setVisible(true);
+           setVisible(false);
+            
+            }
+            else
             {
                  //if current user is normal employee
                  //here currentStallUsers is null because emp has no rights to see emps
-                jTextField1.setText("");
-                jPasswordField1.setText("");
-                 new MainScreen_StallOwner(this,currentuser,currentStallUsers,currentstallname,CurrentStallGames).setVisible(true);
+                  jTextField1.setText("");
+                  jPasswordField1.setText("");
+                 new MainScreen_StallOwner(this,currentgamezone,currentuser).setVisible(true);
                   setVisible(false);
             }
             

@@ -43,6 +43,7 @@ import javax.swing.table.DefaultTableModel;
 import gamecenter.Customers;
 import java.sql.Connection;
 import  gamecenter.BackgroundAutocomplete;
+import gamecenter.Stall;
 //Main screen for every GameZone
 public class MainScreen_StallOwner extends javax.swing.JFrame 
 {
@@ -51,7 +52,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     ArrayList<User> currentStallUsers;
     String Type ;
     LoginScreen l ;
-    String currentstallname;
+    Stall currentgamezone;
+
     ArrayList<Recharge> transactiondetails;
     JDialog dialog;
     CountDownLatch loginSignal;
@@ -75,20 +77,24 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     ArrayList<Customers> custlist;
     
     
-    public MainScreen_StallOwner(LoginScreen l ,User currentuser ,ArrayList<User> currentStallUsers,String currentstallname, ArrayList<String> CurrentStallGames) 
+    public MainScreen_StallOwner(LoginScreen l ,Stall currentgamezone,User currentuser) 
     {
             
-      //this.passwordcheeck = passwordcheeck;
+        //this.passwordcheeck = passwordcheeck;
         testfields = new ArrayList<>();
          
       //System.out.println("LL "+l);
-        this.currentstallname = currentstallname;
+        
         this.l = l;
-      
-        this.currentStallUsers = currentStallUsers;
+        this.currentgamezone = currentgamezone;
         this.currentuser = currentuser;
+        
+        ///Done till here getting information
+        
+        
+        
         initComponents();
-        System.out.println("askljaskj");
+        System.out.println("No");
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - getWidth()) / 2);
         int y = (int) ((dimension.getHeight() - getHeight()) / 2);
@@ -113,10 +119,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         // Gettingdata.setVisible(false);
         loginSignal = new CountDownLatch(1);
         jLabel_OwnerName.setText(this.currentuser.getName());
-        jLabel_GameZoneNAme.setText(currentstallname);
+        jLabel_GameZoneNAme.setText(currentgamezone.getName());
              
         //Background thread for getting transaction details         
-        Background_GetTransactionDetails background_GetTransactionDetails = new Background_GetTransactionDetails(loginSignal,currentstallname);
+        Background_GetTransactionDetails background_GetTransactionDetails = new Background_GetTransactionDetails(loginSignal,currentgamezone.getName());
         background_GetTransactionDetails.start();
         try
         {
@@ -147,20 +153,19 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         recharge = new JDialog();
     }
         //employee
-        public MainScreen_StallOwner(String str,LoginScreen l ,User currentuser ,ArrayList<User> currentStallUsers,String currentstallname,ArrayList<String> CurrentStallGames)
+        public MainScreen_StallOwner(String str,LoginScreen l ,ArrayList<User> currentStallUsers,Stall currentgamezone,User currentuser)
         {
-            
-            
-         //this.passwordcheeck = passwordcheeck;
-          testfields = new ArrayList<>();
+            Type = str;
+            this.l = l;
+            this.currentStallUsers = currentStallUsers;
+            this.currentgamezone = currentgamezone;
+            this.currentuser = currentuser;
+             
+
+           testfields = new ArrayList<>();
           
-          
-          
-          this.currentstallname = currentstallname;
-          this.l = l;
-          Type = str;
-          this.currentStallUsers = currentStallUsers;
-          this.currentuser = currentuser;
+       
+        
           initComponents();
          
           
@@ -185,10 +190,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
           
           loginSignal = new CountDownLatch(1);
           jLabel_OwnerName.setText(this.currentuser.getName());
-          jLabel_GameZoneNAme.setText(currentstallname);
+          jLabel_GameZoneNAme.setText(currentgamezone.getName());
 
          //background thread for getting data New Refresh Data
-         Background_GetTransactionDetails background_GetTransactionDetails = new Background_GetTransactionDetails(loginSignal,currentstallname);
+         Background_GetTransactionDetails background_GetTransactionDetails = new Background_GetTransactionDetails(loginSignal,currentgamezone.getName());
          background_GetTransactionDetails.start();
          try {
       
@@ -224,7 +229,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
        
        
         recharge = new JDialog();
-        jLabel_GameZoneNAme.setText(currentstallname);
+        jLabel_GameZoneNAme.setText(currentgamezone.getName());
         jLabel_OwnerName.setText(currentuser.getName());
         jLabel_Label.setText("Employee Records");
          
@@ -1579,7 +1584,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 	            @Override
 	            protected  String  doInBackground() throws Exception 
 	            {
-	              String TableName = currentstallname+"_transaction";
+	              String TableName = currentgamezone.getName()+"_transaction";
 
                      TransactionInterface Dao = null ;
                   try {
@@ -1667,7 +1672,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                         {
                             
                         TransactionInterface Dao = new TransactionFactory().getInstance();
-                        String TransactionTableName = currentstallname+"_transaction";
+                        String TransactionTableName =  currentgamezone.getName()+"_transaction";
                         transdetailscomplete = Dao.GetTransactionDetails(TransactionTableName);
                                 
                             
@@ -1828,7 +1833,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
        
         
-        Updata_DeleteEmployee newframe = new Updata_DeleteEmployee(user,this,currentstallname);
+        Updata_DeleteEmployee newframe = new Updata_DeleteEmployee(user,this, currentgamezone.getName());
         newframe.setVisible(true);
         setVisible(false);
         
@@ -1853,7 +1858,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
          try
          {
              CustomerInterface Dao =  Customerfactory.getInstance();
-             custlist = Dao.getEmp(currentstallname+"_customers");
+             custlist = Dao.getEmp( currentgamezone.getName()+"_customers");
              
          }catch(Exception e)
          {
@@ -1917,7 +1922,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                     try 
                     {
                         CustomerInterface Dao = Customerfactory.getInstance();
-                        boolean respponce =  Dao.registerEmp(newcustomer,currentstallname+"_customers");
+                        boolean respponce =  Dao.registerEmp(newcustomer, currentgamezone.getName()+"_customers");
                          
                         if(respponce == false)
                          {

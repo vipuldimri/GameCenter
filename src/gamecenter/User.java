@@ -9,6 +9,7 @@ this class represent User Login - (Admin and Emp)
 public class User 
 {
    private int ID;
+   private String UserName;
    private String Name;
    private String Address;
    private String Contact;
@@ -17,7 +18,8 @@ public class User
    private int GameZoneID;
    private String Password;
 
-    public User(int ID, String Name, String Address, String Contact, String Email, String Type, int GameZoneID, String Password) {
+    public User(int ID, String Name, String Address, String Contact, String Email, String Type, int GameZoneID, String Password,String UserName)
+    {
         this.ID = ID;
         this.Name = Name;
         this.Address = Address;
@@ -26,8 +28,18 @@ public class User
         this.Type = Type;
         this.GameZoneID = GameZoneID;
         this.Password = Password;
+        this.UserName = UserName;
     }
 
+  
+
+    public String getUserName() {
+        return UserName;
+    }
+
+    public void setUserName(String UserName) {
+        this.UserName = UserName;
+    }
     public int getID() {
         return ID;
     }

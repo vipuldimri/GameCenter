@@ -16,14 +16,14 @@ public class BackGroundThread1 extends Thread
     ArrayList<User> users;
  
     //All gamezone data and their Endsub details 
-    Stalls_and_SubDate   stalls; 
+    Stall currentgamezone;
     boolean error_flag = false;
     BackGroundThread1()
     {
 
        
         users = new ArrayList<>();
-        stalls = new Stalls_and_SubDate();
+        currentgamezone = new Stall();
     }
     @Override
     public void run()
@@ -32,7 +32,8 @@ public class BackGroundThread1 extends Thread
         try 
         {
             Connect con = new Connect();
-        } catch (Exception ex) 
+        } 
+        catch (Exception ex) 
         {
             System.out.println("Error Connectiing");
             error_flag= true;
@@ -42,8 +43,9 @@ public class BackGroundThread1 extends Thread
         try 
         {
             UserInterface Dao   = UserFactory.getInstance();
-            users = Dao.getAllUsers();
-            stalls = Dao.getAllStall();
+            users = Dao.getAllUsers("GameZone1");
+            //above lines gets all the users for current GameZone;
+             currentgamezone = Dao.getGameZoneDetails("GameZone1");
         } catch (Exception ex) 
         {
            error_flag =true;
