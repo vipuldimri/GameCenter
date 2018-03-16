@@ -6,6 +6,7 @@
 package Gui;
 import Database.UserFactory;
 import Database.UserInterface;
+import gamecenter.UpdateEmployeeListThread;
 import gamecenter.User;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -16,20 +17,24 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
-class Updata_DeleteEmployee extends javax.swing.JFrame {
+import java.util.ArrayList;
+class Updata_DeleteEmployee extends javax.swing.JFrame 
+{
 
     User current;
     JFrame previous;
     User updateemp;
+    ArrayList<User> employeelist;
     boolean updateEmp_flag = false;
     boolean deleteEmp_flag = false;
     JDialog update;
     String currentstallname;
-    public Updata_DeleteEmployee(User current,JFrame previous,String currentstallname)
+    public Updata_DeleteEmployee(User current,JFrame previous,String currentstallname,ArrayList<User> employeelist)
     {
         this.currentstallname = currentstallname;
         this.current = current;
         this.previous = previous;
+        this.employeelist = employeelist;
         initComponents();
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - getWidth()) / 2);
@@ -263,11 +268,16 @@ class Updata_DeleteEmployee extends javax.swing.JFrame {
                      "Inane error",
                       JOptionPane.ERROR_MESSAGE);
                    return;
-        }else{
+        }
+        else
+        {
+                     UpdateEmployeeListThread updateEmployeeListThread = new UpdateEmployeeListThread(employeelist);
+                      updateEmployeeListThread.start();
                       JOptionPane.showMessageDialog(jPanel1,
                      "Update Employee Success.",
                      "Inane error",
                       JOptionPane.ERROR_MESSAGE);
+                     
         }
         
         updateEmp_flag = false;

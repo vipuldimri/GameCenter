@@ -21,12 +21,14 @@ public class MainScreen_Admin extends javax.swing.JFrame
     
     //List for all register GameZone
     ArrayList<Stall> GameZoneList;
-    
+    ArrayList<User> Selectedgamezoneusers;
+    ArrayList<Recharge> Selectedgamezonetransaction; 
+    ArrayList<String> gamezonenames;
     
     
     
     //Containsa all the Users of the System
-    ArrayList<User> users;
+    
     //Contains GameZones Details
     
     JDialog jDialog;
@@ -43,10 +45,22 @@ public class MainScreen_Admin extends javax.swing.JFrame
     int LastId ;
     public MainScreen_Admin()
     {
+        gamezonenames = new ArrayList<>();
       
-       
+       try
+       {
         StallInterface Dao = StallFactory.getInstance();
         GameZoneList = Dao.GetAllGameZone();
+       }
+       catch(Exception e)
+       {
+           //Error in getting GameZone
+           
+       }
+       if(GameZoneList == null || GameZoneList.size() ==0 )
+       {
+           //Error again
+       }
    
         initComponents();
         
@@ -56,9 +70,12 @@ public class MainScreen_Admin extends javax.swing.JFrame
         setLocation(x, y);
     
     
-        jPanel3.setVisible(true);
-        jPanel4.setVisible(false);
-        jPanel5.setVisible(false);
+        AddGameZone.setVisible(true);
+        ViewGameZone.setVisible(false);
+        GameZoneTransaction.setVisible(false);
+        
+        
+        
         jComboBox_allgamezones.addItem("Select GameZone");
         
         
@@ -78,17 +95,19 @@ public class MainScreen_Admin extends javax.swing.JFrame
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        AddGameZonepanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        viewgamezonepanel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        TransactionDetailspanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jLayeredPane1 = new javax.swing.JLayeredPane();
+        jLabel18 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
+        AddGameZone = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel_Sub = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -109,126 +128,147 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jCheckBox_CatchLight = new javax.swing.JCheckBox();
         jCheckBox_dance = new javax.swing.JCheckBox();
         jCheckBox_speedball = new javax.swing.JCheckBox();
-        jPanel4 = new javax.swing.JPanel();
+        ViewGameZone = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_Gamezone = new javax.swing.JTable();
-        jPanel5 = new javax.swing.JPanel();
+        GameZoneTransaction = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_transaction = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         jComboBox_allgamezones = new javax.swing.JComboBox<>();
+        EmployeeDetails = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBox1_selectgamezoneemployee = new javax.swing.JComboBox<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        MainHeadingLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         setMinimumSize(new java.awt.Dimension(1204, 767));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setBackground(new java.awt.Color(110, 89, 222));
         jPanel1.setLayout(null);
 
-        jPanel2.setBackground(new java.awt.Color(102, 0, 153));
+        jPanel2.setBackground(new java.awt.Color(54, 33, 89));
         jPanel2.setLayout(null);
 
-        jPanel6.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        AddGameZonepanel.setBackground(new java.awt.Color(54, 33, 89));
+        AddGameZonepanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel6MouseClicked(evt);
+                AddGameZonepanelMouseClicked(evt);
             }
         });
-        jPanel6.setLayout(null);
-
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Add GameZone");
-        jPanel6.add(jLabel1);
-        jLabel1.setBounds(130, 30, 87, 16);
+        AddGameZonepanel.setLayout(null);
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Add gamezone.png"))); // NOI18N
-        jPanel6.add(jLabel4);
-        jLabel4.setBounds(30, 10, 80, 80);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/newAddemp.png"))); // NOI18N
+        AddGameZonepanel.add(jLabel4);
+        jLabel4.setBounds(60, 20, 40, 50);
 
-        jPanel2.add(jPanel6);
-        jPanel6.setBounds(0, 300, 300, 110);
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Add GameZone");
+        AddGameZonepanel.add(jLabel16);
+        jLabel16.setBounds(130, 40, 130, 17);
 
-        jPanel7.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+        jPanel2.add(AddGameZonepanel);
+        AddGameZonepanel.setBounds(0, 310, 300, 80);
+
+        viewgamezonepanel.setBackground(new java.awt.Color(54, 33, 89));
+        viewgamezonepanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel7MouseClicked(evt);
+                viewgamezonepanelMouseClicked(evt);
             }
         });
-        jPanel7.setLayout(null);
-
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("View Registeed GameZones");
-        jPanel7.add(jLabel2);
-        jLabel2.setBounds(120, 30, 170, 20);
+        viewgamezonepanel.setLayout(null);
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/View gamezones.png"))); // NOI18N
-        jPanel7.add(jLabel5);
+        viewgamezonepanel.add(jLabel5);
         jLabel5.setBounds(30, 20, 70, 60);
 
-        jPanel2.add(jPanel7);
-        jPanel7.setBounds(0, 450, 300, 100);
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("View GameZones");
+        viewgamezonepanel.add(jLabel17);
+        jLabel17.setBounds(130, 40, 130, 17);
 
-        jPanel8.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
+        jPanel2.add(viewgamezonepanel);
+        viewgamezonepanel.setBounds(0, 420, 300, 70);
+
+        TransactionDetailspanel.setBackground(new java.awt.Color(54, 33, 89));
+        TransactionDetailspanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel8MouseClicked(evt);
+                TransactionDetailspanelMouseClicked(evt);
             }
         });
-        jPanel8.setLayout(null);
-
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Transaction Records");
-        jPanel8.add(jLabel3);
-        jLabel3.setBounds(140, 20, 140, 30);
+        TransactionDetailspanel.setLayout(null);
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/viewrecordadmin.png"))); // NOI18N
-        jPanel8.add(jLabel6);
+        TransactionDetailspanel.add(jLabel6);
         jLabel6.setBounds(30, 10, 70, 70);
 
-        jPanel2.add(jPanel8);
-        jPanel8.setBounds(0, 600, 300, 100);
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Transaction Details");
+        TransactionDetailspanel.add(jLabel18);
+        jLabel18.setBounds(130, 40, 130, 17);
+
+        jPanel2.add(TransactionDetailspanel);
+        TransactionDetailspanel.setBounds(0, 510, 300, 90);
+
+        jPanel3.setBackground(new java.awt.Color(54, 33, 89));
+        jPanel3.setLayout(null);
+
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("Employee Details");
+        jPanel3.add(jLabel20);
+        jLabel20.setBounds(140, 20, 130, 17);
+
+        jPanel2.add(jPanel3);
+        jPanel3.setBounds(0, 620, 300, 60);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 0, 300, 730);
 
-        jPanel3.setLayout(null);
+        AddGameZone.setLayout(null);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel7.setText("Add New GameZone");
-        jPanel3.add(jLabel7);
+        AddGameZone.add(jLabel7);
         jLabel7.setBounds(319, 14, 320, 40);
 
         jLabel_Sub.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel_Sub.setText("Sub Yr");
-        jPanel3.add(jLabel_Sub);
+        AddGameZone.add(jLabel_Sub);
         jLabel_Sub.setBounds(500, 210, 140, 50);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel11.setText("Owner Name");
-        jPanel3.add(jLabel11);
+        AddGameZone.add(jLabel11);
         jLabel11.setBounds(70, 150, 220, 60);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel12.setText("Contact No");
-        jPanel3.add(jLabel12);
+        AddGameZone.add(jLabel12);
         jLabel12.setBounds(70, 250, 220, 60);
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel13.setText("Check Avilable Games");
-        jPanel3.add(jLabel13);
+        AddGameZone.add(jLabel13);
         jLabel13.setBounds(500, 260, 310, 60);
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel14.setText("GameZone Name");
-        jPanel3.add(jLabel14);
+        AddGameZone.add(jLabel14);
         jLabel14.setBounds(70, 50, 220, 60);
 
         jTextField_GameZoneAddress.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jPanel3.add(jTextField_GameZoneAddress);
+        AddGameZone.add(jTextField_GameZoneAddress);
         jTextField_GameZoneAddress.setBounds(500, 110, 350, 80);
 
         jButton1.setText("Add GameZone");
@@ -237,61 +277,61 @@ public class MainScreen_Admin extends javax.swing.JFrame
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1);
+        AddGameZone.add(jButton1);
         jButton1.setBounds(350, 470, 230, 50);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel9.setText("Passsword");
-        jPanel3.add(jLabel9);
+        AddGameZone.add(jLabel9);
         jLabel9.setBounds(70, 340, 170, 60);
 
         jComboBox_sub.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jComboBox_sub.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 yr", "2 yr", "3 yr", "4 yr", " " }));
-        jPanel3.add(jComboBox_sub);
+        AddGameZone.add(jComboBox_sub);
         jComboBox_sub.setBounds(600, 210, 140, 40);
 
         jTextField_GameZoneName.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jPanel3.add(jTextField_GameZoneName);
+        AddGameZone.add(jTextField_GameZoneName);
         jTextField_GameZoneName.setBounds(70, 110, 230, 40);
 
         jTextField_GameZoneOwnerName.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jPanel3.add(jTextField_GameZoneOwnerName);
+        AddGameZone.add(jTextField_GameZoneOwnerName);
         jTextField_GameZoneOwnerName.setBounds(70, 210, 230, 40);
 
         jTextField_GameZoneOwnerContact.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jPanel3.add(jTextField_GameZoneOwnerContact);
+        AddGameZone.add(jTextField_GameZoneOwnerContact);
         jTextField_GameZoneOwnerContact.setBounds(70, 310, 230, 40);
 
         jTextField_GameZoneOwnerPassword.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jPanel3.add(jTextField_GameZoneOwnerPassword);
+        AddGameZone.add(jTextField_GameZoneOwnerPassword);
         jTextField_GameZoneOwnerPassword.setBounds(70, 400, 230, 40);
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel15.setText("Address");
-        jPanel3.add(jLabel15);
+        AddGameZone.add(jLabel15);
         jLabel15.setBounds(500, 60, 220, 60);
 
         jCheckBox_Airhockey.setText("Air Hockey");
-        jPanel3.add(jCheckBox_Airhockey);
-        jCheckBox_Airhockey.setBounds(500, 390, 89, 25);
+        AddGameZone.add(jCheckBox_Airhockey);
+        jCheckBox_Airhockey.setBounds(500, 390, 77, 23);
 
         jcheckbox_basketball.setText("Basket Ball");
-        jPanel3.add(jcheckbox_basketball);
-        jcheckbox_basketball.setBounds(500, 360, 89, 25);
+        AddGameZone.add(jcheckbox_basketball);
+        jcheckbox_basketball.setBounds(500, 360, 77, 23);
 
         jCheckBox_CatchLight.setText("Catch Light");
-        jPanel3.add(jCheckBox_CatchLight);
-        jCheckBox_CatchLight.setBounds(670, 360, 91, 25);
+        AddGameZone.add(jCheckBox_CatchLight);
+        jCheckBox_CatchLight.setBounds(670, 360, 79, 23);
 
         jCheckBox_dance.setText("Dance");
-        jPanel3.add(jCheckBox_dance);
-        jCheckBox_dance.setBounds(670, 330, 63, 25);
+        AddGameZone.add(jCheckBox_dance);
+        jCheckBox_dance.setBounds(670, 330, 55, 23);
 
         jCheckBox_speedball.setText("Speed Ball");
-        jPanel3.add(jCheckBox_speedball);
-        jCheckBox_speedball.setBounds(500, 330, 89, 25);
+        AddGameZone.add(jCheckBox_speedball);
+        jCheckBox_speedball.setBounds(500, 330, 75, 23);
 
-        jPanel4.setLayout(null);
+        ViewGameZone.setLayout(null);
 
         jTable_Gamezone.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -303,7 +343,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
         ));
         jScrollPane2.setViewportView(jTable_Gamezone);
 
-        jPanel4.add(jScrollPane2);
+        ViewGameZone.add(jScrollPane2);
         jScrollPane2.setBounds(0, 242, 900, 300);
 
         jTable_transaction.setModel(new javax.swing.table.DefaultTableModel(
@@ -324,54 +364,88 @@ public class MainScreen_Admin extends javax.swing.JFrame
             }
         });
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout GameZoneTransactionLayout = new javax.swing.GroupLayout(GameZoneTransaction);
+        GameZoneTransaction.setLayout(GameZoneTransactionLayout);
+        GameZoneTransactionLayout.setHorizontalGroup(
+            GameZoneTransactionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+            .addGroup(GameZoneTransactionLayout.createSequentialGroup()
                 .addGap(65, 65, 65)
                 .addComponent(jLabel8)
                 .addGap(53, 53, 53)
                 .addComponent(jComboBox_allgamezones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+        GameZoneTransactionLayout.setVerticalGroup(
+            GameZoneTransactionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GameZoneTransactionLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(GameZoneTransactionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addComponent(jComboBox_allgamezones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jLayeredPane1.setLayer(jPanel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jPanel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jPanel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        EmployeeDetails.setLayout(null);
+
+        jLabel1.setText("Select GameZone");
+        EmployeeDetails.add(jLabel1);
+        jLabel1.setBounds(92, 44, 83, 14);
+
+        EmployeeDetails.add(jComboBox1_selectgamezoneemployee);
+        jComboBox1_selectgamezoneemployee.setBounds(230, 40, 28, 20);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable1);
+
+        EmployeeDetails.add(jScrollPane3);
+        jScrollPane3.setBounds(0, 140, 900, 402);
+
+        jLayeredPane1.setLayer(AddGameZone, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(ViewGameZone, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(GameZoneTransaction, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(EmployeeDetails, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(AddGameZone, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(ViewGameZone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(GameZoneTransaction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(EmployeeDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(AddGameZone, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(ViewGameZone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(GameZoneTransaction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(EmployeeDetails, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.add(jLayeredPane1);
         jLayeredPane1.setBounds(300, 190, 900, 540);
+
+        MainHeadingLabel.setText("Heading");
+        jPanel1.add(MainHeadingLabel);
+        MainHeadingLabel.setBounds(600, 110, 240, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -389,13 +463,13 @@ public class MainScreen_Admin extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
+    private void AddGameZonepanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddGameZonepanelMouseClicked
         // TODO add your handling code here:Add new GameZone 
-        jPanel3.setVisible(true);
-        jPanel4.setVisible(false);
-        jPanel5.setVisible(false);
+        AddGameZone.setVisible(true);
+        ViewGameZone.setVisible(false);
+        GameZoneTransaction.setVisible(false);
         
-    }//GEN-LAST:event_jPanel6MouseClicked
+    }//GEN-LAST:event_AddGameZonepanelMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:Create button  Main Add new GameZoneButton
@@ -483,17 +557,13 @@ public class MainScreen_Admin extends javax.swing.JFrame
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
+    private void viewgamezonepanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewgamezonepanelMouseClicked
         // TODO add your handling code here:
-        jPanel3.setVisible(false);
-        jPanel4.setVisible(true);
-        jPanel5.setVisible(false);
-        
-        
-        
+     
+        AddGameZone.setVisible(false);
+        ViewGameZone.setVisible(true);
+        GameZoneTransaction.setVisible(false);
         //display registered GameZone
-       
-        
         //Displaying All the Registered GameZones Into JTABLE
         DefaultTableModel m = (DefaultTableModel) jTable_Gamezone.getModel();
         m.setRowCount(0);
@@ -517,9 +587,9 @@ public class MainScreen_Admin extends javax.swing.JFrame
 
         }
         
-    }//GEN-LAST:event_jPanel7MouseClicked
+    }//GEN-LAST:event_viewgamezonepanelMouseClicked
 
-    private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
+    private void TransactionDetailspanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TransactionDetailspanelMouseClicked
         // TODO add your handling code here:
        /*
         jPanel3.setVisible(false);
@@ -531,8 +601,9 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jComboBox_allgamezones.addItem(gamezone.getName());
        }
        */
-    }//GEN-LAST:event_jPanel8MouseClicked
+    }//GEN-LAST:event_TransactionDetailspanelMouseClicked
 
+    //Method for get transaction for perticular GameZone
     private void jComboBox_allgamezonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_allgamezonesActionPerformed
         // TODO add your handling code here:action event on conbo box
         String GamezoneName = jComboBox_allgamezones.getSelectedItem().toString();
@@ -653,11 +724,19 @@ public class MainScreen_Admin extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel AddGameZone;
+    private javax.swing.JPanel AddGameZonepanel;
+    private javax.swing.JPanel EmployeeDetails;
+    private javax.swing.JPanel GameZoneTransaction;
+    private javax.swing.JLabel MainHeadingLabel;
+    private javax.swing.JPanel TransactionDetailspanel;
+    private javax.swing.JPanel ViewGameZone;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox_Airhockey;
     private javax.swing.JCheckBox jCheckBox_CatchLight;
     private javax.swing.JCheckBox jCheckBox_dance;
     private javax.swing.JCheckBox jCheckBox_speedball;
+    private javax.swing.JComboBox<String> jComboBox1_selectgamezoneemployee;
     private javax.swing.JComboBox<String> jComboBox_allgamezones;
     private javax.swing.JComboBox<String> jComboBox_sub;
     private javax.swing.JLabel jLabel1;
@@ -666,8 +745,10 @@ public class MainScreen_Admin extends javax.swing.JFrame
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -679,13 +760,10 @@ public class MainScreen_Admin extends javax.swing.JFrame
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable_Gamezone;
     private javax.swing.JTable jTable_transaction;
     private javax.swing.JTextField jTextField_GameZoneAddress;
@@ -694,5 +772,6 @@ public class MainScreen_Admin extends javax.swing.JFrame
     private javax.swing.JTextField jTextField_GameZoneOwnerName;
     private javax.swing.JTextField jTextField_GameZoneOwnerPassword;
     private javax.swing.JCheckBox jcheckbox_basketball;
+    private javax.swing.JPanel viewgamezonepanel;
     // End of variables declaration//GEN-END:variables
 }

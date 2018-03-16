@@ -44,19 +44,26 @@ import gamecenter.Customers;
 import java.sql.Connection;
 import  gamecenter.BackgroundAutocomplete;
 import gamecenter.Stall;
+import gamecenter.UpdateCustomerListThread;
+import gamecenter.UpdateEmployeeListThread;
 //Main screen for every GameZone
 public class MainScreen_StallOwner extends javax.swing.JFrame 
 {
     ///// Things we Get from the Login Page//////////
     User currentuser;
-    ArrayList<User> currentgamezoneusers;
+  
     String Type ;
     LoginScreen l ;
     Stall currentgamezone;
     HashMap<String, Integer> UserNameCheck; // to check no two employee get samne Usename and hence Same combination of user name and Password
     ////////////////////////////////////////////
     
-    ArrayList<Recharge> transdetailscomplete; //Transaction Details for current GameZone
+    
+    ArrayList<User> currentgamezoneusers;      //Users Details for Current Gamezone
+    ArrayList<Recharge> transdetailscomplete;  //Transaction Details for current GameZone
+    ArrayList<Customers> customerlist;         //Customer Details for current GameZone
+    
+    
     CountDownLatch TransactionDetailsWaitLock; //To lock GUI till we get Transaction Details
 
     
@@ -70,17 +77,19 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     ArrayList<JTextField> testfields;
     
     
-    //flag for checking wheather recharge is done corect or not 
+    //flags for checking all the operation are working property 
     Boolean rech_flag = false;
+    JDialog rechargeloadingdialoge;
+    
     Boolean AddEmp_flag = false;
+    
     Boolean UpdateEmp_flag = false;
+    
     Boolean RegisterCustomer = false;
     
     
-    JDialog rechargeloadingdialoge;
+  
     
-    
-    ArrayList<Customers> custlist;
     
     
     
@@ -151,7 +160,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         rechargeloadingdialoge = new JDialog();
     }
         //Cons when Admin of the GameZone Enter
-        public MainScreen_StallOwner(String str,LoginScreen l ,ArrayList<User> currentStallUsers,Stall currentgamezone,User currentuser)
+    public MainScreen_StallOwner(String str,LoginScreen l ,ArrayList<User> currentStallUsers,Stall currentgamezone,User currentuser)
         {
             Type = str;
             this.l = l;
@@ -277,7 +286,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLayeredPane1 = new javax.swing.JLayeredPane();
         AddEmployee = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        AddNewEmployee_Button = new javax.swing.JButton();
         jTextField_Name = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -325,8 +334,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jTextField_regemail = new javax.swing.JTextField();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTable_customers = new javax.swing.JTable();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        RegisterNewcustomer_button = new javax.swing.JButton();
+        ResetButton_Customer = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -450,7 +459,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(jRadioButton3);
-        jRadioButton3.setBounds(580, 260, 73, 37);
+        jRadioButton3.setBounds(580, 260, 71, 37);
 
         jRadioButton4.setBackground(new java.awt.Color(0, 0, 0));
         jRadioButton4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -462,7 +471,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(jRadioButton4);
-        jRadioButton4.setBounds(780, 260, 89, 37);
+        jRadioButton4.setBounds(780, 260, 85, 37);
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
@@ -473,7 +482,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel_currentEMpName.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_currentEMpName.setText("jLabel28");
         jPanel4.add(jLabel_currentEMpName);
-        jLabel_currentEMpName.setBounds(1010, 10, 48, 16);
+        jLabel_currentEMpName.setBounds(1010, 10, 40, 14);
 
         jPanel2.add(jPanel4);
         jPanel4.setBounds(2, 7, 1200, 440);
@@ -523,7 +532,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel_currentempname2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_currentempname2.setText("jLabel29");
         jPanel6.add(jLabel_currentempname2);
-        jLabel_currentempname2.setBounds(1060, 10, 48, 16);
+        jLabel_currentempname2.setBounds(1060, 10, 40, 14);
 
         jPanel3.add(jPanel6);
         jPanel6.setBounds(0, 10, 1180, 50);
@@ -548,14 +557,14 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         AddEmployee.add(jLabel12);
         jLabel12.setBounds(90, 30, 53, 22);
 
-        jButton4.setText("Submit");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        AddNewEmployee_Button.setText("Submit");
+        AddNewEmployee_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                AddNewEmployee_ButtonActionPerformed(evt);
             }
         });
-        AddEmployee.add(jButton4);
-        jButton4.setBounds(380, 490, 120, 40);
+        AddEmployee.add(AddNewEmployee_Button);
+        AddNewEmployee_Button.setBounds(380, 490, 120, 40);
 
         jTextField_Name.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         AddEmployee.add(jTextField_Name);
@@ -615,7 +624,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         jLabel13.setText("Enter Employee Name ");
         AddUpateEmployee.add(jLabel13);
-        jLabel13.setBounds(100, 20, 130, 16);
+        jLabel13.setBounds(100, 20, 108, 14);
         AddUpateEmployee.add(jTextField7);
         jTextField7.setBounds(100, 50, 210, 50);
 
@@ -700,7 +709,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         jLabel15.setText("Transaction History");
         transaction.add(jLabel15);
-        jLabel15.setBounds(340, 10, 110, 16);
+        jLabel15.setBounds(340, 10, 93, 14);
 
         jTable_transactionDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -741,9 +750,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         transaction.add(jPanel20);
         jPanel20.setBounds(260, 220, 350, 210);
         transaction.add(jDateChooser_StartDate);
-        jDateChooser_StartDate.setBounds(150, 70, 100, 22);
+        jDateChooser_StartDate.setBounds(150, 70, 91, 20);
         transaction.add(jDateChooser_EndDate);
-        jDateChooser_EndDate.setBounds(150, 110, 100, 22);
+        jDateChooser_EndDate.setBounds(150, 110, 91, 20);
 
         jButton7.setText("Search");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -752,15 +761,15 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         transaction.add(jButton7);
-        jButton7.setBounds(300, 90, 110, 25);
+        jButton7.setBounds(300, 90, 110, 23);
 
         jLabel29.setText("Start Date");
         transaction.add(jLabel29);
-        jLabel29.setBounds(40, 70, 80, 16);
+        jLabel29.setBounds(40, 70, 80, 14);
 
         jLabel30.setText("End Date");
         transaction.add(jLabel30);
-        jLabel30.setBounds(40, 120, 70, 16);
+        jLabel30.setBounds(40, 120, 70, 14);
 
         jLabel3_totalTransaction.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3_totalTransaction.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
@@ -801,11 +810,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         Customer.add(jLabel37);
         jLabel37.setBounds(150, 80, 53, 22);
         Customer.add(jTextField_regname);
-        jTextField_regname.setBounds(250, 80, 140, 22);
+        jTextField_regname.setBounds(250, 80, 140, 20);
         Customer.add(jTextField_regcontact);
-        jTextField_regcontact.setBounds(250, 140, 140, 22);
+        jTextField_regcontact.setBounds(250, 140, 140, 20);
         Customer.add(jTextField_regemail);
-        jTextField_regemail.setBounds(250, 200, 140, 22);
+        jTextField_regemail.setBounds(250, 200, 140, 20);
 
         jTable_customers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -820,23 +829,23 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         Customer.add(jScrollPane6);
         jScrollPane6.setBounds(0, 290, 860, 270);
 
-        jButton9.setText("Register ");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        RegisterNewcustomer_button.setText("Register ");
+        RegisterNewcustomer_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                RegisterNewcustomer_buttonActionPerformed(evt);
             }
         });
-        Customer.add(jButton9);
-        jButton9.setBounds(540, 120, 90, 25);
+        Customer.add(RegisterNewcustomer_button);
+        RegisterNewcustomer_button.setBounds(540, 120, 90, 23);
 
-        jButton10.setText("Reset");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        ResetButton_Customer.setText("Reset");
+        ResetButton_Customer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                ResetButton_CustomerActionPerformed(evt);
             }
         });
-        Customer.add(jButton10);
-        jButton10.setBounds(540, 170, 90, 25);
+        Customer.add(ResetButton_Customer);
+        ResetButton_Customer.setBounds(540, 170, 90, 23);
 
         jLayeredPane1.setLayer(AddEmployee, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(AddUpateEmployee, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -1062,7 +1071,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel22Layout.setHorizontalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel22Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(59, Short.MAX_VALUE)
                 .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel26)
@@ -1251,7 +1260,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel13.setBackground(new Color(54, 33,89));
         jPanel14.setBackground(new Color(54, 33,89));
         jPanel15.setBackground(new Color(110, 89,222)); 
-                jPanel22.setBackground(new Color(54, 33,89));
+        jPanel22.setBackground(new Color(54, 33,89));
 
       
         jLabel_Label.setText("Employees Records");
@@ -1284,7 +1293,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     }//GEN-LAST:event_jPanel15MouseClicked
 
     private void jPanel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel14MouseClicked
-        // TODO add your handling code here:option2
+        // TODO add your handling code here: update and delete employee button click event  (panel)
         jPanel18.setBackground(new Color(54, 33,89));
         jPanel13.setBackground(new Color(54, 33,89));
         jPanel14.setBackground(new Color(110, 89,222));
@@ -1321,23 +1330,24 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     }//GEN-LAST:event_jPanel14MouseClicked
 
     private void jPanel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel13MouseClicked
-        // TODO add your handling code here:option 1
+        // TODO add your handling code here: Add new employee button click event (panel)
         jPanel18.setBackground(new Color(54, 33,89));
         jPanel13.setBackground(new Color(110, 89,222));
         jPanel14.setBackground(new Color(54, 33,89));
         jPanel15.setBackground(new Color(54, 33,89)); 
         jLabel_Label.setText("Add New Employee");
-         jPanel22.setBackground(new Color(54, 33,89));
+        jPanel22.setBackground(new Color(54, 33,89));
         
  
         AddEmployee.setVisible(true);
         AddUpateEmployee.setVisible(false);
         Emprecords.setVisible(false);
         transaction.setVisible(false);
-         Customer.setVisible(false);
+        Customer.setVisible(false);
     }//GEN-LAST:event_jPanel13MouseClicked
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    
+    //Method to ADD new GameZoneEmployee
+    private void AddNewEmployee_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddNewEmployee_ButtonActionPerformed
         // TODO add your handling code here:ADD button to add Employee
 
         
@@ -1370,22 +1380,18 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
                    
                     UserInterface Dao = null;
-                    try {
+                    try 
+                    {
                     Dao = UserFactory.getInstance();
-                    } catch (Exception ex) {
+                    Dao.AddEmp(newuser);
+                    AddEmp_flag = true;
+                    }
+                    catch (Exception ex) 
+                    {
+                    AddEmp_flag = false;
                     Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
-                   }
-                    try {
-                     
-                         Dao.AddEmp(newuser);
-                         AddEmp_flag = true;
-                         
-                      } 
-                      catch (Exception ex)
-                      {
-          
-                     
-                      }
+                    }
+                 
 
                         return "end";
 	                
@@ -1412,15 +1418,21 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         if(AddEmp_flag == false)
         {
             JOptionPane.showMessageDialog(jPanel1,
-                     "Adding Employee Failed.",
-                     "Inane error",
-                      JOptionPane.ERROR_MESSAGE);
+            "Adding Employee Failed.",
+            "Inane error",
+            JOptionPane.ERROR_MESSAGE);
             return;
-        }else{
+        }
+        else
+        {
                       JOptionPane.showMessageDialog(jPanel1,
-                     "Adding Employee Success.",
-                     "Inane error",
+                      "Adding Employee Success.",
+                      "Inane error",
                       JOptionPane.ERROR_MESSAGE);
+                      // now updating the customer list 
+                      UpdateEmployeeListThread updateemployeelist = new UpdateEmployeeListThread(currentgamezoneusers);
+                      updateemployeelist.start();
+                      
         }
                  
         jTextField_Name.setText("");
@@ -1430,7 +1442,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jTextField1_contact.setText("");
         
         AddEmp_flag = false;
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_AddNewEmployee_ButtonActionPerformed
 
     private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
         // TODO add your handling code here:1000rs
@@ -1773,7 +1785,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
        
         
-        Updata_DeleteEmployee newframe = new Updata_DeleteEmployee(user,this, currentgamezone.getName());
+        Updata_DeleteEmployee newframe = new Updata_DeleteEmployee(user,this, currentgamezone.getName(),currentgamezoneusers);
         newframe.setVisible(true);
         setVisible(false);
         
@@ -1798,12 +1810,20 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
          try
          {
              CustomerInterface Dao =  Customerfactory.getInstance();
-             custlist = Dao.getEmp( currentgamezone.getName()+"_customers");
+             customerlist = Dao.getEmp( currentgamezone.getName()+"_customers");
              
          }catch(Exception e)
          {
+             
              System.out.println(e);
              //error in getting Emp list
+              JOptionPane.showMessageDialog(jPanel1,
+                     "Error Getting Employee List !!! Check Your internet Connection.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                     return ;
+                    
+             
          }
          
         DefaultTableModel m = (DefaultTableModel) jTable_customers.getModel();
@@ -1811,12 +1831,12 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         DefaultTableModel  model = (DefaultTableModel) jTable_customers.getModel();
         Object row[] = new Object[4];
-        for(int i = 0;i < custlist.size();i++)
+        for(int i = 0;i < customerlist.size();i++)
         {
-            row[0] = custlist.get(i).getId();
-            row[1] = custlist.get(i).getName();
-            row[2] = custlist.get(i).getContact();
-            row[3] = custlist.get(i).getEmailId();
+            row[0] = customerlist.get(i).getId();
+            row[1] = customerlist.get(i).getName();
+            row[2] = customerlist.get(i).getContact();
+            row[3] = customerlist.get(i).getEmailId();
            
             model.addRow(row);
             
@@ -1831,7 +1851,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
     }//GEN-LAST:event_CustomerMouseClicked
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void RegisterNewcustomer_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterNewcustomer_buttonActionPerformed
         // TODO add your handling code here:Register Customer button
         String contact =jTextField_regcontact.getText();
         String email   =jTextField_regemail.getText();
@@ -1868,10 +1888,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                          {
                              RegisterCustomer = false;
                          }else
-                        {
+                         {
                              RegisterCustomer = true;
                          }
-                         } catch (Exception ex) {
+                         } catch (Exception ex)
+                         {
                        
                              RegisterCustomer = false;
                          }
@@ -1917,20 +1938,25 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             "Customer Registered Success",
             "Inane error",
             JOptionPane.ERROR_MESSAGE);
+            //now updating the customer list
+            
+            UpdateCustomerListThread updatecustomerlist = new UpdateCustomerListThread(customerlist);
+            updatecustomerlist.start();
+            
           }
         
 
         
         RegisterCustomer = false;
         
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_RegisterNewcustomer_buttonActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void ResetButton_CustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButton_CustomerActionPerformed
         // TODO add your handling code here: reset button register customer
         jTextField_regcontact.setText("");
         jTextField_regemail.setText("");
         jTextField_regname.setText("");
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_ResetButton_CustomerActionPerformed
 
     private void transactionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transactionMouseClicked
         // TODO add your handling code here:
@@ -2007,19 +2033,19 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AddEmployee;
+    private javax.swing.JButton AddNewEmployee_Button;
     private javax.swing.JPanel AddUpateEmployee;
     private javax.swing.JPanel Customer;
     private javax.swing.JPanel Emprecords;
+    private javax.swing.JButton RegisterNewcustomer_button;
+    private javax.swing.JButton ResetButton_Customer;
     private javax.swing.JButton ResetValuestozerobutton;
     private javax.swing.JLabel UserNameUniqueLabel;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private com.toedter.calendar.JDateChooser jDateChooser_EndDate;
     private com.toedter.calendar.JDateChooser jDateChooser_StartDate;
     private javax.swing.JLabel jLabel1;
