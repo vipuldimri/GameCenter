@@ -53,13 +53,13 @@ public class UserImplements implements UserInterface
          final String Query = "SELECT * FROM GameZoneDB.gamezone where ID = 1;";
         
          Stall currentgamezone = null ;
-         /*
+         
          try {
                    Statement stmt=conn.createStatement();  
                    ResultSet rs = stmt.executeQuery(Query);
                    while(rs.next())  
                    {
-                    currentgamezone = new Stall(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getDate(7),rs.getDate(8),rs.getInt(9),rs.getInt(10),rs.getInt(11),rs.getInt(12),rs.getInt(13));
+                    currentgamezone = new Stall(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getDate(7),rs.getDate(8));
                    
                     //End date for every stall corres to their ID
                    }
@@ -68,7 +68,7 @@ public class UserImplements implements UserInterface
         {
                 System.out.println("AAA "+ex);
         }
-    */
+        
         return currentgamezone;
 
     }
