@@ -50,8 +50,10 @@ public class MainScreen_Admin extends javax.swing.JFrame
       
        try
        {
+           
         StallInterface Dao = StallFactory.getInstance();
         GameZoneList = Dao.GetAllGameZone();
+       
        }
        catch(Exception e)
        {
@@ -560,11 +562,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
         newgamezone.setOwnerName(OwnerName);
         newgamezone.setSubStartDate(currentdate);
         newgamezone.setSubEndDate(finalEndsubDate);
-        newgamezone.setAir_Hockey(Air_Hockey);
-        newgamezone.setBasket_Ball(Basket_Ball);
-        newgamezone.setCatch_Light(Catch_Light);
-        newgamezone.setSpeed_Ball(Speed_Ball);
-        newgamezone.setDance(Dance);
+   
         //Completed getting data from GUI and storing into obbject of stall type
         //Now using backgrounf to add New gamezone
 

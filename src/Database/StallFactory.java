@@ -12,7 +12,7 @@ package Database;
 public class StallFactory
 {
     
-      public static StallInterface getInstance()
+    public static StallInterface getInstance()
     {
         return new StallImplements();
     }

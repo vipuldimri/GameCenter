@@ -49,8 +49,11 @@ public class UserImplements implements UserInterface
     @Override
     public Stall getGameZoneDetails(int GameZoneID)
     {
+        
          final String Query = "SELECT * FROM GameZoneDB.gamezone where ID = 1;";
+        
          Stall currentgamezone = null ;
+         /*
          try {
                    Statement stmt=conn.createStatement();  
                    ResultSet rs = stmt.executeQuery(Query);
@@ -65,8 +68,9 @@ public class UserImplements implements UserInterface
         {
                 System.out.println("AAA "+ex);
         }
-    
+    */
         return currentgamezone;
+
     }
 
     @Override

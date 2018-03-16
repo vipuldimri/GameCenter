@@ -46,12 +46,7 @@ public class MainAdmin implements MainAdminInterface
          pstmt.setString(5, newgamezone.getPassword());
          pstmt.setDate(6,newgamezone.getSubStartDate());
          pstmt.setDate(7, newgamezone.getSubEndDate()); 
-         pstmt.setInt(8, newgamezone.getBasket_Ball()); 
-         pstmt.setInt(9, newgamezone.getSpeed_Ball()); 
-         pstmt.setInt(10, newgamezone.getAir_Hockey()); 
-         pstmt.setInt(11, newgamezone.getDance()); 
-         pstmt.setInt(12, newgamezone.getCatch_Light()); 
-
+    
          pstmt.executeUpdate();
          
             System.out.println("GameZone ADDED");
