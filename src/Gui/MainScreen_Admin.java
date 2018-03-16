@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import gamecenter.Background_GetTransactionDetails;
 import gamecenter.Recharge;
+import java.awt.Color;
 import java.util.concurrent.CountDownLatch;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -93,8 +94,8 @@ public class MainScreen_Admin extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        TopParentpanel = new javax.swing.JPanel();
+        SidePanel = new javax.swing.JPanel();
         AddGameZonepanel = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -104,9 +105,9 @@ public class MainScreen_Admin extends javax.swing.JFrame
         TransactionDetailspanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        EmployeeDeatilsPanel = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
-        jLayeredPane1 = new javax.swing.JLayeredPane();
+        WorkingScreen_layeredPanel = new javax.swing.JLayeredPane();
         AddGameZone = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel_Sub = new javax.swing.JLabel();
@@ -148,11 +149,11 @@ public class MainScreen_Admin extends javax.swing.JFrame
         setMinimumSize(new java.awt.Dimension(1204, 767));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(110, 89, 222));
-        jPanel1.setLayout(null);
+        TopParentpanel.setBackground(new java.awt.Color(110, 89, 222));
+        TopParentpanel.setLayout(null);
 
-        jPanel2.setBackground(new java.awt.Color(54, 33, 89));
-        jPanel2.setLayout(null);
+        SidePanel.setBackground(new java.awt.Color(54, 33, 89));
+        SidePanel.setLayout(null);
 
         AddGameZonepanel.setBackground(new java.awt.Color(54, 33, 89));
         AddGameZonepanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -173,8 +174,8 @@ public class MainScreen_Admin extends javax.swing.JFrame
         AddGameZonepanel.add(jLabel16);
         jLabel16.setBounds(130, 40, 130, 17);
 
-        jPanel2.add(AddGameZonepanel);
-        AddGameZonepanel.setBounds(0, 310, 300, 80);
+        SidePanel.add(AddGameZonepanel);
+        AddGameZonepanel.setBounds(0, 240, 300, 80);
 
         viewgamezonepanel.setBackground(new java.awt.Color(54, 33, 89));
         viewgamezonepanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -195,8 +196,8 @@ public class MainScreen_Admin extends javax.swing.JFrame
         viewgamezonepanel.add(jLabel17);
         jLabel17.setBounds(130, 40, 130, 17);
 
-        jPanel2.add(viewgamezonepanel);
-        viewgamezonepanel.setBounds(0, 420, 300, 70);
+        SidePanel.add(viewgamezonepanel);
+        viewgamezonepanel.setBounds(0, 320, 300, 70);
 
         TransactionDetailspanel.setBackground(new java.awt.Color(54, 33, 89));
         TransactionDetailspanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -217,24 +218,30 @@ public class MainScreen_Admin extends javax.swing.JFrame
         TransactionDetailspanel.add(jLabel18);
         jLabel18.setBounds(130, 40, 130, 17);
 
-        jPanel2.add(TransactionDetailspanel);
-        TransactionDetailspanel.setBounds(0, 510, 300, 90);
+        SidePanel.add(TransactionDetailspanel);
+        TransactionDetailspanel.setBounds(0, 420, 300, 90);
 
-        jPanel3.setBackground(new java.awt.Color(54, 33, 89));
-        jPanel3.setLayout(null);
+        EmployeeDeatilsPanel.setBackground(new java.awt.Color(54, 33, 89));
+        EmployeeDeatilsPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EmployeeDeatilsPanelMouseClicked(evt);
+            }
+        });
+        EmployeeDeatilsPanel.setLayout(null);
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("Employee Details");
-        jPanel3.add(jLabel20);
+        EmployeeDeatilsPanel.add(jLabel20);
         jLabel20.setBounds(140, 20, 130, 17);
 
-        jPanel2.add(jPanel3);
-        jPanel3.setBounds(0, 620, 300, 60);
+        SidePanel.add(EmployeeDeatilsPanel);
+        EmployeeDeatilsPanel.setBounds(0, 530, 300, 60);
 
-        jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 0, 300, 730);
+        TopParentpanel.add(SidePanel);
+        SidePanel.setBounds(0, 0, 300, 730);
 
+        AddGameZone.setBackground(new java.awt.Color(255, 255, 255));
         AddGameZone.setLayout(null);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -331,6 +338,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
         AddGameZone.add(jCheckBox_speedball);
         jCheckBox_speedball.setBounds(500, 330, 75, 23);
 
+        ViewGameZone.setBackground(new java.awt.Color(255, 255, 255));
         ViewGameZone.setLayout(null);
 
         jTable_Gamezone.setModel(new javax.swing.table.DefaultTableModel(
@@ -345,6 +353,8 @@ public class MainScreen_Admin extends javax.swing.JFrame
 
         ViewGameZone.add(jScrollPane2);
         jScrollPane2.setBounds(0, 242, 900, 300);
+
+        GameZoneTransaction.setBackground(new java.awt.Color(255, 255, 255));
 
         jTable_transaction.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -387,6 +397,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        EmployeeDetails.setBackground(new java.awt.Color(255, 255, 255));
         EmployeeDetails.setLayout(null);
 
         jLabel1.setText("Select GameZone");
@@ -412,52 +423,54 @@ public class MainScreen_Admin extends javax.swing.JFrame
         EmployeeDetails.add(jScrollPane3);
         jScrollPane3.setBounds(0, 140, 900, 402);
 
-        jLayeredPane1.setLayer(AddGameZone, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(ViewGameZone, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(GameZoneTransaction, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(EmployeeDetails, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        WorkingScreen_layeredPanel.setLayer(AddGameZone, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        WorkingScreen_layeredPanel.setLayer(ViewGameZone, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        WorkingScreen_layeredPanel.setLayer(GameZoneTransaction, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        WorkingScreen_layeredPanel.setLayer(EmployeeDetails, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout WorkingScreen_layeredPanelLayout = new javax.swing.GroupLayout(WorkingScreen_layeredPanel);
+        WorkingScreen_layeredPanel.setLayout(WorkingScreen_layeredPanelLayout);
+        WorkingScreen_layeredPanelLayout.setHorizontalGroup(
+            WorkingScreen_layeredPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(AddGameZone, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(WorkingScreen_layeredPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(ViewGameZone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(WorkingScreen_layeredPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(GameZoneTransaction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(WorkingScreen_layeredPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(EmployeeDetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        WorkingScreen_layeredPanelLayout.setVerticalGroup(
+            WorkingScreen_layeredPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(AddGameZone, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(WorkingScreen_layeredPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(ViewGameZone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(WorkingScreen_layeredPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(GameZoneTransaction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(WorkingScreen_layeredPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(EmployeeDetails, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jLayeredPane1);
-        jLayeredPane1.setBounds(300, 190, 900, 540);
+        TopParentpanel.add(WorkingScreen_layeredPanel);
+        WorkingScreen_layeredPanel.setBounds(300, 190, 900, 540);
 
+        MainHeadingLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        MainHeadingLabel.setForeground(new java.awt.Color(255, 255, 255));
         MainHeadingLabel.setText("Heading");
-        jPanel1.add(MainHeadingLabel);
-        MainHeadingLabel.setBounds(600, 110, 240, 40);
+        TopParentpanel.add(MainHeadingLabel);
+        MainHeadingLabel.setBounds(580, 70, 240, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TopParentpanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1201, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 3, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 728, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(TopParentpanel, javax.swing.GroupLayout.PREFERRED_SIZE, 728, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -465,9 +478,20 @@ public class MainScreen_Admin extends javax.swing.JFrame
 
     private void AddGameZonepanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddGameZonepanelMouseClicked
         // TODO add your handling code here:Add new GameZone 
+        
+             
+        MainHeadingLabel.setText("Register New GameZone");
         AddGameZone.setVisible(true);
         ViewGameZone.setVisible(false);
         GameZoneTransaction.setVisible(false);
+        EmployeeDetails.setVisible(false);
+        
+        AddGameZonepanel.setBackground(new Color(110, 89,222));
+        viewgamezonepanel.setBackground(new Color(54, 33,89));
+        TransactionDetailspanel.setBackground(new Color(54, 33,89));
+        EmployeeDeatilsPanel.setBackground(new Color(54, 33,89)); 
+       
+   
         
     }//GEN-LAST:event_AddGameZonepanelMouseClicked
 
@@ -559,10 +583,18 @@ public class MainScreen_Admin extends javax.swing.JFrame
 
     private void viewgamezonepanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewgamezonepanelMouseClicked
         // TODO add your handling code here:
-     
+       MainHeadingLabel.setText("Registered GameZone Details");
         AddGameZone.setVisible(false);
         ViewGameZone.setVisible(true);
         GameZoneTransaction.setVisible(false);
+        EmployeeDetails.setVisible(false);
+         
+        viewgamezonepanel.setBackground(new Color(110, 89,222));
+        AddGameZonepanel.setBackground(new Color(54, 33,89));
+        TransactionDetailspanel.setBackground(new Color(54, 33,89));
+        EmployeeDeatilsPanel.setBackground(new Color(54, 33,89)); 
+        
+        
         //display registered GameZone
         //Displaying All the Registered GameZones Into JTABLE
         DefaultTableModel m = (DefaultTableModel) jTable_Gamezone.getModel();
@@ -591,11 +623,20 @@ public class MainScreen_Admin extends javax.swing.JFrame
 
     private void TransactionDetailspanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TransactionDetailspanelMouseClicked
         // TODO add your handling code here:
-       /*
-        jPanel3.setVisible(false);
-        jPanel4.setVisible(false);
-        jPanel5.setVisible(true);
+         MainHeadingLabel.setText("GameZone Transaction details");
+        AddGameZone.setVisible(false);
+        ViewGameZone.setVisible(false);
+        GameZoneTransaction.setVisible(true);
+         EmployeeDetails.setVisible(false);
+         
+        TransactionDetailspanel.setBackground(new Color(110, 89,222));
+        AddGameZonepanel.setBackground(new Color(54, 33,89));
+        viewgamezonepanel.setBackground(new Color(54, 33,89));
+        EmployeeDeatilsPanel.setBackground(new Color(54, 33,89)); 
+       
+      
           
+        /*
        for(Stall gamezone :stalls.stalls)
        {
         jComboBox_allgamezones.addItem(gamezone.getName());
@@ -688,6 +729,24 @@ public class MainScreen_Admin extends javax.swing.JFrame
         
     }//GEN-LAST:event_jComboBox_allgamezonesActionPerformed
 
+    private void EmployeeDeatilsPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EmployeeDeatilsPanelMouseClicked
+        // TODO add your handling code here://Employee details panel onclick button
+        
+        MainHeadingLabel.setText("GameZone Employee Details");
+        AddGameZone.setVisible(false);
+        ViewGameZone.setVisible(false);
+        GameZoneTransaction.setVisible(false);
+        EmployeeDetails.setVisible(true);
+         
+        EmployeeDeatilsPanel.setBackground(new Color(110, 89,222));
+        AddGameZonepanel.setBackground(new Color(54, 33,89));
+        viewgamezonepanel.setBackground(new Color(54, 33,89));
+        TransactionDetailspanel.setBackground(new Color(54, 33,89)); 
+       
+      
+        
+    }//GEN-LAST:event_EmployeeDeatilsPanelMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -726,11 +785,15 @@ public class MainScreen_Admin extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AddGameZone;
     private javax.swing.JPanel AddGameZonepanel;
+    private javax.swing.JPanel EmployeeDeatilsPanel;
     private javax.swing.JPanel EmployeeDetails;
     private javax.swing.JPanel GameZoneTransaction;
     private javax.swing.JLabel MainHeadingLabel;
+    private javax.swing.JPanel SidePanel;
+    private javax.swing.JPanel TopParentpanel;
     private javax.swing.JPanel TransactionDetailspanel;
     private javax.swing.JPanel ViewGameZone;
+    private javax.swing.JLayeredPane WorkingScreen_layeredPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox_Airhockey;
     private javax.swing.JCheckBox jCheckBox_CatchLight;
@@ -756,10 +819,6 @@ public class MainScreen_Admin extends javax.swing.JFrame
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel_Sub;
-    private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

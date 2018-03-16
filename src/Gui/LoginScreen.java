@@ -256,9 +256,9 @@ public class LoginScreen extends javax.swing.JFrame
         //Checking if admin login
         if(username.equals("admin") && pass.equals("admin"))
         {
-           // MainScreen_Admin admin = new MainScreen_Admin(users,stalls);
-          //  admin.setVisible(true);
-          //  setVisible(false);
+            MainScreen_Admin admin = new MainScreen_Admin();
+            admin.setVisible(true);
+            setVisible(false);
             
           //  return ;
         }
