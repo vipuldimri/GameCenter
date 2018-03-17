@@ -249,6 +249,7 @@ public class LoginScreen extends javax.swing.JFrame
             MainScreen_Admin admin = new MainScreen_Admin();
             admin.setVisible(true);
             setVisible(false);
+            return;
         
         }
         

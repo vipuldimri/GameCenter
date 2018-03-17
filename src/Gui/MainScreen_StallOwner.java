@@ -372,7 +372,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         Customer = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         jTextField_regname = new javax.swing.JTextField();
         jTextField_regcontact = new javax.swing.JTextField();
@@ -505,7 +504,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(jRadioButton3);
-        jRadioButton3.setBounds(580, 260, 73, 37);
+        jRadioButton3.setBounds(580, 260, 71, 37);
 
         jRadioButton4.setBackground(new java.awt.Color(0, 0, 0));
         jRadioButton4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -517,7 +516,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(jRadioButton4);
-        jRadioButton4.setBounds(780, 260, 89, 37);
+        jRadioButton4.setBounds(780, 260, 85, 37);
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
@@ -528,7 +527,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel_currentEMpName.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_currentEMpName.setText("jLabel28");
         jPanel4.add(jLabel_currentEMpName);
-        jLabel_currentEMpName.setBounds(1010, 10, 48, 16);
+        jLabel_currentEMpName.setBounds(1010, 10, 40, 14);
 
         jPanel2.add(jPanel4);
         jPanel4.setBounds(2, 7, 1200, 440);
@@ -582,7 +581,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel_currentempname2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_currentempname2.setText("jLabel29");
         jPanel6.add(jLabel_currentempname2);
-        jLabel_currentempname2.setBounds(1060, 10, 48, 16);
+        jLabel_currentempname2.setBounds(1060, 10, 40, 14);
 
         jPanel3.add(jPanel6);
         jPanel6.setBounds(0, 10, 1180, 50);
@@ -692,7 +691,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         jLabel13.setText("Enter Employee Name ");
         AddUpateEmployee.add(jLabel13);
-        jLabel13.setBounds(100, 20, 130, 16);
+        jLabel13.setBounds(100, 20, 108, 14);
         AddUpateEmployee.add(jTextField7);
         jTextField7.setBounds(100, 50, 210, 50);
 
@@ -801,9 +800,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         transaction.add(jPanel20);
         jPanel20.setBounds(260, 220, 350, 210);
         transaction.add(jDateChooser_StartDate);
-        jDateChooser_StartDate.setBounds(150, 70, 100, 22);
+        jDateChooser_StartDate.setBounds(150, 70, 91, 20);
         transaction.add(jDateChooser_EndDate);
-        jDateChooser_EndDate.setBounds(150, 110, 100, 22);
+        jDateChooser_EndDate.setBounds(150, 110, 91, 20);
 
         jButton7.setText("Search");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -812,15 +811,15 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         transaction.add(jButton7);
-        jButton7.setBounds(300, 90, 110, 25);
+        jButton7.setBounds(300, 90, 110, 23);
 
         jLabel29.setText("Start Date");
         transaction.add(jLabel29);
-        jLabel29.setBounds(40, 70, 80, 16);
+        jLabel29.setBounds(40, 70, 80, 14);
 
         jLabel30.setText("End Date");
         transaction.add(jLabel30);
-        jLabel30.setBounds(40, 120, 70, 16);
+        jLabel30.setBounds(40, 120, 70, 14);
 
         jLabel3_totalTransaction.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3_totalTransaction.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
@@ -836,7 +835,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel15.setText("Total Collection");
         transaction.add(jLabel15);
-        jLabel15.setBounds(590, 30, 150, 20);
+        jLabel15.setBounds(520, 30, 150, 20);
 
         Customer.setBackground(new java.awt.Color(255, 255, 255));
         Customer.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -856,21 +855,22 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         Customer.add(jLabel34);
         jLabel34.setBounds(150, 130, 120, 50);
 
-        jLabel36.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel36.setText("Register Customer ");
-        Customer.add(jLabel36);
-        jLabel36.setBounds(370, 20, 180, 40);
-
         jLabel37.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel37.setText("Name");
         Customer.add(jLabel37);
         jLabel37.setBounds(150, 80, 53, 22);
+
+        jTextField_regname.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         Customer.add(jTextField_regname);
-        jTextField_regname.setBounds(250, 80, 140, 22);
+        jTextField_regname.setBounds(250, 78, 190, 30);
+
+        jTextField_regcontact.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         Customer.add(jTextField_regcontact);
-        jTextField_regcontact.setBounds(250, 140, 140, 22);
+        jTextField_regcontact.setBounds(250, 140, 190, 28);
+
+        jTextField_regemail.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         Customer.add(jTextField_regemail);
-        jTextField_regemail.setBounds(250, 200, 140, 22);
+        jTextField_regemail.setBounds(250, 190, 190, 30);
 
         jTable_customers.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTable_customers.setModel(new javax.swing.table.DefaultTableModel(
@@ -894,7 +894,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         Customer.add(RegisterNewcustomer_button);
-        RegisterNewcustomer_button.setBounds(540, 120, 90, 25);
+        RegisterNewcustomer_button.setBounds(540, 120, 90, 23);
 
         ResetButton_Customer.setText("Reset");
         ResetButton_Customer.addActionListener(new java.awt.event.ActionListener() {
@@ -903,7 +903,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         Customer.add(ResetButton_Customer);
-        ResetButton_Customer.setBounds(540, 170, 90, 25);
+        ResetButton_Customer.setBounds(540, 170, 90, 23);
 
         jLayeredPane1.setLayer(AddEmployee, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(AddUpateEmployee, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -2149,7 +2149,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel3_totalTransaction;
     private javax.swing.JLabel jLabel4;

@@ -6,7 +6,8 @@ public interface StallInterface
 {
     
     public void AddGameZone(StallInterface stall);
-    public ArrayList<Stall> GetAllGameZone();
+    public GameZoneDetailsAndName GetAllGameZone() throws Exception;
+ 
             
     
 }

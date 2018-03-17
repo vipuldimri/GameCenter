@@ -18,6 +18,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
+import Database.GameZoneDetailsAndName;
+import gamecenter.Clock;
+import java.util.Timer;
 public class MainScreen_Admin extends javax.swing.JFrame 
 {
     
@@ -51,9 +54,11 @@ public class MainScreen_Admin extends javax.swing.JFrame
       
        try
        {
-           
+        GameZoneDetailsAndName details ;   
         StallInterface Dao = StallFactory.getInstance();
-        GameZoneList = Dao.GetAllGameZone();
+        details = Dao.GetAllGameZone();
+        GameZoneList = details.GameZoneDetails;
+        gamezonenames = details.GameZoneNames;
        
        }
        catch(Exception e)
@@ -79,10 +84,38 @@ public class MainScreen_Admin extends javax.swing.JFrame
         GameZoneTransaction.setVisible(false);
         
         
+      
+          
+    
+       jComboBox1_selectgamezoneemployee.addItem("Select GameZone"); 
+       jComboBox_allgamezones.addItem("Select GameZone");
+       for(String gamezone : gamezonenames)
+       {
+        jComboBox1_selectgamezoneemployee.addItem(gamezone);
+        jComboBox_allgamezones.addItem(gamezone);
+       }
         
-        jComboBox_allgamezones.addItem("Select GameZone");
-        
-        
+               
+       ///clock
+       
+              java.util.Date date=new java.util.Date();
+		String dip=date.toString();
+		Label_clockadmin.setText(dip);
+                //clock
+                 Timer time=new Timer();
+		int delay=5000;
+		int period= 1000;
+		Clock clock = new Clock(Label_clockadmin);
+		time.scheduleAtFixedRate(clock, delay,period);
+                //
+                
+       
+       //
+  
+      
+    
+       
+       
        
     }
     
@@ -351,23 +384,23 @@ public class MainScreen_Admin extends javax.swing.JFrame
 
         jCheckBox_Airhockey.setText("Air Hockey");
         AddGameZone.add(jCheckBox_Airhockey);
-        jCheckBox_Airhockey.setBounds(500, 390, 89, 25);
+        jCheckBox_Airhockey.setBounds(500, 390, 77, 23);
 
         jcheckbox_basketball.setText("Basket Ball");
         AddGameZone.add(jcheckbox_basketball);
-        jcheckbox_basketball.setBounds(500, 360, 89, 25);
+        jcheckbox_basketball.setBounds(500, 360, 77, 23);
 
         jCheckBox_CatchLight.setText("Catch Light");
         AddGameZone.add(jCheckBox_CatchLight);
-        jCheckBox_CatchLight.setBounds(670, 360, 91, 25);
+        jCheckBox_CatchLight.setBounds(670, 360, 79, 23);
 
         jCheckBox_dance.setText("Dance");
         AddGameZone.add(jCheckBox_dance);
-        jCheckBox_dance.setBounds(670, 330, 63, 25);
+        jCheckBox_dance.setBounds(670, 330, 55, 23);
 
         jCheckBox_speedball.setText("Speed Ball");
         AddGameZone.add(jCheckBox_speedball);
-        jCheckBox_speedball.setBounds(500, 330, 89, 25);
+        jCheckBox_speedball.setBounds(500, 330, 75, 23);
 
         ViewGameZone.setBackground(new java.awt.Color(255, 255, 255));
         ViewGameZone.setLayout(null);
@@ -433,20 +466,17 @@ public class MainScreen_Admin extends javax.swing.JFrame
 
         jLabel1.setText("Select GameZone");
         EmployeeDetails.add(jLabel1);
-        jLabel1.setBounds(92, 44, 100, 16);
+        jLabel1.setBounds(92, 44, 83, 14);
 
         EmployeeDetails.add(jComboBox1_selectgamezoneemployee);
-        jComboBox1_selectgamezoneemployee.setBounds(230, 40, 31, 22);
+        jComboBox1_selectgamezoneemployee.setBounds(230, 40, 130, 20);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Name", "Address", "Contact", "Email", "type", "GameZoneId", "Password", "UserName"
             }
         ));
         jScrollPane3.setViewportView(jTable1);
@@ -489,11 +519,13 @@ public class MainScreen_Admin extends javax.swing.JFrame
         MainHeadingLabel.setForeground(new java.awt.Color(255, 255, 255));
         MainHeadingLabel.setText("Heading");
         TopParentpanel.add(MainHeadingLabel);
-        MainHeadingLabel.setBounds(680, 70, 240, 40);
+        MainHeadingLabel.setBounds(470, 70, 400, 70);
 
+        Label_clockadmin.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Label_clockadmin.setForeground(new java.awt.Color(255, 255, 255));
         Label_clockadmin.setText("jLabel10");
         TopParentpanel.add(Label_clockadmin);
-        Label_clockadmin.setBounds(1080, 10, 48, 16);
+        Label_clockadmin.setBounds(830, 10, 290, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -653,26 +685,22 @@ public class MainScreen_Admin extends javax.swing.JFrame
     }//GEN-LAST:event_viewgamezonepanelMouseClicked
 
     private void TransactionDetailspanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TransactionDetailspanelMouseClicked
+
         // TODO add your handling code here:
          MainHeadingLabel.setText("GameZone Transaction details");
-        AddGameZone.setVisible(false);
-        ViewGameZone.setVisible(false);
-        GameZoneTransaction.setVisible(true);
+         AddGameZone.setVisible(false);
+         ViewGameZone.setVisible(false);
+         GameZoneTransaction.setVisible(true);
          EmployeeDetails.setVisible(false);
          
-        TransactionDetailspanel.setBackground(new Color(110, 89,222));
-        AddGameZonepanel.setBackground(new Color(54, 33,89));
-        viewgamezonepanel.setBackground(new Color(54, 33,89));
-        EmployeeDeatilsPanel.setBackground(new Color(54, 33,89)); 
+         TransactionDetailspanel.setBackground(new Color(110, 89,222));
+         AddGameZonepanel.setBackground(new Color(54, 33,89));
+         viewgamezonepanel.setBackground(new Color(54, 33,89));
+         EmployeeDeatilsPanel.setBackground(new Color(54, 33,89)); 
        
       
-          
-        /*
-       for(Stall gamezone :stalls.stalls)
-       {
-        jComboBox_allgamezones.addItem(gamezone.getName());
-       }
-       */
+  
+       
     }//GEN-LAST:event_TransactionDetailspanelMouseClicked
 
     //Method for get transaction for perticular GameZone
@@ -773,7 +801,9 @@ public class MainScreen_Admin extends javax.swing.JFrame
         AddGameZonepanel.setBackground(new Color(54, 33,89));
         viewgamezonepanel.setBackground(new Color(54, 33,89));
         TransactionDetailspanel.setBackground(new Color(54, 33,89)); 
-       
+        
+        
+      
       
         
     }//GEN-LAST:event_EmployeeDeatilsPanelMouseClicked

@@ -41,28 +41,26 @@ public class StallImplements implements StallInterface
     }
 
     @Override
-    public ArrayList<Stall> GetAllGameZone() 
+    public GameZoneDetailsAndName GetAllGameZone() throws Exception
     {
-        ArrayList<Stall> gamzonelist =  null;
-        try
-        {
+                 GameZoneDetailsAndName details = new GameZoneDetailsAndName();
+      
                    Statement stmt=conn.createStatement();  
                    ResultSet rs = stmt.executeQuery(GetGameZones);
                    while(rs.next())  
                    {
-                    //int ID, String Name, String OwnerName, String Address, String Contact, String Password, Date SubStartDate, Date SubEndDate
                     Stall newstall = new Stall(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getDate(7),rs.getDate(8));
-                    gamzonelist.add(newstall);
+                    details.GameZoneDetails.add(newstall);
+                    details.GameZoneNames.add(rs.getString(2));
+                    
+                    
                    }
-            Errormessage = "Success";
-        }
-        catch(Exception e)
-        {
-            
-            Errormessage = "Failed";
-        }
+                   
+                   Errormessage = "Success";
         
-        return gamzonelist;
+    
+        
+        return details;
      
     }
     
