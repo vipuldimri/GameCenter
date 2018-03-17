@@ -39,9 +39,10 @@ public class MainScreen_Admin extends javax.swing.JFrame
     JDialog jDialog;
     
     String ErrorMessage;
-    TransactionInterface Dao;
+    
     
     ArrayList<Recharge> transactionlist;
+    ArrayList<User> employelist;
     
     
     
@@ -181,7 +182,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jLabel1 = new javax.swing.JLabel();
         jComboBox1_selectgamezoneemployee = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable_Emploe = new javax.swing.JTable();
         MainHeadingLabel = new javax.swing.JLabel();
         Label_clockadmin = new javax.swing.JLabel();
 
@@ -466,12 +467,17 @@ public class MainScreen_Admin extends javax.swing.JFrame
 
         jLabel1.setText("Select GameZone");
         EmployeeDetails.add(jLabel1);
-        jLabel1.setBounds(92, 44, 83, 14);
+        jLabel1.setBounds(50, 30, 150, 40);
 
+        jComboBox1_selectgamezoneemployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1_selectgamezoneemployeeActionPerformed(evt);
+            }
+        });
         EmployeeDetails.add(jComboBox1_selectgamezoneemployee);
         jComboBox1_selectgamezoneemployee.setBounds(230, 40, 130, 20);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_Emploe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -479,7 +485,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
                 "ID", "Name", "Address", "Contact", "Email", "type", "GameZoneId", "Password", "UserName"
             }
         ));
-        jScrollPane3.setViewportView(jTable1);
+        jScrollPane3.setViewportView(jTable_Emploe);
 
         EmployeeDetails.add(jScrollPane3);
         jScrollPane3.setBounds(0, 140, 900, 402);
@@ -721,8 +727,11 @@ public class MainScreen_Admin extends javax.swing.JFrame
 	              
                      try 
                       {
-                       Dao = TransactionFactory.getInstance();
-                       } 
+                           TransactionInterface Dao;
+                           Dao = TransactionFactory.getInstance();
+                            String TransactionTableName = GamezoneName+"_transaction";
+                           transactionlist  = Dao.GetTransactionDetails(TransactionTableName);
+                      } 
                      catch (Exception ex) 
                       {
                            System.out.println(ex);
@@ -730,18 +739,10 @@ public class MainScreen_Admin extends javax.swing.JFrame
                       }
                         //Arguments is table Name
                
-                        String TransactionTableName = GamezoneName+"_transaction";
-                        try 
-                       {
-                       transactionlist  = Dao.GetTransactionDetails(TransactionTableName);
-                       } catch (Exception ex)
-                         {
-                           System.out.println("ERROR IN THREAD "+ex);
-                               ErrorMessage = "TransactionError";
-          
-                              }
-                                  ;           
-                                  jDialog.dispose();
+                       
+                     
+                                          
+                        jDialog.dispose();
                         return "end";
 	                
 	            }//do backgrounf ENDS
@@ -819,6 +820,85 @@ public class MainScreen_Admin extends javax.swing.JFrame
         }
         System.exit(0);
     }//GEN-LAST:event_jLabel_OwnerName1MouseClicked
+
+    private void jComboBox1_selectgamezoneemployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1_selectgamezoneemployeeActionPerformed
+        // TODO add your handling code here:Employee ComboBox Event
+        
+         String GamezoneName = jComboBox1_selectgamezoneemployee.getSelectedItem().toString();
+        if(GamezoneName.equals("Select GameZone"))
+        {
+            return ;
+        }
+     
+      
+        //Background worker for getting the data from the server 
+        SwingWorker work = new SwingWorker<String , Integer>() {
+	            @Override
+	            protected  String  doInBackground() throws Exception 
+	            {
+	              
+                     try 
+                      {
+                           UserInterface Dao = UserFactory.getInstance();
+                           employelist  = Dao.getAllUsers(GamezoneName);
+  
+                       } 
+                     catch (Exception ex) 
+                      {
+                           System.out.println(ex);
+                           Logger.getLogger(Background_GetTransactionDetails.class.getName()).log(Level.SEVERE, null, ex);
+                      }
+                        //Arguments is table Name
+               
+                             
+                                  jDialog.dispose();
+                        return "end";
+	                
+	            }//do backgrounf ENDS
+
+
+	            @Override
+	            protected void done()
+                    {
+                        
+        
+	            }
+	        };
+        final ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/Images/Loading.gif"));
+        work.execute();
+        JOptionPane pane = new JOptionPane("", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon,new Object[]{}, null);
+        jDialog = pane.createDialog(this,"Loading Date");
+        jDialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+      
+        //jDialog.show();  this method is depricated there using setVisible method for showing the dialoge box 
+        jDialog.setVisible(true);
+ 
+                
+        //Filling the Jtable 
+        DefaultTableModel m = (DefaultTableModel) jTable_Emploe.getModel();
+        m.setRowCount(0);
+        
+        DefaultTableModel  model = (DefaultTableModel) jTable_Emploe.getModel();
+        Object row[] = new Object[9];
+        for(int i=0;i < employelist.size();i++)
+        {
+        row[0] = employelist.get(i).getID();
+        row[1] = employelist.get(i).getName();
+        row[2] = employelist.get(i).getAddress();
+        row[3] = employelist.get(i).getContact();
+        row[4] = employelist.get(i).getEmail();
+        row[5] = employelist.get(i).getType();
+        row[6] = employelist.get(i).getGameZoneID();
+        row[7] = employelist.get(i).getPassword();
+        row[8] = employelist.get(i).getUserName();
+       
+      
+        model.addRow(row);
+        }
+        
+        
+        
+    }//GEN-LAST:event_jComboBox1_selectgamezoneemployeeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -900,7 +980,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable_Emploe;
     private javax.swing.JTable jTable_Gamezone;
     private javax.swing.JTable jTable_transaction;
     private javax.swing.JTextField jTextField_GameZoneAddress;
