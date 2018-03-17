@@ -4,6 +4,7 @@ package gamecenter;
 import Database.Connect;
 import Gui.LoginScreen;
 import Gui.Splash;
+import SerialCommunication.CommPortTest;
 import javax.swing.JOptionPane;
 
 
@@ -17,6 +18,8 @@ public class GameCenter
     
     public static void main(String[] args) throws InterruptedException 
     {
+        
+         //CommPortTest obj  = new CommPortTest("COM2");
         //Creating connection
       
         //Creating instance of splash loading screen
