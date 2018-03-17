@@ -97,8 +97,20 @@ public class UserImplements implements UserInterface
     @Override
     public boolean UpdateEmp(User user,String GameZoneName)throws Exception
     {
-        String  query = "UPDATE `GameZoneDB`.`users` SET `Name` = ?,`Address` = ?,`Contact` = ?,`Email` = ?,`Type` =? ,`GameZoneID` = ?,`Password` =? WHERE `ID` = ?;";
-        PreparedStatement pstmt = conn.prepareStatement(query);
+        
+        String q ="UPDATE `GameZoneDB`.`"+GameZoneName+"_users"+"` \n" +
+"SET \n" +
+"`Name` =? ,\n" +
+"`Address` =? ,\n" +
+"`Contact` =? ,\n" +
+"`Email` =? ,\n" +
+"`Type` =? \n" +
+",`GameZoneID` = ? ,`Password` =? ,\n" +
+"`UserName` = ? \n" +
+"WHERE `ID` =? ;";    
+
+             
+               PreparedStatement pstmt = conn.prepareStatement(q);
         pstmt.setString(1, user.getName());
         pstmt.setString(2, user.getAddress());
         pstmt.setString(3, user.getContact());
@@ -106,9 +118,12 @@ public class UserImplements implements UserInterface
         pstmt.setString(5, user.getType());
         pstmt.setInt(6, user.getGameZoneID());
         pstmt.setString(7, user.getPassword());
-        pstmt.setInt(8, user.getID());
+        pstmt.setString(8, user.getUserName());
+        pstmt.setInt(9, user.getID());
+       
 
         pstmt.executeUpdate();
+   
         return true;
         
     }

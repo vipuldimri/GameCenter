@@ -29,6 +29,9 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
     boolean deleteEmp_flag = false;
     JDialog update;
     String currentstallname;
+    
+    
+    
     public Updata_DeleteEmployee(User current,JFrame previous,String currentstallname,ArrayList<User> employeelist)
     {
         this.currentstallname = currentstallname;
@@ -46,6 +49,7 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
         jTextField1_empaddress.setText(current.getAddress());
         jTextField1_empcontact.setText(current.getContact());
         jTextField1_emppassword.setText(current.getPassword());
+        jTextField1_usernam.setText(current.getUserName());
         
         update = new JDialog();
     }
@@ -74,7 +78,7 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
         jTextField1_emppassword = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
-        jTextField1_emppassword1 = new javax.swing.JTextField();
+        jTextField1_usernam = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 500));
@@ -165,9 +169,9 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
         jPanel1.add(jLabel17);
         jLabel17.setBounds(130, 280, 140, 22);
 
-        jTextField1_emppassword1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jPanel1.add(jTextField1_emppassword1);
-        jTextField1_emppassword1.setBounds(130, 320, 220, 40);
+        jTextField1_usernam.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jPanel1.add(jTextField1_usernam);
+        jTextField1_usernam.setBounds(130, 320, 220, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -191,8 +195,9 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
         
         String username = jTextField1_empname.getText();
         String password = jTextField1_emppassword.getText();
+        String usernamee  =jTextField1_usernam.getText();
         
-        if(username.length() == 0 || password.length() == 0)
+        if(username.length() == 0 || password.length() == 0 || usernamee.length() == 0)
         {
            JOptionPane.showMessageDialog(jPanel1,
            "Enter Complete Details.",
@@ -215,6 +220,7 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
         updateemp.setPassword(password);
         updateemp.setID(current.getID());
         updateemp.setGameZoneID(current.getGameZoneID());
+        updateemp.setUserName(username);
 
         
               SwingWorker work = new SwingWorker<String , Integer>() 
@@ -271,7 +277,7 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
         }
         else
         {
-                     UpdateEmployeeListThread updateEmployeeListThread = new UpdateEmployeeListThread(employeelist,currentstallname);
+                      UpdateEmployeeListThread updateEmployeeListThread = new UpdateEmployeeListThread(employeelist,currentstallname);
                       updateEmployeeListThread.start();
                       JOptionPane.showMessageDialog(jPanel1,
                      "Update Employee Success.",
@@ -421,6 +427,6 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
     private javax.swing.JTextField jTextField1_empemail;
     private javax.swing.JTextField jTextField1_empname;
     private javax.swing.JTextField jTextField1_emppassword;
-    private javax.swing.JTextField jTextField1_emppassword1;
+    private javax.swing.JTextField jTextField1_usernam;
     // End of variables declaration//GEN-END:variables
 }

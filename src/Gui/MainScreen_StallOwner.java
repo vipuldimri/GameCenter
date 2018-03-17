@@ -1375,7 +1375,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         DefaultTableModel m = (DefaultTableModel) jTable_updatedelete.getModel();
         m.setRowCount(0);
         DefaultTableModel  model = (DefaultTableModel) jTable_updatedelete.getModel();
-        Object row[] = new Object[8];
+        Object row[] = new Object[9];
         for(int i=0;i < currentgamezoneusers.size();i++)
         {
             row[0] = currentgamezoneusers.get(i).getID();
@@ -1386,6 +1386,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             row[5] = currentgamezoneusers.get(i).getType();
             row[6] = currentgamezoneusers.get(i).getGameZoneID();
             row[7] = currentgamezoneusers.get(i).getPassword();
+            row[8] = currentgamezoneusers.get(i).getUserName();
             model.addRow(row);
 
         }
@@ -1852,7 +1853,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
          String type = jTable_updatedelete.getModel().getValueAt(row, 5).toString();
          String gamezoneid = jTable_updatedelete.getModel().getValueAt(row, 6).toString();
          String password = jTable_updatedelete.getModel().getValueAt(row, 7).toString();
+         String username = jTable_updatedelete.getModel().getValueAt(row, 8).toString();
           
+         
          user.setID(Integer.parseInt(ID ));
          user.setEmail(email);
          user.setName(Name);
@@ -1861,6 +1864,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
          user.setPassword(password);
          user.setAddress(addres);
          user.setGameZoneID(Integer.parseInt(gamezoneid));
+         user.setUserName(username);
          
         
        
