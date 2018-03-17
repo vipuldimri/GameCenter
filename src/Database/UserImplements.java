@@ -131,7 +131,7 @@ public class UserImplements implements UserInterface
     @Override
     public boolean DeleteEmp(int id,String GameZoneName) throws Exception
     {
-        String query = "DELETE FROM `GameZoneDB`.`users` WHERE ID = ?;";
+        String query = "DELETE FROM `GameZoneDB`.`"+GameZoneName+"_users"+"` WHERE ID = ?;";
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setInt(1, id);
 

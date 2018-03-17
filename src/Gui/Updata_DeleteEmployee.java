@@ -294,7 +294,8 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:Delete Button Event
-        int dialogButton = JOptionPane.YES_NO_OPTION;
+
+       int dialogButton = JOptionPane.YES_NO_OPTION;
        int dialogResult = JOptionPane.showConfirmDialog (null, "Delete confirm  ???","Warning",dialogButton);
        if(dialogResult == JOptionPane.NO_OPTION)
        {
@@ -308,19 +309,19 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
 	            @Override
 	            protected  String  doInBackground() throws Exception 
 	            {
-	             
 
-                   
                     UserInterface Dao = null;
-                    try {
+                    try 
+                    {
                     Dao = UserFactory.getInstance();
                     Dao.DeleteEmp(current.getID(),currentstallname);
                     deleteEmp_flag = true;
+                    
                     } catch (Exception ex) 
                     {
                         deleteEmp_flag = false;
                     Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
-                   }
+                    }
                 
 
                         return "end";
@@ -347,12 +348,16 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
         
         if(deleteEmp_flag == false)
         {
-            JOptionPane.showMessageDialog(jPanel1,
+                     JOptionPane.showMessageDialog(jPanel1,
                      "Delete Employee Failed.",
                      "Inane error",
                       JOptionPane.ERROR_MESSAGE);
-                   return;
-        }else{
+                     return;
+        }else
+        {
+            
+                      UpdateEmployeeListThread updateEmployeeListThread = new UpdateEmployeeListThread(employeelist,currentstallname);
+                      updateEmployeeListThread.start();
                      JOptionPane.showMessageDialog(jPanel1,
                      "Employee Deleted.",
                      "Inane error",
