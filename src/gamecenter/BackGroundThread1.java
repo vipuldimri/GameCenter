@@ -37,7 +37,7 @@ public class BackGroundThread1 extends Thread
         {
             System.out.println("Error Connectiing");
             error_flag= true;
-            Logger.getLogger(BackGroundThread1.class.getName()).log(Level.SEVERE, null, ex);
+         
             return ;
         }
         try 

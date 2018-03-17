@@ -271,7 +271,7 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
         }
         else
         {
-                     UpdateEmployeeListThread updateEmployeeListThread = new UpdateEmployeeListThread(employeelist);
+                     UpdateEmployeeListThread updateEmployeeListThread = new UpdateEmployeeListThread(employeelist,currentstallname);
                       updateEmployeeListThread.start();
                       JOptionPane.showMessageDialog(jPanel1,
                      "Update Employee Success.",

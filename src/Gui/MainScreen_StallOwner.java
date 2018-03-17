@@ -46,6 +46,8 @@ import  gamecenter.BackgroundAutocomplete;
 import gamecenter.Stall;
 import gamecenter.UpdateCustomerListThread;
 import gamecenter.UpdateEmployeeListThread;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 //Main screen for every GameZone
 public class MainScreen_StallOwner extends javax.swing.JFrame 
 {
@@ -180,7 +182,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             buttonGroup1.add(jRadioButton4);
         
  
+            //clock
             
+            
+            //
             
             
             
@@ -313,9 +318,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jTable_EmpRecord = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
-        list_empsearch = new java.awt.List();
         transaction = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_transactionDetails = new javax.swing.JTable();
         jPanel20 = new javax.swing.JPanel();
@@ -327,6 +330,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel30 = new javax.swing.JLabel();
         jLabel3_totalTransaction = new javax.swing.JLabel();
         jLabel_validDate = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
         Customer = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
@@ -361,6 +365,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel31 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel_Label = new javax.swing.JLabel();
+        Label_clock = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -462,7 +467,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(jRadioButton3);
-        jRadioButton3.setBounds(580, 260, 71, 37);
+        jRadioButton3.setBounds(580, 260, 73, 37);
 
         jRadioButton4.setBackground(new java.awt.Color(0, 0, 0));
         jRadioButton4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -474,7 +479,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(jRadioButton4);
-        jRadioButton4.setBounds(780, 260, 85, 37);
+        jRadioButton4.setBounds(780, 260, 89, 37);
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
@@ -485,7 +490,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel_currentEMpName.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_currentEMpName.setText("jLabel28");
         jPanel4.add(jLabel_currentEMpName);
-        jLabel_currentEMpName.setBounds(1010, 10, 40, 14);
+        jLabel_currentEMpName.setBounds(1010, 10, 48, 16);
 
         jPanel2.add(jPanel4);
         jPanel4.setBounds(2, 7, 1200, 440);
@@ -493,19 +498,23 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel5.setBackground(new java.awt.Color(0, 0, 0));
         jPanel5.setLayout(null);
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Existing Amount");
         jPanel5.add(jLabel4);
-        jLabel4.setBounds(0, 0, 100, 30);
+        jLabel4.setBounds(0, 0, 180, 30);
         jPanel5.add(jSeparator2);
         jSeparator2.setBounds(0, 30, 660, 2);
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Existing Amount ");
         jPanel5.add(jLabel5);
-        jLabel5.setBounds(110, 90, 100, 30);
+        jLabel5.setBounds(110, 80, 190, 40);
+
+        jTextField3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jPanel5.add(jTextField3);
-        jTextField3.setBounds(320, 62, 290, 60);
+        jTextField3.setBounds(290, 70, 290, 60);
 
         jPanel2.add(jPanel5);
         jPanel5.setBounds(280, 470, 660, 190);
@@ -535,7 +544,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel_currentempname2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_currentempname2.setText("jLabel29");
         jPanel6.add(jLabel_currentempname2);
-        jLabel_currentempname2.setBounds(1060, 10, 40, 14);
+        jLabel_currentempname2.setBounds(1060, 10, 48, 16);
 
         jPanel3.add(jPanel6);
         jPanel6.setBounds(0, 10, 1180, 50);
@@ -645,7 +654,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         jLabel13.setText("Enter Employee Name ");
         AddUpateEmployee.add(jLabel13);
-        jLabel13.setBounds(100, 20, 108, 14);
+        jLabel13.setBounds(100, 20, 130, 16);
         AddUpateEmployee.add(jTextField7);
         jTextField7.setBounds(100, 50, 210, 50);
 
@@ -701,25 +710,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel11.setText("Search for Employee");
         Emprecords.add(jLabel11);
-        jLabel11.setBounds(30, 20, 220, 60);
-
-        jTextField4.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField4FocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField4FocusLost(evt);
-            }
-        });
-        jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField4KeyReleased(evt);
-            }
-        });
+        jLabel11.setBounds(70, 30, 220, 60);
         Emprecords.add(jTextField4);
-        jTextField4.setBounds(30, 80, 190, 40);
-        Emprecords.add(list_empsearch);
-        list_empsearch.setBounds(30, 120, 190, 80);
+        jTextField4.setBounds(70, 90, 190, 40);
 
         transaction.setBackground(new java.awt.Color(255, 255, 255));
         transaction.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -728,10 +721,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         transaction.setLayout(null);
-
-        jLabel15.setText("Transaction History");
-        transaction.add(jLabel15);
-        jLabel15.setBounds(340, 10, 93, 14);
 
         jTable_transactionDetails.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTable_transactionDetails.setModel(new javax.swing.table.DefaultTableModel(
@@ -774,9 +763,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         transaction.add(jPanel20);
         jPanel20.setBounds(260, 220, 350, 210);
         transaction.add(jDateChooser_StartDate);
-        jDateChooser_StartDate.setBounds(150, 70, 91, 20);
+        jDateChooser_StartDate.setBounds(150, 70, 100, 22);
         transaction.add(jDateChooser_EndDate);
-        jDateChooser_EndDate.setBounds(150, 110, 91, 20);
+        jDateChooser_EndDate.setBounds(150, 110, 100, 22);
 
         jButton7.setText("Search");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -785,15 +774,15 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         transaction.add(jButton7);
-        jButton7.setBounds(300, 90, 110, 23);
+        jButton7.setBounds(300, 90, 110, 25);
 
         jLabel29.setText("Start Date");
         transaction.add(jLabel29);
-        jLabel29.setBounds(40, 70, 80, 14);
+        jLabel29.setBounds(40, 70, 80, 16);
 
         jLabel30.setText("End Date");
         transaction.add(jLabel30);
-        jLabel30.setBounds(40, 120, 70, 14);
+        jLabel30.setBounds(40, 120, 70, 16);
 
         jLabel3_totalTransaction.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3_totalTransaction.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
@@ -805,6 +794,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel_validDate.setForeground(new java.awt.Color(255, 0, 0));
         transaction.add(jLabel_validDate);
         jLabel_validDate.setBounds(40, 30, 110, 20);
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel15.setText("Total Collection");
+        transaction.add(jLabel15);
+        jLabel15.setBounds(590, 30, 150, 20);
 
         Customer.setBackground(new java.awt.Color(255, 255, 255));
         Customer.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -834,11 +828,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         Customer.add(jLabel37);
         jLabel37.setBounds(150, 80, 53, 22);
         Customer.add(jTextField_regname);
-        jTextField_regname.setBounds(250, 80, 140, 20);
+        jTextField_regname.setBounds(250, 80, 140, 22);
         Customer.add(jTextField_regcontact);
-        jTextField_regcontact.setBounds(250, 140, 140, 20);
+        jTextField_regcontact.setBounds(250, 140, 140, 22);
         Customer.add(jTextField_regemail);
-        jTextField_regemail.setBounds(250, 200, 140, 20);
+        jTextField_regemail.setBounds(250, 200, 140, 22);
 
         jTable_customers.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTable_customers.setModel(new javax.swing.table.DefaultTableModel(
@@ -862,7 +856,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         Customer.add(RegisterNewcustomer_button);
-        RegisterNewcustomer_button.setBounds(540, 120, 90, 23);
+        RegisterNewcustomer_button.setBounds(540, 120, 90, 25);
 
         ResetButton_Customer.setText("Reset");
         ResetButton_Customer.addActionListener(new java.awt.event.ActionListener() {
@@ -871,7 +865,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         Customer.add(ResetButton_Customer);
-        ResetButton_Customer.setBounds(540, 170, 90, 23);
+        ResetButton_Customer.setBounds(540, 170, 90, 25);
 
         jLayeredPane1.setLayer(AddEmployee, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(AddUpateEmployee, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -1173,6 +1167,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel9.add(jLabel_Label);
         jLabel_Label.setBounds(350, 60, 280, 60);
 
+        Label_clock.setText("jLabel35");
+        jPanel9.add(Label_clock);
+        Label_clock.setBounds(698, 10, 70, 16);
+
         jPanel7.add(jPanel9);
         jPanel9.setBounds(340, 0, 860, 180);
 
@@ -1457,7 +1455,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         }
         else
         {
-                      UpdateEmployeeListThread updateemployeelist = new UpdateEmployeeListThread(currentgamezoneusers);
+                      UpdateEmployeeListThread updateemployeelist = new UpdateEmployeeListThread(currentgamezoneusers,currentgamezone.getName());
                       updateemployeelist.start();
                       JOptionPane.showMessageDialog(jPanel1,
                       "Adding Employee Success.",
@@ -1974,7 +1972,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             JOptionPane.ERROR_MESSAGE);
             //now updating the customer list
             
-            UpdateCustomerListThread updatecustomerlist = new UpdateCustomerListThread(customerlist);
+            UpdateCustomerListThread updatecustomerlist = new UpdateCustomerListThread(customerlist,currentgamezone.getName());
             updatecustomerlist.start();
             
           }
@@ -2007,24 +2005,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         }
         System.exit(0);
     }//GEN-LAST:event_jLabel_OwnerName1MouseClicked
-
-    private void jTextField4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyReleased
-        // TODO add your handling code here:Autocomplete
-        
-        BackgroundAutocomplete background = new BackgroundAutocomplete(jTextField4, list_empsearch);
-        background.start();
-        
-    }//GEN-LAST:event_jTextField4KeyReleased
-
-    private void jTextField4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusLost
-        // TODO add your handling code here:
-        list_empsearch.setVisible(false);
-    }//GEN-LAST:event_jTextField4FocusLost
-
-    private void jTextField4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusGained
-        // TODO add your handling code here:
-         list_empsearch.setVisible(true);
-    }//GEN-LAST:event_jTextField4FocusGained
  	public static java.sql.Timestamp convert(java.util.Date date)
 	{
 		return new java.sql.Timestamp(date.getTime());
@@ -2077,6 +2057,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JPanel AddUpateEmployee;
     private javax.swing.JPanel Customer;
     private javax.swing.JPanel Emprecords;
+    private javax.swing.JLabel Label_clock;
     private javax.swing.JButton RegisterNewcustomer_button;
     private javax.swing.JButton ResetButton_Customer;
     private javax.swing.JButton ResetValuestozerobutton;
@@ -2181,7 +2162,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JTextField jTextField_regcontact;
     private javax.swing.JTextField jTextField_regemail;
     private javax.swing.JTextField jTextField_regname;
-    private java.awt.List list_empsearch;
     private javax.swing.JPanel transaction;
     // End of variables declaration//GEN-END:variables
 }

@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import gamecenter.Background_GetTransactionDetails;
 import gamecenter.Recharge;
 import java.awt.Color;
+import java.sql.Connection;
 import java.util.concurrent.CountDownLatch;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -109,6 +110,10 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jLabel18 = new javax.swing.JLabel();
         EmployeeDeatilsPanel = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel_OwnerName1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
         WorkingScreen_layeredPanel = new javax.swing.JLayeredPane();
         AddGameZone = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -145,6 +150,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         MainHeadingLabel = new javax.swing.JLabel();
+        Label_clockadmin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -188,9 +194,9 @@ public class MainScreen_Admin extends javax.swing.JFrame
         viewgamezonepanel.setLayout(null);
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/View gamezones.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/newCustomer.png"))); // NOI18N
         viewgamezonepanel.add(jLabel5);
-        jLabel5.setBounds(30, 20, 70, 60);
+        jLabel5.setBounds(60, 10, 70, 60);
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
@@ -210,18 +216,18 @@ public class MainScreen_Admin extends javax.swing.JFrame
         TransactionDetailspanel.setLayout(null);
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/viewrecordadmin.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/newemprecords.png"))); // NOI18N
         TransactionDetailspanel.add(jLabel6);
-        jLabel6.setBounds(30, 10, 70, 70);
+        jLabel6.setBounds(60, 10, 40, 50);
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("Transaction Details");
         TransactionDetailspanel.add(jLabel18);
-        jLabel18.setBounds(130, 40, 130, 17);
+        jLabel18.setBounds(130, 20, 130, 17);
 
         SidePanel.add(TransactionDetailspanel);
-        TransactionDetailspanel.setBounds(0, 420, 300, 90);
+        TransactionDetailspanel.setBounds(0, 420, 300, 70);
 
         EmployeeDeatilsPanel.setBackground(new java.awt.Color(54, 33, 89));
         EmployeeDeatilsPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -235,10 +241,33 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("Employee Details");
         EmployeeDeatilsPanel.add(jLabel20);
-        jLabel20.setBounds(140, 20, 130, 17);
+        jLabel20.setBounds(130, 10, 130, 17);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/newAddemp.png"))); // NOI18N
+        EmployeeDeatilsPanel.add(jLabel2);
+        jLabel2.setBounds(60, 0, 50, 40);
 
         SidePanel.add(EmployeeDeatilsPanel);
-        EmployeeDeatilsPanel.setBounds(0, 530, 300, 60);
+        EmployeeDeatilsPanel.setBounds(0, 510, 300, 60);
+
+        jLabel_OwnerName1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel_OwnerName1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_OwnerName1.setText("Exit");
+        jLabel_OwnerName1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel_OwnerName1MouseClicked(evt);
+            }
+        });
+        SidePanel.add(jLabel_OwnerName1);
+        jLabel_OwnerName1.setBounds(20, 660, 47, 29);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Company Name");
+        SidePanel.add(jLabel3);
+        jLabel3.setBounds(30, 60, 160, 60);
+        SidePanel.add(jSeparator4);
+        jSeparator4.setBounds(60, 110, 150, 20);
 
         TopParentpanel.add(SidePanel);
         SidePanel.setBounds(0, 0, 300, 730);
@@ -322,23 +351,23 @@ public class MainScreen_Admin extends javax.swing.JFrame
 
         jCheckBox_Airhockey.setText("Air Hockey");
         AddGameZone.add(jCheckBox_Airhockey);
-        jCheckBox_Airhockey.setBounds(500, 390, 77, 23);
+        jCheckBox_Airhockey.setBounds(500, 390, 89, 25);
 
         jcheckbox_basketball.setText("Basket Ball");
         AddGameZone.add(jcheckbox_basketball);
-        jcheckbox_basketball.setBounds(500, 360, 77, 23);
+        jcheckbox_basketball.setBounds(500, 360, 89, 25);
 
         jCheckBox_CatchLight.setText("Catch Light");
         AddGameZone.add(jCheckBox_CatchLight);
-        jCheckBox_CatchLight.setBounds(670, 360, 79, 23);
+        jCheckBox_CatchLight.setBounds(670, 360, 91, 25);
 
         jCheckBox_dance.setText("Dance");
         AddGameZone.add(jCheckBox_dance);
-        jCheckBox_dance.setBounds(670, 330, 55, 23);
+        jCheckBox_dance.setBounds(670, 330, 63, 25);
 
         jCheckBox_speedball.setText("Speed Ball");
         AddGameZone.add(jCheckBox_speedball);
-        jCheckBox_speedball.setBounds(500, 330, 75, 23);
+        jCheckBox_speedball.setBounds(500, 330, 89, 25);
 
         ViewGameZone.setBackground(new java.awt.Color(255, 255, 255));
         ViewGameZone.setLayout(null);
@@ -404,10 +433,10 @@ public class MainScreen_Admin extends javax.swing.JFrame
 
         jLabel1.setText("Select GameZone");
         EmployeeDetails.add(jLabel1);
-        jLabel1.setBounds(92, 44, 83, 14);
+        jLabel1.setBounds(92, 44, 100, 16);
 
         EmployeeDetails.add(jComboBox1_selectgamezoneemployee);
-        jComboBox1_selectgamezoneemployee.setBounds(230, 40, 28, 20);
+        jComboBox1_selectgamezoneemployee.setBounds(230, 40, 31, 22);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -460,7 +489,11 @@ public class MainScreen_Admin extends javax.swing.JFrame
         MainHeadingLabel.setForeground(new java.awt.Color(255, 255, 255));
         MainHeadingLabel.setText("Heading");
         TopParentpanel.add(MainHeadingLabel);
-        MainHeadingLabel.setBounds(580, 70, 240, 40);
+        MainHeadingLabel.setBounds(680, 70, 240, 40);
+
+        Label_clockadmin.setText("jLabel10");
+        TopParentpanel.add(Label_clockadmin);
+        Label_clockadmin.setBounds(1080, 10, 48, 16);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -468,7 +501,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(TopParentpanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 3, Short.MAX_VALUE))
+                .addGap(0, 13, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -745,6 +778,18 @@ public class MainScreen_Admin extends javax.swing.JFrame
         
     }//GEN-LAST:event_EmployeeDeatilsPanelMouseClicked
 
+    private void jLabel_OwnerName1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_OwnerName1MouseClicked
+        // TODO add your handling code here:exit button
+        Connection conn = Connect.getconnection();
+
+        try{conn.close();}
+        catch(Exception e)
+        {
+            System.out.println("e");
+        }
+        System.exit(0);
+    }//GEN-LAST:event_jLabel_OwnerName1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -786,6 +831,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
     private javax.swing.JPanel EmployeeDeatilsPanel;
     private javax.swing.JPanel EmployeeDetails;
     private javax.swing.JPanel GameZoneTransaction;
+    private javax.swing.JLabel Label_clockadmin;
     private javax.swing.JLabel MainHeadingLabel;
     private javax.swing.JPanel SidePanel;
     private javax.swing.JPanel TopParentpanel;
@@ -809,17 +855,21 @@ public class MainScreen_Admin extends javax.swing.JFrame
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel_OwnerName1;
     private javax.swing.JLabel jLabel_Sub;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable_Gamezone;
     private javax.swing.JTable jTable_transaction;
