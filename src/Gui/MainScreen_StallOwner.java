@@ -48,6 +48,10 @@ import gamecenter.UpdateCustomerListThread;
 import gamecenter.UpdateEmployeeListThread;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Time;
+import java.util.Timer;
+import java.util.TimerTask;
+import  gamecenter.Clock;
 //Main screen for every GameZone
 public class MainScreen_StallOwner extends javax.swing.JFrame 
 {
@@ -161,7 +165,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
        
         rechargeloadingdialoge = new JDialog();
     }
-        //Cons when Admin of the GameZone Enter
+    //Cons when Admin of the GameZone Enter
     public MainScreen_StallOwner(String str,LoginScreen l ,ArrayList<User> currentStallUsers,Stall currentgamezone,User currentuser)
         {
             Type = str;
@@ -182,10 +186,29 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             buttonGroup1.add(jRadioButton4);
         
  
-            //clock
             
-            
-            //
+                java.util.Date date=new java.util.Date();
+		String dip=date.toString();
+		Label_clock.setText(dip);
+                //clock
+                 Timer time=new Timer();
+		int delay=5000;
+		int period= 1000;
+		Clock clock = new Clock(Label_clock);
+		time.scheduleAtFixedRate(clock, delay,period);
+                //
+                
+                   
+              jPanel13.setBackground(new Color(110, 89,222));
+      
+       
+        
+ 
+             AddEmployee.setVisible(true);
+             AddUpateEmployee.setVisible(false);
+             Emprecords.setVisible(false);
+             transaction.setVisible(false);
+             Customer.setVisible(false);
             
             
             
@@ -196,10 +219,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
             //Getting Trnsaction Details
             TransactionDetailsWaitLock = new CountDownLatch(1);
-         
-
-   
-         
 
          //background thread for getting data New Refresh Data
            Background_GetTransactionDetails background_GetTransactionDetails = new Background_GetTransactionDetails(TransactionDetailsWaitLock,currentgamezone.getName());
@@ -1167,9 +1186,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel9.add(jLabel_Label);
         jLabel_Label.setBounds(350, 60, 280, 60);
 
-        Label_clock.setText("jLabel35");
+        Label_clock.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Label_clock.setForeground(new java.awt.Color(255, 255, 255));
+        Label_clock.setText("Current Time");
         jPanel9.add(Label_clock);
-        Label_clock.setBounds(698, 10, 70, 16);
+        Label_clock.setBounds(560, 10, 290, 30);
 
         jPanel7.add(jPanel9);
         jPanel9.setBounds(340, 0, 860, 180);
@@ -2057,7 +2078,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JPanel AddUpateEmployee;
     private javax.swing.JPanel Customer;
     private javax.swing.JPanel Emprecords;
-    private javax.swing.JLabel Label_clock;
+    public javax.swing.JLabel Label_clock;
     private javax.swing.JButton RegisterNewcustomer_button;
     private javax.swing.JButton ResetButton_Customer;
     private javax.swing.JButton ResetValuestozerobutton;

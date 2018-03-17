@@ -1790,11 +1790,20 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="Label_clock">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="jLabel35"/>
+                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                              <Font name="Tahoma" size="18" style="1"/>
+                            </Property>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="Current Time"/>
                           </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                          </AuxValues>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="698" y="10" width="70" height="-1"/>
+                              <AbsoluteConstraints x="560" y="10" width="290" height="30"/>
                             </Constraint>
                           </Constraints>
                         </Component>
