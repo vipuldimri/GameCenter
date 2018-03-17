@@ -7,6 +7,7 @@ package Gui;
 import Database.UserFactory;
 import Database.UserInterface;
 import gamecenter.UpdateEmployeeListThread;
+import gamecenter.UpdatePasswordCheck;
 import gamecenter.User;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -18,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import java.util.ArrayList;
+import java.util.HashMap;
 class Updata_DeleteEmployee extends javax.swing.JFrame 
 {
 
@@ -29,15 +31,17 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
     boolean deleteEmp_flag = false;
     JDialog update;
     String currentstallname;
+    HashMap<String, Boolean> passwordcheck;
     
     
     
-    public Updata_DeleteEmployee(User current,JFrame previous,String currentstallname,ArrayList<User> employeelist)
+    public Updata_DeleteEmployee(User current,JFrame previous,String currentstallname,ArrayList<User> employeelist,HashMap<String, Boolean> passwordcheck)
     {
         this.currentstallname = currentstallname;
         this.current = current;
         this.previous = previous;
         this.employeelist = employeelist;
+        this.passwordcheck = passwordcheck;
         initComponents();
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - getWidth()) / 2);
@@ -197,6 +201,16 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
         String password = jTextField1_emppassword.getText();
         String usernamee  =jTextField1_usernam.getText();
         
+        
+        if(passwordcheck.containsKey(usernamee))
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+           "This UserName Is Taken",
+           "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+            return ;
+        }
+        
         if(username.length() == 0 || password.length() == 0 || usernamee.length() == 0)
         {
            JOptionPane.showMessageDialog(jPanel1,
@@ -279,6 +293,11 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
         {
                       UpdateEmployeeListThread updateEmployeeListThread = new UpdateEmployeeListThread(employeelist,currentstallname);
                       updateEmployeeListThread.start();
+                      
+                      UpdatePasswordCheck updatepasswordcheck = new UpdatePasswordCheck(currentstallname,passwordcheck);
+                      updatepasswordcheck.start();
+                      
+                      
                       JOptionPane.showMessageDialog(jPanel1,
                      "Update Employee Success.",
                      "Inane error",
@@ -358,6 +377,9 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
             
                       UpdateEmployeeListThread updateEmployeeListThread = new UpdateEmployeeListThread(employeelist,currentstallname);
                       updateEmployeeListThread.start();
+                      
+                      
+                      
                      JOptionPane.showMessageDialog(jPanel1,
                      "Employee Deleted.",
                      "Inane error",

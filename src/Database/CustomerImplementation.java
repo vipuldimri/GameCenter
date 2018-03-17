@@ -63,5 +63,22 @@ public class CustomerImplementation implements CustomerInterface
         
         return custlist;
     }
+
+    @Override
+    public ArrayList<Customers> getCust(String TableName, ArrayList<Customers> old ) throws Exception 
+    {
+       
+        old.clear();
+        String Query ="SELECT * FROM GameZoneDB."+TableName+";";
+        Statement stmt=conn.createStatement();  
+        ResultSet rs = stmt.executeQuery(Query);
+        while(rs.next())  
+        {
+          Customers cust = new Customers(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4));
+          old.add(cust);
+        }
+        
+        return old;
+    }
     
 }

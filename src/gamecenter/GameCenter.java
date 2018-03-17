@@ -46,7 +46,7 @@ public class GameCenter
                       //break; this break is Mandatory Do not Comment this
                 }
                 //Sending Users and stall details to the login screen after Getting Users and GameZone Data 
-                LoginScreen l = new LoginScreen(backgroundthread1.users,backgroundthread1.currentgamezone);
+                LoginScreen l = new LoginScreen(backgroundthread1.users,backgroundthread1.currentgamezone,backgroundthread1.passwordcheck);
                 l.setVisible(true);
                 break;
             }

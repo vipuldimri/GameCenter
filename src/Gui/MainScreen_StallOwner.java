@@ -52,6 +52,7 @@ import java.sql.Time;
 import java.util.Timer;
 import java.util.TimerTask;
 import  gamecenter.Clock;
+import gamecenter.UpdatePasswordCheck;
 import gamecenter.UpdateTransactionListThread;
 //Main screen for every GameZone
 public class MainScreen_StallOwner extends javax.swing.JFrame 
@@ -70,7 +71,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     ArrayList<Recharge> transdetailscomplete;  //Transaction Details for current GameZone
     ArrayList<Customers> customerlist;         //Customer Details for current GameZone
     
-    
+     HashMap<String,Boolean> passwordcheck;
     CountDownLatch TransactionDetailsWaitLock; //To lock GUI till we get Transaction Details
 
     
@@ -94,7 +95,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     
     Boolean RegisterCustomer = false;
     
-    
+   
   
     
     
@@ -167,10 +168,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         rechargeloadingdialoge = new JDialog();
     }
     //Cons when Admin of the GameZone Enter
-    public MainScreen_StallOwner(String str,LoginScreen l ,ArrayList<User> currentStallUsers,Stall currentgamezone,User currentuser)
+    public MainScreen_StallOwner(String str,LoginScreen l ,ArrayList<User> currentStallUsers,Stall currentgamezone,User currentuser,HashMap<String,Boolean> passwordcheck)
         {
             Type = str;
             this.l = l;
+            this.passwordcheck =passwordcheck;
             this.currentgamezoneusers = currentStallUsers;
             this.currentgamezone = currentgamezone;
             this.currentuser = currentuser;
@@ -1419,6 +1421,15 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         String password = AddEmpPassword_textfield.getText();
         String username2 = AddEmpUserName_textfield.getText();
         
+        if(passwordcheck.containsKey(username2))
+        {
+             JOptionPane.showMessageDialog(jPanel1,
+                     "This UserName is Taken ",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                      return ;
+        }
+        
         if(username.length() == 0 || password.length() == 0 || username2.length() == 0 )
         {
                      JOptionPane.showMessageDialog(jPanel1,
@@ -1503,6 +1514,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                       UpdateEmployeeListThread updateemployeelist = new UpdateEmployeeListThread(currentgamezoneusers,currentgamezone.getName());
                       updateemployeelist.start();
                       
+                      UpdatePasswordCheck updatepasswordcheck = new UpdatePasswordCheck(currentgamezone.getName(),passwordcheck);
+                      updatepasswordcheck.start();
                       
                       JOptionPane.showMessageDialog(jPanel1,
                       "Adding Employee Success.",
@@ -1869,7 +1882,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
        
         
-        Updata_DeleteEmployee newframe = new Updata_DeleteEmployee(user,this, currentgamezone.getName(),currentgamezoneusers);
+        Updata_DeleteEmployee newframe = new Updata_DeleteEmployee(user,this, currentgamezone.getName(),currentgamezoneusers,passwordcheck);
         newframe.setVisible(true);
         setVisible(false);
         
@@ -2002,21 +2015,24 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
           }else
           {
         
+             UpdateCustomerListThread updatecustomerlist = new UpdateCustomerListThread(customerlist,currentgamezone.getName());
+            updatecustomerlist.start();
+               
             JOptionPane.showMessageDialog(jPanel1,
             "Customer Registered Success",
             "Inane error",
             JOptionPane.ERROR_MESSAGE);
             //now updating the customer list
             
-            UpdateCustomerListThread updatecustomerlist = new UpdateCustomerListThread(customerlist,currentgamezone.getName());
-            updatecustomerlist.start();
-            
+           
           }
         
 
         
         RegisterCustomer = false;
-        
+        jTextField_regcontact.setText("");
+        jTextField_regemail.setText("");
+        jTextField_regname.setText("");
     }//GEN-LAST:event_RegisterNewcustomer_buttonActionPerformed
 
     private void ResetButton_CustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButton_CustomerActionPerformed

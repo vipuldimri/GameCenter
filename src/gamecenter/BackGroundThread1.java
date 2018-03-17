@@ -5,6 +5,7 @@ import Gui.*;
 import java.sql.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.HashMap;
 /*
 Thread for gtting users  and stall (GameZone ) information from the database .
 
@@ -17,13 +18,14 @@ public class BackGroundThread1 extends Thread
  
     //All gamezone data and their Endsub details 
     Stall currentgamezone;
+    
+    HashMap<String, Boolean> passwordcheck;
+    
     boolean error_flag = false;
     BackGroundThread1()
     {
 
-       
-        users = new ArrayList<>();
-        currentgamezone = new Stall();
+              
     }
     @Override
     public void run()
@@ -46,7 +48,11 @@ public class BackGroundThread1 extends Thread
             users = Dao.getAllUsers("GameZone1");
             //above lines gets all the users for current GameZone;
             currentgamezone = Dao.getGameZoneDetails(1);
-        } catch (Exception ex) 
+            
+            passwordcheck = Dao.getUserNames("GameZone1");
+            
+        } 
+        catch (Exception ex) 
         {
            error_flag =true;
            System.out.println("ERROR ");

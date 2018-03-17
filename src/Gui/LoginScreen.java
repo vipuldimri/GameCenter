@@ -30,15 +30,16 @@ public class LoginScreen extends javax.swing.JFrame
     ArrayList<User> currentgamezoneusers;
     Stall currentgamezone;
     User currentuser;
-
+    HashMap<String,Boolean> passwordcheck;
     static public Trie trienames = new Trie();
     
     
-    public LoginScreen(ArrayList<User> currentgamezoneusers,Stall currentgamezone)
+    public LoginScreen(ArrayList<User> currentgamezoneusers,Stall currentgamezone,HashMap<String,Boolean> passwordcheck)
     {
     //getting data from thread
     this.currentgamezoneusers = currentgamezoneusers;
     this.currentgamezone = currentgamezone;
+    this.passwordcheck = passwordcheck;
     //init components 
     initComponents();
     //Displaying the screen in the center of the screen
@@ -232,18 +233,7 @@ public class LoginScreen extends javax.swing.JFrame
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here: Login button Event 
-        //store username and  password from the GUI
-      
-//        CountDownLatch loginSignal = new CountDownLatch(1);
-//     
-//        LoadingTHREAD t = new LoadingTHREAD();
-//        t.start();
-//        try {
-//            loginSignal.await();
-//        } catch (InterruptedException ex) {
-//            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        
+
         String username = jTextField1.getText();
         char[] password = jPasswordField1.getPassword();
         String pass ="";
@@ -259,8 +249,7 @@ public class LoginScreen extends javax.swing.JFrame
             MainScreen_Admin admin = new MainScreen_Admin();
             admin.setVisible(true);
             setVisible(false);
-            
-          //  return ;
+        
         }
         
         
@@ -452,7 +441,7 @@ public class LoginScreen extends javax.swing.JFrame
                 jPasswordField1.setText("");
               
       
-           MainScreen_StallOwner mainScreen_StallOwner =  new MainScreen_StallOwner("admin",this,currentgamezoneusers,currentgamezone,currentuser); 
+           MainScreen_StallOwner mainScreen_StallOwner =  new MainScreen_StallOwner("admin",this,currentgamezoneusers,currentgamezone,currentuser,passwordcheck); 
            mainScreen_StallOwner.setVisible(true);
            setVisible(false);
             

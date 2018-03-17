@@ -16,5 +16,5 @@ public interface CustomerInterface
     public boolean registerCust(Customers cust,String TableName)throws Exception;
     public boolean deleteCust(int ID,String TableName)throws Exception;
     public ArrayList<Customers> getCust(String TableName)throws Exception;
-    
+      public ArrayList<Customers> getCust(String TableName,ArrayList<Customers> old)throws Exception;
 }

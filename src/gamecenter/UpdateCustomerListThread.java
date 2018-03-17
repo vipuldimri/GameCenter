@@ -23,14 +23,14 @@ public class UpdateCustomerListThread extends Thread
     @Override
     public void run()
     {
-          final String Query ="";
+          
           CustomerInterface Dao = null;
           try 
           {
          
              Dao = Customerfactory.getInstance();
              String TransactionTableName = GameZoneName+"_customers";
-             customerlist  = Dao.getCust(TransactionTableName);
+             customerlist  = Dao.getCust(TransactionTableName,customerlist);
            
           } 
           catch (Exception ex)

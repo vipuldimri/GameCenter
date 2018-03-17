@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -157,6 +158,42 @@ public class UserImplements implements UserInterface
        
         return old;
       
+    }
+
+    @Override
+    public HashMap<String, Boolean> getUserNames(String GameZoneName) throws Exception 
+    {
+          final String GetAllUser = "SELECT * FROM GameZoneDB."+GameZoneName+"_users";
+          HashMap<String,Boolean> passwordcheck = new HashMap<>();
+        
+                   Statement stmt=conn.createStatement();  
+                   ResultSet rs = stmt.executeQuery(GetAllUser);
+                   while(rs.next())  
+                   {
+                  
+                    passwordcheck.put(rs.getString(9),true);
+                   }
+        
+      
+        return passwordcheck;
+    }
+        @Override
+    public HashMap<String, Boolean> getUserNames(String GameZoneName,HashMap<String,Boolean> old) throws Exception 
+    {
+          old.clear();
+          final String GetAllUser = "SELECT * FROM GameZoneDB."+GameZoneName+"_users";
+          
+        
+                   Statement stmt=conn.createStatement();  
+                   ResultSet rs = stmt.executeQuery(GetAllUser);
+                   while(rs.next())  
+                   {
+                  
+                    old.put(rs.getString(9),true);
+                   }
+        
+      
+        return old;
     }
     
 }

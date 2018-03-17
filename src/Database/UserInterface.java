@@ -4,6 +4,7 @@ import gamecenter.Stall;
 
 import gamecenter.User;
 import java.util.ArrayList;
+import java.util.HashMap;
 public interface UserInterface 
 {
     public ArrayList<User> getAllUsers(String GameZoneName)throws Exception;
@@ -18,4 +19,10 @@ public interface UserInterface
     public boolean UpdateEmp(User user,String GameZoneName)throws Exception;
    
     public boolean DeleteEmp(int id,String GameZoneName) throws Exception;
+    
+    
+    public HashMap<String,Boolean> getUserNames(String GameZoneName)throws Exception;
+        public HashMap<String,Boolean> getUserNames(String GameZoneName,HashMap<String,Boolean> old)throws Exception;
+
+    
 }
