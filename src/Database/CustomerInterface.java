@@ -13,8 +13,8 @@ import gamecenter.Customers;
 import java.util.ArrayList;
 public interface CustomerInterface 
 {
-    public boolean registerEmp(Customers cust,String TableName)throws Exception;
-    public boolean deleteEmp(int ID,String TableName)throws Exception;
-    public ArrayList<Customers> getEmp(String TableName)throws Exception;
+    public boolean registerCust(Customers cust,String TableName)throws Exception;
+    public boolean deleteCust(int ID,String TableName)throws Exception;
+    public ArrayList<Customers> getCust(String TableName)throws Exception;
     
 }

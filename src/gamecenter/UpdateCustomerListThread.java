@@ -30,7 +30,7 @@ public class UpdateCustomerListThread extends Thread
          
              Dao = Customerfactory.getInstance();
              String TransactionTableName = GameZoneName+"_customers";
-             customerlist  = Dao.getEmp(TransactionTableName);
+             customerlist  = Dao.getCust(TransactionTableName);
            
           } 
           catch (Exception ex)

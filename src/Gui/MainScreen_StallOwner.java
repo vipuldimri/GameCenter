@@ -233,6 +233,22 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
            }
            transdetailscomplete = background_GetTransactionDetails.transactiondetails; 
        
+           
+           try{
+              CustomerInterface Dao =  Customerfactory.getInstance();
+              customerlist = Dao.getCust( currentgamezone.getName()+"_customers"); 
+           }
+           catch(Exception e)
+           {
+               //Error  in Getting Transaction Details
+                JOptionPane.showMessageDialog(jPanel1,
+                  "No internet Connection.",
+                  "Inane error",
+                  JOptionPane.ERROR_MESSAGE);
+                  System.exit(0);
+           }
+           
+           
         
            if(null == transdetailscomplete || background_GetTransactionDetails.ErrorMessage.equals("TransactionError"))
            {
@@ -1860,24 +1876,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
          Customer.setVisible(true);
          
          
-         try
-         {
-             CustomerInterface Dao =  Customerfactory.getInstance();
-             customerlist = Dao.getEmp( currentgamezone.getName()+"_customers");
-             
-         }catch(Exception e)
-         {
-             
-             System.out.println(e);
-             //error in getting Emp list
-              JOptionPane.showMessageDialog(jPanel1,
-                     "Error Getting Employee List !!! Check Your internet Connection.",
-                     "Inane error",
-                      JOptionPane.ERROR_MESSAGE);
-                     return ;
-                    
-             
-         }
+     
          
         DefaultTableModel m = (DefaultTableModel) jTable_customers.getModel();
         m.setRowCount(0);
@@ -1935,7 +1934,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                     try 
                     {
                         CustomerInterface Dao = Customerfactory.getInstance();
-                        boolean respponce =  Dao.registerEmp(newcustomer, currentgamezone.getName()+"_customers");
+                        boolean respponce =  Dao.registerCust(newcustomer, currentgamezone.getName()+"_customers");
                          
                         if(respponce == false)
                          {

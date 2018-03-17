@@ -27,7 +27,7 @@ public class CustomerImplementation implements CustomerInterface
 
      
     @Override
-    public boolean registerEmp(Customers cust,String TableName) throws Exception
+    public boolean registerCust(Customers cust,String TableName) throws Exception
     {
         
         
@@ -43,13 +43,13 @@ public class CustomerImplementation implements CustomerInterface
     }
 
     @Override
-    public boolean deleteEmp(int ID,String TableName)throws Exception 
+    public boolean deleteCust(int ID,String TableName)throws Exception 
     {
        return true;
     }
 
     @Override
-    public ArrayList<Customers> getEmp(String TableName) throws Exception {
+    public ArrayList<Customers> getCust(String TableName) throws Exception {
         ArrayList<Customers> custlist = new ArrayList<>();
         
         String Query ="SELECT * FROM GameZoneDB."+TableName+";";
