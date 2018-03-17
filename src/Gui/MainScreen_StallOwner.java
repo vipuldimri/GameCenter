@@ -52,6 +52,7 @@ import java.sql.Time;
 import java.util.Timer;
 import java.util.TimerTask;
 import  gamecenter.Clock;
+import gamecenter.UpdateTransactionListThread;
 //Main screen for every GameZone
 public class MainScreen_StallOwner extends javax.swing.JFrame 
 {
@@ -1287,7 +1288,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         Customer.setVisible(false);
         transaction.setVisible(true);
 
-        System.out.println(transdetailscomplete.size()+"   size hai bhai  sub thik");
+       
         
         DefaultTableModel m = (DefaultTableModel) jTable_transactionDetails.getModel();
         m.setRowCount(0);
@@ -1585,6 +1586,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         Recharge rec = new Recharge();
         long millis=System.currentTimeMillis();
         java.sql.Timestamp date = new Timestamp(millis);
+       
         rec.setAmount(amt);
         rec.setCardNo(cardno);
         rec.setEmpName(currentuser.getName());
@@ -1652,8 +1654,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 return ;
           }else
           {
-        
-          JOptionPane.showMessageDialog(jPanel1,
+              
+             UpdateTransactionListThread updatetransaction = new UpdateTransactionListThread(transdetailscomplete, currentgamezone.getName());
+             updatetransaction.start();
+            JOptionPane.showMessageDialog(jPanel1,
             "Recharge Success",
             "Inane error",
             JOptionPane.ERROR_MESSAGE);
@@ -1667,8 +1671,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
         
         //step 3 update transaction records Threads updates Transaction details Automatically
-        Background_GetTransactionDetails background_GetTransactionDetails = new Background_GetTransactionDetails(currentgamezone.getName());
-        background_GetTransactionDetails.start();
+     
         
     }//GEN-LAST:event_jButton2ActionPerformed
 

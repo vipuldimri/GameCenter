@@ -17,4 +17,5 @@ public interface TransactionInterface
     
     public void Recharge(Recharge rec,String TableName)throws Exception;
     public ArrayList<Recharge> GetTransactionDetails(String TableName)throws Exception;
+    public ArrayList<Recharge> GetTransactionDetails(String TableName,ArrayList<Recharge> old)throws Exception;
 }

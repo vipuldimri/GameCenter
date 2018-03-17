@@ -13,11 +13,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /*
-
 This class is for test purpose not used in the project
 */
 public class Background_GetTransactionDetails extends  Thread
 {
+    
    public ArrayList<Recharge> transactiondetails;
    CountDownLatch StopGUIrefresh;
    String TableName;

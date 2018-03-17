@@ -36,10 +36,11 @@ public class TransactionImplementation implements TransactionInterface
     @Override
     public void Recharge(gamecenter.Recharge rec, String TableName) throws Exception
     {
-       
-        Rech = "INSERT INTO "+TableName+" (CardNo,EmpName,Amount,Date,GameName)VALUES(?,?,?,?,?)";
-          try {
-           
+        try{
+            
+        
+           Rech = "INSERT INTO "+TableName+" (CardNo,EmpName,Amount,Date)VALUES(?,?,?,?)";
+          
             PreparedStatement pstmt = conn.prepareStatement(Rech);
             pstmt.setString(1, rec.getCardNo());
             pstmt.setString(2, rec.getEmpName());
@@ -48,17 +49,11 @@ public class TransactionImplementation implements TransactionInterface
          
           
             pstmt.executeUpdate();
-           
-           
-           
-        } 
-        catch (SQLException ex) 
-        {
-            System.out.println(ex);
-            Logger.getLogger(UserImplements.class.getName()).log(Level.SEVERE, null, ex);
-            
         }
-
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
         
     }
 
@@ -90,6 +85,33 @@ public class TransactionImplementation implements TransactionInterface
   
         return transactiondetails;
         
+    }
+
+    @Override
+    public ArrayList<Recharge> GetTransactionDetails(String TableName, ArrayList<Recharge> old) throws Exception 
+    {
+           
+                   old.clear();
+                   TransDetails = "SELECT * FROM GameZoneDB."+TableName;
+                   Statement stmt=conn.createStatement();  
+                   ResultSet rs = stmt.executeQuery(TransDetails);
+                   while(rs.next())  
+                   {
+                       Recharge rec = new Recharge();
+                       rec.setID(rs.getInt(1));
+                       rec.setEmpName(rs.getString(3));
+                       rec.setCardNo(rs.getString(2));
+                       rec.setDate(rs.getTimestamp(5));
+                       rec.setAmount(rs.getInt(4));
+              
+                       old.add(rec);
+                  
+                   }
+        
+        
+           
+  
+        return old;
     }
     
 }

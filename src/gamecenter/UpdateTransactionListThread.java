@@ -26,8 +26,10 @@ public class UpdateTransactionListThread extends Thread
           {
          
              Dao = TransactionFactory.getInstance();
+     
              String TransactionTableName = GameZoneName+"_transaction";
-             transactiondetails  = Dao.GetTransactionDetails(TransactionTableName);
+             transactiondetails  = Dao.GetTransactionDetails(TransactionTableName,transactiondetails);
+       
            
           } 
           catch (Exception ex)
