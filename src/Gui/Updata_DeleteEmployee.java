@@ -234,7 +234,7 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
         updateemp.setPassword(password);
         updateemp.setID(current.getID());
         updateemp.setGameZoneID(current.getGameZoneID());
-        updateemp.setUserName(username);
+        updateemp.setUserName(usernamee);
 
         
               SwingWorker work = new SwingWorker<String , Integer>() 
