@@ -1418,16 +1418,24 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         String password = AddEmpPassword_textfield.getText();
         String username2 = AddEmpUserName_textfield.getText();
         
-        if(username.length() == 0 || password.length() == 0 || username2.length() == 0)
+        if(username.length() == 0 || password.length() == 0 || username2.length() == 0 )
         {
                      JOptionPane.showMessageDialog(jPanel1,
                      "Please Enter Mandatory Details",
                      "Inane error",
                       JOptionPane.ERROR_MESSAGE);
-                
                       return ;
         }
-
+    
+         if(AddEmpContact_textfield.getText().length()!=10)
+         {
+               JOptionPane.showMessageDialog(jPanel1,
+                     "Invalid Contact No",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                      return ;
+         }
+         
         User newuser = new User();
         newuser.setName(AddEmpName_textfield.getText());
         newuser.setType("emp");
@@ -1444,15 +1452,13 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 	            @Override
 	            protected  String  doInBackground() throws Exception 
 	            {
-	             
 
-                   
                     UserInterface Dao = null;
                     try 
                     {
-                    Dao = UserFactory.getInstance();
-                    Dao.AddEmp(newuser);
-                    AddEmp_flag = true;
+                        Dao = UserFactory.getInstance();
+                        Dao.AddEmp(newuser,currentgamezone.getName());
+                        AddEmp_flag = true;
                     }
                     catch (Exception ex) 
                     {
@@ -1495,6 +1501,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         {
                       UpdateEmployeeListThread updateemployeelist = new UpdateEmployeeListThread(currentgamezoneusers,currentgamezone.getName());
                       updateemployeelist.start();
+                      
+                      
                       JOptionPane.showMessageDialog(jPanel1,
                       "Adding Employee Success.",
                       "Inane error",
@@ -1509,6 +1517,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         AddEmpPassword_textfield.setText("");
         AddEmpEmail_textfield.setText("");
         AddEmpContact_textfield.setText("");
+        AddEmpUserName_textfield.setText("");
         
         AddEmp_flag = false;
     }//GEN-LAST:event_AddNewEmployee_ButtonActionPerformed

@@ -16,7 +16,7 @@ public class UserImplements implements UserInterface
 {
 
     
-    static  final String AddEmp = "INSERT INTO GameZoneDB.users (Name,Address,Contact,Email,Type,GameZoneID,Password) VALUES(?,?,?,?,?,?,?)";
+   
     Connection conn;
     UserImplements()throws Exception
     {
@@ -25,12 +25,12 @@ public class UserImplements implements UserInterface
     }
     
     @Override
-    public ArrayList<User> getAllUsers(String GameZoneName) 
+    public ArrayList<User> getAllUsers(String GameZoneName) throws Exception
     {
     
         final String GetAllUser = "SELECT * FROM GameZoneDB."+GameZoneName+"_users";
         ArrayList<User> users = new ArrayList<>();
-         try {
+        
                    Statement stmt=conn.createStatement();  
                    ResultSet rs = stmt.executeQuery(GetAllUser);
                    while(rs.next())  
@@ -39,10 +39,7 @@ public class UserImplements implements UserInterface
                     users.add(newuser);
                    }
         
-        } catch (Exception ex) 
-        {
-                System.out.println("AAA "+ex);
-        }
+      
         return users;
     }
 
@@ -74,12 +71,10 @@ public class UserImplements implements UserInterface
     }
 
     @Override
-    public boolean AddEmp(User user) 
+    public boolean AddEmp(User user,String GameZoneName) throws Exception
     {
-        System.out.println("Inside ADD");
-         
-        try {
-           
+             try{
+            final String AddEmp = "INSERT INTO GameZoneDB."+GameZoneName+"_users (Name,Address,Contact,Email,Type,GameZoneID,Password,UserName) VALUES(?,?,?,?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(AddEmp);
             pstmt.setString(1, user.getName());
             pstmt.setString(2, user.getAddress());
@@ -88,25 +83,19 @@ public class UserImplements implements UserInterface
             pstmt.setString(5, user.getType());
             pstmt.setInt(6, user.getGameZoneID());
             pstmt.setString(7, user.getPassword());
+            pstmt.setString(8, user.getUserName());
             pstmt.executeUpdate();
-           
-           
-           
-        } 
-        catch (SQLException ex) 
-        {
-            System.out.println(ex);
-            Logger.getLogger(UserImplements.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
-   
-        
-   
+             }
+             catch(Exception e)
+             {
+                 System.out.println(e);
+             }
+  
         return true;
     }
 
     @Override
-    public boolean UpdateEmp(User user)throws Exception
+    public boolean UpdateEmp(User user,String GameZoneName)throws Exception
     {
         String  query = "UPDATE `GameZoneDB`.`users` SET `Name` = ?,`Address` = ?,`Contact` = ?,`Email` = ?,`Type` =? ,`GameZoneID` = ?,`Password` =? WHERE `ID` = ?;";
         PreparedStatement pstmt = conn.prepareStatement(query);
@@ -125,7 +114,7 @@ public class UserImplements implements UserInterface
     }
 
     @Override
-    public boolean DeleteEmp(int id) throws Exception
+    public boolean DeleteEmp(int id,String GameZoneName) throws Exception
     {
         String query = "DELETE FROM `GameZoneDB`.`users` WHERE ID = ?;";
         PreparedStatement pstmt = conn.prepareStatement(query);
@@ -133,9 +122,26 @@ public class UserImplements implements UserInterface
 
 
         pstmt.executeUpdate();
+        return true;
+    }
+
+    @Override
+    public ArrayList<User> getAllUsers(String GameZoneName, ArrayList<User> old)throws Exception
+    {
+        final String GetAllUser = "SELECT * FROM GameZoneDB."+GameZoneName+"_users";
+      
+                   old.clear();
+                   Statement stmt=conn.createStatement();  
+                   ResultSet rs = stmt.executeQuery(GetAllUser);
+                   while(rs.next())  
+                   {
+                    User newuser = new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getInt(7),rs.getString(8),rs.getString(9));
+                    old.add(newuser);
+                   }
         
-        
-              return true;
+       
+        return old;
+      
     }
     
 }

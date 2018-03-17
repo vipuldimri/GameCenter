@@ -5,7 +5,7 @@
  */
 package Database;
 
-import static Database.UserImplements.AddEmp;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

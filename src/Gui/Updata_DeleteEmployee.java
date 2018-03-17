@@ -229,7 +229,7 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
                     try 
                     {
                     Dao = UserFactory.getInstance();
-                    Dao.UpdateEmp(updateemp);
+                    Dao.UpdateEmp(updateemp,currentstallname);
                     updateEmp_flag = true;
                     
                     } catch (Exception ex) 
@@ -308,7 +308,7 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
                     UserInterface Dao = null;
                     try {
                     Dao = UserFactory.getInstance();
-                    Dao.DeleteEmp(current.getID());
+                    Dao.DeleteEmp(current.getID(),currentstallname);
                     deleteEmp_flag = true;
                     } catch (Exception ex) 
                     {

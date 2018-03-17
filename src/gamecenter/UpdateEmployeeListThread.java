@@ -29,8 +29,8 @@ public class UpdateEmployeeListThread extends Thread
           {
          
              Dao = UserFactory.getInstance();
-             String TransactionTableName = GameZoneName+"_users";
-             employeelist  = Dao.getAllUsers(TransactionTableName);
+             
+             employeelist  = Dao.getAllUsers(GameZoneName,employeelist);
            
           } 
            catch (Exception ex)
