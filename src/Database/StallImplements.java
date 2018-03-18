@@ -63,5 +63,30 @@ public class StallImplements implements StallInterface
         return details;
      
     }
+
+    @Override
+    public ArrayList<Games> GetGames(String GameZoneName) throws Exception 
+    {
+        String Query="SELECT * FROM GameZoneDB.GameZone1_games;";
+        ArrayList<Games> gameslist = new ArrayList<>();
+        
+         
+      
+                   Statement stmt=conn.createStatement();  
+                   ResultSet rs = stmt.executeQuery(Query);
+                   while(rs.next())  
+                   {
+                    Games game = new Games(rs.getInt(1),rs.getString(2),rs.getString(3));
+                  
+                    gameslist.add(game);
+                    
+                   }
+                   
+                 
+        
+    
+        
+        return gameslist;
+    }
     
 }
