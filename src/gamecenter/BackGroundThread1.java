@@ -45,11 +45,11 @@ public class BackGroundThread1 extends Thread
         try 
         {
             UserInterface Dao   = UserFactory.getInstance();
-            users = Dao.getAllUsers("GameZone1");
+            users = Dao.getAllUsers("GameZone2");   ///change this according to gamezone
             //above lines gets all the users for current GameZone;
-            currentgamezone = Dao.getGameZoneDetails(1);
+            currentgamezone = Dao.getGameZoneDetails(2) ; //chnage this according to gamezone id;
             
-            passwordcheck = Dao.getUserNames("GameZone1");
+            passwordcheck = Dao.getUserNames("GameZone2"); //chnage this according to gamezone
             
         } 
         catch (Exception ex) 

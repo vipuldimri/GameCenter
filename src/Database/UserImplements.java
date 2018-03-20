@@ -48,7 +48,7 @@ public class UserImplements implements UserInterface
     public Stall getGameZoneDetails(int GameZoneID)
     {
         
-         final String Query = "SELECT * FROM GameZoneDB.gamezone where ID = 1;";
+         final String Query = "SELECT * FROM GameZoneDB.gamezone where ID = 2;";
         
          Stall currentgamezone = null ;
          

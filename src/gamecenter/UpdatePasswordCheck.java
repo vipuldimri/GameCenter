@@ -30,7 +30,7 @@ public class UpdatePasswordCheck extends Thread
                 
             
             UserInterface Dao   = UserFactory.getInstance();
-            passwordcheck = Dao.getUserNames("GameZone1",passwordcheck);
+            passwordcheck = Dao.getUserNames("GameZoneName",passwordcheck);
              }
             catch(Exception e)
             {

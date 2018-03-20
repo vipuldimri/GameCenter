@@ -1948,6 +1948,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
          AddUpateEmployee.setVisible(false);
          Emprecords.setVisible(false);
          Customer.setVisible(true);
+         transaction.setVisible(false);
          
          
      

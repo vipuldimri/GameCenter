@@ -67,7 +67,8 @@ public class StallImplements implements StallInterface
     @Override
     public ArrayList<Games> GetGames(String GameZoneName) throws Exception 
     {
-        String Query="SELECT * FROM GameZoneDB.GameZone1_games;";
+    
+        String Query="SELECT * FROM GameZoneDB."+GameZoneName+"_games;";
         ArrayList<Games> gameslist = new ArrayList<>();
         
          

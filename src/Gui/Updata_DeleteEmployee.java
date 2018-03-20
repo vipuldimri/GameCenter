@@ -204,11 +204,16 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
         
         if(passwordcheck.containsKey(usernamee))
         {
+            if(current.getUserName().equals(usernamee))
+            {
+                //old user fine can change
+            }else{
             JOptionPane.showMessageDialog(jPanel1,
-           "This UserName Is Taken",
-           "Inane error",
+            "This UserName Is Taken",
+            "Inane error",
             JOptionPane.ERROR_MESSAGE);
             return ;
+            }
         }
         
         if(username.length() == 0 || password.length() == 0 || usernamee.length() == 0)
@@ -255,6 +260,7 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
                     } catch (Exception ex) 
                     {
                     Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("HERE");
                     updateEmp_flag = false;
                    }
                 
@@ -299,8 +305,8 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
                       
                       
                       JOptionPane.showMessageDialog(jPanel1,
-                     "Update Employee Success.",
-                     "Inane error",
+                      "Update Employee Success.",
+                      "Inane error",
                       JOptionPane.ERROR_MESSAGE);
                      
         }
