@@ -1466,7 +1466,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         String password = AddEmpPassword_textfield.getText();
         String username2 = AddEmpUserName_textfield.getText();
         
-        if(passwordcheck.containsKey(username2))
+        if(passwordcheck.containsKey(username2) || username2.equals("admin"))
         {
              JOptionPane.showMessageDialog(jPanel1,
                      "This UserName is Taken ",

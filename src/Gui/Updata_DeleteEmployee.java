@@ -202,7 +202,7 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
         String usernamee  =jTextField1_usernam.getText();
         
         
-        if(passwordcheck.containsKey(usernamee))
+        if(passwordcheck.containsKey(usernamee) || usernamee.equals("admin") )
         {
             if(current.getUserName().equals(usernamee))
             {
