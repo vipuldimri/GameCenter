@@ -18,7 +18,9 @@ import java.util.HashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import sun.audio.AudioPlayer;
+
+import SerialCommunication.CommPortTest;
+import SerialCommunication.FactoryClass;
 
 import javax.swing.JDialog;
 /*
@@ -441,11 +443,21 @@ public class LoginScreen extends javax.swing.JFrame
                 jTextField1.setText("");
                 jPasswordField1.setText("");
               
-      
+          
            MainScreen_StallOwner mainScreen_StallOwner =  new MainScreen_StallOwner("admin",this,currentgamezoneusers,currentgamezone,currentuser,passwordcheck); 
            mainScreen_StallOwner.setVisible(true);
            setVisible(false);
-            
+                try 
+                  {
+                FactoryClass.createObjects(mainScreen_StallOwner);
+                } catch (ClassNotFoundException ex)
+                {
+                 
+                    System.out.println("Factory class exception "+ex);
+                }
+           
+           
+           
             }
             else
             {
@@ -453,8 +465,12 @@ public class LoginScreen extends javax.swing.JFrame
                  //here currentStallUsers is null because emp has no rights to see emps
                   jTextField1.setText("");
                   jPasswordField1.setText("");
-                 new MainScreen_StallOwner(this,currentgamezone,currentuser).setVisible(true);
+                  new MainScreen_StallOwner(this,currentgamezone,currentuser).setVisible(true);
                   setVisible(false);
+                
+                  /////////////////////Code for serial communication//////////
+              
+                  
             }
             
         }

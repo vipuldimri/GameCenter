@@ -4,7 +4,7 @@ package gamecenter;
 import Database.Connect;
 import Gui.LoginScreen;
 import Gui.Splash;
-import SerialCommunication.CommPortTest;
+
 import javax.swing.JOptionPane;
 
 

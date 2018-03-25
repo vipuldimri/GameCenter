@@ -1,6 +1,8 @@
 
 package Gui;
-
+import java.util.Properties;    
+import javax.mail.*;    
+import javax.mail.internet.*;    
 import Database.Connect;
 import Database.CustomerInterface;
 import Database.Customerfactory;
@@ -76,7 +78,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     ArrayList<Customers> customerlist;         //Customer Details for current GameZone
     
      HashMap<String,Boolean> passwordcheck;
-             ArrayList<Games> gamelist ;
+     ArrayList<Games> gamelist ;
      
     CountDownLatch TransactionDetailsWaitLock; //To lock GUI till we get Transaction Details
 
@@ -212,9 +214,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
  
             
-                java.util.Date date=new java.util.Date();
-		String dip=date.toString();
-		Label_clock.setText(dip);
+            java.util.Date date=new java.util.Date();
+            String dip=date.toString();
+	   Label_clock.setText(dip);
                 //clock
                  Timer time=new Timer();
 		int delay=5000;
@@ -322,6 +324,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
        }
         
          
+      //COM CODE
+      
+      
+      
       
     }
 
@@ -444,6 +450,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         Label_clock = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
@@ -632,7 +639,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel6.setBounds(0, 10, 1180, 50);
 
         GridPanel.setBackground(new java.awt.Color(0, 0, 0));
-        GridPanel.setLayout(new java.awt.GridLayout());
+        GridPanel.setLayout(new java.awt.GridLayout(1, 0));
         jPanel3.add(GridPanel);
         GridPanel.setBounds(0, 60, 1190, 670);
 
@@ -1280,6 +1287,14 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         );
 
         jMenu1.setText("File");
+
+        jMenuItem3.setText("Send Email");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Refresh ");
@@ -2115,11 +2130,70 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
         
     }//GEN-LAST:event_jTabbedPane1MouseClicked
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:Send emain code here
+          
+        String from = "dimrivipul.vd@gmail.com";
+        String password = "password";
+        String to = "dimrivipul.vd@gmail.com";                 
+        String sub = "Transaction Details for "+java.time.LocalDate.now();
+        String msg = "testing ";
+
+        Properties props = new Properties();    
+        props.put("mail.smtp.host", "smtp.gmail.com");    
+        props.put("mail.smtp.socketFactory.port", "465");    
+        props.put("mail.smtp.socketFactory.class",    
+                    "javax.net.ssl.SSLSocketFactory");    
+        props.put("mail.smtp.auth", "true");    
+        props.put("mail.smtp.port", "465");    
+           //get Session   
+          Session session = Session.getDefaultInstance(props,    
+           new javax.mail.Authenticator() {    
+           @Override
+           protected PasswordAuthentication getPasswordAuthentication()
+           {    
+           return new PasswordAuthentication("dimrivipul.vd1@gmail.com","password");  
+           }    
+          });    
+          //compose message    
+          try {    
+           MimeMessage message = new MimeMessage(session);    
+           message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));    
+          
+           message.setSubject(sub);
+           String mss = "";
+           for(Games g : gamelist)
+           {
+               mss += g.getGameName() +" ---  Rs "+g.getAmount()+ " \n";
+           }
+           message.setText(mss);    
+           //send message  
+           Transport.send(message);    
+           System.out.println("message sent successfully");    
+          } 
+          catch (MessagingException e) {throw new RuntimeException(e);
+          }    
+          
+          
+          
+          
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
  	public static java.sql.Timestamp convert(java.util.Date date)
 	{
 		return new java.sql.Timestamp(date.getTime());
 	}
 
+        
+        
+        public void setCardNumber(String cardno)
+        {
+            jTextField1.setText(cardno);
+        }
+        public void cardDetails(String rs)
+        {
+            jTextField3.setText(rs);
+        }
     /**
      * @param args the command line arguments
      */
@@ -2228,6 +2302,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -2263,9 +2338,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JTable jTable_customers;
     private javax.swing.JTable jTable_transactionDetails;
     private javax.swing.JTable jTable_updatedelete;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    public javax.swing.JTextField jTextField1;
+    public javax.swing.JTextField jTextField2;
+    public javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField_regcontact;

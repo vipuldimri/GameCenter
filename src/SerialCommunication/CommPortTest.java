@@ -1,5 +1,12 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package SerialCommunication;
+
+
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -12,20 +19,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
 
 
-public class CommPortTest implements SerialPortEventListener {
+public class CommPortTest implements  SerialPortEventListener 
+        {
 	SerialPort serialPort;
-        
-	private static final String PORT_NAMES[] = 
-        { 
+        /** The port we're normally going to use. */
+	private static final String PORT_NAMES[] = { 
 			//"COM4", // Windows
                         "COM7",
 	};
-
+	
 	private BufferedReader input;
 	/** The output stream to the port */
 	private OutputStream output;
@@ -45,31 +51,33 @@ public class CommPortTest implements SerialPortEventListener {
             initialize();
         }
         
-     
+ 
+
 	public void initialize() 
         {
-               
-                
-		
+                        
                 CommPortIdentifier portId = null;
           
                 Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
-                
-		while (portEnum.hasMoreElements()) {
+		//First, Find an instance of serial port as set in PORT_NAMES.
+		while (portEnum.hasMoreElements())
+                {
                    
 			CommPortIdentifier currPortId = (CommPortIdentifier) portEnum.nextElement();
-                       
-				if (currPortId.getName().equals(commPort)) {
-                                    
+				if (currPortId.getName().equals(commPort)) 
+                                {
+                   
 					portId = currPortId;
 					break;
 				}
 			}
-		
-		if (portId == null) {
-                        
+		//}
+                 
+		if (portId == null)
+                {
+                       
                         JOptionPane.showMessageDialog(null, "Could not find COM port");
-		
+			//System.exit(0);
                         return;
 		}
 
@@ -103,16 +111,18 @@ public class CommPortTest implements SerialPortEventListener {
                 catch( gnu.io.PortInUseException e)
                 {
                     System.exit(0);
+                }catch(Exception ee)
+                {
+                    System.out.println("error here "+ "");
                 }
-                catch (Exception e) {
-			System.err.println(e.toString());
-                       
-		}
-                // Multithread to read from both threads
              
+                
 	}
 
-
+	/**
+	 * This should be called when you stop using the port.
+	 * This will prevent port locking on platforms like Linux.
+	 */
 	public synchronized void close() 
         {
 		if (serialPort != null) {
@@ -134,29 +144,88 @@ public class CommPortTest implements SerialPortEventListener {
 	 * Handle an event on the serial port. Read the data and print it.
 	 */
 	public synchronized void serialEvent(SerialPortEvent oEvent) {
-		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
+	 System.out.println("inside event "+Thread.currentThread().getName());	
+            if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
 			        String inputLine=input.readLine();
                                 System.out.println(inputLine);
                                 
                                 Scanner scanner = new Scanner(inputLine);
-                               
-                           
+                                //System.out.println(scanner.hasNext("UID"));
+                                if( scanner.hasNext("###"))
+                                {
+                                 String hash = scanner.next();
+                                 String gamename = scanner.next();
+                                 String amt = scanner.next();
+                                  
+                                 if( "speedball".equals(gamename) )
+                                 {
+                                   // FactoryClass.getMainPageObj().setGameAmount(gamename,amt);
+                                 }
+                                 else if( "basketball".equals(gamename) )
+                                 {
+                                        //System.out.println("volleyball setgameamount");
+                                       // FactoryClass.getMainPageObj().setGameAmount(gamename,amt);
+                                 }
+                                    else if( "airhockey".equals(gamename) )
+                                    {
+                                       // System.out.println("airhockey setgameamount");
+                                        //FactoryClass.getMainPageObj().setGameAmount(gamename,amt);
+                                    }
+                                    else if( "dance".equals(gamename) )
+                                    {
+                                        //System.out.println("dance setgameamount");
+                                        //FactoryClass.getMainPageObj().setGameAmount(gamename,amt);
+                                    }
+                                    else if( "randomhit".equals(gamename) )
+                                    {
+                                        //FactoryClass.getMainPageObj().setGameAmount(gamename,amt);
+                                    }
+                                }
+                                else if( scanner.hasNext("UID") )
+                                { 
+                                    String uid = inputLine;   
+                                    FactoryClass.getMainPageObj().setCardNumber(uid.substring(4));
+                                }
+                                else if( scanner.hasNext("RUPEES"))
+                                {
+                                    scanner.next();
+                                    String rupees = scanner.next();
+                                    FactoryClass.getMainPageObj().cardDetails(rupees);
+                                }
+                                else if( scanner.hasNext("ERROR"))
+                                {
+                                   // MyLog.getLogger().severe(inputLine);
+                                   // FactoryClass.getMainPageObj().message(inputLine);
+                                }
+                                else if( scanner.hasNext("LOG"))
+                                {
+                                    //MyLog.getLogger().info(inputLine);
+                                }
+                                else if( scanner.hasNext("SUCCESS"))
+                                {
+                                    //FactoryClass.getMainPageObj().message(inputLine);
+                                }
                                
 			}
                         catch( java.io.IOException e)
                         {
-                            
+                          // FactoryClass.getMainPageObj().message("Recharge module removed, Login again ");
+                            System.exit(0);
                         }
-                        catch (Exception e) {
-                            
+                        catch (Exception e) 
+                        {
+                          
+				System.err.println(e.toString());
 			}
 		}
-		// Ignore all the other eventTypes, but you should consider the other ones.
+		
 	}
         
         protected void finalize()
         {
+      
+            
             close();
         }        
 }
