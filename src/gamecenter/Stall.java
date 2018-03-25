@@ -19,6 +19,7 @@ public class Stall
    private Date   SubEndDate;
 
 
+
     public Stall(int ID, String Name, String OwnerName, String Address, String Contact, String Password, Date SubStartDate, Date SubEndDate)
     {
         this.ID = ID;
@@ -29,6 +30,7 @@ public class Stall
         this.Password = Password;
         this.SubStartDate = SubStartDate;
         this.SubEndDate = SubEndDate;
+       
        
     }
 

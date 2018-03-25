@@ -154,7 +154,6 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jLabel_Sub = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jTextField_GameZoneAddress = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -165,11 +164,6 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jTextField_GameZoneOwnerContact = new javax.swing.JTextField();
         jTextField_GameZoneOwnerPassword = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        jCheckBox_Airhockey = new javax.swing.JCheckBox();
-        jcheckbox_basketball = new javax.swing.JCheckBox();
-        jCheckBox_CatchLight = new javax.swing.JCheckBox();
-        jCheckBox_dance = new javax.swing.JCheckBox();
-        jCheckBox_speedball = new javax.swing.JCheckBox();
         ViewGameZone = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_Gamezone = new javax.swing.JTable();
@@ -329,11 +323,6 @@ public class MainScreen_Admin extends javax.swing.JFrame
         AddGameZone.add(jLabel12);
         jLabel12.setBounds(70, 250, 220, 60);
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel13.setText("Check Avilable Games");
-        AddGameZone.add(jLabel13);
-        jLabel13.setBounds(500, 260, 310, 60);
-
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel14.setText("GameZone Name");
         AddGameZone.add(jLabel14);
@@ -382,26 +371,6 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jLabel15.setText("Address");
         AddGameZone.add(jLabel15);
         jLabel15.setBounds(500, 60, 220, 60);
-
-        jCheckBox_Airhockey.setText("Air Hockey");
-        AddGameZone.add(jCheckBox_Airhockey);
-        jCheckBox_Airhockey.setBounds(500, 390, 77, 23);
-
-        jcheckbox_basketball.setText("Basket Ball");
-        AddGameZone.add(jcheckbox_basketball);
-        jcheckbox_basketball.setBounds(500, 360, 77, 23);
-
-        jCheckBox_CatchLight.setText("Catch Light");
-        AddGameZone.add(jCheckBox_CatchLight);
-        jCheckBox_CatchLight.setBounds(670, 360, 79, 23);
-
-        jCheckBox_dance.setText("Dance");
-        AddGameZone.add(jCheckBox_dance);
-        jCheckBox_dance.setBounds(670, 330, 55, 23);
-
-        jCheckBox_speedball.setText("Speed Ball");
-        AddGameZone.add(jCheckBox_speedball);
-        jCheckBox_speedball.setBounds(500, 330, 75, 23);
 
         ViewGameZone.setBackground(new java.awt.Color(255, 255, 255));
         ViewGameZone.setLayout(null);
@@ -570,46 +539,13 @@ public class MainScreen_Admin extends javax.swing.JFrame
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:Create button  Main Add new GameZoneButton
-        /*
-        Code for Submit Button ADD GameZone
-        */
-        
-        
-            int    Basket_Ball  =0 ;  
-            int    Speed_Ball   =0 ;
-            int    Air_Hockey   =0 ;
-            int    Dance        =0 ;
-            int    Catch_Light  =0;
-        
-        if(jCheckBox_Airhockey.isSelected())
-        {
-            Air_Hockey = 1;
-        }
-        if(jCheckBox_dance.isSelected())
-        {
-            Dance = 1;
-        }
-        if(jCheckBox_speedball.isSelected())
-        {
-            Speed_Ball = 1;
-        }
-        if(jCheckBox_CatchLight.isSelected())
-        {
-            Catch_Light =1 ;
-        }
-        if(jcheckbox_basketball.isSelected())
-        {
-            Basket_Ball = 1;
-        }
-        
-        
-        
+      
         String Gamezonename = jTextField_GameZoneName.getText();
         String Conact = jTextField_GameZoneOwnerContact.getText();
         String Password = jTextField_GameZoneOwnerPassword.getText();
         String OwnerName = jTextField_GameZoneOwnerName.getText();
         String address = jTextField_GameZoneAddress.getText();
-        
+      
         String select = jComboBox_sub.getSelectedItem().toString();
         int subyears = Integer.parseInt(select.substring(0,1));
         
@@ -633,19 +569,22 @@ public class MainScreen_Admin extends javax.swing.JFrame
         newgamezone.setOwnerName(OwnerName);
         newgamezone.setSubStartDate(currentdate);
         newgamezone.setSubEndDate(finalEndsubDate);
+        
    
         //Completed getting data from GUI and storing into obbject of stall type
         //Now using backgrounf to add New gamezone
 
         MainAdminInterface Dao = null;
-        try {
+        try 
+        {
             Dao = MainAdminFactory.getInstance();
+            Dao.AddGameZone(newgamezone);
         } catch (Exception ex) 
         {
             //inCase of any errot in Adding new GameZone
             Logger.getLogger(MainScreen_Admin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Dao.AddGameZone(newgamezone,LastId);
+      
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -949,17 +888,12 @@ public class MainScreen_Admin extends javax.swing.JFrame
     private javax.swing.JPanel ViewGameZone;
     private javax.swing.JLayeredPane WorkingScreen_layeredPanel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox_Airhockey;
-    private javax.swing.JCheckBox jCheckBox_CatchLight;
-    private javax.swing.JCheckBox jCheckBox_dance;
-    private javax.swing.JCheckBox jCheckBox_speedball;
     private javax.swing.JComboBox<String> jComboBox1_selectgamezoneemployee;
     private javax.swing.JComboBox<String> jComboBox_allgamezones;
     private javax.swing.JComboBox<String> jComboBox_sub;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -988,7 +922,6 @@ public class MainScreen_Admin extends javax.swing.JFrame
     private javax.swing.JTextField jTextField_GameZoneOwnerContact;
     private javax.swing.JTextField jTextField_GameZoneOwnerName;
     private javax.swing.JTextField jTextField_GameZoneOwnerPassword;
-    private javax.swing.JCheckBox jcheckbox_basketball;
     private javax.swing.JPanel viewgamezonepanel;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,6 +1,8 @@
 
 package Database;
 
+import static Database.Connect.conn;
+import static Database.StallImplements.GetGameZones;
 import static Database.TransactionImplementation.Rech;
 import gamecenter.Stall;
 import gamecenter.User;
@@ -21,19 +23,22 @@ public class MainAdmin implements MainAdminInterface
         conn = Connect.getconnection();
     }
     @Override
-    public void AddGameZone(Stall newgamezone,int ID) 
+    public void AddGameZone(Stall newgamezone) 
     {
-         /*
-        Steps
-        1. Add data to GameZone Table
-        2. Add data to UserTable
-        3. create name_transaction Table
+        /*
+        1 . Add into GameZone List
+        2 . create its userttable
+        3 . create its transaction table
+        4 . create its customer table
+        5 .
         */
         
-        String insert = "INSERT INTO GameZoneDB.gamezone(Name,OwnerName,Address,Contact,Password,SubStartDate,SubEndDate,BasketBall,SpeedBall,AirHockey,Dance,CatchLight)VALUES(?,?,?,?,?,?,?,?,?,?,?,?);";
+    
+        String insert3 ="INSERT INTO `GameZoneDB`.`gamezone`(`Name`,`OwnerName`,`Address`,`Contact`,`Password`,`SubStartDate`,`SubEndDate`)VALUES(?,?,?,?,?,?,?);";
         
-       String insert2 = "INSERT INTO GameZoneDB.gamezone(ID,Name,OwnerName,Address,Contact,Password,SubStartDate,SubEndDate,Basket Ball,Speed Ball,Air Hockey,Dance,Catch Light)VALUES(?,?,?,?,?,?,?,?,?,?,?,?);";
-        String insert3 ="INSERT INTO `GameZoneDB`.`gamezone`(`Name`,`OwnerName`,`Address`,`Contact`,`Password`,`SubStartDate`,`SubEndDate`,`Basket Ball`,`Speed Ball`,`Air Hockey`,`Dance`,`Catch Light`)VALUES(?,?,?,?,?,?,?,?,?,?,?,?);";
+        
+        String insertuser ="(`Name`,`Address`,`Contact`,`Email`,`Type`,`GameZoneID`,`Password`,`UserName`)VALUES(?,?,?,?,?,?,?,?);";
+
         try
         { 
         
@@ -46,7 +51,6 @@ public class MainAdmin implements MainAdminInterface
          pstmt.setString(5, newgamezone.getPassword());
          pstmt.setDate(6,newgamezone.getSubStartDate());
          pstmt.setDate(7, newgamezone.getSubEndDate()); 
-    
          pstmt.executeUpdate();
          
             System.out.println("GameZone ADDED");
@@ -58,27 +62,81 @@ public class MainAdmin implements MainAdminInterface
               String temp ="CREATE TABLE "+FinalTableName;
               
               
-              String sql2 =temp+" (ID int(11) NOT NULL AUTO_INCREMENT,CardNo varchar(45) DEFAULT NULL,EmpName varchar(45) DEFAULT NULL,Amount int(11) DEFAULT NULL,Date datetime(6) DEFAULT NULL,GameName varchar(45) DEFAULT NULL,PRIMARY KEY (ID))";
+              String sql2 =temp+" (ID int(11) NOT NULL AUTO_INCREMENT,CardNo varchar(45) DEFAULT NULL,EmpName varchar(45) DEFAULT NULL,Amount int(11) DEFAULT NULL,Date datetime(6) DEFAULT NULL,PRIMARY KEY (ID))";
               
               Statement stmt2 = conn.createStatement() ;
             // create a new table
               stmt2.execute(sql2);
               
-              
-         String insertuser  = "INSERT INTO GameZoneDB.users (Name, Address,Contact,Email,Type,GameZoneID, Password) VALUES(?,?,?,?,?,?,?);";
-         PreparedStatement pstmt2 = conn.prepareStatement(insertuser);
-         pstmt2.setString(1, newgamezone.getOwnerName());
-         pstmt2.setString(2, newgamezone.getAddress());
-         pstmt2.setString(3,newgamezone.getContact());
-         pstmt2.setString(4, "dummy@gamezone.com");
-         pstmt2.setString(5, "admin");
-         pstmt2.setInt(6 ,ID+1);
-         pstmt2.setString(7, newgamezone.getPassword()); 
          
-         pstmt2.executeUpdate();
-         System.out.println("ALL DONe");
-         //conn.commit();    
-}
+              
+              ///////////////////////////////
+              
+              
+              String TableName2 = newgamezone.getName();
+              String FinalTableName2 = TableName+"_users";
+              String temp2 ="CREATE TABLE "+FinalTableName2;
+              
+            
+              String query = temp2+"(ID INT AUTO_INCREMENT PRIMARY KEY,Name       VARCHAR(20) NOT NULL,Address    VARCHAR(50) NULL, Contact    VARCHAR(20) NULL, Email      VARCHAR(30) NULL,Type       VARCHAR(10) NOT NULL,GameZoneID INT         NOT NULL,Password   VARCHAR(20) NOT NULL,UserName   VARCHAR(45) NOT NULL, CONSTRAINT UserName_UNIQUE UNIQUE (UserName))";
+              //String sql22 =temp2+qu;
+              Statement stmt22 = conn.createStatement() ;
+              stmt22.execute(query);
+              //////////////////////
+              
+              
+                    
+              
+             
+              String FinalTableName3 = TableName+"_customers";
+              String temp3 ="CREATE TABLE "+FinalTableName3;
+              
+            
+              String query2 = temp3+"(Id      INT(100) AUTO_INCREMENT PRIMARY KEY, Name    VARCHAR(30) NOT NULL,Contact VARCHAR(30) NOT NULL, EmailId VARCHAR(50) NULL)";
+              //String sql22 =temp2+qu;
+              Statement stmt222 = conn.createStatement() ;
+              stmt222.execute(query2);
+              //////////////////////////////////
+              
+              
+              String FinalTableName4 = TableName+"_games";
+              String temp4 ="CREATE TABLE "+FinalTableName4;
+              
+            
+              String query3 = temp4+"(Id  INT(100) AUTO_INCREMENT PRIMARY KEY, Name    VARCHAR(30) NOT NULL,Contact VARCHAR(30) NOT NULL, EmailId VARCHAR(50) NULL)";
+              //String sql22 =temp2+qu;
+              Statement stmt2222 = conn.createStatement() ;
+              stmt222.execute(query3);
+              
+              /////////////////////////////////////////////
+              
+              
+              int gamezoneid = 0 ;
+              String getmaxidquery = "SELECT MAX(ID) AS LargestPrice FROM gamezone";
+              
+                   Statement stmt=conn.createStatement();  
+                   ResultSet rs = stmt.executeQuery(getmaxidquery);
+                   while(rs.next())  
+                   {
+                    gamezoneid  = rs.getInt(1);
+                    break;
+
+                   }
+              
+              //////////////////////////////////////////////
+             String query4 = "INSERT INTO `"+FinalTableName2+"` "+insertuser;    
+             PreparedStatement pstmtuser = conn.prepareStatement(query4);
+             pstmtuser.setString(1, newgamezone.getOwnerName());
+             pstmtuser.setString(2, newgamezone.getAddress());
+             pstmtuser.setString(3,newgamezone.getContact());
+             pstmtuser.setString(4, "dummy@gmail.com");
+             pstmtuser.setString(5, "admin");
+             pstmtuser.setInt(6, gamezoneid);
+             pstmtuser.setString(7, newgamezone.getPassword());
+             pstmtuser.setString(8, newgamezone.getOwnerName()); 
+             pstmtuser.executeUpdate();
+
+        }  
         catch(Exception e)
         {
 
