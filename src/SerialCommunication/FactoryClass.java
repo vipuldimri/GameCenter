@@ -25,17 +25,17 @@ public class FactoryClass
         zigbeePort = "";
         cardRechargerPort = "";
     }
-    //private static my.ticketsystem.Database dbObj;
+
     private static CommPortTest commObj,commObj2;
-    private static MainScreen_StallOwner MainGui;
-    //private static my.ticketsystem.CollectionPage collectionpage;
+    private static MainScreen_StallOwner MainGui; 
     private static String zigbeePort;
     private static String cardRechargerPort;
     
     public static void createObjects(MainScreen_StallOwner MainGuiComing) throws ClassNotFoundException
     {
-            getPortsFromConfig();
             MainGui = MainGuiComing;
+            getPortsFromConfig();
+           
          
     }
 
@@ -55,7 +55,7 @@ public class FactoryClass
 	InputStream input = null;
         
 	try {
-		
+		//Error in getting Com ports from config file
                 //input = FactoryClass.class.getClassLoader().getResourceAsStream("config.properties");
 		// prop.load(input);
                 ///zigbeePort = prop.getProperty("zigbeeport");

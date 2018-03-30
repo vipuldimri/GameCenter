@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package SerialCommunication;
-
-
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -27,7 +20,8 @@ public class CommPortTest implements  SerialPortEventListener
         {
 	SerialPort serialPort;
         /** The port we're normally going to use. */
-	private static final String PORT_NAMES[] = { 
+	private static final String PORT_NAMES[] =
+        { 
 			//"COM4", // Windows
                         "COM7",
 	};
@@ -77,7 +71,7 @@ public class CommPortTest implements  SerialPortEventListener
                 {
                        
                         JOptionPane.showMessageDialog(null, "Could not find COM port");
-			//System.exit(0);
+			System.exit(0);
                         return;
 		}
 
@@ -125,7 +119,8 @@ public class CommPortTest implements  SerialPortEventListener
 	 */
 	public synchronized void close() 
         {
-		if (serialPort != null) {
+		if (serialPort != null) 
+                {
 			serialPort.removeEventListener();
 			serialPort.close();
                         System.out.println("port closed successfully");
@@ -145,7 +140,8 @@ public class CommPortTest implements  SerialPortEventListener
 	 */
 	public synchronized void serialEvent(SerialPortEvent oEvent) {
 	 System.out.println("inside event "+Thread.currentThread().getName());	
-            if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
+            if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) 
+            {
 			try {
 			        String inputLine=input.readLine();
                                 System.out.println(inputLine);
@@ -160,27 +156,27 @@ public class CommPortTest implements  SerialPortEventListener
                                   
                                  if( "speedball".equals(gamename) )
                                  {
-                                   // FactoryClass.getMainPageObj().setGameAmount(gamename,amt);
+                                   FactoryClass.getMainPageObj().setGameAmount(gamename,amt);
                                  }
                                  else if( "basketball".equals(gamename) )
                                  {
                                         //System.out.println("volleyball setgameamount");
-                                       // FactoryClass.getMainPageObj().setGameAmount(gamename,amt);
-                                 }
-                                    else if( "airhockey".equals(gamename) )
-                                    {
-                                       // System.out.println("airhockey setgameamount");
-                                        //FactoryClass.getMainPageObj().setGameAmount(gamename,amt);
-                                    }
-                                    else if( "dance".equals(gamename) )
-                                    {
+                                        FactoryClass.getMainPageObj().setGameAmount(gamename,amt);
+                                }
+                                else if( "airhockey".equals(gamename) )
+                                {
+                                       //System.out.println("airhockey setgameamount");
+                                        FactoryClass.getMainPageObj().setGameAmount(gamename,amt);
+                                }
+                                else if( "dance".equals(gamename) )
+                                {
                                         //System.out.println("dance setgameamount");
-                                        //FactoryClass.getMainPageObj().setGameAmount(gamename,amt);
-                                    }
-                                    else if( "randomhit".equals(gamename) )
-                                    {
-                                        //FactoryClass.getMainPageObj().setGameAmount(gamename,amt);
-                                    }
+                                        FactoryClass.getMainPageObj().setGameAmount(gamename,amt);
+                                }
+                                else if( "randomhit".equals(gamename) )
+                                {
+                                        FactoryClass.getMainPageObj().setGameAmount(gamename,amt);
+                                }
                                 }
                                 else if( scanner.hasNext("UID") )
                                 { 
@@ -196,7 +192,7 @@ public class CommPortTest implements  SerialPortEventListener
                                 else if( scanner.hasNext("ERROR"))
                                 {
                                    // MyLog.getLogger().severe(inputLine);
-                                   // FactoryClass.getMainPageObj().message(inputLine);
+                                    FactoryClass.getMainPageObj().message(inputLine);
                                 }
                                 else if( scanner.hasNext("LOG"))
                                 {
@@ -204,13 +200,13 @@ public class CommPortTest implements  SerialPortEventListener
                                 }
                                 else if( scanner.hasNext("SUCCESS"))
                                 {
-                                    //FactoryClass.getMainPageObj().message(inputLine);
+                                    FactoryClass.getMainPageObj().message(inputLine);
                                 }
                                
 			}
                         catch( java.io.IOException e)
                         {
-                          // FactoryClass.getMainPageObj().message("Recharge module removed, Login again ");
+                            FactoryClass.getMainPageObj().message("Recharge module removed, Login again ");
                             System.exit(0);
                         }
                         catch (Exception e) 

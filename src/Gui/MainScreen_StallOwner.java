@@ -60,6 +60,8 @@ import  gamecenter.Clock;
 import gamecenter.Games;
 import gamecenter.UpdatePasswordCheck;
 import gamecenter.UpdateTransactionListThread;
+import java.io.IOException;
+import SerialCommunication.*;
 //Main screen for every GameZone
 public class MainScreen_StallOwner extends javax.swing.JFrame 
 {
@@ -1663,7 +1665,21 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 JOptionPane.ERROR_MESSAGE);
             return;
         }
-
+       //first writting amout to card serial communication code
+        try 
+        {
+           
+            FactoryClass.getCommObj().sendData(amount);
+        } catch (IOException ex) 
+        {
+           JOptionPane.showMessageDialog(jPanel1,
+                "Error in Recharging Amount ,Please Check Com Port Connection",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    
+        
         //now doing recharge
 
         Recharge rec = new Recharge();
@@ -2130,7 +2146,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
         
     }//GEN-LAST:event_jTabbedPane1MouseClicked
-
+    //Method for sending email 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:Send emain code here
           
@@ -2185,7 +2201,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 	}
 
         
-        
+        //Below Methods are for serial communication ethods
         public void setCardNumber(String cardno)
         {
             jTextField1.setText(cardno);
@@ -2194,6 +2210,18 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         {
             jTextField3.setText(rs);
         }
+        public void message(String message)
+        {
+                     JOptionPane.showMessageDialog(jPanel1,
+                     message,
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+        }
+        public void setGameAmount(String gamename,String amount)
+        {
+            
+        }
+        
     /**
      * @param args the command line arguments
      */

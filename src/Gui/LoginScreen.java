@@ -447,14 +447,17 @@ public class LoginScreen extends javax.swing.JFrame
            MainScreen_StallOwner mainScreen_StallOwner =  new MainScreen_StallOwner("admin",this,currentgamezoneusers,currentgamezone,currentuser,passwordcheck); 
            mainScreen_StallOwner.setVisible(true);
            setVisible(false);
-                try 
-                  {
+           //Below code is for Serial communication to start    
+           try 
+           {
                 FactoryClass.createObjects(mainScreen_StallOwner);
-                } catch (ClassNotFoundException ex)
-                {
+               
+           } catch (ClassNotFoundException ex)
+           {
                  
                     System.out.println("Factory class exception "+ex);
-                }
+            
+           }
            
            
            
