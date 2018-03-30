@@ -450,8 +450,8 @@ public class LoginScreen extends javax.swing.JFrame
            //Below code is for Serial communication to start    
            try 
            {
-                FactoryClass.createObjects(mainScreen_StallOwner);
-               
+            FactoryClass.createObjects(mainScreen_StallOwner);
+    
            } catch (ClassNotFoundException ex)
            {
                  

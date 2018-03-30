@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.Scanner;
+import java.util.concurrent.CountDownLatch;
 
 import javax.swing.JOptionPane;
 
@@ -128,18 +129,23 @@ public class CommPortTest implements  SerialPortEventListener
 	}
        
        
-         public void sendData(String amount) throws IOException
+        public void sendData(String amount) throws IOException
         {
+            System.out.println("inside sendData"+Thread.currentThread().getName());
             byte[] arr = amount.getBytes();
             output.write(arr);
             System.out.print("Sending amount:");
             System.out.print(amount);
+       
         }          
 	/**
 	 * Handle an event on the serial port. Read the data and print it.
+     * @param oEvent
 	 */
-	public synchronized void serialEvent(SerialPortEvent oEvent) {
-	 System.out.println("inside event "+Thread.currentThread().getName());	
+        @Override
+	public synchronized void serialEvent(SerialPortEvent oEvent) 
+        {
+	    System.out.println("inside event "+Thread.currentThread().getName());	
             if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) 
             {
 			try {
@@ -192,7 +198,7 @@ public class CommPortTest implements  SerialPortEventListener
                                 else if( scanner.hasNext("ERROR"))
                                 {
                                    // MyLog.getLogger().severe(inputLine);
-                                    FactoryClass.getMainPageObj().message(inputLine);
+                                    FactoryClass.getMainPageObj().message(inputLine,"Error");
                                 }
                                 else if( scanner.hasNext("LOG"))
                                 {
@@ -200,13 +206,15 @@ public class CommPortTest implements  SerialPortEventListener
                                 }
                                 else if( scanner.hasNext("SUCCESS"))
                                 {
-                                    FactoryClass.getMainPageObj().message(inputLine);
+                                    //What is this inputLine value in different cases
+                                    FactoryClass.getMainPageObj().message(inputLine,"Recharge");
+                                 
                                 }
                                
 			}
                         catch( java.io.IOException e)
                         {
-                            FactoryClass.getMainPageObj().message("Recharge module removed, Login again ");
+                            FactoryClass.getMainPageObj().message("Recharge module removed, Login again ","RechargeModuleError");
                             System.exit(0);
                         }
                         catch (Exception e) 

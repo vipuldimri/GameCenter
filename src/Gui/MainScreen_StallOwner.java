@@ -109,8 +109,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
   
     
     
-    
-    
+    CountDownLatch RechargeWait;
+    Boolean ComportRecharge = false;
     
     //Constructor for normal GameZone employee 
     public MainScreen_StallOwner(LoginScreen l ,Stall currentgamezone,User currentuser) 
@@ -177,7 +177,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
        
         rechargeloadingdialoge = new JDialog();
         
-             GridPanel.setLayout(new GridLayout(30,2));
+        GridPanel.setLayout(new GridLayout(30,2));
        for(Games game : gamelist)
        {
             JLabel newlabel = new JLabel(game.getGameName());
@@ -218,12 +218,12 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             
             java.util.Date date=new java.util.Date();
             String dip=date.toString();
-	   Label_clock.setText(dip);
+	    Label_clock.setText(dip);
                 //clock
-                 Timer time=new Timer();
-		int delay=5000;
-		int period= 1000;
-		Clock clock = new Clock(Label_clock);
+            Timer time=new Timer();
+            int delay=5000;
+            int period= 1000;
+	   Clock clock = new Clock(Label_clock);
 		time.scheduleAtFixedRate(clock, delay,period);
                 //
                 
@@ -261,8 +261,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
            }
            transdetailscomplete = background_GetTransactionDetails.transactiondetails; 
-       
-           
            try{
                
               CustomerInterface Dao =  Customerfactory.getInstance();
@@ -324,13 +322,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             newtextField.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
             // newtextField.setForeground(new java.awt.Color(255, 255, 255));
        }
+  
         
-         
-      //COM CODE
-      
-      
-      
-      
     }
 
 
@@ -351,18 +344,18 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        ResetValuestozerobutton = new javax.swing.JButton();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
         jLabel27 = new javax.swing.JLabel();
         jLabel_currentEMpName = new javax.swing.JLabel();
+        ResetValuestozerobutton = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        Textfiled_ExistingAmount = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -494,6 +487,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel4.add(jLabel3);
         jLabel3.setBounds(360, 90, 80, 20);
 
+        jTextField1.setEditable(false);
         jTextField1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jPanel4.add(jTextField1);
         jTextField1.setBounds(580, 90, 260, 50);
@@ -502,7 +496,12 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel4.add(jTextField2);
         jTextField2.setBounds(580, 160, 260, 60);
 
-        jButton1.setText("Reset To Zero");
+        jButton1.setText("Refund");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel4.add(jButton1);
         jButton1.setBounds(830, 370, 130, 40);
 
@@ -513,16 +512,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(jButton2);
-        jButton2.setBounds(550, 370, 110, 40);
-
-        ResetValuestozerobutton.setText("Reset");
-        ResetValuestozerobutton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ResetValuestozerobuttonActionPerformed(evt);
-            }
-        });
-        jPanel4.add(ResetValuestozerobutton);
-        ResetValuestozerobutton.setBounds(270, 370, 130, 40);
+        jButton2.setBounds(250, 370, 110, 40);
 
         jRadioButton1.setBackground(new java.awt.Color(0, 0, 0));
         jRadioButton1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -583,6 +573,15 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel4.add(jLabel_currentEMpName);
         jLabel_currentEMpName.setBounds(1010, 10, 40, 14);
 
+        ResetValuestozerobutton.setText("Clear");
+        ResetValuestozerobutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResetValuestozerobuttonActionPerformed(evt);
+            }
+        });
+        jPanel4.add(ResetValuestozerobutton);
+        ResetValuestozerobutton.setBounds(540, 370, 130, 40);
+
         jPanel2.add(jPanel4);
         jPanel4.setBounds(2, 7, 1200, 440);
 
@@ -603,9 +602,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel5.add(jLabel5);
         jLabel5.setBounds(110, 80, 190, 40);
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jPanel5.add(jTextField3);
-        jTextField3.setBounds(290, 70, 290, 60);
+        Textfiled_ExistingAmount.setEditable(false);
+        Textfiled_ExistingAmount.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jPanel5.add(Textfiled_ExistingAmount);
+        Textfiled_ExistingAmount.setBounds(290, 70, 290, 60);
 
         jPanel2.add(jPanel5);
         jPanel5.setBounds(280, 470, 660, 190);
@@ -1622,6 +1622,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         // TODO add your handling code here://Reset button code In Recharge Tab
         jTextField1.setText("");
         jTextField2.setText("");
+        Textfiled_ExistingAmount.setText("");
     }//GEN-LAST:event_ResetValuestozerobuttonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1660,28 +1661,53 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         {
 
             JOptionPane.showMessageDialog(jPanel1,
-                "Please Enter A Valid Amount Amount.",
-                "Inane error",
-                JOptionPane.ERROR_MESSAGE);
+            "Please Enter A Valid Amount Amount.",
+            "Inane error",
+            JOptionPane.ERROR_MESSAGE);
             return;
         }
-       //first writting amout to card serial communication code
+        //first writting amout to card serial communication code
+        RechargeWait = new CountDownLatch(1); //for stoping the gui
         try 
         {
            
             FactoryClass.getCommObj().sendData(amount);
-        } catch (IOException ex) 
+            RechargeWait.await();
+            
+        } 
+        catch (IOException ex) 
         {
            JOptionPane.showMessageDialog(jPanel1,
-                "Error in Recharging Amount ,Please Check Com Port Connection",
-                "Inane error",
-                JOptionPane.ERROR_MESSAGE);
+            "Error in Recharge ,Please Check Com Port Connection",
+            "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+            "Something went wrong  "+e,
+            "Inane error",
+            JOptionPane.ERROR_MESSAGE);
             return;
         }
     
         
         //now doing recharge
 
+        if(ComportRecharge == false)
+        {
+            
+            JOptionPane.showMessageDialog(jPanel1,
+            "Error in HardWare ,Please Check the connection",
+            "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+            return;
+            
+        }
+        
+        ComportRecharge = false;
+        
         Recharge rec = new Recharge();
         long millis=System.currentTimeMillis();
         java.sql.Timestamp date = new Timestamp(millis);
@@ -1746,7 +1772,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
           {
                 System.out.println("Error in recharge");
                 JOptionPane.showMessageDialog(jPanel1,
-                "Recharge Failed",
+                "Recharge Failed Check Internet Connection",
                 "Inane error",
                 JOptionPane.ERROR_MESSAGE);
            
@@ -1759,12 +1785,13 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             JOptionPane.showMessageDialog(jPanel1,
             "Recharge Success",
             "Inane error",
-            JOptionPane.ERROR_MESSAGE);
+            JOptionPane.PLAIN_MESSAGE);
           }
         
         rech_flag = false;
         jTextField1.setText("");
         jTextField2.setText("");
+        Textfiled_ExistingAmount.setText("");
         
         //Step 1 complete
         
@@ -2195,6 +2222,20 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
           
           
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        //refund button code
+        
+           try 
+           {
+            FactoryClass.getCommObj().sendData("reset");
+           } catch (IOException ex)
+           {
+            
+           }
+    }//GEN-LAST:event_jButton1ActionPerformed
  	public static java.sql.Timestamp convert(java.util.Date date)
 	{
 		return new java.sql.Timestamp(date.getTime());
@@ -2208,14 +2249,25 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         }
         public void cardDetails(String rs)
         {
-            jTextField3.setText(rs);
+            Textfiled_ExistingAmount.setText(rs);
         }
-        public void message(String message)
+        public void message(String message,String option)
         {
+                     if(option.equals("Recharge"))
+                     {
+                         ComportRecharge = true;
+                         RechargeWait.countDown();
+                         return;
+                     }
+                     if(option.equals("Error"))
+                     {
+                         RechargeWait.countDown();
+                         return;
+                     }
                      JOptionPane.showMessageDialog(jPanel1,
                      message,
                      "Inane error",
-                      JOptionPane.ERROR_MESSAGE);
+                     JOptionPane.ERROR_MESSAGE);
         }
         public void setGameAmount(String gamename,String amount)
         {
@@ -2274,6 +2326,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JButton RegisterNewcustomer_button;
     private javax.swing.JButton ResetButton_Customer;
     private javax.swing.JButton ResetValuestozerobutton;
+    public javax.swing.JTextField Textfiled_ExistingAmount;
     private javax.swing.JLabel UserNameUniqueLabel;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
@@ -2368,7 +2421,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JTable jTable_updatedelete;
     public javax.swing.JTextField jTextField1;
     public javax.swing.JTextField jTextField2;
-    public javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField_regcontact;
