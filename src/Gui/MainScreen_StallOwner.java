@@ -2175,13 +2175,20 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     }//GEN-LAST:event_jTabbedPane1MouseClicked
     //Method for sending email 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:Send emain code here
-          
-        String from = "dimrivipul.vd@gmail.com";
-        String password = "password";
-        String to = "dimrivipul.vd@gmail.com";                 
+       
+            SwingWorker work = new SwingWorker<String , Integer>() 
+                 {
+	            @Override
+	            protected  String  doInBackground() throws Exception 
+	            {
+	            
+                    try 
+                    {
+                        String from = "starktechnologies2018@gmail.com";
+        String password = "sample@123";
+        String to = "dimrivipul.vd@gmail.com";    //receiver email id              
         String sub = "Transaction Details for "+java.time.LocalDate.now();
-        String msg = "testing ";
+        
 
         Properties props = new Properties();    
         props.put("mail.smtp.host", "smtp.gmail.com");    
@@ -2196,11 +2203,12 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
            @Override
            protected PasswordAuthentication getPasswordAuthentication()
            {    
-           return new PasswordAuthentication("dimrivipul.vd1@gmail.com","password");  
+           return new PasswordAuthentication(from,password);  
            }    
           });    
           //compose message    
-          try {    
+          try 
+          {    
            MimeMessage message = new MimeMessage(session);    
            message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));    
           
@@ -2211,14 +2219,42 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                mss += g.getGameName() +" ---  Rs "+g.getAmount()+ " \n";
            }
            message.setText(mss);    
-           //send message  
+   
            Transport.send(message);    
            System.out.println("message sent successfully");    
           } 
-          catch (MessagingException e) {throw new RuntimeException(e);
+          catch (MessagingException e)
+          {
+              throw new RuntimeException(e);
           }    
           
           
+          
+                         } catch (Exception ex)
+                         {
+                       
+                             RegisterCustomer = false;
+                         }
+                 
+                        return "end";
+	                
+	            }
+	            @Override
+	            protected void done()
+                    {
+                        
+                     rechargeloadingdialoge.setVisible(false);
+	            }
+	        };
+        
+                 
+        final ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/Images/recharge.gif"));
+        work.execute();
+        JOptionPane pane = new JOptionPane("", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon,new Object[]{}, null);
+        rechargeloadingdialoge = pane.createDialog(this,"Please wait Sending E-Mail ");
+        rechargeloadingdialoge.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        rechargeloadingdialoge.setVisible(true);   
+      
           
           
     }//GEN-LAST:event_jMenuItem3ActionPerformed
@@ -2273,10 +2309,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         {
             
         }
-        
-    /**
-     * @param args the command line arguments
-     */
+   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

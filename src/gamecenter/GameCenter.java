@@ -1,7 +1,6 @@
 
 package gamecenter;
 
-import Database.Connect;
 import Gui.LoginScreen;
 import Gui.Splash;
 

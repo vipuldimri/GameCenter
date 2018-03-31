@@ -5,6 +5,8 @@
  */
 package gamecenter;
 
+import java.sql.Date;
+
 /**
  *
  * @author vipul
@@ -13,11 +15,21 @@ public class Games {
     private int ID;
     private String  GameName;
     private String Amount;
+    private java.sql.Date date;
 
-    public Games(int ID, String GameName, String Amount) {
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    public Games(int ID, String GameName, String Amount, java.sql.Date date) 
+    {
         this.ID = ID;
         this.GameName = GameName;
         this.Amount = Amount;
+        this.date = date;
     }
 
     public int getID() {

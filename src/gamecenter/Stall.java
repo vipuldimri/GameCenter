@@ -17,10 +17,11 @@ public class Stall
    private String Password; 
    private Date   SubStartDate;
    private Date   SubEndDate;
+   private String Email;
 
 
 
-    public Stall(int ID, String Name, String OwnerName, String Address, String Contact, String Password, Date SubStartDate, Date SubEndDate)
+    public Stall(int ID, String Name, String OwnerName, String Address, String Contact, String Password, Date SubStartDate, Date SubEndDate,String Email)
     {
         this.ID = ID;
         this.Name = Name;
@@ -30,13 +31,17 @@ public class Stall
         this.Password = Password;
         this.SubStartDate = SubStartDate;
         this.SubEndDate = SubEndDate;
-       
+        this.Email = Email;       
        
     }
 
-   
+    public String getEmail() {
+        return Email;
+    }
 
-   
+    public void setEmail(String Email) {
+        this.Email = Email;
+    }
 
     public int getID() {
         return ID;

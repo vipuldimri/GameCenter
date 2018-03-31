@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 
 import SerialCommunication.CommPortTest;
 import SerialCommunication.FactoryClass;
+import gamecenter.SendEmailThread;
 
 import javax.swing.JDialog;
 /*
@@ -65,6 +66,7 @@ public class LoginScreen extends javax.swing.JFrame
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -100,6 +102,8 @@ public class LoginScreen extends javax.swing.JFrame
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Contact Us");
 
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/StarkLogo.jpg"))); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -112,12 +116,18 @@ public class LoginScreen extends javax.swing.JFrame
                         .addGap(18, 18, 18)
                         .addComponent(jLabel8))
                     .addComponent(jLabel9))
-                .addContainerGap(397, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(265, Short.MAX_VALUE)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(216, 216, 216))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(511, Short.MAX_VALUE)
+                .addGap(136, 136, 136)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 249, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel7)
@@ -130,7 +140,7 @@ public class LoginScreen extends javax.swing.JFrame
         );
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(12, 13, 695, 642);
+        jPanel2.setBounds(12, 13, 693, 642);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("User Name");
@@ -180,8 +190,13 @@ public class LoginScreen extends javax.swing.JFrame
         jButton1.setBounds(860, 450, 270, 80);
 
         jLabel3.setText("Forgot Pasword");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(860, 540, 90, 16);
+        jLabel3.setBounds(860, 540, 110, 30);
 
         jPasswordField1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jPasswordField1.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -200,12 +215,12 @@ public class LoginScreen extends javax.swing.JFrame
         jLabel4.setForeground(new java.awt.Color(255, 0, 0));
         jLabel4.setText("*");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(860, 410, 230, 16);
+        jLabel4.setBounds(860, 410, 230, 14);
 
         jLabel5.setForeground(new java.awt.Color(255, 0, 0));
         jLabel5.setText("*");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(860, 270, 230, 16);
+        jLabel5.setBounds(860, 270, 230, 14);
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/showpassword.png"))); // NOI18N
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -564,6 +579,30 @@ public class LoginScreen extends javax.swing.JFrame
         
     }//GEN-LAST:event_jTextField1KeyPressed
 
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        // TODO add your handling code here:Forget password code here
+        String ans =JOptionPane.showInputDialog(jPanel1,"Enter Your Registered Phone No ");      
+        if(ans.equals(currentgamezone.getContact()))
+        {
+                     SendEmailThread sendEmailThread = new SendEmailThread(currentgamezone.getEmail(),currentgamezone.getPassword());
+                      sendEmailThread.start();
+                     JOptionPane.showMessageDialog(jPanel1,
+                     "Password will be sent to registered E-mail address",
+                     "Recover Password",
+                      JOptionPane.PLAIN_MESSAGE);
+                      return ;
+        }else
+        {
+                     JOptionPane.showMessageDialog(jPanel1,
+                     "Phone No did not Match With Registered No",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                
+                     return ;
+        }
+        
+    }//GEN-LAST:event_jLabel3MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -602,6 +641,7 @@ public class LoginScreen extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
