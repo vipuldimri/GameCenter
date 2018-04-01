@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package gamecenter;
 
-/**
- *
- * @author vipul
- */
+/*
+class to update password check so that no to employee can have same username
+*/
+package gamecenter;
 import Database.UserFactory;
 import Database.UserInterface;
 import java.util.HashMap;
@@ -18,7 +12,7 @@ public class UpdatePasswordCheck extends Thread
     String GameZoneName;
     HashMap<String , Boolean> passwordcheck;
     
-    public UpdatePasswordCheck(String GameZoneName , HashMap<String , Boolean> passwordcheck)
+    public UpdatePasswordCheck(String GameZoneName , HashMap<String,Boolean> passwordcheck)
     {
         this.GameZoneName = GameZoneName;
         this.passwordcheck = passwordcheck;
@@ -30,7 +24,7 @@ public class UpdatePasswordCheck extends Thread
                 
             
             UserInterface Dao   = UserFactory.getInstance();
-            passwordcheck = Dao.getUserNames("GameZoneName",passwordcheck);
+            passwordcheck = Dao.getUserNames(GameZoneName,passwordcheck);
              }
             catch(Exception e)
             {

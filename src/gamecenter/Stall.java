@@ -18,10 +18,11 @@ public class Stall
    private Date   SubStartDate;
    private Date   SubEndDate;
    private String Email;
+   private int Max_Employee;
 
 
 
-    public Stall(int ID, String Name, String OwnerName, String Address, String Contact, String Password, Date SubStartDate, Date SubEndDate,String Email)
+    public Stall(int ID, String Name, String OwnerName, String Address, String Contact, String Password, Date SubStartDate, Date SubEndDate,String Email,int Max_Employee)
     {
         this.ID = ID;
         this.Name = Name;
@@ -32,7 +33,15 @@ public class Stall
         this.SubStartDate = SubStartDate;
         this.SubEndDate = SubEndDate;
         this.Email = Email;       
-       
+       this.Max_Employee = Max_Employee;
+    }
+
+    public int getMax_Employee() {
+        return Max_Employee;
+    }
+
+    public void setMax_Employee(int Max_Employee) {
+        this.Max_Employee = Max_Employee;
     }
 
     public String getEmail() {

@@ -103,7 +103,7 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(130, 430, 129, 25);
+        jButton1.setBounds(130, 430, 150, 40);
 
         jButton2.setText("Delete Employee");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -112,7 +112,7 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(370, 430, 127, 25);
+        jButton2.setBounds(343, 430, 140, 40);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel12.setText("Password");
@@ -166,7 +166,7 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
             }
         });
         jPanel1.add(jButton3);
-        jButton3.setBounds(620, 430, 71, 25);
+        jButton3.setBounds(590, 440, 110, 30);
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel17.setText("UserName");
@@ -202,6 +202,10 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
         String usernamee  =jTextField1_usernam.getText();
         
         
+        String address = jTextField1_empaddress.getText();
+        String email = jTextField1_empemail.getText();
+        String contact = jTextField1_empcontact.getText();
+      
         if(passwordcheck.containsKey(usernamee) || usernamee.equals("admin") )
         {
             if(current.getUserName().equals(usernamee))
@@ -224,11 +228,16 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
             JOptionPane.ERROR_MESSAGE);
             return ;
         }
+        if(current.getType().equals("admin") && !current.getEmail().equals(email))
+        {
+           JOptionPane.showMessageDialog(jPanel1,
+           "Admin E-mail Id can not be change please contact us for this change.",
+           "Inane error",
+           JOptionPane.ERROR_MESSAGE);
+           return ;
+        }
 
-        String address = jTextField1_empaddress.getText();
-        String email = jTextField1_empemail.getText();
-        String contact = jTextField1_empcontact.getText();
-      
+
         
         updateemp = new User();
         updateemp.setName(username);
@@ -326,7 +335,14 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
        {
                      return ;
        }
-        
+        if(current.getType().equals("admin"))
+        {
+                    JOptionPane.showMessageDialog(jPanel1,
+                    "Can't delete Admin",
+                    "Inane error",
+                    JOptionPane.ERROR_MESSAGE);
+                    return;
+        }
         
                  //above for confirming the 
                  SwingWorker work = new SwingWorker<String , Integer>() 
@@ -384,6 +400,8 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
                       UpdateEmployeeListThread updateEmployeeListThread = new UpdateEmployeeListThread(employeelist,currentstallname);
                       updateEmployeeListThread.start();
                       
+                      UpdatePasswordCheck updatePasswordCheck = new UpdatePasswordCheck(currentstallname, passwordcheck);
+                      updatePasswordCheck.start();
                       
                       
                      JOptionPane.showMessageDialog(jPanel1,

@@ -49,7 +49,7 @@ public class StallImplements implements StallInterface
                    ResultSet rs = stmt.executeQuery(GetGameZones);
                    while(rs.next())  
                    {
-                    Stall newstall = new Stall(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getDate(7),rs.getDate(8),rs.getString(9));
+                    Stall newstall = new Stall(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getDate(7),rs.getDate(8),rs.getString(9),rs.getInt(10));
                     details.GameZoneDetails.add(newstall);
                     details.GameZoneNames.add(rs.getString(2));
                     

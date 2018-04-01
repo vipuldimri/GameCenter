@@ -547,9 +547,7 @@ public class LoginScreen extends javax.swing.JFrame
         // TODO add your handling code here:Key presses for Enter Button
         if(evt.getKeyCode()==KeyEvent.VK_ENTER)
         { 
-                
-       //Same Code as Of Login Button
-   
+
         } 
         
         
@@ -560,9 +558,6 @@ public class LoginScreen extends javax.swing.JFrame
         if(evt.getKeyCode()==KeyEvent.VK_ENTER)
         { 
                 
-    
-       
-       //Same Code as Of Login Button
    
         } 
         

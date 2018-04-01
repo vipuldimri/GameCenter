@@ -55,7 +55,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Time;
 import java.util.Timer;
-import java.util.TimerTask;
 import  gamecenter.Clock;
 import gamecenter.Games;
 import gamecenter.UpdatePasswordCheck;
@@ -317,16 +316,14 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             newtextField.setEditable(false);
             GridPanel.add(newlabel);
             GridPanel.add(newtextField);
-            newlabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+            newlabel.setFont(new java.awt.Font("Tahoma", 1, 18)); 
             newlabel.setForeground(new java.awt.Color(255, 255, 255));
-            newtextField.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-            // newtextField.setForeground(new java.awt.Color(255, 255, 255));
+            newtextField.setFont(new java.awt.Font("Tahoma", 1, 18));
+           
        }
   
-        
+        currentnoofemployeelabel.setText(currentStallUsers.size()+"");
     }
-
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -424,6 +421,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel13 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        currentnoofemployeelabel = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -454,12 +452,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         setResizable(false);
 
         jPanel1.setOpaque(false);
-
-        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTabbedPane1MouseClicked(evt);
-            }
-        });
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.setLayout(null);
@@ -1021,27 +1013,31 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/newAddemp.png"))); // NOI18N
 
+        currentnoofemployeelabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        currentnoofemployeelabel.setForeground(new java.awt.Color(255, 255, 0));
+
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+            .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(currentnoofemployeelabel)
+                .addGap(18, 18, 18))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(currentnoofemployeelabel))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel14.setBackground(new java.awt.Color(54, 33, 89));
@@ -1065,7 +1061,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 .addGap(67, 67, 67)
                 .addComponent(jLabel18)
                 .addGap(27, 27, 27)
-                .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel14Layout.setVerticalGroup(
@@ -1478,14 +1474,21 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         // TODO add your handling code here:ADD button to add Employee
 
         
-        
+        if(currentgamezoneusers.size() == currentgamezone.getMax_Employee())
+        {
+                     JOptionPane.showMessageDialog(jPanel1,
+                     "You can not register more then "+currentgamezone.getMax_Employee()+ "Employees ,contact product owner to increase No of employees",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                      return ;
+        }
         String username = AddEmpName_textfield.getText();
         String password = AddEmpPassword_textfield.getText();
         String username2 = AddEmpUserName_textfield.getText();
         
         if(passwordcheck.containsKey(username2) || username2.equals("admin"))
         {
-             JOptionPane.showMessageDialog(jPanel1,
+                     JOptionPane.showMessageDialog(jPanel1,
                      "This UserName is Taken ",
                      "Inane error",
                       JOptionPane.ERROR_MESSAGE);
@@ -1559,7 +1562,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         rechargeloadingdialoge = pane.createDialog(this,"Please wait ");
         rechargeloadingdialoge.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
       
-        //jDialog.show();  this method is depricated there using setVisible method for showing the dialoge box 
+       
         rechargeloadingdialoge.setVisible(true);   
                  
         
@@ -1594,7 +1597,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         AddEmpEmail_textfield.setText("");
         AddEmpContact_textfield.setText("");
         AddEmpUserName_textfield.setText("");
-        
+        currentnoofemployeelabel.setText(currentgamezoneusers.size()+"");
         AddEmp_flag = false;
     }//GEN-LAST:event_AddNewEmployee_ButtonActionPerformed
 
@@ -2103,7 +2106,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         rechargeloadingdialoge = pane.createDialog(this,"Please wait ");
         rechargeloadingdialoge.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
       
-        //jDialog.show();  this method is depricated there using setVisible method for showing the dialoge box 
+        
         rechargeloadingdialoge.setVisible(true);   
                  
      
@@ -2114,12 +2117,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 "Registeration Failed",
                 "Inane error",
                 JOptionPane.ERROR_MESSAGE);
-           
-            return ;
+                return ;
           }else
           {
         
-             UpdateCustomerListThread updatecustomerlist = new UpdateCustomerListThread(customerlist,currentgamezone.getName());
+            UpdateCustomerListThread updatecustomerlist = new UpdateCustomerListThread(customerlist,currentgamezone.getName());
             updatecustomerlist.start();
                
             JOptionPane.showMessageDialog(jPanel1,
@@ -2127,8 +2129,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             "Inane error",
             JOptionPane.ERROR_MESSAGE);
             //now updating the customer list
-            
-           
           }
         
 
@@ -2161,18 +2161,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         }
         System.exit(0);
     }//GEN-LAST:event_jLabel_OwnerName1MouseClicked
-
-    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
-       //Grid Tab open
-       
-      
-        
-        
-        
-        
-        
-        
-    }//GEN-LAST:event_jTabbedPane1MouseClicked
     //Method for sending email 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
        
@@ -2261,8 +2249,20 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
-        //refund button code
+        String cardno = jTextField1.getText();
+        if("".equals(cardno))
+        {
+            
+              JOptionPane.showMessageDialog(jPanel1,
+              "Please Enter Card No.",
+              "Inane error",
+              JOptionPane.ERROR_MESSAGE);
+              return ;
+
+          
+
+        }
+
         
            try 
            {
@@ -2362,6 +2362,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     public javax.swing.JTextField Textfiled_ExistingAmount;
     private javax.swing.JLabel UserNameUniqueLabel;
     private javax.swing.ButtonGroup buttonGroup1;
+    public javax.swing.JLabel currentnoofemployeelabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton7;
@@ -2420,7 +2421,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
+    public javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel18;
