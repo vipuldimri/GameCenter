@@ -19,6 +19,7 @@ public class Stall
    private Date   SubEndDate;
    private String Email;
    private int Max_Employee;
+  // private Date EmailTiming;
 
 
 
@@ -33,9 +34,18 @@ public class Stall
         this.SubStartDate = SubStartDate;
         this.SubEndDate = SubEndDate;
         this.Email = Email;       
-       this.Max_Employee = Max_Employee;
+        this.Max_Employee = Max_Employee;
+        //.EmailTiming  = this.EmailTiming;
+    }
+/*
+    public Date getEmailTiming() {
+        return EmailTiming;
     }
 
+    public void setEmailTiming(Date EmailTiming) {
+        this.EmailTiming = EmailTiming;
+    }
+*/
     public int getMax_Employee() {
         return Max_Employee;
     }

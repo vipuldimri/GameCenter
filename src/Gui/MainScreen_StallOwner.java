@@ -444,6 +444,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
@@ -1293,6 +1294,14 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jMenu1.add(jMenuItem3);
+
+        jMenuItem4.setText("Set Email Timing");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Refresh ");
@@ -2272,6 +2281,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             
            }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:Set Email timimg
+          String Time =JOptionPane.showInputDialog(jPanel1,"Set Email  Time In Format hr-am/pm (24hr format)"); 
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
  	public static java.sql.Timestamp convert(java.util.Date date)
 	{
 		return new java.sql.Timestamp(date.getTime());
@@ -2418,6 +2432,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
