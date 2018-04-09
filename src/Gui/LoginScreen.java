@@ -4,6 +4,9 @@ import DataStructure.Trie;
 import gamecenter.Stall;
 import gamecenter.User;
 
+import org.apache.commons.net.ntp.NTPUDPClient;
+import org.apache.commons.net.ntp.NtpV3Packet;
+import org.apache.commons.net.ntp.TimeInfo;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -19,9 +22,12 @@ import java.util.concurrent.CountDownLatch;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import java.net.InetAddress;
 import SerialCommunication.CommPortTest;
 import SerialCommunication.FactoryClass;
 import gamecenter.SendEmailThread;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JDialog;
 /*
@@ -76,6 +82,7 @@ public class LoginScreen extends javax.swing.JFrame
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1208, 668));
@@ -234,6 +241,20 @@ public class LoginScreen extends javax.swing.JFrame
         jPanel1.add(jLabel6);
         jLabel6.setBounds(1100, 360, 32, 30);
 
+        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
+        jLayeredPane1.setLayout(jLayeredPane1Layout);
+        jLayeredPane1Layout.setHorizontalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jLayeredPane1Layout.setVerticalGroup(
+            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jLayeredPane1);
+        jLayeredPane1.setBounds(860, 500, 100, 100);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -273,7 +294,37 @@ public class LoginScreen extends javax.swing.JFrame
         
         //Getting current time and then converting it into String for easy comparision
        long millis=System.currentTimeMillis();  
-       java.sql.Date currentdate=new java.sql.Date(millis);  
+       java.sql.Date currentdate=new java.sql.Date(millis);
+        System.out.println("current time is "+currentdate);
+        
+        
+        
+        
+         try
+         {
+//        	NTPUDPClient timeClient = new NTPUDPClient();
+//		InetAddress inetAddress = InetAddress.getByName("time-a-wwv.nist.gov");
+//		TimeInfo timeInfo = timeClient.getTime(inetAddress);
+//		NtpV3Packet message = timeInfo.getMessage();
+//		long serverTime = message.getTransmitTimeStamp().getTime();
+//		Date time = new Date(serverTime);
+//		System.out.println("Time from " + "nist1-ny.ustiming.org" + ": " + time);
+              Date date = new Date();
+    String strDateFormat = "hh:mm:ss a";
+    DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
+    String formattedDate= dateFormat.format(date);
+    System.out.println("Current time of the day using Date - 12 hour format: " + formattedDate);
+         }
+         catch(Exception e)
+         {
+              JOptionPane.showMessageDialog(jPanel1,
+                     "Unable to Connect To Internet ,Please check your internet Connection.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                
+                     return ;
+         }
+        
        String cur_date =currentdate.toString();
        String Year = cur_date.substring(0,4);
        String Month = cur_date.substring(5,7);
@@ -327,37 +378,7 @@ public class LoginScreen extends javax.swing.JFrame
                //code for getting Game zone
                //Now getting current stall Endsub data and converting it into String to check if sub is valid or not for the gamezone
                 gamezoneid = u.getGameZoneID();
-            /*
-                for(int d = 0 ; d < stalls.stalls.size() ; d++)
-                {
-                    if(stalls.stalls.get(d).getID() == gamezoneid)
-                    {
-                        if(stalls.stalls.get(d).getBasket_Ball() == 1)
-                        {
-                            
-                            CurrentStallGames.add("Basket Ball");
-                        }
-                        if(stalls.stalls.get(d).getAir_Hockey()== 1)
-                        {
-                            CurrentStallGames.add(" Air Hockey");
-                        }
-                        if(stalls.stalls.get(d).getCatch_Light()== 1)
-                        {
-                            CurrentStallGames.add("Catch Light");
-                        }
-                        if(stalls.stalls.get(d).getDance()== 1)
-                        {
-                            CurrentStallGames.add("Dance");
-                        }
-                        if(stalls.stalls.get(d).getSpeed_Ball()== 1)
-                        {
-                            CurrentStallGames.add("Speed Ball");
-                        }
-                        
-                    }
-                    
-                }
-                */
+          
             
                 //Checking for GameZoneSubcription
                 java.sql.Date sub_enddate = currentgamezone.getSubEndDate();
@@ -579,7 +600,7 @@ public class LoginScreen extends javax.swing.JFrame
         String ans =JOptionPane.showInputDialog(jPanel1,"Enter Your Registered Phone No ");      
         if(ans.equals(currentgamezone.getContact()))
         {
-                     SendEmailThread sendEmailThread = new SendEmailThread(currentgamezone.getEmail(),currentgamezone.getPassword());
+                     SendEmailThread sendEmailThread = new SendEmailThread(currentgamezone.getEmail(),currentgamezone.getPassword(),currentgamezone.getOwnerName(),currentgamezone.getName());
                       sendEmailThread.start();
                      JOptionPane.showMessageDialog(jPanel1,
                      "Password will be sent to registered E-mail address",
@@ -645,6 +666,7 @@ public class LoginScreen extends javax.swing.JFrame
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPasswordField1;

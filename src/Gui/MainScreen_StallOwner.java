@@ -323,6 +323,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
        }
   
         currentnoofemployeelabel.setText(currentStallUsers.size()+"");
+        Noofcustomerlabel.setText(customerlist.size()+"");
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -384,15 +385,16 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel10 = new javax.swing.JLabel();
         AddUpateEmployee = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jButton8 = new javax.swing.JButton();
+        EmplyeeIdInput = new javax.swing.JTextField();
+        UpdateEmplloyeeSearch_Button = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable_updatedelete = new javax.swing.JTable();
         Emprecords = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_EmpRecord = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        Employeeidinput = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
         transaction = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_transactionDetails = new javax.swing.JTable();
@@ -438,6 +440,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel22 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
+        Noofcustomerlabel = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel_Label = new javax.swing.JLabel();
         Label_clock = new javax.swing.JLabel();
@@ -736,15 +739,21 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         AddUpateEmployee.setBackground(new java.awt.Color(255, 255, 255));
         AddUpateEmployee.setLayout(null);
 
-        jLabel13.setText("Enter Employee Name ");
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel13.setText("Enter Employee ID ");
         AddUpateEmployee.add(jLabel13);
-        jLabel13.setBounds(100, 20, 108, 14);
-        AddUpateEmployee.add(jTextField7);
-        jTextField7.setBounds(100, 50, 210, 50);
+        jLabel13.setBounds(100, 10, 230, 30);
+        AddUpateEmployee.add(EmplyeeIdInput);
+        EmplyeeIdInput.setBounds(100, 50, 210, 50);
 
-        jButton8.setText("Search");
-        AddUpateEmployee.add(jButton8);
-        jButton8.setBounds(410, 60, 120, 40);
+        UpdateEmplloyeeSearch_Button.setText("Search");
+        UpdateEmplloyeeSearch_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateEmplloyeeSearch_ButtonActionPerformed(evt);
+            }
+        });
+        AddUpateEmployee.add(UpdateEmplloyeeSearch_Button);
+        UpdateEmplloyeeSearch_Button.setBounds(410, 60, 120, 40);
 
         jTable_updatedelete.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTable_updatedelete.setModel(new javax.swing.table.DefaultTableModel(
@@ -792,11 +801,20 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jScrollPane1.setBounds(0, 205, 860, 350);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel11.setText("Search for Employee");
+        jLabel11.setText(" Employee ID");
         Emprecords.add(jLabel11);
         jLabel11.setBounds(70, 30, 220, 60);
-        Emprecords.add(jTextField4);
-        jTextField4.setBounds(70, 90, 190, 40);
+        Emprecords.add(Employeeidinput);
+        Employeeidinput.setBounds(70, 90, 190, 40);
+
+        jButton3.setText("Search Employee");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        Emprecords.add(jButton3);
+        jButton3.setBounds(460, 90, 120, 40);
 
         transaction.setBackground(new java.awt.Color(255, 255, 255));
         transaction.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1175,6 +1193,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/newCustomer.png"))); // NOI18N
 
+        Noofcustomerlabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Noofcustomerlabel.setForeground(new java.awt.Color(255, 255, 0));
+
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
         jPanel22Layout.setHorizontalGroup(
@@ -1183,13 +1204,20 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 .addContainerGap(59, Short.MAX_VALUE)
                 .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel26)
-                .addGap(40, 40, 40))
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel22Layout.createSequentialGroup()
+                        .addComponent(jLabel26)
+                        .addGap(40, 40, 40))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel22Layout.createSequentialGroup()
+                        .addComponent(Noofcustomerlabel)
+                        .addContainerGap())))
         );
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap()
+                .addComponent(Noofcustomerlabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel22Layout.createSequentialGroup()
@@ -1212,13 +1240,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 .addComponent(jLabel_OwnerName, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jPanel22, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel_GameZoneNAme, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel_GameZoneNAme, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
@@ -1238,7 +1263,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_OwnerName, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_OwnerName1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2139,13 +2164,34 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             JOptionPane.ERROR_MESSAGE);
             //now updating the customer list
           }
-        
+         
 
         
         RegisterCustomer = false;
         jTextField_regcontact.setText("");
         jTextField_regemail.setText("");
         jTextField_regname.setText("");
+        
+        
+        //code for filled table with new customer list  
+        DefaultTableModel m = (DefaultTableModel) jTable_customers.getModel();
+        m.setRowCount(0);
+
+        DefaultTableModel  model = (DefaultTableModel) jTable_customers.getModel();
+        Object row[] = new Object[4];
+        for(int i = 0;i < customerlist.size();i++)
+        {
+            row[0] = customerlist.get(i).getId();
+            row[1] = customerlist.get(i).getName();
+            row[2] = customerlist.get(i).getContact();
+            row[3] = customerlist.get(i).getEmailId();
+           
+            model.addRow(row);
+            
+        
+        }
+        Noofcustomerlabel.setText(customerlist.size()+"");
+        
     }//GEN-LAST:event_RegisterNewcustomer_buttonActionPerformed
 
     private void ResetButton_CustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButton_CustomerActionPerformed
@@ -2286,6 +2332,107 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         // TODO add your handling code here:Set Email timimg
           String Time =JOptionPane.showInputDialog(jPanel1,"Set Email  Time In Format hr-am/pm (24hr format)"); 
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void UpdateEmplloyeeSearch_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateEmplloyeeSearch_ButtonActionPerformed
+        // TODO add your handling code here:
+        String Id = EmplyeeIdInput.getText();
+        int id = 0 ;
+        try
+        {
+        id = Integer.parseInt(Id);
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+            "Enter Valid ID",
+            "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        
+        for(User user : currentgamezoneusers)
+        {
+            if(user.getID() == id)
+            {
+            DefaultTableModel m = (DefaultTableModel) jTable_updatedelete.getModel();
+            m.setRowCount(0);
+            DefaultTableModel  model = (DefaultTableModel) jTable_updatedelete.getModel();
+            Object row[] = new Object[9];
+            row[0] = user.getID();
+            row[1] = user.getName();
+            row[2] = user.getAddress();
+            row[3] = user.getContact();
+            row[4] = user.getEmail();
+            row[5] = user.getType();
+            row[6] = user.getGameZoneID();
+            row[7] = user.getPassword();
+            row[8] = user.getAddress();
+            model.addRow(row);
+
+            return;
+            }
+        }
+        
+         JOptionPane.showMessageDialog(jPanel1,
+            "No Employee Found For this ID",
+            "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+            return;
+        
+        
+    }//GEN-LAST:event_UpdateEmplloyeeSearch_ButtonActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+        String Id = Employeeidinput.getText();
+        int id = 0 ;
+        try
+        {
+        id = Integer.parseInt(Id);
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+            "Enter Valid ID",
+            "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        
+        for(User user : currentgamezoneusers)
+        {
+            if(user.getID() == id)
+            {
+            DefaultTableModel m = (DefaultTableModel) jTable_EmpRecord.getModel();
+            m.setRowCount(0);
+            DefaultTableModel  model = (DefaultTableModel) jTable_EmpRecord.getModel();
+            Object row[] = new Object[9];
+            row[0] = user.getID();
+            row[1] = user.getName();
+            row[2] = user.getAddress();
+            row[3] = user.getContact();
+            row[4] = user.getEmail();
+            row[5] = user.getType();
+            row[6] = user.getGameZoneID();
+            row[7] = user.getPassword();
+            row[8] = user.getAddress();
+            model.addRow(row);
+
+            return;
+            }
+        }
+        
+            JOptionPane.showMessageDialog(jPanel1,
+            "No Employee Found For this ID",
+            "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+            return;
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
  	public static java.sql.Timestamp convert(java.util.Date date)
 	{
 		return new java.sql.Timestamp(date.getTime());
@@ -2367,20 +2514,24 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JButton AddNewEmployee_Button;
     private javax.swing.JPanel AddUpateEmployee;
     private javax.swing.JPanel Customer;
+    private javax.swing.JTextField Employeeidinput;
+    private javax.swing.JTextField EmplyeeIdInput;
     private javax.swing.JPanel Emprecords;
     private javax.swing.JPanel GridPanel;
     public javax.swing.JLabel Label_clock;
+    private javax.swing.JLabel Noofcustomerlabel;
     private javax.swing.JButton RegisterNewcustomer_button;
     private javax.swing.JButton ResetButton_Customer;
     private javax.swing.JButton ResetValuestozerobutton;
     public javax.swing.JTextField Textfiled_ExistingAmount;
+    private javax.swing.JButton UpdateEmplloyeeSearch_Button;
     private javax.swing.JLabel UserNameUniqueLabel;
     private javax.swing.ButtonGroup buttonGroup1;
     public javax.swing.JLabel currentnoofemployeelabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private com.toedter.calendar.JDateChooser jDateChooser_EndDate;
     private com.toedter.calendar.JDateChooser jDateChooser_StartDate;
     private javax.swing.JLabel jLabel1;
@@ -2470,8 +2621,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JTable jTable_updatedelete;
     public javax.swing.JTextField jTextField1;
     public javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField_regcontact;
     private javax.swing.JTextField jTextField_regemail;
     private javax.swing.JTextField jTextField_regname;

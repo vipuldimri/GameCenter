@@ -16,10 +16,14 @@ public class SendEmailThread extends Thread
 {
     String To;
     String passwordgamezone;
-    public SendEmailThread(String To,String passwordgamezone)
+    String OwnerName;
+    String GameZoneName;
+    public SendEmailThread(String To,String passwordgamezone,String OwnerName,String GameZoneName)
     {
         this.To = To;
         this.passwordgamezone = passwordgamezone;
+        this.OwnerName = OwnerName;
+        this.GameZoneName = GameZoneName;
     }
     @Override
     public void run()
@@ -52,7 +56,7 @@ public class SendEmailThread extends Thread
            message.addRecipient(Message.RecipientType.TO,new InternetAddress(To));    
           
            message.setSubject(sub);
-           String mss = "Your Password is "+passwordgamezone+", please reset your password for safety purpose";
+           String mss = "Dear "+OwnerName+" Your Password is "+passwordgamezone+", for Login into "+GameZoneName+"  please reset your password for safety purpose "+System.lineSeparator() + "Regards starktechnologies";;
     
            message.setText(mss);    
    

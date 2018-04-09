@@ -103,7 +103,7 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(130, 430, 150, 40);
+        jButton1.setBounds(130, 420, 150, 50);
 
         jButton2.setText("Delete Employee");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -166,7 +166,7 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
             }
         });
         jPanel1.add(jButton3);
-        jButton3.setBounds(590, 440, 110, 30);
+        jButton3.setBounds(560, 430, 140, 40);
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel17.setText("UserName");
