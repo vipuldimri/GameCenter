@@ -56,7 +56,7 @@ public class SendEmailThread extends Thread
            message.addRecipient(Message.RecipientType.TO,new InternetAddress(To));    
           
            message.setSubject(sub);
-           String mss = "Dear "+OwnerName+" Your Password is "+passwordgamezone+", for Login into "+GameZoneName+"  please reset your password for safety purpose "+System.lineSeparator() + "Regards starktechnologies";;
+           String mss = "Dear "+OwnerName+" Your Password is "+passwordgamezone+", for Login into "+GameZoneName+"  please reset your password for safety purpose "+System.lineSeparator() + "Regards starktechnologies";
     
            message.setText(mss);    
    

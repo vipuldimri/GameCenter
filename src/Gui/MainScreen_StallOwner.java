@@ -4,6 +4,7 @@ import java.util.Properties;
 import javax.mail.*;    
 import javax.mail.internet.*;    
 import Database.Connect;
+import Database.CustomerImplementation;
 import Database.CustomerInterface;
 import Database.Customerfactory;
 import Database.StallFactory;
@@ -47,7 +48,7 @@ import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import gamecenter.Customers;
 import java.sql.Connection;
-import  gamecenter.BackgroundAutocomplete;
+
 import gamecenter.Stall;
 import gamecenter.UpdateCustomerListThread;
 import gamecenter.UpdateEmployeeListThread;
@@ -176,17 +177,16 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
        
         rechargeloadingdialoge = new JDialog();
         
-        GridPanel.setLayout(new GridLayout(30,2));
+      
        for(Games game : gamelist)
        {
             JLabel newlabel = new JLabel(game.getGameName());
             JTextField newtextField = new JTextField(game.getAmount());
-            GridPanel.add(newlabel);
-            GridPanel.add(newtextField);
+        
             newlabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
             newlabel.setForeground(new java.awt.Color(255, 255, 255));
             newtextField.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-            // newtextField.setForeground(new java.awt.Color(255, 255, 255));
+            
        }
         
         
@@ -308,19 +308,21 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel_Label.setText("Employee Records");
         
         
-       GridPanel.setLayout(new GridLayout(30,2));
+       DefaultTableModel m = (DefaultTableModel) TodaysCollectionTable.getModel();
+       m.setRowCount(0);
        for(Games game : gamelist)
        {
-            JLabel newlabel = new JLabel(game.getGameName());
-            JTextField newtextField = new JTextField(game.getAmount());
-            newtextField.setEditable(false);
-            GridPanel.add(newlabel);
-            GridPanel.add(newtextField);
-            newlabel.setFont(new java.awt.Font("Tahoma", 1, 18)); 
-            newlabel.setForeground(new java.awt.Color(255, 255, 255));
-            newtextField.setFont(new java.awt.Font("Tahoma", 1, 18));
-           
+        DefaultTableModel  model = (DefaultTableModel) TodaysCollectionTable.getModel();
+        Object row[] = new Object[2];
+      
+            row[0] = game.getGameName();
+            row[1] = game.getAmount();
+            model.addRow(row);
+            
+        
        }
+           
+       
   
         currentnoofemployeelabel.setText(currentStallUsers.size()+"");
         Noofcustomerlabel.setText(customerlist.size()+"");
@@ -360,7 +362,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jSeparator3 = new javax.swing.JSeparator();
         jLabel28 = new javax.swing.JLabel();
         jLabel_currentempname2 = new javax.swing.JLabel();
-        GridPanel = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TodaysCollectionTable = new javax.swing.JTable();
         jPanel8 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -447,7 +450,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
@@ -615,10 +617,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel6.setForeground(new java.awt.Color(204, 255, 255));
         jPanel6.setLayout(null);
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Today Collection");
         jPanel6.add(jLabel6);
-        jLabel6.setBounds(0, 9, 240, 20);
+        jLabel6.setBounds(30, 10, 240, 20);
         jPanel6.add(jSeparator3);
         jSeparator3.setBounds(-380, 40, 1570, 2);
 
@@ -628,18 +631,27 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel6.add(jLabel28);
         jLabel28.setBounds(860, 0, 110, 30);
 
+        jLabel_currentempname2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel_currentempname2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_currentempname2.setText("jLabel29");
         jPanel6.add(jLabel_currentempname2);
-        jLabel_currentempname2.setBounds(1060, 10, 40, 14);
+        jLabel_currentempname2.setBounds(1020, 10, 51, 17);
 
         jPanel3.add(jPanel6);
         jPanel6.setBounds(0, 10, 1180, 50);
 
-        GridPanel.setBackground(new java.awt.Color(0, 0, 0));
-        GridPanel.setLayout(new java.awt.GridLayout(1, 0));
-        jPanel3.add(GridPanel);
-        GridPanel.setBounds(0, 60, 1190, 670);
+        TodaysCollectionTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "GameName", "Amount"
+            }
+        ));
+        jScrollPane3.setViewportView(TodaysCollectionTable);
+
+        jPanel3.add(jScrollPane3);
+        jScrollPane3.setBounds(132, 160, 990, 402);
 
         jTabbedPane1.addTab("Today Collection", jPanel3);
 
@@ -1320,14 +1332,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         });
         jMenu1.add(jMenuItem3);
 
-        jMenuItem4.setText("Set Email Timing");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem4);
-
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Refresh ");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -1682,9 +1686,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }else
             {
                 JOptionPane.showMessageDialog(jPanel1,
-                    "Please Enter Amount.",
-                    "Inane error",
-                    JOptionPane.ERROR_MESSAGE);
+                "Please Enter Amount.",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
                 return ;
             }
 
@@ -1819,7 +1823,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
               
              UpdateTransactionListThread updatetransaction = new UpdateTransactionListThread(transdetailscomplete, currentgamezone.getName());
              updatetransaction.start();
-            JOptionPane.showMessageDialog(jPanel1,
+             JOptionPane.showMessageDialog(jPanel1,
             "Recharge Success",
             "Inane error",
             JOptionPane.PLAIN_MESSAGE);
@@ -1830,10 +1834,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jTextField2.setText("");
         Textfiled_ExistingAmount.setText("");
         
-        //Step 1 complete
-        
-        
-        //step 3 update transaction records Threads updates Transaction details Automatically
      
         
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -1843,9 +1843,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
         System.out.println("Refresh");
         final ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/Images/Refresh.gif"));
-       
-     
-        //Background worker for getting the data from the server 
+
+                  //Background worker for getting the data from the server 
                   SwingWorker work = new SwingWorker<String , Integer>() {
 	            @Override
 	            protected  String  doInBackground() throws Exception 
@@ -1853,6 +1852,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 	                //Thing to update when refresh button is clicked 
                         //1 .Transaction Details
                         //2 .CurrentGameZone users
+                        //3 .Customers Details
                         //For now only Transaction is refreshed
                         try
                         {
@@ -1861,11 +1861,20 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                         String TransactionTableName =  currentgamezone.getName()+"_transaction";
                         transdetailscomplete = Dao.GetTransactionDetails(TransactionTableName);
                                 
-                            
+                        CustomerInterface Dao2 = new Customerfactory().getInstance();
+                    
+                        customerlist  = Dao2.getCust(currentgamezone.getName()+"_customers");
+                         
+                        UserInterface Dao3 =  new UserFactory().getInstance();
+                        currentgamezoneusers = Dao3.getAllUsers(currentgamezone.getName());
+                         
                         }
                         catch(Exception ex)
                         {
-                            System.out.println(ex);
+                               JOptionPane.showMessageDialog(jPanel1,
+                               "Error In Refreshing Please Check Your Internet Connection.",
+                               "Inane error",
+                               JOptionPane.ERROR_MESSAGE);
                         }
              
                     
@@ -1883,17 +1892,13 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 	            }
 	        };
     
-             work.execute();
+         work.execute();
         JOptionPane pane = new JOptionPane("", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon,new Object[]{}, null);
         refresh = pane.createDialog(this,"Refreshing Date");
         refresh.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
       
-        //jDialog.show();  this method is depricated there using setVisible method for showing the dialoge box 
+         
         refresh.setVisible(true);
-        
-        
-        
-        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -2227,9 +2232,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 	            
                     try 
                     {
-                        String from = "starktechnologies2018@gmail.com";
+        String from = "starktechnologies2018@gmail.com";
         String password = "sample@123";
-        String to = "dimrivipul.vd@gmail.com";    //receiver email id              
+        String to  = "dimrivipul.vd@gmail.com";               
         String sub = "Transaction Details for "+java.time.LocalDate.now();
         
 
@@ -2256,11 +2261,12 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
            message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));    
           
            message.setSubject(sub);
-           String mss = "";
+           String mss = "Transaction Details for "+java.time.LocalDate.now()+System.lineSeparator() ;
            for(Games g : gamelist)
            {
                mss += g.getGameName() +" ---  Rs "+g.getAmount()+ " \n";
            }
+           mss = mss+System.lineSeparator()+" Regards starktechnologies";
            message.setText(mss);    
    
            Transport.send(message);    
@@ -2303,35 +2309,33 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        //TODO add your handling code here:
         String cardno = jTextField1.getText();
+        if(cardno.length() == 0 )
+        {
+             JOptionPane.showMessageDialog(jPanel1,
+              "Please Enter Card No.",
+              "Inane error",
+              JOptionPane.ERROR_MESSAGE);
+              return ;  
+        }
         if("".equals(cardno))
         {
-            
               JOptionPane.showMessageDialog(jPanel1,
               "Please Enter Card No.",
               "Inane error",
               JOptionPane.ERROR_MESSAGE);
               return ;
-
-          
-
         }
-
-        
-           try 
-           {
+        try 
+        {
             FactoryClass.getCommObj().sendData("reset");
-           } catch (IOException ex)
-           {
+        }
+        catch (IOException ex)
+        {
             
-           }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:Set Email timimg
-          String Time =JOptionPane.showInputDialog(jPanel1,"Set Email  Time In Format hr-am/pm (24hr format)"); 
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void UpdateEmplloyeeSearch_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateEmplloyeeSearch_ButtonActionPerformed
         // TODO add your handling code here:
@@ -2517,13 +2521,13 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JTextField Employeeidinput;
     private javax.swing.JTextField EmplyeeIdInput;
     private javax.swing.JPanel Emprecords;
-    private javax.swing.JPanel GridPanel;
     public javax.swing.JLabel Label_clock;
     private javax.swing.JLabel Noofcustomerlabel;
     private javax.swing.JButton RegisterNewcustomer_button;
     private javax.swing.JButton ResetButton_Customer;
     private javax.swing.JButton ResetValuestozerobutton;
     public javax.swing.JTextField Textfiled_ExistingAmount;
+    private javax.swing.JTable TodaysCollectionTable;
     private javax.swing.JButton UpdateEmplloyeeSearch_Button;
     private javax.swing.JLabel UserNameUniqueLabel;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -2583,7 +2587,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -2608,6 +2611,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;

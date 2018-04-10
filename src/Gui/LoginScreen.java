@@ -1,6 +1,6 @@
 
 package Gui;
-import DataStructure.Trie;
+
 import gamecenter.Stall;
 import gamecenter.User;
 
@@ -40,7 +40,7 @@ public class LoginScreen extends javax.swing.JFrame
     Stall currentgamezone;
     User currentuser;
     HashMap<String,Boolean> passwordcheck;
-    static public Trie trienames = new Trie();
+    
     
     
     public LoginScreen(ArrayList<User> currentgamezoneusers,Stall currentgamezone,HashMap<String,Boolean> passwordcheck)

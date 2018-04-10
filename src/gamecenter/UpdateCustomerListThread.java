@@ -29,8 +29,8 @@ public class UpdateCustomerListThread extends Thread
           {
          
              Dao = Customerfactory.getInstance();
-             String TransactionTableName = GameZoneName+"_customers";
-             customerlist  = Dao.getCust(TransactionTableName,customerlist);
+             String TableName = GameZoneName+"_customers";
+             customerlist  = Dao.getCust(TableName,customerlist);
            
           } 
           catch (Exception ex)

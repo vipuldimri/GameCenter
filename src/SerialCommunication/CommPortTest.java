@@ -13,12 +13,14 @@ import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 
-public class CommPortTest implements  SerialPortEventListener 
-        {
+public class CommPortTest implements  SerialPortEventListener        
+{
+        ArrayList<String> AllgamesList;
 	SerialPort serialPort;
         /** The port we're normally going to use. */
 	private static final String PORT_NAMES[] =
@@ -43,6 +45,7 @@ public class CommPortTest implements  SerialPortEventListener
         public CommPortTest(String commport)
         {
             this.commPort = commport;
+            AllgamesList = new ArrayList<>();
             initialize();
         }
         
@@ -156,34 +159,17 @@ public class CommPortTest implements  SerialPortEventListener
                                 //System.out.println(scanner.hasNext("UID"));
                                 if( scanner.hasNext("###"))
                                 {
+                                    
                                  String hash = scanner.next();
                                  String gamename = scanner.next();
-                                 String amt = scanner.next();
-                                  
-                                 if( "speedball".equals(gamename) )
+                                 String amt = scanner.next();                                  
+                                 if(AllgamesList.contains(gamename))
                                  {
-                                   FactoryClass.getMainPageObj().setGameAmount(gamename,amt);
+                                     FactoryClass.getMainPageObj().setGameAmount(gamename,amt);
                                  }
-                                 else if( "basketball".equals(gamename) )
-                                 {
-                                        //System.out.println("volleyball setgameamount");
-                                        FactoryClass.getMainPageObj().setGameAmount(gamename,amt);
+                                
                                 }
-                                else if( "airhockey".equals(gamename) )
-                                {
-                                       //System.out.println("airhockey setgameamount");
-                                        FactoryClass.getMainPageObj().setGameAmount(gamename,amt);
-                                }
-                                else if( "dance".equals(gamename) )
-                                {
-                                        //System.out.println("dance setgameamount");
-                                        FactoryClass.getMainPageObj().setGameAmount(gamename,amt);
-                                }
-                                else if( "randomhit".equals(gamename) )
-                                {
-                                        FactoryClass.getMainPageObj().setGameAmount(gamename,amt);
-                                }
-                                }
+                                
                                 else if( scanner.hasNext("UID") )
                                 { 
                                     String uid = inputLine;   
