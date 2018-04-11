@@ -26,6 +26,10 @@ import java.net.InetAddress;
 import SerialCommunication.CommPortTest;
 import SerialCommunication.FactoryClass;
 import gamecenter.SendEmailThread;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.Socket;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -297,8 +301,20 @@ public class LoginScreen extends javax.swing.JFrame
        java.sql.Date currentdate=new java.sql.Date(millis);
         System.out.println("current time is "+currentdate);
         
-        
-        
+        try{
+       String TIME_SERVER = "time-a.nist.gov";   
+        NTPUDPClient timeClient = new NTPUDPClient();
+        InetAddress inetAddress = InetAddress.getByName(TIME_SERVER);
+        TimeInfo timeInfo = timeClient.getTime(inetAddress);
+        long returnTime = timeInfo.getReturnTime();
+        Date time = new Date(returnTime);
+        System.out.println("Time from " + TIME_SERVER + ": " + time);
+
+        }
+        catch(Exception e)
+        {
+            System.out.println("Time error "+e);
+        }
         
          try
          {
@@ -504,10 +520,21 @@ public class LoginScreen extends javax.swing.JFrame
                  //here currentStallUsers is null because emp has no rights to see emps
                   jTextField1.setText("");
                   jPasswordField1.setText("");
-                  new MainScreen_StallOwner(this,currentgamezone,currentuser).setVisible(true);
-                  setVisible(false);
+                      MainScreen_StallOwner mainScreen_StallOwner =  new MainScreen_StallOwner(this,currentgamezone,currentuser);
+                      mainScreen_StallOwner.setVisible(true);
+                      setVisible(false);
                 
                   /////////////////////Code for serial communication//////////
+                   try 
+                   {
+                    FactoryClass.createObjects(mainScreen_StallOwner);
+    
+                   } catch (ClassNotFoundException ex)
+                   {
+                 
+                    System.out.println("Factory class exception "+ex);
+            
+                   }
               
                   
             }

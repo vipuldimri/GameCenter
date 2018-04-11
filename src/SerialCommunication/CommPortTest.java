@@ -130,11 +130,10 @@ public class CommPortTest implements  SerialPortEventListener
                         System.out.println("port closed successfully");
 		}
 	}
-       
-       
+   
         public void sendData(String amount) throws IOException
         {
-            System.out.println("inside sendData"+Thread.currentThread().getName());
+         
             byte[] arr = amount.getBytes();
             output.write(arr);
             System.out.print("Sending amount:");

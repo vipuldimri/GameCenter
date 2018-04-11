@@ -6,6 +6,7 @@ import javax.mail.internet.*;
 import Database.Connect;
 import Database.CustomerImplementation;
 import Database.CustomerInterface;
+
 import Database.Customerfactory;
 import Database.StallFactory;
 import Database.StallInterface;
@@ -222,7 +223,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             Timer time=new Timer();
             int delay=5000;
             int period= 1000;
-	   Clock clock = new Clock(Label_clock);
+	    Clock clock = new Clock(Label_clock);
 		time.scheduleAtFixedRate(clock, delay,period);
                 //
                 
@@ -247,7 +248,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
            //Getting Trnsaction Details
            TransactionDetailsWaitLock = new CountDownLatch(1);
-
            //background thread for getting data New Refresh Data
            Background_GetTransactionDetails background_GetTransactionDetails = new Background_GetTransactionDetails(TransactionDetailsWaitLock,currentgamezone.getName());
            background_GetTransactionDetails.start();
@@ -1678,7 +1678,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             {
 
                 JOptionPane.showMessageDialog(jPanel1,
-                    "Please Enter Card No.",
+                    "Please Scan The Card .",
                     "Inane error",
                     JOptionPane.ERROR_MESSAGE);
                 return ;
@@ -1830,9 +1830,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
           }
         
         rech_flag = false;
-        jTextField1.setText("");
-        jTextField2.setText("");
-        Textfiled_ExistingAmount.setText("");
+        //jTextField1.setText("");
+        //jTextField2.setText("");
+        //Textfiled_ExistingAmount.setText("");
         
      
         
@@ -2333,8 +2333,19 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         }
         catch (IOException ex)
         {
-            
+             JOptionPane.showMessageDialog(jPanel1,
+              "Error in ReFund.",
+              "Inane error",
+              JOptionPane.ERROR_MESSAGE);
+              return ;
         }
+        
+        
+               JOptionPane.showMessageDialog(jPanel1,
+              "Refund Success",
+              "Inane error",
+              JOptionPane.ERROR_MESSAGE);
+              return ;
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void UpdateEmplloyeeSearch_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateEmplloyeeSearch_ButtonActionPerformed
@@ -2376,13 +2387,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             return;
             }
         }
-        
          JOptionPane.showMessageDialog(jPanel1,
-            "No Employee Found For this ID",
-            "Inane error",
-            JOptionPane.ERROR_MESSAGE);
-            return;
-        
+         "No Employee Found For this ID",
+         "Inane error",
+         JOptionPane.ERROR_MESSAGE);
+         return;
         
     }//GEN-LAST:event_UpdateEmplloyeeSearch_ButtonActionPerformed
 
