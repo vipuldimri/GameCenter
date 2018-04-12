@@ -512,6 +512,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel4.add(jTextField2);
         jTextField2.setBounds(580, 160, 260, 60);
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/refund.png"))); // NOI18N
         jButton1.setText("Refund");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -519,8 +520,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(jButton1);
-        jButton1.setBounds(830, 370, 130, 40);
+        jButton1.setBounds(820, 340, 170, 70);
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Recharge.png"))); // NOI18N
         jButton2.setText("Recharge ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -528,7 +530,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(jButton2);
-        jButton2.setBounds(250, 370, 110, 40);
+        jButton2.setBounds(250, 340, 170, 70);
 
         jRadioButton1.setBackground(new java.awt.Color(0, 0, 0));
         jRadioButton1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -589,6 +591,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel4.add(jLabel_currentEMpName);
         jLabel_currentEMpName.setBounds(1010, 10, 40, 14);
 
+        ResetValuestozerobutton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Clear.png"))); // NOI18N
         ResetValuestozerobutton.setText("Clear");
         ResetValuestozerobutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -596,7 +599,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(ResetValuestozerobutton);
-        ResetValuestozerobutton.setBounds(540, 370, 130, 40);
+        ResetValuestozerobutton.setBounds(540, 340, 180, 70);
 
         jButton4.setText("jButton4");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -779,12 +782,14 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         AddUpateEmployee.setLayout(null);
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel13.setText("Enter Employee ID ");
+        jLabel13.setText("Enter Employee Name ");
         AddUpateEmployee.add(jLabel13);
         jLabel13.setBounds(100, 10, 230, 30);
         AddUpateEmployee.add(EmplyeeIdInput);
         EmplyeeIdInput.setBounds(100, 50, 210, 50);
 
+        UpdateEmplloyeeSearch_Button.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        UpdateEmplloyeeSearch_Button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/search.png"))); // NOI18N
         UpdateEmplloyeeSearch_Button.setText("Search");
         UpdateEmplloyeeSearch_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -792,7 +797,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         AddUpateEmployee.add(UpdateEmplloyeeSearch_Button);
-        UpdateEmplloyeeSearch_Button.setBounds(410, 60, 120, 40);
+        UpdateEmplloyeeSearch_Button.setBounds(410, 40, 160, 60);
 
         jTable_updatedelete.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTable_updatedelete.setModel(new javax.swing.table.DefaultTableModel(
@@ -840,20 +845,22 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jScrollPane1.setBounds(0, 205, 860, 350);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel11.setText(" Employee ID");
+        jLabel11.setText("Employee Name");
         Emprecords.add(jLabel11);
         jLabel11.setBounds(70, 30, 220, 60);
         Emprecords.add(Employeeidinput);
         Employeeidinput.setBounds(70, 90, 190, 40);
 
-        jButton3.setText("Search Employee");
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/search.png"))); // NOI18N
+        jButton3.setText("Search ");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
         Emprecords.add(jButton3);
-        jButton3.setBounds(460, 90, 120, 40);
+        jButton3.setBounds(460, 70, 150, 60);
 
         transaction.setBackground(new java.awt.Color(255, 255, 255));
         transaction.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2379,24 +2386,13 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
     private void UpdateEmplloyeeSearch_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateEmplloyeeSearch_ButtonActionPerformed
         // TODO add your handling code here:
-        String Id = EmplyeeIdInput.getText();
-        int id = 0 ;
-        try
-        {
-        id = Integer.parseInt(Id);
-        }catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(jPanel1,
-            "Enter Valid ID",
-            "Inane error",
-            JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        String Name = EmplyeeIdInput.getText();
+        
         
         
         for(User user : currentgamezoneusers)
         {
-            if(user.getID() == id)
+            if(user.getName().equalsIgnoreCase(Name))
             {
             DefaultTableModel m = (DefaultTableModel) jTable_updatedelete.getModel();
             m.setRowCount(0);
@@ -2417,7 +2413,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         }
          JOptionPane.showMessageDialog(jPanel1,
-         "No Employee Found For this ID",
+         "No Employee Found For this Name",
          "Inane error",
          JOptionPane.ERROR_MESSAGE);
          return;
@@ -2427,24 +2423,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         
-        String Id = Employeeidinput.getText();
-        int id = 0 ;
-        try
+        String Name = Employeeidinput.getText();
+         for(User user : currentgamezoneusers)
         {
-        id = Integer.parseInt(Id);
-        }catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(jPanel1,
-            "Enter Valid ID",
-            "Inane error",
-            JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
-        
-        for(User user : currentgamezoneusers)
-        {
-            if(user.getID() == id)
+             
+            if(user.getName().equalsIgnoreCase(Name))
             {
             DefaultTableModel m = (DefaultTableModel) jTable_EmpRecord.getModel();
             m.setRowCount(0);
@@ -2466,7 +2449,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         }
         
             JOptionPane.showMessageDialog(jPanel1,
-            "No Employee Found For this ID",
+            "No Employee Found For this Name",
             "Inane error",
             JOptionPane.ERROR_MESSAGE);
             return;
