@@ -151,11 +151,26 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         try
         {
             TransactionDetailsWaitLock.await();
+            
+            
         } catch (InterruptedException ex)
         {
             Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
+              try
+              {
+               StallInterface Dao1 = StallFactory.getInstance();
+               gamelist = Dao1.GetGames(currentgamezone.getName());
+              }
+              catch(Exception e)
+              {
+                //Error  in Getting Transaction Details
+                 JOptionPane.showMessageDialog(jPanel1,
+                  "No internet Connection.",
+                  "Inane error",
+                  JOptionPane.ERROR_MESSAGE);
+                  System.exit(0);
+               }
         transdetailscomplete = background_GetTransactionDetails.transactiondetails; 
         if(null == transdetailscomplete || background_GetTransactionDetails.ErrorMessage.equals("TransactionError"))
         {
@@ -178,18 +193,20 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
        
         rechargeloadingdialoge = new JDialog();
         
-      
+       DefaultTableModel m = (DefaultTableModel) TodaysCollectionTable.getModel();
+       m.setRowCount(0);
        for(Games game : gamelist)
        {
-            JLabel newlabel = new JLabel(game.getGameName());
-            JTextField newtextField = new JTextField(game.getAmount());
-        
-            newlabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-            newlabel.setForeground(new java.awt.Color(255, 255, 255));
-            newtextField.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        DefaultTableModel  model = (DefaultTableModel) TodaysCollectionTable.getModel();
+        Object row[] = new Object[2];
+      
+            row[0] = game.getGameName();
+            row[1] = game.getAmount();
+            model.addRow(row);
             
-       }
         
+       }
+           
         
     }
     //Cons when Admin of the GameZone Enter
@@ -351,6 +368,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel27 = new javax.swing.JLabel();
         jLabel_currentEMpName = new javax.swing.JLabel();
         ResetValuestozerobutton = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -579,6 +597,15 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         });
         jPanel4.add(ResetValuestozerobutton);
         ResetValuestozerobutton.setBounds(540, 370, 130, 40);
+
+        jButton4.setText("jButton4");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton4);
+        jButton4.setBounds(50, 110, 73, 23);
 
         jPanel2.add(jPanel4);
         jPanel4.setBounds(2, 7, 1200, 440);
@@ -877,9 +904,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         transaction.add(jPanel20);
         jPanel20.setBounds(260, 220, 350, 210);
         transaction.add(jDateChooser_StartDate);
-        jDateChooser_StartDate.setBounds(150, 70, 91, 20);
+        jDateChooser_StartDate.setBounds(121, 50, 150, 40);
         transaction.add(jDateChooser_EndDate);
-        jDateChooser_EndDate.setBounds(150, 110, 91, 20);
+        jDateChooser_EndDate.setBounds(121, 110, 150, 40);
 
         jButton7.setText("Search");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -888,7 +915,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         transaction.add(jButton7);
-        jButton7.setBounds(300, 90, 110, 23);
+        jButton7.setBounds(300, 73, 150, 40);
 
         jLabel29.setText("Start Date");
         transaction.add(jLabel29);
@@ -1915,9 +1942,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             jLabel_validDate.setText("Enter Valid Dates");
             return;
         }
-        
-        try{
+        try
+        {
+            
          startdate  = jDateChooser_StartDate.getDate(); 
+        
          enddate =jDateChooser_EndDate.getDate();
         }
         catch(Exception e)
@@ -1943,12 +1972,12 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         Object row[] = new Object[5];
 
        
-            long totaltransaction = 0l;
+        long totaltransaction = 0l;
         for(int i = 0;i < transdetailscomplete.size();i++)
         {
             java.sql.Timestamp trans_date = transdetailscomplete.get(i).getDate();
             
-            if(  trans_date.after(statTimestamp) && trans_date.before(endTimestamp)   )
+            if(trans_date.after(statTimestamp) && trans_date.before(endTimestamp))
             {
             row[0] = transdetailscomplete.get(i).getID();
             row[1] = transdetailscomplete.get(i).getCardNo();
@@ -2446,6 +2475,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
         
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        setGameAmount("airhockey", "100");
+    }//GEN-LAST:event_jButton4ActionPerformed
  	public static java.sql.Timestamp convert(java.util.Date date)
 	{
 		return new java.sql.Timestamp(date.getTime());
@@ -2479,8 +2513,52 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                      "Inane error",
                      JOptionPane.ERROR_MESSAGE);
         }
+        /*
+        Method for getting gamename an damount from the machine
+        */
         public void setGameAmount(String gamename,String amount)
         {
+            Long updated = 0l;
+            try
+            {
+                StallInterface Dao = StallFactory.getInstance();
+                String oldString = Dao.GetAmount(currentgamezone.getName(), gamename);
+                Long old = Long.parseLong(oldString);
+                Long newamount = Long.parseLong(amount);
+                 updated = old +newamount;
+                Dao.UpdateAmount(currentgamezone.getName(), updated+"", gamename);
+                
+                
+            }catch(Exception ex)
+            {
+                   JOptionPane.showMessageDialog(jPanel1,
+                     "Unable to update today collection",
+                     "Inane error",
+                     JOptionPane.ERROR_MESSAGE);
+                   return;
+            }
+            
+                   
+       DefaultTableModel m = (DefaultTableModel) TodaysCollectionTable.getModel();
+       m.setRowCount(0);
+       for(Games game : gamelist)
+       {
+            if(game.getGameName().equals(gamename))
+            {
+               game.setAmount(updated+"");
+            }
+            DefaultTableModel  model = (DefaultTableModel) TodaysCollectionTable.getModel();
+            Object row[] = new Object[2];
+            row[0] = game.getGameName();
+            row[1] = game.getAmount();
+            model.addRow(row);
+            
+        
+       }
+           
+            
+            
+            
             
         }
    
@@ -2544,6 +2622,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton7;
     private com.toedter.calendar.JDateChooser jDateChooser_EndDate;
     private com.toedter.calendar.JDateChooser jDateChooser_StartDate;

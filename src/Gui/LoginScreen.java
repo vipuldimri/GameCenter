@@ -301,20 +301,20 @@ public class LoginScreen extends javax.swing.JFrame
        java.sql.Date currentdate=new java.sql.Date(millis);
         System.out.println("current time is "+currentdate);
         
-        try{
-       String TIME_SERVER = "time-a.nist.gov";   
-        NTPUDPClient timeClient = new NTPUDPClient();
-        InetAddress inetAddress = InetAddress.getByName(TIME_SERVER);
-        TimeInfo timeInfo = timeClient.getTime(inetAddress);
-        long returnTime = timeInfo.getReturnTime();
-        Date time = new Date(returnTime);
-        System.out.println("Time from " + TIME_SERVER + ": " + time);
-
-        }
-        catch(Exception e)
-        {
-            System.out.println("Time error "+e);
-        }
+//        try{
+//       String TIME_SERVER = "time-a.nist.gov";   
+//        NTPUDPClient timeClient = new NTPUDPClient();
+//        InetAddress inetAddress = InetAddress.getByName(TIME_SERVER);
+//        TimeInfo timeInfo = timeClient.getTime(inetAddress);
+//        long returnTime = timeInfo.getReturnTime();
+//        Date time = new Date(returnTime);
+//        System.out.println("Time from " + TIME_SERVER + ": " + time);
+//
+//        }
+//        catch(Exception e)
+//        {
+//            System.out.println("Time error "+e);
+//        }
         
          try
          {
@@ -340,6 +340,7 @@ public class LoginScreen extends javax.swing.JFrame
                 
                      return ;
          }
+         
         
        String cur_date =currentdate.toString();
        String Year = cur_date.substring(0,4);

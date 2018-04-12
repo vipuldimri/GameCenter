@@ -162,10 +162,10 @@ public class CommPortTest implements  SerialPortEventListener
                                  String hash = scanner.next();
                                  String gamename = scanner.next();
                                  String amt = scanner.next();                                  
-                                 if(AllgamesList.contains(gamename))
-                                 {
+                                 //if(AllgamesList.contains(gamename))
+                                 //{
                                      FactoryClass.getMainPageObj().setGameAmount(gamename,amt);
-                                 }
+                                 //}
                                 
                                 }
                                 

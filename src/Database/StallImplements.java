@@ -3,6 +3,7 @@ package Database;
 import static Database.Connect.conn;
 import java.util.*;
 import gamecenter.*;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 public class StallImplements implements StallInterface
@@ -81,6 +82,36 @@ public class StallImplements implements StallInterface
                    }
 
         return gameslist;
+    }
+
+    @Override
+    public String GetAmount(String GameZoneName,String gamename) throws Exception 
+    {
+                //string Query="SELECT * FROM GameZoneDB."+GameZoneName+"_games  WHERE Date = curdate();";
+                  String queryforgettingoldamount = "SELECT Amount from "+GameZoneName+"_games WHERE GameName = '"+gamename+"';";
+
+                   String amount = "";
+                   Statement stmt=conn.createStatement();  
+                   ResultSet rs = stmt.executeQuery(queryforgettingoldamount);
+                   while(rs.next())  
+                   {
+                    amount = rs.getString(1);
+                 
+                   }
+                   return amount;
+    }
+
+    @Override
+    public boolean UpdateAmount(String GameZoneName, String Amount,String GameName) throws Exception 
+    {
+            final String Register = "UPDATE "+GameZoneName+"_games SET Amount = '"+Amount+"' WHERE GameName = '"+GameName+"'";
+        
+             PreparedStatement pstmt = conn.prepareStatement(Register);
+            
+             pstmt.executeUpdate();
+        
+             return true;
+       
     }
     
 }
