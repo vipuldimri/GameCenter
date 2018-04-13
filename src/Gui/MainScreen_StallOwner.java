@@ -80,8 +80,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     ArrayList<Recharge> transdetailscomplete;  //Transaction Details for current GameZone
     ArrayList<Customers> customerlist;         //Customer Details for current GameZone
     
-     HashMap<String,Boolean> passwordcheck;
-     ArrayList<Games> gamelist ;
+    HashMap<String,Boolean> passwordcheck;
+    ArrayList<Games> gamelist ;
      
     CountDownLatch TransactionDetailsWaitLock; //To lock GUI till we get Transaction Details
 
@@ -121,7 +121,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         this.l = l;
         this.currentgamezone = currentgamezone;
         this.currentuser = currentuser;
-
         initComponents();
         System.out.println("No");
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -151,8 +150,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         try
         {
             TransactionDetailsWaitLock.await();
-            
-            
+        
         } catch (InterruptedException ex)
         {
             Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
@@ -1088,7 +1086,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(currentnoofemployeelabel)
@@ -1247,7 +1245,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel22Layout.setHorizontalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel22Layout.createSequentialGroup()
-                .addContainerGap(59, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1264,11 +1262,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 .addContainerGap()
                 .addComponent(Noofcustomerlabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel22Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -1308,7 +1305,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 .addGap(18, 18, 18)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_OwnerName, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2508,20 +2505,16 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 String oldString = Dao.GetAmount(currentgamezone.getName(), gamename);
                 Long old = Long.parseLong(oldString);
                 Long newamount = Long.parseLong(amount);
-                 updated = old +newamount;
+                updated = old +newamount;
                 Dao.UpdateAmount(currentgamezone.getName(), updated+"", gamename);
-                
-                
             }catch(Exception ex)
             {
-                   JOptionPane.showMessageDialog(jPanel1,
+                     JOptionPane.showMessageDialog(jPanel1,
                      "Unable to update today collection",
                      "Inane error",
                      JOptionPane.ERROR_MESSAGE);
-                   return;
-            }
-            
-                   
+                     return;
+            }          
        DefaultTableModel m = (DefaultTableModel) TodaysCollectionTable.getModel();
        m.setRowCount(0);
        for(Games game : gamelist)
@@ -2536,13 +2529,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             row[1] = game.getAmount();
             model.addRow(row);
             
-        
-       }
-           
-            
-            
-            
-            
+        }
+ 
         }
    
     public static void main(String args[]) {

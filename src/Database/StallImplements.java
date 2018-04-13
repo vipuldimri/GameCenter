@@ -68,18 +68,39 @@ public class StallImplements implements StallInterface
     @Override
     public ArrayList<Games> GetGames(String GameZoneName) throws Exception 
     {
-    
         String Query="SELECT * FROM GameZoneDB."+GameZoneName+"_games  WHERE Date = curdate();";
         ArrayList<Games> gameslist = new ArrayList<>();
-                   Statement stmt=conn.createStatement();  
-                   ResultSet rs = stmt.executeQuery(Query);
+        Statement stmt=conn.createStatement();  
+        ResultSet rs = stmt.executeQuery(Query);
+                   
                    while(rs.next())  
                    {
                     Games game = new Games(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getDate(4));
-                  
                     gameslist.add(game);
-                    
                    }
+               //Code for new Day    
+               if(gameslist.isEmpty() == true)
+               {
+                
+                //Query for updating amount and date to initial
+                String  QueryUpdate = "UPDATE GameZone2_games SET Amount = '0' , Date = curdate();"; 
+                PreparedStatement pstmt = conn.prepareStatement(QueryUpdate);
+                pstmt.executeUpdate();   
+               
+               }else
+               {
+                   //Return If Current Date and no need to change the dater and Time 
+                   return gameslist;
+               }
+                 //Now getting data
+                 Statement stmt2=conn.createStatement();  
+                 ResultSet rs2 = stmt.executeQuery(Query);
+                 
+                 while(rs.next())  
+                 {
+                    Games game = new Games(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getDate(4));
+                    gameslist.add(game);
+                 }
 
         return gameslist;
     }
@@ -104,11 +125,11 @@ public class StallImplements implements StallInterface
     @Override
     public boolean UpdateAmount(String GameZoneName, String Amount,String GameName) throws Exception 
     {
-            final String Register = "UPDATE "+GameZoneName+"_games SET Amount = '"+Amount+"' WHERE GameName = '"+GameName+"'";
+            final String UpdateAmount = "UPDATE "+GameZoneName+"_games SET Amount = '"+Amount+"' WHERE GameName = '"+GameName+"'";
         
-             PreparedStatement pstmt = conn.prepareStatement(Register);
+            PreparedStatement pstmt = conn.prepareStatement(UpdateAmount);
             
-             pstmt.executeUpdate();
+            pstmt.executeUpdate();
         
              return true;
        
