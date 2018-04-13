@@ -2075,6 +2075,8 @@ cal.set(Calendar.MILLISECOND, 0);
         newframe.setVisible(true);
         setVisible(false);
         
+        
+        
     }//GEN-LAST:event_jTable_updatedeleteMouseClicked
 
     private void jPanel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel22MouseClicked

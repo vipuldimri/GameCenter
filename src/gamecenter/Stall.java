@@ -19,11 +19,10 @@ public class Stall
    private Date   SubEndDate;
    private String Email;
    private int Max_Employee;
-  // private Date EmailTiming;
+   private int EmailTime;
 
 
-
-    public Stall(int ID, String Name, String OwnerName, String Address, String Contact, String Password, Date SubStartDate, Date SubEndDate,String Email,int Max_Employee)
+    public Stall(int ID, String Name, String OwnerName, String Address, String Contact, String Password, Date SubStartDate, Date SubEndDate,String Email,int Max_Employee,int EmailTime)
     {
         this.ID = ID;
         this.Name = Name;
@@ -35,17 +34,18 @@ public class Stall
         this.SubEndDate = SubEndDate;
         this.Email = Email;       
         this.Max_Employee = Max_Employee;
-        //.EmailTiming  = this.EmailTiming;
-    }
-/*
-    public Date getEmailTiming() {
-        return EmailTiming;
+        this.EmailTime = EmailTime;
+        
     }
 
-    public void setEmailTiming(Date EmailTiming) {
-        this.EmailTiming = EmailTiming;
+    public int getEmailTime() {
+        return EmailTime;
     }
-*/
+
+    public void setEmailTime(int EmailTime) {
+        this.EmailTime = EmailTime;
+    }
+
     public int getMax_Employee() {
         return Max_Employee;
     }

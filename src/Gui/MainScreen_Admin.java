@@ -164,6 +164,8 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jTextField_GameZoneOwnerContact = new javax.swing.JTextField();
         jTextField_GameZoneOwnerPassword = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jTextField_GameZoneEmail = new javax.swing.JTextField();
         ViewGameZone = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_Gamezone = new javax.swing.JTable();
@@ -330,7 +332,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
 
         jTextField_GameZoneAddress.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         AddGameZone.add(jTextField_GameZoneAddress);
-        jTextField_GameZoneAddress.setBounds(500, 110, 350, 80);
+        jTextField_GameZoneAddress.setBounds(490, 110, 350, 80);
 
         jButton1.setText("Add GameZone");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -368,9 +370,18 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jTextField_GameZoneOwnerPassword.setBounds(70, 400, 230, 40);
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel15.setText("Address");
+        jLabel15.setText("Email ID");
         AddGameZone.add(jLabel15);
-        jLabel15.setBounds(500, 60, 220, 60);
+        jLabel15.setBounds(500, 270, 220, 60);
+
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel19.setText("Address");
+        AddGameZone.add(jLabel19);
+        jLabel19.setBounds(490, 50, 220, 60);
+
+        jTextField_GameZoneEmail.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        AddGameZone.add(jTextField_GameZoneEmail);
+        jTextField_GameZoneEmail.setBounds(490, 320, 350, 80);
 
         ViewGameZone.setBackground(new java.awt.Color(255, 255, 255));
         ViewGameZone.setLayout(null);
@@ -494,7 +505,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
         MainHeadingLabel.setForeground(new java.awt.Color(255, 255, 255));
         MainHeadingLabel.setText("Heading");
         TopParentpanel.add(MainHeadingLabel);
-        MainHeadingLabel.setBounds(470, 70, 400, 70);
+        MainHeadingLabel.setBounds(610, 90, 400, 70);
 
         Label_clockadmin.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         Label_clockadmin.setForeground(new java.awt.Color(255, 255, 255));
@@ -545,6 +556,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
         String Password = jTextField_GameZoneOwnerPassword.getText();
         String OwnerName = jTextField_GameZoneOwnerName.getText();
         String address = jTextField_GameZoneAddress.getText();
+        String Email = jTextField_GameZoneEmail.getText();
       
         String select = jComboBox_sub.getSelectedItem().toString();
         int subyears = Integer.parseInt(select.substring(0,1));
@@ -899,6 +911,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
@@ -918,6 +931,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
     private javax.swing.JTable jTable_Gamezone;
     private javax.swing.JTable jTable_transaction;
     private javax.swing.JTextField jTextField_GameZoneAddress;
+    private javax.swing.JTextField jTextField_GameZoneEmail;
     private javax.swing.JTextField jTextField_GameZoneName;
     private javax.swing.JTextField jTextField_GameZoneOwnerContact;
     private javax.swing.JTextField jTextField_GameZoneOwnerName;

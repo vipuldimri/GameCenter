@@ -298,7 +298,7 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
         
         if(updateEmp_flag == false)
         {
-            JOptionPane.showMessageDialog(jPanel1,
+                 JOptionPane.showMessageDialog(jPanel1,
                      "Update Employee Failed.",
                      "Inane error",
                       JOptionPane.ERROR_MESSAGE);
