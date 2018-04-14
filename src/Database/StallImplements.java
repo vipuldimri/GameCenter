@@ -80,12 +80,22 @@ public class StallImplements implements StallInterface
                    }
                //Code for new Day    
                if(gameslist.isEmpty() == true)
-               {
-                
-                //Query for updating amount and date to initial
-                String  QueryUpdate = "UPDATE GameZone2_games SET Amount = '0' , Date = curdate();"; 
-                PreparedStatement pstmt = conn.prepareStatement(QueryUpdate);
-                pstmt.executeUpdate();   
+               {                
+                  //Query for Creating new entry for a day 
+                  String Creatingnewentry = "SELECT DISTINCT  Amount from "+GameZoneName+"_games ;";
+                  ArrayList<String> GamesAvailable = new ArrayList<>();
+                  Statement stmt3=conn.createStatement();  
+                  ResultSet rs2 = stmt.executeQuery(Creatingnewentry);
+                  while(rs2.next())  
+                  {
+                  GamesAvailable.add(rs2.getString(1));
+                  }  
+                  
+                  for(String gamename : GamesAvailable)
+                  {
+                      
+                      
+                  }
                
                }else
                {
@@ -125,14 +135,29 @@ public class StallImplements implements StallInterface
     @Override
     public boolean UpdateAmount(String GameZoneName, String Amount,String GameName) throws Exception 
     {
-            final String UpdateAmount = "UPDATE "+GameZoneName+"_games SET Amount = '"+Amount+"' WHERE GameName = '"+GameName+"'";
-        
+            final String UpdateAmount = "UPDATE "+GameZoneName+"_games SET Amount = '"+Amount+"' WHERE GameName = '"+GameName+"' AND Date = curdate()";
             PreparedStatement pstmt = conn.prepareStatement(UpdateAmount);
-            
             pstmt.executeUpdate();
         
              return true;
        
+    }
+
+    @Override
+    public  Date GetCurrentDate() throws Exception 
+    {
+        String Query_getCurrentDatefromAmazoneDatabase="select curdate();";
+        
+        Statement stmt=conn.createStatement();  
+        ResultSet rs = stmt.executeQuery(Query_getCurrentDatefromAmazoneDatabase);
+                
+                   java.util.Date current_date =null;
+                   while(rs.next())  
+                   {
+                    current_date = rs.getDate(1);
+                   }
+                   
+        return current_date;
     }
     
 }

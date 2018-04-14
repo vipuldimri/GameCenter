@@ -14,5 +14,5 @@ public interface StallInterface
     public String GetAmount(String TableName,String gamename)throws Exception;
     public boolean UpdateAmount(String TableName,String Amount,String GameName)throws Exception;
             
-    
+    public  Date GetCurrentDate()throws Exception;
 }

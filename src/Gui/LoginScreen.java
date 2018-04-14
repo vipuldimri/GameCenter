@@ -1,6 +1,8 @@
 
 package Gui;
 
+import Database.StallFactory;
+import Database.StallInterface;
 import gamecenter.Stall;
 import gamecenter.User;
 
@@ -299,46 +301,23 @@ public class LoginScreen extends javax.swing.JFrame
         //Getting current time and then converting it into String for easy comparision
        long millis=System.currentTimeMillis();  
        java.sql.Date currentdate=new java.sql.Date(millis);
-        System.out.println("current time is "+currentdate);
-        
-//        try{
-//       String TIME_SERVER = "time-a.nist.gov";   
-//        NTPUDPClient timeClient = new NTPUDPClient();
-//        InetAddress inetAddress = InetAddress.getByName(TIME_SERVER);
-//        TimeInfo timeInfo = timeClient.getTime(inetAddress);
-//        long returnTime = timeInfo.getReturnTime();
-//        Date time = new Date(returnTime);
-//        System.out.println("Time from " + TIME_SERVER + ": " + time);
-//
-//        }
-//        catch(Exception e)
-//        {
-//            System.out.println("Time error "+e);
-//        }
-        
+       System.out.println("current time is "+currentdate);
+       
+            java.util.Date DateAmazone = null;
          try
          {
-//        	NTPUDPClient timeClient = new NTPUDPClient();
-//		InetAddress inetAddress = InetAddress.getByName("time-a-wwv.nist.gov");
-//		TimeInfo timeInfo = timeClient.getTime(inetAddress);
-//		NtpV3Packet message = timeInfo.getMessage();
-//		long serverTime = message.getTransmitTimeStamp().getTime();
-//		Date time = new Date(serverTime);
-//		System.out.println("Time from " + "nist1-ny.ustiming.org" + ": " + time);
-              Date date = new Date();
-    String strDateFormat = "hh:mm:ss a";
-    DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
-    String formattedDate= dateFormat.format(date);
-    System.out.println("Current time of the day using Date - 12 hour format: " + formattedDate);
+
+         StallInterface Dao= StallFactory.getInstance();
+        DateAmazone= Dao.GetCurrentDate();
+        
          }
          catch(Exception e)
          {
-              JOptionPane.showMessageDialog(jPanel1,
+                     JOptionPane.showMessageDialog(jPanel1,
                      "Unable to Connect To Internet ,Please check your internet Connection.",
                      "Inane error",
                       JOptionPane.ERROR_MESSAGE);
-                
-                     return ;
+                      return ;
          }
          
         
@@ -399,78 +378,17 @@ public class LoginScreen extends javax.swing.JFrame
             
                 //Checking for GameZoneSubcription
                 java.sql.Date sub_enddate = currentgamezone.getSubEndDate();
-    
-                
-                System.out.println(cur_date);
-                System.out.println(sub_enddate);
-                
-                
-                
-                String s =sub_enddate.toString();
-                String end_Year = s.substring(0,4);
-                String end_Month = s.substring(5,7);
-                String end_Day = s.substring(8);
-                
-                    int y = 0 ;
-                    int m =0;
-                    int d = 0;
-                    int e_y = 0;
-                    int e_m = 0;
-                    int e_d = 0;
-                
-                try
+                //Code for checking the subcription for the GameZone
+                if(DateAmazone.after(sub_enddate))
                 {
-                     y = Integer.parseInt(Year);
-                     m = Integer.parseInt(Month);
-                     d = Integer.parseInt(Day);
-                     e_y = Integer.parseInt(end_Year);
-                     e_m = Integer.parseInt(end_Month);
-                     e_d = Integer.parseInt(end_Day);
-                              
-                    
-                }catch(NumberFormatException e)
-                {
-                    System.out.println(e);
-                    
+                      JOptionPane.showMessageDialog(jPanel1,
+                      "Your GameZone Subcription Has Expired On "+sub_enddate+" , Please Contact Admin For Recharge",
+                      "Inane error",
+                       JOptionPane.ERROR_MESSAGE);
+                      return;
+           
                 }
-                
-                
-                //code for checking sub is valid or not 
-                if(y > e_y )
-                {
-                    JOptionPane.showMessageDialog(jPanel1,
-                     "Your Subscription has Expired Plz Contact The service Provider.",
-                     "Inane error",
-                      JOptionPane.ERROR_MESSAGE);
-                
-                     return ;
-                    
-                }
-                if( m > e_m && y == e_y )
-                {
-                    JOptionPane.showMessageDialog(jPanel1,
-                     "Your Subscription has Expired Plz Contact The service Provider.",
-                     "Inane error",
-                      JOptionPane.ERROR_MESSAGE);
-                
-                     return ;
-                    
-                }
-                if(   d > e_d  &&  y == e_y &&   m == e_m)
-                {
-                    JOptionPane.showMessageDialog(jPanel1,
-                     "Your Subscription has Expired Plz Contact The service Provider.",
-                     "Inane error",
-                      JOptionPane.ERROR_MESSAGE);
-                
-                     return ;
-                    
-                }
-                
-                
-                ///Checking complete for sub
-               
-              
+
                  
                 //checking if current user is admin or emp    
                 if(u.getType().equals("admin"))

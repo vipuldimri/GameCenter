@@ -2515,10 +2515,11 @@ cal.set(Calendar.MILLISECOND, 0);
             try
             {
                 StallInterface Dao = StallFactory.getInstance();
-                String oldString = Dao.GetAmount(currentgamezone.getName(), gamename);
-                Long old = Long.parseLong(oldString);
-                Long newamount = Long.parseLong(amount);
-                updated = old +newamount;
+                //String oldString = Dao.GetAmount(currentgamezone.getName(), gamename);
+                //Long old = Long.parseLong(oldString);
+                //Long newamount = Long.parseLong(amount);
+                //updated = old +newamount;
+                updated = Long.parseLong(amount);
                 Dao.UpdateAmount(currentgamezone.getName(), updated+"", gamename);
             }catch(Exception ex)
             {
