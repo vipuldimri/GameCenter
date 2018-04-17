@@ -82,20 +82,43 @@ public class StallImplements implements StallInterface
                if(gameslist.isEmpty() == true)
                {                
                   //Query for Creating new entry for a day 
-                  String Creatingnewentry = "SELECT DISTINCT  Amount from "+GameZoneName+"_games ;";
+                  String Creatingnewentry = "select MAX(Date) from "+GameZoneName+"_games ;";
+                  java.sql.Date maxdate = null;
                   ArrayList<String> GamesAvailable = new ArrayList<>();
                   Statement stmt3=conn.createStatement();  
                   ResultSet rs2 = stmt.executeQuery(Creatingnewentry);
                   while(rs2.next())  
                   {
-                  GamesAvailable.add(rs2.getString(1));
+                   maxdate = rs2.getDate(1);
                   }  
+                  long millis=System.currentTimeMillis();  
+                  java.sql.Date currentdate=new java.sql.Date(millis);    
+                  if(maxdate.before(currentdate))
+                  {
+                  //create new entry  select DISTINCT(GameName) from GameZone2_games;
+                  String getallgames = "select DISTINCT(GameName) from "+GameZoneName+"_games ;";
+                  Statement stmt4=conn.createStatement();  
+                  ResultSet rs3 = stmt.executeQuery(getallgames);
+                  while(rs3.next())  
+                  {
+                   GamesAvailable.add(rs3.getString(1));
+                  }
                   
                   for(String gamename : GamesAvailable)
                   {
-                      
+                   final String addgamerow = "INSERT INTO "+GameZoneName+"_games (GameName,Amount,Date) VALUES ('"+gamename+"','0',curdate());";
+                   PreparedStatement pstmt = conn.prepareStatement(addgamerow);
+                   pstmt.executeUpdate();
+        
                       
                   }
+                  
+                  
+                  }else
+                  {
+                      
+                  }
+                
                
                }else
                {
@@ -104,11 +127,11 @@ public class StallImplements implements StallInterface
                }
                  //Now getting data
                  Statement stmt2=conn.createStatement();  
-                 ResultSet rs2 = stmt.executeQuery(Query);
+                 ResultSet rs4 = stmt.executeQuery(Query);
                  
-                 while(rs.next())  
+                 while(rs4.next())  
                  {
-                    Games game = new Games(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getDate(4));
+                    Games game = new Games(rs4.getInt(1),rs4.getString(2),rs4.getString(3),rs4.getDate(4));
                     gameslist.add(game);
                  }
 
@@ -118,8 +141,8 @@ public class StallImplements implements StallInterface
     @Override
     public String GetAmount(String GameZoneName,String gamename) throws Exception 
     {
-                //string Query="SELECT * FROM GameZoneDB."+GameZoneName+"_games  WHERE Date = curdate();";
-                  String queryforgettingoldamount = "SELECT Amount from "+GameZoneName+"_games WHERE GameName = '"+gamename+"';";
+          //string Query="SELECT * FROM GameZoneDB."+GameZoneName+"_games  WHERE Date = curdate();";
+          String queryforgettingoldamount = "SELECT Amount from "+GameZoneName+"_games WHERE GameName = '"+gamename+"';";
 
                    String amount = "";
                    Statement stmt=conn.createStatement();  

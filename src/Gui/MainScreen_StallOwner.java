@@ -275,14 +275,15 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
            }
            transdetailscomplete = background_GetTransactionDetails.transactiondetails; 
-           try{
-               
+           try
+           {
+              
               CustomerInterface Dao =  Customerfactory.getInstance();
               customerlist = Dao.getCust( currentgamezone.getName()+"_customers"); 
               StallInterface Dao1 = StallFactory.getInstance();
               gamelist = Dao1.GetGames(currentgamezone.getName());
 
-             }
+           }
            catch(Exception e)
            {
                //Error  in Getting Transaction Details
@@ -366,7 +367,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel27 = new javax.swing.JLabel();
         jLabel_currentEMpName = new javax.swing.JLabel();
         ResetValuestozerobutton = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -598,15 +598,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         });
         jPanel4.add(ResetValuestozerobutton);
         ResetValuestozerobutton.setBounds(540, 340, 180, 70);
-
-        jButton4.setText("jButton4");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jButton4);
-        jButton4.setBounds(50, 110, 73, 23);
 
         jPanel2.add(jPanel4);
         jPanel4.setBounds(2, 7, 1200, 440);
@@ -2468,11 +2459,6 @@ cal.set(Calendar.MILLISECOND, 0);
         
         
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        setGameAmount("airhockey", "100");
-    }//GEN-LAST:event_jButton4ActionPerformed
  	public static java.sql.Timestamp convert(java.util.Date date)
 	{
 		return new java.sql.Timestamp(date.getTime());
@@ -2607,7 +2593,6 @@ cal.set(Calendar.MILLISECOND, 0);
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton7;
     private com.toedter.calendar.JDateChooser jDateChooser_EndDate;
     private com.toedter.calendar.JDateChooser jDateChooser_StartDate;

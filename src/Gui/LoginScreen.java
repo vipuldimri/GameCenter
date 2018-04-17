@@ -388,13 +388,10 @@ public class LoginScreen extends javax.swing.JFrame
                       return;
            
                 }
-
-                 
                 //checking if current user is admin or emp    
                 if(u.getType().equals("admin"))
                 {
-                  
-                    flagAdmin = true;
+                   flagAdmin = true;
                 }
                 break;
             }
