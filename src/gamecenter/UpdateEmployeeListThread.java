@@ -11,12 +11,15 @@ import Database.UserInterface;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 public class UpdateEmployeeListThread extends Thread
 {
     ArrayList<User> employeelist;
     String GameZoneName;
-    public UpdateEmployeeListThread(ArrayList<User> employeelist , String GameZoneName)
+     JDialog update;
+    public UpdateEmployeeListThread(ArrayList<User> employeelist , String GameZoneName, JDialog update)
     {
+        this.update=update;
         this.employeelist = employeelist;
         this.GameZoneName = GameZoneName;
     }
@@ -29,7 +32,6 @@ public class UpdateEmployeeListThread extends Thread
           {
          
              Dao = UserFactory.getInstance();
-             
              employeelist  = Dao.getAllUsers(GameZoneName,employeelist);
            
           } 
@@ -39,7 +41,7 @@ public class UpdateEmployeeListThread extends Thread
            }
            
                
-        
+        update.dispose();
     }
     
 }

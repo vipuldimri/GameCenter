@@ -20,12 +20,17 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 class Updata_DeleteEmployee extends javax.swing.JFrame 
 {
 
     User current;
     JFrame previous;
     User updateemp;
+    JTable update_delete_table;
+    JLabel noofemployee;
     ArrayList<User> employeelist;
     boolean updateEmp_flag = false;
     boolean deleteEmp_flag = false;
@@ -35,13 +40,15 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
     
     
     
-    public Updata_DeleteEmployee(User current,JFrame previous,String currentstallname,ArrayList<User> employeelist,HashMap<String, Boolean> passwordcheck)
+    public Updata_DeleteEmployee(User current,JFrame previous,String currentstallname,ArrayList<User> employeelist,HashMap<String, Boolean> passwordcheck,JTable update_delete_table, JLabel noofemployee)
     {
         this.currentstallname = currentstallname;
         this.current = current;
         this.previous = previous;
         this.employeelist = employeelist;
         this.passwordcheck = passwordcheck;
+        this.noofemployee = noofemployee;
+        this.update_delete_table = update_delete_table;
         initComponents();
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - getWidth()) / 2);
@@ -306,22 +313,45 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
         }
         else
         {
-                      UpdateEmployeeListThread updateEmployeeListThread = new UpdateEmployeeListThread(employeelist,currentstallname);
+                      UpdateEmployeeListThread updateEmployeeListThread = new UpdateEmployeeListThread(employeelist,currentstallname,update);
                       updateEmployeeListThread.start();
-                      
+                      update.setVisible(true);
                       UpdatePasswordCheck updatepasswordcheck = new UpdatePasswordCheck(currentstallname,passwordcheck);
                       updatepasswordcheck.start();
                       
                       
                       JOptionPane.showMessageDialog(jPanel1,
                       "Update Employee Success.",
-                      "Inane error",
-                      JOptionPane.ERROR_MESSAGE);
+                      "Employee Update Success",
+                      JOptionPane.PLAIN_MESSAGE);
                      
         }
         
         updateEmp_flag = false;
         previous.setVisible(true);
+        
+        
+           
+       DefaultTableModel m = (DefaultTableModel) update_delete_table.getModel();
+        m.setRowCount(0);
+        DefaultTableModel  model = (DefaultTableModel) update_delete_table.getModel();
+        Object row[] = new Object[9];
+        for(int i=0;i < employeelist.size();i++)
+        {
+            row[0] = employeelist.get(i).getID();
+            row[1] = employeelist.get(i).getName();
+            row[2] = employeelist.get(i).getAddress();
+            row[3] = employeelist.get(i).getContact();
+            row[4] = employeelist.get(i).getEmail();
+            row[5] = employeelist.get(i).getType();
+            row[6] = employeelist.get(i).getGameZoneID();
+            row[7] = employeelist.get(i).getPassword();
+            row[8] = employeelist.get(i).getUserName();
+            model.addRow(row);
+
+        }
+        
+        
         dispose();
       
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -350,7 +380,6 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
 	            @Override
 	            protected  String  doInBackground() throws Exception 
 	            {
-
                     UserInterface Dao = null;
                     try 
                     {
@@ -360,7 +389,7 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
                     
                     } catch (Exception ex) 
                     {
-                        deleteEmp_flag = false;
+                    deleteEmp_flag = false;
                     Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 
@@ -373,7 +402,6 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
 	            @Override
 	            protected void done()
                     {
-                        
                       update.dispose();
 	            }
 	        };
@@ -397,20 +425,48 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
         }else
         {
             
-                      UpdateEmployeeListThread updateEmployeeListThread = new UpdateEmployeeListThread(employeelist,currentstallname);
+                     
+                      UpdateEmployeeListThread updateEmployeeListThread = new UpdateEmployeeListThread(employeelist,currentstallname,update);
                       updateEmployeeListThread.start();
-                      
+                      update.setVisible(true); 
                       UpdatePasswordCheck updatePasswordCheck = new UpdatePasswordCheck(currentstallname, passwordcheck);
                       updatePasswordCheck.start();
-                      
-                      
-                     JOptionPane.showMessageDialog(jPanel1,
-                     "Employee Deleted.",
-                     "Inane error",
-                     JOptionPane.ERROR_MESSAGE);
+     
+                      JOptionPane.showMessageDialog(jPanel1,
+                      "Employee Deleted.",
+                      "Employee Deletion Success",
+                      JOptionPane.PLAIN_MESSAGE);
         }
         deleteEmp_flag = false;
         previous.setVisible(true);
+        
+         DefaultTableModel m = (DefaultTableModel) update_delete_table.getModel();
+        m.setRowCount(0);
+        DefaultTableModel  model = (DefaultTableModel) update_delete_table.getModel();
+        Object row[] = new Object[9];
+        for(int i=0;i < employeelist.size();i++)
+        {
+            row[0] = employeelist.get(i).getID();
+            row[1] = employeelist.get(i).getName();
+            row[2] = employeelist.get(i).getAddress();
+            row[3] = employeelist.get(i).getContact();
+            row[4] = employeelist.get(i).getEmail();
+            row[5] = employeelist.get(i).getType();
+            row[6] = employeelist.get(i).getGameZoneID();
+            row[7] = employeelist.get(i).getPassword();
+            row[8] = employeelist.get(i).getUserName();
+            model.addRow(row);
+
+        }
+        String oldno= noofemployee.getText();
+        try 
+        {
+            int newno = Integer.parseInt(oldno);
+            noofemployee.setText(newno+"");
+        }catch(NumberFormatException e)
+        {
+            
+        }   
         dispose();
         
     }//GEN-LAST:event_jButton2ActionPerformed

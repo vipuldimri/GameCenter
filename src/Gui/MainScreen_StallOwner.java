@@ -1636,7 +1636,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         }
         else
         {
-                      UpdateEmployeeListThread updateemployeelist = new UpdateEmployeeListThread(currentgamezoneusers,currentgamezone.getName());
+                      UpdateEmployeeListThread updateemployeelist = new UpdateEmployeeListThread(currentgamezoneusers,currentgamezone.getName(),rechargeloadingdialoge);
                       updateemployeelist.start();
                       
                       UpdatePasswordCheck updatepasswordcheck = new UpdatePasswordCheck(currentgamezone.getName(),passwordcheck);
@@ -2062,7 +2062,7 @@ cal.set(Calendar.MILLISECOND, 0);
         
        
         
-        Updata_DeleteEmployee newframe = new Updata_DeleteEmployee(user,this, currentgamezone.getName(),currentgamezoneusers,passwordcheck);
+        Updata_DeleteEmployee newframe = new Updata_DeleteEmployee(user,this, currentgamezone.getName(),currentgamezoneusers,passwordcheck,jTable_updatedelete,currentnoofemployeelabel);
         newframe.setVisible(true);
         setVisible(false);
         
@@ -2389,10 +2389,14 @@ cal.set(Calendar.MILLISECOND, 0);
         // TODO add your handling code here:
         String Name = EmplyeeIdInput.getText();
         
-        
+        Name = Name.trim();
         
         for(User user : currentgamezoneusers)
         {
+            String as =user.getName();
+            String asas = Name;
+            boolean df= as.equalsIgnoreCase(asas);
+            boolean asd = as.equals(asas);
             if(user.getName().equalsIgnoreCase(Name))
             {
             DefaultTableModel m = (DefaultTableModel) jTable_updatedelete.getModel();
@@ -2425,6 +2429,7 @@ cal.set(Calendar.MILLISECOND, 0);
         // TODO add your handling code here:
         
         String Name = Employeeidinput.getText();
+        Name = Name.trim();
          for(User user : currentgamezoneusers)
         {
              
