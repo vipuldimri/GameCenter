@@ -462,7 +462,7 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
         try 
         {
             int newno = Integer.parseInt(oldno);
-            noofemployee.setText(newno+"");
+            noofemployee.setText(newno-1+"");
         }catch(NumberFormatException e)
         {
             

@@ -2397,7 +2397,7 @@ cal.set(Calendar.MILLISECOND, 0);
             String asas = Name;
             boolean df= as.equalsIgnoreCase(asas);
             boolean asd = as.equals(asas);
-            if(user.getName().equalsIgnoreCase(Name))
+            if(user.getName().trim().equalsIgnoreCase(Name))
             {
             DefaultTableModel m = (DefaultTableModel) jTable_updatedelete.getModel();
             m.setRowCount(0);
@@ -2430,10 +2430,11 @@ cal.set(Calendar.MILLISECOND, 0);
         
         String Name = Employeeidinput.getText();
         Name = Name.trim();
-         for(User user : currentgamezoneusers)
+        
+        for(User user : currentgamezoneusers)
         {
-             
-            if(user.getName().equalsIgnoreCase(Name))
+            boolean ss = Name.equalsIgnoreCase(user.getName());
+            if(user.getName().trim().equalsIgnoreCase(Name))
             {
             DefaultTableModel m = (DefaultTableModel) jTable_EmpRecord.getModel();
             m.setRowCount(0);
