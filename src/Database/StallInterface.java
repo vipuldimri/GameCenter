@@ -15,4 +15,6 @@ public interface StallInterface
     public boolean UpdateAmount(String TableName,String Amount,String GameName)throws Exception;
             
     public  Date GetCurrentDate()throws Exception;
+    
+    public ArrayList<Games> GetGamesPerticularDate(String GameZoneName,Date date)throws Exception;
 }

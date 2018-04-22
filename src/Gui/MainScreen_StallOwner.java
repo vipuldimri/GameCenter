@@ -205,7 +205,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
        }
            
-        
+      
     }
     //Cons when Admin of the GameZone Enter
     public MainScreen_StallOwner(String str,LoginScreen l ,ArrayList<User> currentStallUsers,Stall currentgamezone,User currentuser,HashMap<String,Boolean> passwordcheck)
@@ -380,6 +380,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel_currentempname2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         TodaysCollectionTable = new javax.swing.JTable();
+        jSeparator5 = new javax.swing.JSeparator();
+        jLabel35 = new javax.swing.JLabel();
+        jDateChooser_todayCollection = new com.toedter.calendar.JDateChooser();
+        jButton4 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
@@ -667,10 +671,29 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 "GameName", "Amount"
             }
         ));
+        TodaysCollectionTable.setEnabled(false);
         jScrollPane3.setViewportView(TodaysCollectionTable);
 
         jPanel3.add(jScrollPane3);
-        jScrollPane3.setBounds(132, 160, 990, 402);
+        jScrollPane3.setBounds(100, 120, 990, 402);
+        jPanel3.add(jSeparator5);
+        jSeparator5.setBounds(100, 542, 990, 10);
+
+        jLabel35.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel35.setText("Get Collection Record for Perticular Date");
+        jPanel3.add(jLabel35);
+        jLabel35.setBounds(100, 560, 260, 40);
+        jPanel3.add(jDateChooser_todayCollection);
+        jDateChooser_todayCollection.setBounds(420, 560, 150, 40);
+
+        jButton4.setText("Get Record");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton4);
+        jButton4.setBounds(630, 560, 120, 40);
 
         jTabbedPane1.addTab("Today Collection", jPanel3);
 
@@ -1954,6 +1977,16 @@ cal.set(Calendar.MILLISECOND, 0);
          //startdate  = jDateChooser_StartDate.getDate(); 
         
          enddate =jDateChooser_EndDate.getDate();
+         
+            Calendar cal2 = Calendar.getInstance();
+            cal2.setTime(enddate);
+ 
+// Set time fields to zero
+cal2.set(Calendar.HOUR_OF_DAY, 24);
+
+ 
+// Put it back in the Date object
+         enddate = cal2.getTime();
         }
         catch(Exception e)
         {
@@ -2465,6 +2498,72 @@ cal.set(Calendar.MILLISECOND, 0);
         
         
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:Perticular day today collection
+         if(jDateChooser_todayCollection.getDate() == null )
+         {
+              JOptionPane.showMessageDialog(jPanel1,
+                     "Please Provide Date.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                      return ;
+         }
+          java.util.Date date  = jDateChooser_todayCollection.getDate(); 
+          Calendar cal = Calendar.getInstance();
+          cal.setTime(date);
+ 
+// Set time fields to zero
+cal.set(Calendar.HOUR_OF_DAY, 0);
+cal.set(Calendar.MINUTE, 0);
+cal.set(Calendar.SECOND, 0);
+cal.set(Calendar.MILLISECOND, 0);
+ 
+// Put it back in the Date object
+         date = cal.getTime();
+        
+         ArrayList<Games> gamelistper = null;
+         StallInterface Dao = StallFactory.getInstance();
+         try
+         {
+         gamelistper = Dao.GetGamesPerticularDate(currentgamezone.getName(), date);
+         }
+         catch(Exception e)
+         {
+                 JOptionPane.showMessageDialog(jPanel1,
+                     "Unable to Connect To Internet ,Please check your internet Connection.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                      return ;
+         }
+         if(gamelistper.isEmpty())
+         {
+               JOptionPane.showMessageDialog(jPanel1,
+                     "No record for  this perticular date.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                      return ;
+         }
+         else{
+       DefaultTableModel m = (DefaultTableModel) TodaysCollectionTable.getModel();
+       m.setRowCount(0);
+       for(Games game : gamelistper)
+       {
+        DefaultTableModel  model = (DefaultTableModel) TodaysCollectionTable.getModel();
+        Object row[] = new Object[2];
+      
+            row[0] = game.getGameName();
+            row[1] = game.getAmount();
+            model.addRow(row);
+            
+        
+       }
+         }
+           
+         
+         
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
  	public static java.sql.Timestamp convert(java.util.Date date)
 	{
 		return new java.sql.Timestamp(date.getTime());
@@ -2599,9 +2698,11 @@ cal.set(Calendar.MILLISECOND, 0);
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton7;
     private com.toedter.calendar.JDateChooser jDateChooser_EndDate;
     private com.toedter.calendar.JDateChooser jDateChooser_StartDate;
+    private com.toedter.calendar.JDateChooser jDateChooser_todayCollection;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2630,6 +2731,7 @@ cal.set(Calendar.MILLISECOND, 0);
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel3_totalTransaction;
     private javax.swing.JLabel jLabel4;
@@ -2682,6 +2784,7 @@ cal.set(Calendar.MILLISECOND, 0);
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable_EmpRecord;
     private javax.swing.JTable jTable_customers;

@@ -137,6 +137,7 @@ public class StallImplements implements StallInterface
 
         return gameslist;
     }
+    
 
     @Override
     public String GetAmount(String GameZoneName,String gamename) throws Exception 
@@ -181,6 +182,25 @@ public class StallImplements implements StallInterface
                    }
                    
         return current_date;
+    }
+
+    @Override
+    public ArrayList<Games> GetGamesPerticularDate(String GameZoneName, Date date) throws Exception {
+       
+        java.sql.Date d = new java.sql.Date(date.getTime());
+        String Query="SELECT * FROM GameZoneDB."+GameZoneName+"_games  WHERE Date = '"+d+"';";
+        ArrayList<Games> gameslist = new ArrayList<>();
+        Statement stmt=conn.createStatement();  
+        ResultSet rs = stmt.executeQuery(Query);
+                   
+                   while(rs.next())  
+                   {
+                    Games game = new Games(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getDate(4));
+                    gameslist.add(game);
+                   }
+                   
+                   
+                   return gameslist;
     }
     
 }
