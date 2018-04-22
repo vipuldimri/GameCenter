@@ -2602,6 +2602,7 @@ cal.set(Calendar.MILLISECOND, 0);
         */
         public void setGameAmount(String gamename,String amount)
         {
+            gamename = gamename.trim();
             Long updated = 0l;
             try
             {
