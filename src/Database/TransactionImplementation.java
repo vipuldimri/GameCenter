@@ -63,7 +63,7 @@ public class TransactionImplementation implements TransactionInterface
         
         ArrayList<Recharge> transactiondetails = new ArrayList<>();
         
-        TransDetails = "SELECT * FROM GameZoneDB."+TableName;
+        TransDetails = "SELECT * FROM GameZoneDB."+TableName+" ORDER BY  Date desc" ;
         
                    Statement stmt=conn.createStatement();  
                    ResultSet rs = stmt.executeQuery(TransDetails);
@@ -92,7 +92,7 @@ public class TransactionImplementation implements TransactionInterface
     {
            
                    old.clear();
-                   TransDetails = "SELECT * FROM GameZoneDB."+TableName;
+                   TransDetails = "SELECT * FROM GameZoneDB."+TableName+" ORDER BY  Date desc";
                    Statement stmt=conn.createStatement();  
                    ResultSet rs = stmt.executeQuery(TransDetails);
                    while(rs.next())  

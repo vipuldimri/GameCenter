@@ -382,7 +382,7 @@ public class LoginScreen extends javax.swing.JFrame
                 if(DateAmazone.after(sub_enddate))
                 {
                       JOptionPane.showMessageDialog(jPanel1,
-                      "Your GameZone Subcription Has Expired On "+sub_enddate+" , Please Contact Admin For Recharge",
+                      "Your GameZone Subcription Has Expired On "+sub_enddate+" , Please Contact Admin For Renewals",
                       "Inane error",
                        JOptionPane.ERROR_MESSAGE);
                       return;
@@ -436,7 +436,7 @@ public class LoginScreen extends javax.swing.JFrame
                  //here currentStallUsers is null because emp has no rights to see emps
                   jTextField1.setText("");
                   jPasswordField1.setText("");
-                      MainScreen_StallOwner mainScreen_StallOwner =  new MainScreen_StallOwner(this,currentgamezone,currentuser);
+                   MainScreen_StallOwner mainScreen_StallOwner =  new MainScreen_StallOwner(this,currentgamezone,currentuser);
                       mainScreen_StallOwner.setVisible(true);
                       setVisible(false);
                 
@@ -511,7 +511,194 @@ public class LoginScreen extends javax.swing.JFrame
         // TODO add your handling code here:Key presses for Enter Button
         if(evt.getKeyCode()==KeyEvent.VK_ENTER)
         { 
+  String username = jTextField1.getText();
+        char[] password = jPasswordField1.getPassword();
+        String pass ="";
+        for(int i = 0 ; i <password.length ; i ++)
+        {
+            pass = pass + password[i];
+        }
 
+     
+        //Checking if admin login
+        if(username.equals("admin") && pass.equals("admin"))
+        {
+            MainScreen_Admin admin = new MainScreen_Admin();
+            admin.setVisible(true);
+            setVisible(false);
+            return;
+        
+        }
+        
+        
+        //Getting current time and then converting it into String for easy comparision
+       long millis=System.currentTimeMillis();  
+       java.sql.Date currentdate=new java.sql.Date(millis);
+       System.out.println("current time is "+currentdate);
+       
+            java.util.Date DateAmazone = null;
+         try
+         {
+
+         StallInterface Dao= StallFactory.getInstance();
+        DateAmazone= Dao.GetCurrentDate();
+        
+         }
+         catch(Exception e)
+         {
+                     JOptionPane.showMessageDialog(jPanel1,
+                     "Unable to Connect To Internet ,Please check your internet Connection.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                      return ;
+         }
+         
+        
+       String cur_date =currentdate.toString();
+       String Year = cur_date.substring(0,4);
+       String Month = cur_date.substring(5,7);
+       String Day = cur_date.substring(8);
+       // year , month , day represent current time   
+        
+       
+        //Validation 
+        if(username.length() == 0)
+        {  
+            jLabel5.setText("UserName is Required");
+            return ;
+        }
+        if(password.length == 0)
+        {  
+            jLabel4.setText("Password is Required");
+           return ;
+        }
+     
+        //flag used for login
+        boolean flagUser = false;
+        boolean flagAdmin = false;
+        boolean flagSub = false;
+        int gamezoneid ;
+        
+        
+        // traversing users list to check password and user name exits or not ;
+        for(User u : currentgamezoneusers)
+        {
+         
+            if(u.getUserName().equals(username) && u.getPassword().equals(pass))
+            {
+                
+                // if user name and password match storing the info of logedin user into currentuser
+                currentuser.setID(u.getID());
+                currentuser.setAddress(u.getAddress());
+                currentuser.setContact(u.getContact());
+                currentuser.setEmail(u.getEmail());
+                currentuser.setName(u.getName());
+                currentuser.setPassword(u.getPassword());
+                currentuser.setType(u.getType());
+                currentuser.setGameZoneID(u.getGameZoneID()); 
+                currentuser.setUserName(u.getUserName());
+                
+                System.out.println(u.getName()  +"    "+username);     
+                System.out.println(u.getPassword()+"    "+pass);
+                
+                
+                flagUser = true;
+              
+               //code for getting Game zone
+               //Now getting current stall Endsub data and converting it into String to check if sub is valid or not for the gamezone
+                gamezoneid = u.getGameZoneID();
+          
+            
+                //Checking for GameZoneSubcription
+                java.sql.Date sub_enddate = currentgamezone.getSubEndDate();
+                //Code for checking the subcription for the GameZone
+                if(DateAmazone.after(sub_enddate))
+                {
+                      JOptionPane.showMessageDialog(jPanel1,
+                      "Your GameZone Subcription Has Expired On "+sub_enddate+" , Please Contact Admin For Renewals",
+                      "Inane error",
+                       JOptionPane.ERROR_MESSAGE);
+                      return;
+           
+                }
+                //checking if current user is admin or emp    
+                if(u.getType().equals("admin"))
+                {
+                   flagAdmin = true;
+                }
+                break;
+            }
+            
+        }
+            
+        
+        
+          
+        
+        if(flagAdmin || flagUser)
+        {
+            // if current user is admin
+            if(flagAdmin)
+            {
+             
+                jTextField1.setText("");
+                jPasswordField1.setText("");
+              
+          
+           MainScreen_StallOwner mainScreen_StallOwner =  new MainScreen_StallOwner("admin",this,currentgamezoneusers,currentgamezone,currentuser,passwordcheck); 
+           mainScreen_StallOwner.setVisible(true);
+           setVisible(false);
+           //Below code is for Serial communication to start    
+           try 
+           {
+            FactoryClass.createObjects(mainScreen_StallOwner);
+    
+           } catch (ClassNotFoundException ex)
+           {
+                 
+                    System.out.println("Factory class exception "+ex);
+            
+           }
+           
+           
+           
+            }
+            else
+            {
+                 //if current user is normal employee
+                 //here currentStallUsers is null because emp has no rights to see emps
+                  jTextField1.setText("");
+                  jPasswordField1.setText("");
+                   MainScreen_StallOwner mainScreen_StallOwner =  new MainScreen_StallOwner(this,currentgamezone,currentuser);
+                      mainScreen_StallOwner.setVisible(true);
+                      setVisible(false);
+                
+                  /////////////////////Code for serial communication//////////
+                   try 
+                   {
+                    FactoryClass.createObjects(mainScreen_StallOwner);
+    
+                   } catch (ClassNotFoundException ex)
+                   {
+                 
+                    System.out.println("Factory class exception "+ex);
+            
+                   }
+              
+                  
+            }
+            
+        }
+        //No user found with provided usernmae and password
+        else
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+           "Invalid Password or UserName.",
+           "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+           
+        }
+        
         } 
         
         
@@ -521,7 +708,194 @@ public class LoginScreen extends javax.swing.JFrame
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER)
         { 
+                 String username = jTextField1.getText();
+        char[] password = jPasswordField1.getPassword();
+        String pass ="";
+        for(int i = 0 ; i <password.length ; i ++)
+        {
+            pass = pass + password[i];
+        }
+
+     
+        //Checking if admin login
+        if(username.equals("admin") && pass.equals("admin"))
+        {
+            MainScreen_Admin admin = new MainScreen_Admin();
+            admin.setVisible(true);
+            setVisible(false);
+            return;
+        
+        }
+        
+        
+        //Getting current time and then converting it into String for easy comparision
+       long millis=System.currentTimeMillis();  
+       java.sql.Date currentdate=new java.sql.Date(millis);
+       System.out.println("current time is "+currentdate);
+       
+            java.util.Date DateAmazone = null;
+         try
+         {
+
+         StallInterface Dao= StallFactory.getInstance();
+        DateAmazone= Dao.GetCurrentDate();
+        
+         }
+         catch(Exception e)
+         {
+                     JOptionPane.showMessageDialog(jPanel1,
+                     "Unable to Connect To Internet ,Please check your internet Connection.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                      return ;
+         }
+         
+        
+       String cur_date =currentdate.toString();
+       String Year = cur_date.substring(0,4);
+       String Month = cur_date.substring(5,7);
+       String Day = cur_date.substring(8);
+       // year , month , day represent current time   
+        
+       
+        //Validation 
+        if(username.length() == 0)
+        {  
+            jLabel5.setText("UserName is Required");
+            return ;
+        }
+        if(password.length == 0)
+        {  
+            jLabel4.setText("Password is Required");
+           return ;
+        }
+     
+        //flag used for login
+        boolean flagUser = false;
+        boolean flagAdmin = false;
+        boolean flagSub = false;
+        int gamezoneid ;
+        
+        
+        // traversing users list to check password and user name exits or not ;
+        for(User u : currentgamezoneusers)
+        {
+         
+            if(u.getUserName().equals(username) && u.getPassword().equals(pass))
+            {
                 
+                // if user name and password match storing the info of logedin user into currentuser
+                currentuser.setID(u.getID());
+                currentuser.setAddress(u.getAddress());
+                currentuser.setContact(u.getContact());
+                currentuser.setEmail(u.getEmail());
+                currentuser.setName(u.getName());
+                currentuser.setPassword(u.getPassword());
+                currentuser.setType(u.getType());
+                currentuser.setGameZoneID(u.getGameZoneID()); 
+                currentuser.setUserName(u.getUserName());
+                
+                System.out.println(u.getName()  +"    "+username);     
+                System.out.println(u.getPassword()+"    "+pass);
+                
+                
+                flagUser = true;
+              
+               //code for getting Game zone
+               //Now getting current stall Endsub data and converting it into String to check if sub is valid or not for the gamezone
+                gamezoneid = u.getGameZoneID();
+          
+            
+                //Checking for GameZoneSubcription
+                java.sql.Date sub_enddate = currentgamezone.getSubEndDate();
+                //Code for checking the subcription for the GameZone
+                if(DateAmazone.after(sub_enddate))
+                {
+                      JOptionPane.showMessageDialog(jPanel1,
+                      "Your GameZone Subcription Has Expired On "+sub_enddate+" , Please Contact Admin For Renewals",
+                      "Inane error",
+                       JOptionPane.ERROR_MESSAGE);
+                      return;
+           
+                }
+                //checking if current user is admin or emp    
+                if(u.getType().equals("admin"))
+                {
+                   flagAdmin = true;
+                }
+                break;
+            }
+            
+        }
+            
+        
+        
+          
+        
+        if(flagAdmin || flagUser)
+        {
+            // if current user is admin
+            if(flagAdmin)
+            {
+             
+                jTextField1.setText("");
+                jPasswordField1.setText("");
+              
+          
+           MainScreen_StallOwner mainScreen_StallOwner =  new MainScreen_StallOwner("admin",this,currentgamezoneusers,currentgamezone,currentuser,passwordcheck); 
+           mainScreen_StallOwner.setVisible(true);
+           setVisible(false);
+           //Below code is for Serial communication to start    
+           try 
+           {
+            FactoryClass.createObjects(mainScreen_StallOwner);
+    
+           } catch (ClassNotFoundException ex)
+           {
+                 
+                    System.out.println("Factory class exception "+ex);
+            
+           }
+           
+           
+           
+            }
+            else
+            {
+                 //if current user is normal employee
+                 //here currentStallUsers is null because emp has no rights to see emps
+                  jTextField1.setText("");
+                  jPasswordField1.setText("");
+                   MainScreen_StallOwner mainScreen_StallOwner =  new MainScreen_StallOwner(this,currentgamezone,currentuser);
+                      mainScreen_StallOwner.setVisible(true);
+                      setVisible(false);
+                
+                  /////////////////////Code for serial communication//////////
+                   try 
+                   {
+                    FactoryClass.createObjects(mainScreen_StallOwner);
+    
+                   } catch (ClassNotFoundException ex)
+                   {
+                 
+                    System.out.println("Factory class exception "+ex);
+            
+                   }
+              
+                  
+            }
+            
+        }
+        //No user found with provided usernmae and password
+        else
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+           "Invalid Password or UserName.",
+           "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+           
+        }
+         
    
         } 
         
@@ -533,6 +907,194 @@ public class LoginScreen extends javax.swing.JFrame
         if(evt.getKeyCode()==KeyEvent.VK_ENTER)
         { 
             //Same Code as Of Login Button
+              String username = jTextField1.getText();
+        char[] password = jPasswordField1.getPassword();
+        String pass ="";
+        for(int i = 0 ; i <password.length ; i ++)
+        {
+            pass = pass + password[i];
+        }
+
+     
+        //Checking if admin login
+        if(username.equals("admin") && pass.equals("admin"))
+        {
+            MainScreen_Admin admin = new MainScreen_Admin();
+            admin.setVisible(true);
+            setVisible(false);
+            return;
+        
+        }
+        
+        
+        //Getting current time and then converting it into String for easy comparision
+       long millis=System.currentTimeMillis();  
+       java.sql.Date currentdate=new java.sql.Date(millis);
+       System.out.println("current time is "+currentdate);
+       
+            java.util.Date DateAmazone = null;
+         try
+         {
+
+         StallInterface Dao= StallFactory.getInstance();
+        DateAmazone= Dao.GetCurrentDate();
+        
+         }
+         catch(Exception e)
+         {
+                     JOptionPane.showMessageDialog(jPanel1,
+                     "Unable to Connect To Internet ,Please check your internet Connection.",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                      return ;
+         }
+         
+        
+       String cur_date =currentdate.toString();
+       String Year = cur_date.substring(0,4);
+       String Month = cur_date.substring(5,7);
+       String Day = cur_date.substring(8);
+       // year , month , day represent current time   
+        
+       
+        //Validation 
+        if(username.length() == 0)
+        {  
+            jLabel5.setText("UserName is Required");
+            return ;
+        }
+        if(password.length == 0)
+        {  
+            jLabel4.setText("Password is Required");
+           return ;
+        }
+     
+        //flag used for login
+        boolean flagUser = false;
+        boolean flagAdmin = false;
+        boolean flagSub = false;
+        int gamezoneid ;
+        
+        
+        // traversing users list to check password and user name exits or not ;
+        for(User u : currentgamezoneusers)
+        {
+         
+            if(u.getUserName().equals(username) && u.getPassword().equals(pass))
+            {
+                
+                // if user name and password match storing the info of logedin user into currentuser
+                currentuser.setID(u.getID());
+                currentuser.setAddress(u.getAddress());
+                currentuser.setContact(u.getContact());
+                currentuser.setEmail(u.getEmail());
+                currentuser.setName(u.getName());
+                currentuser.setPassword(u.getPassword());
+                currentuser.setType(u.getType());
+                currentuser.setGameZoneID(u.getGameZoneID()); 
+                currentuser.setUserName(u.getUserName());
+                
+                System.out.println(u.getName()  +"    "+username);     
+                System.out.println(u.getPassword()+"    "+pass);
+                
+                
+                flagUser = true;
+              
+               //code for getting Game zone
+               //Now getting current stall Endsub data and converting it into String to check if sub is valid or not for the gamezone
+                gamezoneid = u.getGameZoneID();
+          
+            
+                //Checking for GameZoneSubcription
+                java.sql.Date sub_enddate = currentgamezone.getSubEndDate();
+                //Code for checking the subcription for the GameZone
+                if(DateAmazone.after(sub_enddate))
+                {
+                      JOptionPane.showMessageDialog(jPanel1,
+                      "Your GameZone Subcription Has Expired On "+sub_enddate+" , Please Contact Admin For Renewals",
+                      "Inane error",
+                       JOptionPane.ERROR_MESSAGE);
+                      return;
+           
+                }
+                //checking if current user is admin or emp    
+                if(u.getType().equals("admin"))
+                {
+                   flagAdmin = true;
+                }
+                break;
+            }
+            
+        }
+            
+        
+        
+          
+        
+        if(flagAdmin || flagUser)
+        {
+            // if current user is admin
+            if(flagAdmin)
+            {
+             
+                jTextField1.setText("");
+                jPasswordField1.setText("");
+              
+          
+           MainScreen_StallOwner mainScreen_StallOwner =  new MainScreen_StallOwner("admin",this,currentgamezoneusers,currentgamezone,currentuser,passwordcheck); 
+           mainScreen_StallOwner.setVisible(true);
+           setVisible(false);
+           //Below code is for Serial communication to start    
+           try 
+           {
+            FactoryClass.createObjects(mainScreen_StallOwner);
+    
+           } catch (ClassNotFoundException ex)
+           {
+                 
+                    System.out.println("Factory class exception "+ex);
+            
+           }
+           
+           
+           
+            }
+            else
+            {
+                 //if current user is normal employee
+                 //here currentStallUsers is null because emp has no rights to see emps
+                  jTextField1.setText("");
+                  jPasswordField1.setText("");
+                   MainScreen_StallOwner mainScreen_StallOwner =  new MainScreen_StallOwner(this,currentgamezone,currentuser);
+                      mainScreen_StallOwner.setVisible(true);
+                      setVisible(false);
+                
+                  /////////////////////Code for serial communication//////////
+                   try 
+                   {
+                    FactoryClass.createObjects(mainScreen_StallOwner);
+    
+                   } catch (ClassNotFoundException ex)
+                   {
+                 
+                    System.out.println("Factory class exception "+ex);
+            
+                   }
+              
+                  
+            }
+            
+        }
+        //No user found with provided usernmae and password
+        else
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+           "Invalid Password or UserName.",
+           "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+           
+        }
+        
    
         } 
         

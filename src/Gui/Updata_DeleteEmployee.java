@@ -119,7 +119,7 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(343, 430, 140, 40);
+        jButton2.setBounds(343, 420, 140, 50);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel12.setText("Password");
@@ -173,7 +173,7 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
             }
         });
         jPanel1.add(jButton3);
-        jButton3.setBounds(560, 430, 140, 40);
+        jButton3.setBounds(560, 420, 140, 50);
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel17.setText("UserName");

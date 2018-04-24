@@ -471,6 +471,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1385,6 +1386,14 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jMenu1.add(jMenuItem1);
+
+        jMenuItem4.setText("Logoff");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem2.setText("Exit");
@@ -2564,6 +2573,15 @@ cal.set(Calendar.MILLISECOND, 0);
          
         
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:Code for Logoff
+        setVisible(false);
+        l.setVisible(true);
+        
+        
+        
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
  	public static java.sql.Timestamp convert(java.util.Date date)
 	{
 		return new java.sql.Timestamp(date.getTime());
@@ -2754,6 +2772,7 @@ cal.set(Calendar.MILLISECOND, 0);
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
