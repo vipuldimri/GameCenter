@@ -63,7 +63,7 @@ public class TransactionImplementation implements TransactionInterface
         
         ArrayList<Recharge> transactiondetails = new ArrayList<>();
         
-        TransDetails = "SELECT * FROM GameZoneDB."+TableName+" ORDER BY  Date desc" ;
+        TransDetails = "SELECT * FROM GameZoneDB."+TableName+" WHERE MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE()) ORDER BY  Date desc" ;
         
                    Statement stmt=conn.createStatement();  
                    ResultSet rs = stmt.executeQuery(TransDetails);
@@ -92,7 +92,7 @@ public class TransactionImplementation implements TransactionInterface
     {
            
                    old.clear();
-                   TransDetails = "SELECT * FROM GameZoneDB."+TableName+" ORDER BY  Date desc";
+                   TransDetails = "SELECT * FROM GameZoneDB."+TableName+"  WHERE MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE()) ORDER BY  Date desc";
                    Statement stmt=conn.createStatement();  
                    ResultSet rs = stmt.executeQuery(TransDetails);
                    while(rs.next())  
@@ -112,6 +112,33 @@ public class TransactionImplementation implements TransactionInterface
            
   
         return old;
+    }
+
+    @Override
+    public ArrayList<Recharge> GetTransactionDetailsPerticularDates(String TableName,java.sql.Date Start ,java.sql.Date End) throws Exception {
+        ArrayList<Recharge> transactiondetails = new ArrayList<>();
+        
+        TransDetails = "SELECT * FROM GameZoneDB."+TableName+" WHERE Date>= "+Start+" AND Date <= "+End+" ORDER BY  Date desc" ;
+        
+                   Statement stmt=conn.createStatement();  
+                   ResultSet rs = stmt.executeQuery(TransDetails);
+                   while(rs.next())  
+                   {
+                       Recharge rec = new Recharge();
+                       rec.setID(rs.getInt(1));
+                       rec.setEmpName(rs.getString(3));
+                       rec.setCardNo(rs.getString(2));
+                       rec.setDate(rs.getTimestamp(5));
+                       rec.setAmount(rs.getInt(4));
+              
+                       transactiondetails.add(rec);
+                  
+                   }
+        
+        
+           
+  
+        return transactiondetails;
     }
     
 }
