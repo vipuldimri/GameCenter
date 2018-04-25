@@ -181,6 +181,11 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
         jLabel17.setBounds(130, 280, 140, 22);
 
         jTextField1_usernam.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jTextField1_usernam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1_usernamActionPerformed(evt);
+            }
+        });
         jPanel1.add(jTextField1_usernam);
         jTextField1_usernam.setBounds(130, 320, 220, 40);
 
@@ -482,6 +487,10 @@ class Updata_DeleteEmployee extends javax.swing.JFrame
         // TODO add your handling code here:
       previous.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
+
+    private void jTextField1_usernamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1_usernamActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1_usernamActionPerformed
 
     /**
      * @param args the command line arguments

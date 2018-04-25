@@ -1102,25 +1102,49 @@ public class LoginScreen extends javax.swing.JFrame
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:Forget password code here
-        String ans =JOptionPane.showInputDialog(jPanel1,"Enter Your Registered Phone No ");      
-        if(ans.equals(currentgamezone.getContact()))
+        String username = jTextField1.getText().trim();
+        if(username.length()==0)
         {
-                     SendEmailThread sendEmailThread = new SendEmailThread(currentgamezone.getEmail(),currentgamezone.getPassword(),currentgamezone.getOwnerName(),currentgamezone.getName());
-                      sendEmailThread.start();
-                     JOptionPane.showMessageDialog(jPanel1,
-                     "Password will be sent to registered E-mail address",
-                     "Recover Password",
-                      JOptionPane.PLAIN_MESSAGE);
+             
+                       JOptionPane.showMessageDialog(jPanel1,
+                     "Please provide username",
+                     "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
                       return ;
-        }else
+        }
+       
+        
+        for(User employee : currentgamezoneusers)
         {
+            if(employee.getUserName().trim().equalsIgnoreCase(username))
+            {
+                String ans =JOptionPane.showInputDialog(jPanel1,"Enter Your Registered Phone No ");
+                if(ans.trim().equalsIgnoreCase(employee.getContact()))
+                {
+                    //work done here 
+  
+                    SendEmailThread sendEmailThread = new SendEmailThread(employee.getEmail(),employee.getPassword(),employee.getName(),currentgamezone.getName());
+                    sendEmailThread.start();
+                    JOptionPane.showMessageDialog(jPanel1,
+                    "Password will be sent to registered E-mail address ",
+                    "Recover Password",
+                    JOptionPane.PLAIN_MESSAGE);
+                    return ;
+                }
+                return;
+            }
+        }
+        
+        
+                     
+        
+       
                      JOptionPane.showMessageDialog(jPanel1,
-                     "Phone No did not Match With Registered No",
+                     "No Employee Found for this UserName",
                      "Inane error",
                       JOptionPane.ERROR_MESSAGE);
                 
-                     return ;
-        }
+        
         
     }//GEN-LAST:event_jLabel3MouseClicked
 

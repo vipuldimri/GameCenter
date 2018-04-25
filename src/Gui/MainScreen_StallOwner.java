@@ -137,7 +137,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         AddUpateEmployee.setVisible(false);
         AddEmployee.setVisible(false);
         transaction.setVisible(false);
-        jTabbedPane1.setEnabledAt(2, false);
+        EmployeeTab.setEnabledAt(2, false);
        
         
         TransactionDetailsWaitLock = new CountDownLatch(1);
@@ -349,7 +349,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        EmployeeTab = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -367,6 +367,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel27 = new javax.swing.JLabel();
         jLabel_currentEMpName = new javax.swing.JLabel();
         ResetValuestozerobutton = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -467,6 +468,41 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel9 = new javax.swing.JPanel();
         jLabel_Label = new javax.swing.JLabel();
         Label_clock = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        jPanel16 = new javax.swing.JPanel();
+        Emp_owndetailsPanel = new javax.swing.JPanel();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        emp_registercustomerpanel = new javax.swing.JPanel();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel_GameZoneNAme1 = new javax.swing.JLabel();
+        jSeparator6 = new javax.swing.JSeparator();
+        jPanel17 = new javax.swing.JPanel();
+        Employee_headingtab = new javax.swing.JLabel();
+        jLayeredPane2 = new javax.swing.JLayeredPane();
+        emp_owndetails = new javax.swing.JPanel();
+        jLabel44 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
+        jLabel46 = new javax.swing.JLabel();
+        jLabel47 = new javax.swing.JLabel();
+        jLabel48 = new javax.swing.JLabel();
+        jLabel50 = new javax.swing.JLabel();
+        emptab_name = new javax.swing.JTextField();
+        emptab_username = new javax.swing.JTextField();
+        emptab_password = new javax.swing.JTextField();
+        emptab_emailid = new javax.swing.JTextField();
+        emptab_contact = new javax.swing.JTextField();
+        emptab_address = new javax.swing.JTextField();
+        emp_registernewcustomer = new javax.swing.JPanel();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        emp_nameregistercust = new javax.swing.JTextField();
+        emp_contactregistercust = new javax.swing.JTextField();
+        emp_emailregistercust = new javax.swing.JTextField();
+        RegisterNewcustomer_button1 = new javax.swing.JButton();
+        ResetButton_Customer1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -479,6 +515,12 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         setResizable(false);
 
         jPanel1.setOpaque(false);
+
+        EmployeeTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EmployeeTabMouseClicked(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
         jPanel2.setLayout(null);
@@ -604,6 +646,15 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel4.add(ResetValuestozerobutton);
         ResetValuestozerobutton.setBounds(540, 340, 180, 70);
 
+        jButton5.setText("jButton5");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton5);
+        jButton5.setBounds(100, 130, 73, 23);
+
         jPanel2.add(jPanel4);
         jPanel4.setBounds(2, 7, 1200, 440);
 
@@ -632,7 +683,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel2.add(jPanel5);
         jPanel5.setBounds(280, 470, 660, 190);
 
-        jTabbedPane1.addTab("Recharge ", jPanel2);
+        EmployeeTab.addTab("Recharge ", jPanel2);
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
         jPanel3.setLayout(null);
@@ -696,7 +747,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel3.add(jButton4);
         jButton4.setBounds(630, 560, 120, 40);
 
-        jTabbedPane1.addTab("Today Collection", jPanel3);
+        EmployeeTab.addTab("Today Collection", jPanel3);
 
         jPanel8.setLayout(null);
 
@@ -1351,20 +1402,319 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel8.add(jPanel7);
         jPanel7.setBounds(0, 0, 1200, 740);
 
-        jTabbedPane1.addTab("Admin", jPanel8);
+        EmployeeTab.addTab("Admin", jPanel8);
+
+        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel10.setLayout(null);
+
+        jPanel16.setBackground(new java.awt.Color(54, 33, 89));
+        jPanel16.setLayout(null);
+
+        Emp_owndetailsPanel.setBackground(new java.awt.Color(54, 33, 89));
+        Emp_owndetailsPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Emp_owndetailsPanelMouseClicked(evt);
+            }
+        });
+        Emp_owndetailsPanel.setLayout(null);
+
+        jLabel40.setBackground(new java.awt.Color(54, 33, 89));
+        jLabel40.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel40.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel40.setText("Own Details");
+        Emp_owndetailsPanel.add(jLabel40);
+        jLabel40.setBounds(140, 40, 120, 32);
+
+        jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/newAddemp.png"))); // NOI18N
+        Emp_owndetailsPanel.add(jLabel36);
+        jLabel36.setBounds(50, 40, 32, 32);
+
+        jPanel16.add(Emp_owndetailsPanel);
+        Emp_owndetailsPanel.setBounds(0, 179, 300, 90);
+
+        emp_registercustomerpanel.setBackground(new java.awt.Color(54, 33, 89));
+        emp_registercustomerpanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                emp_registercustomerpanelMouseClicked(evt);
+            }
+        });
+        emp_registercustomerpanel.setLayout(null);
+
+        jLabel39.setBackground(new java.awt.Color(54, 33, 89));
+        jLabel39.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel39.setText("Register new Customer");
+        emp_registercustomerpanel.add(jLabel39);
+        jLabel39.setBounds(120, 30, 162, 32);
+
+        jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/newCustomer.png"))); // NOI18N
+        emp_registercustomerpanel.add(jLabel38);
+        jLabel38.setBounds(50, 30, 32, 32);
+
+        jPanel16.add(emp_registercustomerpanel);
+        emp_registercustomerpanel.setBounds(0, 330, 300, 90);
+
+        jLabel_GameZoneNAme1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel_GameZoneNAme1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_GameZoneNAme1.setText("GameZone Name");
+        jPanel16.add(jLabel_GameZoneNAme1);
+        jLabel_GameZoneNAme1.setBounds(20, 30, 205, 29);
+        jPanel16.add(jSeparator6);
+        jSeparator6.setBounds(10, 70, 240, 50);
+
+        jPanel10.add(jPanel16);
+        jPanel16.setBounds(0, -2, 300, 740);
+
+        jPanel17.setBackground(new java.awt.Color(110, 89, 222));
+
+        Employee_headingtab.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Employee_headingtab.setText("Own Details");
+
+        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
+        jPanel17.setLayout(jPanel17Layout);
+        jPanel17Layout.setHorizontalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 900, Short.MAX_VALUE)
+            .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
+                    .addContainerGap(310, Short.MAX_VALUE)
+                    .addComponent(Employee_headingtab, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(232, Short.MAX_VALUE)))
+        );
+        jPanel17Layout.setVerticalGroup(
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 170, Short.MAX_VALUE)
+            .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
+                    .addContainerGap(55, Short.MAX_VALUE)
+                    .addComponent(Employee_headingtab, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(55, Short.MAX_VALUE)))
+        );
+
+        jPanel10.add(jPanel17);
+        jPanel17.setBounds(300, 0, 900, 170);
+
+        emp_owndetails.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel44.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel44.setText("Name");
+
+        jLabel45.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel45.setText("Contact");
+
+        jLabel46.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel46.setText("UserName");
+
+        jLabel47.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel47.setText("Email ID");
+
+        jLabel48.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel48.setText("Password");
+
+        jLabel50.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel50.setText("Address");
+
+        emptab_name.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
+        emptab_username.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
+        emptab_password.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
+        emptab_emailid.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
+        emptab_contact.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
+        emptab_address.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
+        javax.swing.GroupLayout emp_owndetailsLayout = new javax.swing.GroupLayout(emp_owndetails);
+        emp_owndetails.setLayout(emp_owndetailsLayout);
+        emp_owndetailsLayout.setHorizontalGroup(
+            emp_owndetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(emp_owndetailsLayout.createSequentialGroup()
+                .addGap(120, 120, 120)
+                .addGroup(emp_owndetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(emp_owndetailsLayout.createSequentialGroup()
+                        .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(emp_owndetailsLayout.createSequentialGroup()
+                        .addGroup(emp_owndetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(emptab_password, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(emptab_address, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(emptab_name, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(93, Short.MAX_VALUE))
+                    .addGroup(emp_owndetailsLayout.createSequentialGroup()
+                        .addGroup(emp_owndetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(emptab_username, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(emptab_emailid, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, emp_owndetailsLayout.createSequentialGroup()
+                .addGap(128, 128, 128)
+                .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(emp_owndetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(emptab_contact, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(106, 106, 106))
+        );
+        emp_owndetailsLayout.setVerticalGroup(
+            emp_owndetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(emp_owndetailsLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(emp_owndetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(emp_owndetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(emptab_name, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(emptab_contact, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(emp_owndetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(emp_owndetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(emptab_username, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(emptab_emailid, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(emptab_password, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(emptab_address, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
+        );
+
+        emp_registernewcustomer.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel41.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel41.setText("Email");
+
+        jLabel42.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel42.setText("Contact");
+
+        jLabel43.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel43.setText("Name");
+
+        emp_nameregistercust.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
+        emp_contactregistercust.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
+        emp_emailregistercust.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
+        RegisterNewcustomer_button1.setText("Register ");
+        RegisterNewcustomer_button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegisterNewcustomer_button1ActionPerformed(evt);
+            }
+        });
+
+        ResetButton_Customer1.setText("Reset");
+        ResetButton_Customer1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ResetButton_Customer1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout emp_registernewcustomerLayout = new javax.swing.GroupLayout(emp_registernewcustomer);
+        emp_registernewcustomer.setLayout(emp_registernewcustomerLayout);
+        emp_registernewcustomerLayout.setHorizontalGroup(
+            emp_registernewcustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(emp_registernewcustomerLayout.createSequentialGroup()
+                .addGap(174, 174, 174)
+                .addGroup(emp_registernewcustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(emp_registernewcustomerLayout.createSequentialGroup()
+                        .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(117, 117, 117)
+                        .addComponent(emp_nameregistercust, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(emp_registernewcustomerLayout.createSequentialGroup()
+                        .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addComponent(emp_contactregistercust, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(emp_registernewcustomerLayout.createSequentialGroup()
+                        .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(111, 111, 111)
+                        .addComponent(emp_emailregistercust, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(emp_registernewcustomerLayout.createSequentialGroup()
+                        .addComponent(RegisterNewcustomer_button1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(175, 175, 175)
+                        .addComponent(ResetButton_Customer1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(184, Short.MAX_VALUE))
+        );
+        emp_registernewcustomerLayout.setVerticalGroup(
+            emp_registernewcustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(emp_registernewcustomerLayout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addGroup(emp_registernewcustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(emp_nameregistercust, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(emp_registernewcustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(emp_registernewcustomerLayout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(emp_contactregistercust, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(emp_registernewcustomerLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(emp_registernewcustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(emp_registernewcustomerLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(emp_emailregistercust, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, emp_registernewcustomerLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(75, 75, 75)
+                .addGroup(emp_registernewcustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ResetButton_Customer1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RegisterNewcustomer_button1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(66, 66, 66))
+        );
+
+        jLayeredPane2.setLayer(emp_owndetails, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane2.setLayer(emp_registernewcustomer, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
+        jLayeredPane2.setLayout(jLayeredPane2Layout);
+        jLayeredPane2Layout.setHorizontalGroup(
+            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 900, Short.MAX_VALUE)
+            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(emp_owndetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jLayeredPane2Layout.createSequentialGroup()
+                    .addComponent(emp_registernewcustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 33, Short.MAX_VALUE)))
+        );
+        jLayeredPane2Layout.setVerticalGroup(
+            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 570, Short.MAX_VALUE)
+            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(emp_owndetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(emp_registernewcustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel10.add(jLayeredPane2);
+        jLayeredPane2.setBounds(300, 170, 900, 570);
+
+        EmployeeTab.addTab("Employee", jPanel10);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(EmployeeTab, javax.swing.GroupLayout.PREFERRED_SIZE, 1204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 767, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(EmployeeTab, javax.swing.GroupLayout.PREFERRED_SIZE, 767, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -2582,6 +2932,191 @@ cal.set(Calendar.MILLISECOND, 0);
         
         
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        GameNameSetting ddddd = new GameNameSetting(this, true);
+        ddddd.setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void RegisterNewcustomer_button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterNewcustomer_button1ActionPerformed
+        // TODO add your handling code here:
+        
+         String contact =emp_contactregistercust.getText();
+        String email   =emp_emailregistercust.getText();
+        String name = emp_nameregistercust.getText();
+        
+        if(contact.length() == 0 || name.length() == 0)
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+           "Name and Contact are Mandatory",
+           "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+            return;
+            
+        }
+        
+        
+        Customers newcustomer = new Customers();
+        newcustomer.setName(name);
+        newcustomer.setContact(contact);
+        newcustomer.setEmailId(email);
+        
+                 SwingWorker work = new SwingWorker<String , Integer>() 
+                 {
+	            @Override
+	            protected  String  doInBackground() throws Exception 
+	            {
+	            
+                    try 
+                    {
+                        CustomerInterface Dao = Customerfactory.getInstance();
+                        boolean respponce =  Dao.registerCust(newcustomer, currentgamezone.getName()+"_customers");
+                         
+                        if(respponce == false)
+                         {
+                             RegisterCustomer = false;
+                         }else
+                         {
+                             RegisterCustomer = true;
+                         }
+                         } catch (Exception ex)
+                         {
+                       
+                             RegisterCustomer = false;
+                         }
+                  
+                       
+                        return "end";
+	                
+	            }//do backgrounf ENDS
+
+
+	            @Override
+	            protected void done()
+                    {
+                        
+                     rechargeloadingdialoge.setVisible(false);
+	            }
+	        };
+        
+                 
+        final ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/Images/recharge.gif"));
+        work.execute();
+        JOptionPane pane = new JOptionPane("", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon,new Object[]{}, null);
+        rechargeloadingdialoge = pane.createDialog(this,"Please wait ");
+        rechargeloadingdialoge.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+      
+        
+        rechargeloadingdialoge.setVisible(true);   
+                 
+     
+          if(RegisterCustomer == false)
+          {
+                System.out.println("Error in recharge");
+                JOptionPane.showMessageDialog(jPanel1,
+                "Registeration Failed",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+                return ;
+          }else
+          {
+        
+            UpdateCustomerListThread updatecustomerlist = new UpdateCustomerListThread(customerlist,currentgamezone.getName());
+            updatecustomerlist.start();
+               
+            JOptionPane.showMessageDialog(jPanel1,
+            "Customer Registered Success",
+            "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+            //now updating the customer list
+          }
+         
+
+        
+        RegisterCustomer = false;
+      
+       emp_contactregistercust.setText("");
+       emp_emailregistercust.setText("");
+       emp_nameregistercust.setText("");
+        
+        
+        
+        //code for filled table with new customer list  
+        DefaultTableModel m = (DefaultTableModel) jTable_customers.getModel();
+        m.setRowCount(0);
+
+        DefaultTableModel  model = (DefaultTableModel) jTable_customers.getModel();
+        Object row[] = new Object[4];
+        for(int i = 0;i < customerlist.size();i++)
+        {
+            row[0] = customerlist.get(i).getId();
+            row[1] = customerlist.get(i).getName();
+            row[2] = customerlist.get(i).getContact();
+            row[3] = customerlist.get(i).getEmailId();
+           
+            model.addRow(row);
+            
+        
+        }
+        Noofcustomerlabel.setText(customerlist.size()+"");
+        
+        
+        
+    }//GEN-LAST:event_RegisterNewcustomer_button1ActionPerformed
+
+    private void ResetButton_Customer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButton_Customer1ActionPerformed
+        // TODO add your handling code here:
+        
+        emp_nameregistercust.setText("");
+        emp_emailregistercust.setText("");
+          emp_contactregistercust.setText("");
+    }//GEN-LAST:event_ResetButton_Customer1ActionPerformed
+
+    private void Emp_owndetailsPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Emp_owndetailsPanelMouseClicked
+        // TODO add your handling code here:Own Details panel click Employee tab
+        Emp_owndetailsPanel.setBackground(new Color(110, 89,222));
+        emp_registercustomerpanel.setBackground(new Color(54, 33,89));
+        
+      
+        Employee_headingtab.setText("Own Details");
+     
+        emp_registernewcustomer.setVisible(false);
+        emp_owndetails.setVisible(true);
+        
+        emptab_name.setText(currentuser.getName());
+        emptab_address.setText(currentuser.getAddress());
+        emptab_contact.setText(currentuser.getContact());
+        emptab_emailid.setText(currentuser.getEmail());
+        emptab_password.setText(currentuser.getPassword());
+        emptab_username.setText(currentuser.getUserName());
+    
+    }//GEN-LAST:event_Emp_owndetailsPanelMouseClicked
+
+    private void emp_registercustomerpanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emp_registercustomerpanelMouseClicked
+        // TODO add your handling code here:Add customer Employee
+        emp_registercustomerpanel.setBackground(new Color(110, 89,222));
+        Emp_owndetailsPanel.setBackground(new Color(54, 33,89));
+        
+      
+        Employee_headingtab.setText("Register New Customer");
+     
+        emp_owndetails.setVisible(false);
+        emp_registernewcustomer.setVisible(true);
+        
+    }//GEN-LAST:event_emp_registercustomerpanelMouseClicked
+
+    private void EmployeeTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EmployeeTabMouseClicked
+        // TODO add your handling code here:employee tab click
+        emp_registernewcustomer.setVisible(false);
+         Emp_owndetailsPanel.setBackground(new Color(110, 89,222));
+            emptab_name.setText(currentuser.getName());
+        emptab_address.setText(currentuser.getAddress());
+           emptab_contact.setText(currentuser.getContact());
+        emptab_emailid.setText(currentuser.getEmail());
+           emptab_password.setText(currentuser.getPassword());
+        emptab_username.setText(currentuser.getUserName());
+    }//GEN-LAST:event_EmployeeTabMouseClicked
  	public static java.sql.Timestamp convert(java.util.Date date)
 	{
 		return new java.sql.Timestamp(date.getTime());
@@ -2700,13 +3235,18 @@ cal.set(Calendar.MILLISECOND, 0);
     private javax.swing.JButton AddNewEmployee_Button;
     private javax.swing.JPanel AddUpateEmployee;
     private javax.swing.JPanel Customer;
+    private javax.swing.JPanel Emp_owndetailsPanel;
+    private javax.swing.JTabbedPane EmployeeTab;
+    private javax.swing.JLabel Employee_headingtab;
     private javax.swing.JTextField Employeeidinput;
     private javax.swing.JTextField EmplyeeIdInput;
     private javax.swing.JPanel Emprecords;
     public javax.swing.JLabel Label_clock;
     private javax.swing.JLabel Noofcustomerlabel;
     private javax.swing.JButton RegisterNewcustomer_button;
+    private javax.swing.JButton RegisterNewcustomer_button1;
     private javax.swing.JButton ResetButton_Customer;
+    private javax.swing.JButton ResetButton_Customer1;
     private javax.swing.JButton ResetValuestozerobutton;
     public javax.swing.JTextField Textfiled_ExistingAmount;
     private javax.swing.JTable TodaysCollectionTable;
@@ -2714,10 +3254,23 @@ cal.set(Calendar.MILLISECOND, 0);
     private javax.swing.JLabel UserNameUniqueLabel;
     private javax.swing.ButtonGroup buttonGroup1;
     public javax.swing.JLabel currentnoofemployeelabel;
+    private javax.swing.JTextField emp_contactregistercust;
+    private javax.swing.JTextField emp_emailregistercust;
+    private javax.swing.JTextField emp_nameregistercust;
+    private javax.swing.JPanel emp_owndetails;
+    private javax.swing.JPanel emp_registercustomerpanel;
+    private javax.swing.JPanel emp_registernewcustomer;
+    private javax.swing.JTextField emptab_address;
+    private javax.swing.JTextField emptab_contact;
+    private javax.swing.JTextField emptab_emailid;
+    private javax.swing.JTextField emptab_name;
+    private javax.swing.JTextField emptab_password;
+    private javax.swing.JTextField emptab_username;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
     private com.toedter.calendar.JDateChooser jDateChooser_EndDate;
     private com.toedter.calendar.JDateChooser jDateChooser_StartDate;
@@ -2751,15 +3304,29 @@ cal.set(Calendar.MILLISECOND, 0);
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel3_totalTransaction;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
+    private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel_GameZoneNAme;
+    private javax.swing.JLabel jLabel_GameZoneNAme1;
     private javax.swing.JLabel jLabel_Label;
     private javax.swing.JLabel jLabel_OwnerName;
     private javax.swing.JLabel jLabel_OwnerName1;
@@ -2767,6 +3334,7 @@ cal.set(Calendar.MILLISECOND, 0);
     private javax.swing.JLabel jLabel_currentempname2;
     private javax.swing.JLabel jLabel_validDate;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -2774,11 +3342,14 @@ cal.set(Calendar.MILLISECOND, 0);
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     public javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
@@ -2805,7 +3376,7 @@ cal.set(Calendar.MILLISECOND, 0);
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JTable jTable_EmpRecord;
     private javax.swing.JTable jTable_customers;
     private javax.swing.JTable jTable_transactionDetails;
