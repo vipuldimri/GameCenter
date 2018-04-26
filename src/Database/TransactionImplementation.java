@@ -115,10 +115,11 @@ public class TransactionImplementation implements TransactionInterface
     }
 
     @Override
-    public ArrayList<Recharge> GetTransactionDetailsPerticularDates(String TableName,java.sql.Date Start ,java.sql.Date End) throws Exception {
+    public ArrayList<Recharge> GetTransactionDetailsPerticularDates(String TableName,java.sql.Date Start ,java.sql.Date End) throws Exception 
+    {
         ArrayList<Recharge> transactiondetails = new ArrayList<>();
         
-        TransDetails = "SELECT * FROM GameZoneDB."+TableName+" WHERE Date>= "+Start+" AND Date <= "+End+" ORDER BY  Date desc" ;
+        TransDetails = "SELECT * FROM GameZoneDB."+TableName+" WHERE DATE(Date)>= '"+Start+"' AND DATE(Date) <= '"+End+"'" ;
         
                    Statement stmt=conn.createStatement();  
                    ResultSet rs = stmt.executeQuery(TransDetails);

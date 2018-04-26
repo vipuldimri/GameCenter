@@ -5,8 +5,10 @@
  */
 package Gui;
 
+import gamecenter.Games;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,13 +19,20 @@ public class GameNameSetting extends javax.swing.JDialog {
     /**
      * Creates new form GameNameSetting
      */
-    public GameNameSetting(java.awt.Frame parent, boolean modal) {
+    ArrayList<Games> gamelist;
+    public GameNameSetting(java.awt.Frame parent, boolean modal,ArrayList<Games> gamelist) {
         super(parent, modal);
         initComponents();
          Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
     int x = (int) ((dimension.getWidth() - getWidth()) / 2);
     int y = (int) ((dimension.getHeight() - getHeight()) / 2);
     setLocation(x, y);
+    this.gamelist = gamelist;
+         
+         for(Games game : gamelist)
+         {
+        
+         }
     }
 
     /**
@@ -161,15 +170,9 @@ public class GameNameSetting extends javax.swing.JDialog {
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                GameNameSetting dialog = new GameNameSetting(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+            public void run() 
+            {
+        
             }
         });
     }

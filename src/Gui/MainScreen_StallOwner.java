@@ -367,7 +367,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel27 = new javax.swing.JLabel();
         jLabel_currentEMpName = new javax.swing.JLabel();
         ResetValuestozerobutton = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -508,6 +507,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -645,15 +645,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         });
         jPanel4.add(ResetValuestozerobutton);
         ResetValuestozerobutton.setBounds(540, 340, 180, 70);
-
-        jButton5.setText("jButton5");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jButton5);
-        jButton5.setBounds(100, 130, 73, 23);
 
         jPanel2.add(jPanel4);
         jPanel4.setBounds(2, 7, 1200, 440);
@@ -1745,6 +1736,14 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         });
         jMenu1.add(jMenuItem4);
 
+        jMenuItem5.setText("View Games");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem5);
+
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem2.setText("Exit");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -2355,13 +2354,27 @@ cal2.set(Calendar.HOUR_OF_DAY, 24);
         }
       
         
-        java.sql.Timestamp statTimestamp = convert(startdate);
-        java.sql.Timestamp endTimestamp = convert(enddate);
+        
 
         
-        System.out.println(statTimestamp+"  "+endTimestamp);
-        
-        
+       //Getting data from the amzone database
+       
+       ArrayList<Recharge> list  = null;
+       try
+       {
+       TransactionInterface Dao = TransactionFactory.getInstance();
+       list = Dao.GetTransactionDetailsPerticularDates(currentgamezone.getName()+"_transaction", new java.sql.Date(startdate.getTime()), new java.sql.Date(enddate.getTime()));
+       }
+      catch(Exception e)
+       {  
+         JOptionPane.showMessageDialog(jPanel1,
+         "Unable to Connect To Internet ,Please check your internet Connection.",
+         "Inane error",
+          JOptionPane.ERROR_MESSAGE);
+           return ;
+    
+        }
+         
         
         DefaultTableModel m = (DefaultTableModel) jTable_transactionDetails.getModel();
         m.setRowCount(0);
@@ -2371,21 +2384,21 @@ cal2.set(Calendar.HOUR_OF_DAY, 24);
 
        
         long totaltransaction = 0l;
-        for(int i = 0;i < transdetailscomplete.size();i++)
+        for(int i = 0;i < list.size();i++)
         {
-            java.sql.Timestamp trans_date = transdetailscomplete.get(i).getDate();
+            java.sql.Timestamp trans_date = list.get(i).getDate();
             
-            if(trans_date.after(statTimestamp) && trans_date.before(endTimestamp))
-            {
-            row[0] = transdetailscomplete.get(i).getID();
-            row[1] = transdetailscomplete.get(i).getCardNo();
-            row[2] = transdetailscomplete.get(i).getEmpName();
-            row[3] = transdetailscomplete.get(i).getAmount();
-            row[4] = transdetailscomplete.get(i).getDate();
-            totaltransaction  = transdetailscomplete.get(i).getAmount() + totaltransaction;
+            //if(trans_date.after(statTimestamp) && trans_date.before(endTimestamp))
+           // {
+            row[0] = list.get(i).getID();
+            row[1] = list.get(i).getCardNo();
+            row[2] = list.get(i).getEmpName();
+            row[3] = list.get(i).getAmount();
+            row[4] = list.get(i).getDate();
+            totaltransaction  = list.get(i).getAmount() + totaltransaction;
 
             model.addRow(row);
-            }
+           // }
         
         }
         
@@ -2933,12 +2946,6 @@ cal.set(Calendar.MILLISECOND, 0);
         
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        GameNameSetting ddddd = new GameNameSetting(this, true);
-        ddddd.setVisible(true);
-    }//GEN-LAST:event_jButton5ActionPerformed
-
     private void RegisterNewcustomer_button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterNewcustomer_button1ActionPerformed
         // TODO add your handling code here:
         
@@ -3117,6 +3124,13 @@ cal.set(Calendar.MILLISECOND, 0);
            emptab_password.setText(currentuser.getPassword());
         emptab_username.setText(currentuser.getUserName());
     }//GEN-LAST:event_EmployeeTabMouseClicked
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:to add new games and view existing games 
+        
+         GameNameSetting gameNameSetting = new GameNameSetting(this, true,gamelist);
+         gameNameSetting.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
  	public static java.sql.Timestamp convert(java.util.Date date)
 	{
 		return new java.sql.Timestamp(date.getTime());
@@ -3270,7 +3284,6 @@ cal.set(Calendar.MILLISECOND, 0);
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
     private com.toedter.calendar.JDateChooser jDateChooser_EndDate;
     private com.toedter.calendar.JDateChooser jDateChooser_StartDate;
@@ -3341,6 +3354,7 @@ cal.set(Calendar.MILLISECOND, 0);
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
