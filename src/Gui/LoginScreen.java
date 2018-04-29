@@ -5,37 +5,15 @@ import Database.StallFactory;
 import Database.StallInterface;
 import gamecenter.Stall;
 import gamecenter.User;
-
-import org.apache.commons.net.ntp.NTPUDPClient;
-import org.apache.commons.net.ntp.NtpV3Packet;
-import org.apache.commons.net.ntp.TimeInfo;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
-import java.sql.Time;
-import java.time.Clock;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.concurrent.CountDownLatch;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import java.net.InetAddress;
-import SerialCommunication.CommPortTest;
 import SerialCommunication.FactoryClass;
 import gamecenter.SendEmailThread;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.Socket;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
-import javax.swing.JDialog;
 /*
 Login frame Class
 */
@@ -57,6 +35,7 @@ public class LoginScreen extends javax.swing.JFrame
     this.passwordcheck = passwordcheck;
     //init components 
     initComponents();
+    
     //Displaying the screen in the center of the screen
     Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
     int x = (int) ((dimension.getWidth() - getWidth()) / 2);
@@ -381,11 +360,11 @@ public class LoginScreen extends javax.swing.JFrame
                 //Code for checking the subcription for the GameZone
                 if(DateAmazone.after(sub_enddate))
                 {
-                      JOptionPane.showMessageDialog(jPanel1,
-                      "Your GameZone Subcription Has Expired On "+sub_enddate+" , Please Contact Admin For Renewals",
-                      "Inane error",
-                       JOptionPane.ERROR_MESSAGE);
-                      return;
+                 JOptionPane.showMessageDialog(jPanel1,
+                 "Your GameZone Subcription Has Expired On "+sub_enddate+" , Please Contact Admin For Renewals",
+                 "Inane error",
+                  JOptionPane.ERROR_MESSAGE);
+                   return;
            
                 }
                 //checking if current user is admin or emp    
@@ -418,12 +397,15 @@ public class LoginScreen extends javax.swing.JFrame
            //Below code is for Serial communication to start    
            try 
            {
-            FactoryClass.createObjects(mainScreen_StallOwner);
+           
+               FactoryClass.createObjects(mainScreen_StallOwner);
     
            } catch (ClassNotFoundException ex)
            {
-                 
-                    System.out.println("Factory class exception "+ex);
+                 JOptionPane.showMessageDialog(jPanel1,
+                 "Error in Connecting Hardware.",
+                 "Inane error",
+                 JOptionPane.ERROR_MESSAGE);
             
            }
            
@@ -447,8 +429,10 @@ public class LoginScreen extends javax.swing.JFrame
     
                    } catch (ClassNotFoundException ex)
                    {
-                 
-                    System.out.println("Factory class exception "+ex);
+                       JOptionPane.showMessageDialog(jPanel1,
+                        "Error in Connecting Hardware.",
+                       "Inane error",
+                         JOptionPane.ERROR_MESSAGE);
             
                    }
               

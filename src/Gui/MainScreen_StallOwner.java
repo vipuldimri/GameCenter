@@ -4,7 +4,7 @@ import java.util.Properties;
 import javax.mail.*;    
 import javax.mail.internet.*;    
 import Database.Connect;
-import Database.CustomerImplementation;
+
 import Database.CustomerInterface;
 
 import Database.Customerfactory;
@@ -20,31 +20,24 @@ import gamecenter.User;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.PointerInfo;
+
 import javax.swing.*;
 import java.awt.Toolkit;
-import java.awt.Window;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.sql.Date;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
+
 import java.util.HashMap;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutionException;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.AbstractButton;
+
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
+
 import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import gamecenter.Customers;
@@ -53,9 +46,7 @@ import java.sql.Connection;
 import gamecenter.Stall;
 import gamecenter.UpdateCustomerListThread;
 import gamecenter.UpdateEmployeeListThread;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Time;
+
 import java.util.Timer;
 import  gamecenter.Clock;
 import gamecenter.Games;
@@ -70,7 +61,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     User currentuser;
   
     String Type ;
-    LoginScreen l ;
+    LoginScreen Loginform ;
     Stall currentgamezone;
     HashMap<String, Integer> UserNameCheck; // to check no two employee get samne Usename and hence Same combination of user name and Password
     ////////////////////////////////////////////
@@ -118,11 +109,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     {
         testfields = new ArrayList<>();
         gamelist = new ArrayList<>();
-        this.l = l;
+        this.Loginform = l;
         this.currentgamezone = currentgamezone;
         this.currentuser = currentuser;
         initComponents();
-        System.out.println("No");
+       
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - getWidth()) / 2);
         int y = (int) ((dimension.getHeight() - getHeight()) / 2);
@@ -157,6 +148,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         }
               try
               {
+                  
+              CustomerInterface Dao =  Customerfactory.getInstance();
+              customerlist = Dao.getCust( currentgamezone.getName()+"_customers"); 
+                  
                StallInterface Dao1 = StallFactory.getInstance();
                gamelist = Dao1.GetGames(currentgamezone.getName());
               }
@@ -212,7 +207,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         {
             Type = str;
              gamelist = new ArrayList<>();
-            this.l = l;
+            this.Loginform = l;
             this.passwordcheck =passwordcheck;
             this.currentgamezoneusers = currentStallUsers;
             this.currentgamezone = currentgamezone;
@@ -280,6 +275,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
               
               CustomerInterface Dao =  Customerfactory.getInstance();
               customerlist = Dao.getCust( currentgamezone.getName()+"_customers"); 
+              
               StallInterface Dao1 = StallFactory.getInstance();
               gamelist = Dao1.GetGames(currentgamezone.getName());
 
@@ -367,6 +363,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel27 = new javax.swing.JLabel();
         jLabel_currentEMpName = new javax.swing.JLabel();
         ResetValuestozerobutton = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -442,6 +439,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jTable_customers = new javax.swing.JTable();
         RegisterNewcustomer_button = new javax.swing.JButton();
         ResetButton_Customer = new javax.swing.JButton();
+        Othertrasactions = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel12 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -464,44 +464,12 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel26 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         Noofcustomerlabel = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel_Label = new javax.swing.JLabel();
         Label_clock = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
-        jPanel16 = new javax.swing.JPanel();
-        Emp_owndetailsPanel = new javax.swing.JPanel();
-        jLabel40 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
-        emp_registercustomerpanel = new javax.swing.JPanel();
-        jLabel39 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        jLabel_GameZoneNAme1 = new javax.swing.JLabel();
-        jSeparator6 = new javax.swing.JSeparator();
-        jPanel17 = new javax.swing.JPanel();
-        Employee_headingtab = new javax.swing.JLabel();
-        jLayeredPane2 = new javax.swing.JLayeredPane();
-        emp_owndetails = new javax.swing.JPanel();
-        jLabel44 = new javax.swing.JLabel();
-        jLabel45 = new javax.swing.JLabel();
-        jLabel46 = new javax.swing.JLabel();
-        jLabel47 = new javax.swing.JLabel();
-        jLabel48 = new javax.swing.JLabel();
-        jLabel50 = new javax.swing.JLabel();
-        emptab_name = new javax.swing.JTextField();
-        emptab_username = new javax.swing.JTextField();
-        emptab_password = new javax.swing.JTextField();
-        emptab_emailid = new javax.swing.JTextField();
-        emptab_contact = new javax.swing.JTextField();
-        emptab_address = new javax.swing.JTextField();
-        emp_registernewcustomer = new javax.swing.JPanel();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
-        emp_nameregistercust = new javax.swing.JTextField();
-        emp_contactregistercust = new javax.swing.JTextField();
-        emp_emailregistercust = new javax.swing.JTextField();
-        RegisterNewcustomer_button1 = new javax.swing.JButton();
-        ResetButton_Customer1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -565,7 +533,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(jButton1);
-        jButton1.setBounds(820, 340, 170, 70);
+        jButton1.setBounds(580, 340, 170, 70);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Recharge.png"))); // NOI18N
         jButton2.setText("Recharge ");
@@ -575,7 +543,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(jButton2);
-        jButton2.setBounds(250, 340, 170, 70);
+        jButton2.setBounds(120, 340, 170, 70);
 
         jRadioButton1.setBackground(new java.awt.Color(0, 0, 0));
         jRadioButton1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -644,7 +612,17 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(ResetValuestozerobutton);
-        ResetValuestozerobutton.setBounds(540, 340, 180, 70);
+        ResetValuestozerobutton.setBounds(350, 340, 180, 70);
+
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Customer.png"))); // NOI18N
+        jButton5.setText("Register Customer");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton5);
+        jButton5.setBounds(810, 340, 230, 70);
 
         jPanel2.add(jPanel4);
         jPanel4.setBounds(2, 7, 1200, 440);
@@ -1071,11 +1049,31 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         Customer.add(ResetButton_Customer);
         ResetButton_Customer.setBounds(540, 170, 90, 23);
 
+        Othertrasactions.setBackground(new java.awt.Color(255, 255, 255));
+        Othertrasactions.setLayout(null);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane5.setViewportView(jTable1);
+
+        Othertrasactions.add(jScrollPane5);
+        jScrollPane5.setBounds(0, 280, 870, 280);
+
         jLayeredPane1.setLayer(AddEmployee, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(AddUpateEmployee, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(Emprecords, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(transaction, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(Customer, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(Othertrasactions, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -1090,6 +1088,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 .addComponent(transaction, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(Customer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(Othertrasactions, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1102,6 +1102,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 .addComponent(transaction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(Customer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(Othertrasactions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
@@ -1322,7 +1324,32 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        jLabel36.setText("jLabel36");
+
+        jLabel38.setText("jLabel38");
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(jLabel38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel36)
+                .addGap(68, 68, 68))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel36)
+                    .addComponent(jLabel38))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -1345,6 +1372,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                     .addComponent(jLabel_GameZoneNAme, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1353,7 +1381,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 .addComponent(jLabel_GameZoneNAme)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1361,9 +1389,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_OwnerName, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_OwnerName1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1394,305 +1424,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel7.setBounds(0, 0, 1200, 740);
 
         EmployeeTab.addTab("Admin", jPanel8);
-
-        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel10.setLayout(null);
-
-        jPanel16.setBackground(new java.awt.Color(54, 33, 89));
-        jPanel16.setLayout(null);
-
-        Emp_owndetailsPanel.setBackground(new java.awt.Color(54, 33, 89));
-        Emp_owndetailsPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Emp_owndetailsPanelMouseClicked(evt);
-            }
-        });
-        Emp_owndetailsPanel.setLayout(null);
-
-        jLabel40.setBackground(new java.awt.Color(54, 33, 89));
-        jLabel40.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel40.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel40.setText("Own Details");
-        Emp_owndetailsPanel.add(jLabel40);
-        jLabel40.setBounds(140, 40, 120, 32);
-
-        jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/newAddemp.png"))); // NOI18N
-        Emp_owndetailsPanel.add(jLabel36);
-        jLabel36.setBounds(50, 40, 32, 32);
-
-        jPanel16.add(Emp_owndetailsPanel);
-        Emp_owndetailsPanel.setBounds(0, 179, 300, 90);
-
-        emp_registercustomerpanel.setBackground(new java.awt.Color(54, 33, 89));
-        emp_registercustomerpanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                emp_registercustomerpanelMouseClicked(evt);
-            }
-        });
-        emp_registercustomerpanel.setLayout(null);
-
-        jLabel39.setBackground(new java.awt.Color(54, 33, 89));
-        jLabel39.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel39.setText("Register new Customer");
-        emp_registercustomerpanel.add(jLabel39);
-        jLabel39.setBounds(120, 30, 162, 32);
-
-        jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/newCustomer.png"))); // NOI18N
-        emp_registercustomerpanel.add(jLabel38);
-        jLabel38.setBounds(50, 30, 32, 32);
-
-        jPanel16.add(emp_registercustomerpanel);
-        emp_registercustomerpanel.setBounds(0, 330, 300, 90);
-
-        jLabel_GameZoneNAme1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel_GameZoneNAme1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel_GameZoneNAme1.setText("GameZone Name");
-        jPanel16.add(jLabel_GameZoneNAme1);
-        jLabel_GameZoneNAme1.setBounds(20, 30, 205, 29);
-        jPanel16.add(jSeparator6);
-        jSeparator6.setBounds(10, 70, 240, 50);
-
-        jPanel10.add(jPanel16);
-        jPanel16.setBounds(0, -2, 300, 740);
-
-        jPanel17.setBackground(new java.awt.Color(110, 89, 222));
-
-        Employee_headingtab.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        Employee_headingtab.setText("Own Details");
-
-        javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
-        jPanel17.setLayout(jPanel17Layout);
-        jPanel17Layout.setHorizontalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
-            .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
-                    .addContainerGap(310, Short.MAX_VALUE)
-                    .addComponent(Employee_headingtab, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(232, Short.MAX_VALUE)))
-        );
-        jPanel17Layout.setVerticalGroup(
-            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 170, Short.MAX_VALUE)
-            .addGroup(jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel17Layout.createSequentialGroup()
-                    .addContainerGap(55, Short.MAX_VALUE)
-                    .addComponent(Employee_headingtab, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(55, Short.MAX_VALUE)))
-        );
-
-        jPanel10.add(jPanel17);
-        jPanel17.setBounds(300, 0, 900, 170);
-
-        emp_owndetails.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel44.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel44.setText("Name");
-
-        jLabel45.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel45.setText("Contact");
-
-        jLabel46.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel46.setText("UserName");
-
-        jLabel47.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel47.setText("Email ID");
-
-        jLabel48.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel48.setText("Password");
-
-        jLabel50.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel50.setText("Address");
-
-        emptab_name.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-
-        emptab_username.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-
-        emptab_password.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-
-        emptab_emailid.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-
-        emptab_contact.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-
-        emptab_address.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-
-        javax.swing.GroupLayout emp_owndetailsLayout = new javax.swing.GroupLayout(emp_owndetails);
-        emp_owndetails.setLayout(emp_owndetailsLayout);
-        emp_owndetailsLayout.setHorizontalGroup(
-            emp_owndetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(emp_owndetailsLayout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addGroup(emp_owndetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(emp_owndetailsLayout.createSequentialGroup()
-                        .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(emp_owndetailsLayout.createSequentialGroup()
-                        .addGroup(emp_owndetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(emptab_password, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(emptab_address, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(emptab_name, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(93, Short.MAX_VALUE))
-                    .addGroup(emp_owndetailsLayout.createSequentialGroup()
-                        .addGroup(emp_owndetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(emptab_username, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(emptab_emailid, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, emp_owndetailsLayout.createSequentialGroup()
-                .addGap(128, 128, 128)
-                .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(emp_owndetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(emptab_contact, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(106, 106, 106))
-        );
-        emp_owndetailsLayout.setVerticalGroup(
-            emp_owndetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(emp_owndetailsLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(emp_owndetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(emp_owndetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(emptab_name, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(emptab_contact, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(emp_owndetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(emp_owndetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(emptab_username, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(emptab_emailid, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(emptab_password, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(emptab_address, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
-        );
-
-        emp_registernewcustomer.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel41.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel41.setText("Email");
-
-        jLabel42.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel42.setText("Contact");
-
-        jLabel43.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel43.setText("Name");
-
-        emp_nameregistercust.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-
-        emp_contactregistercust.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-
-        emp_emailregistercust.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-
-        RegisterNewcustomer_button1.setText("Register ");
-        RegisterNewcustomer_button1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RegisterNewcustomer_button1ActionPerformed(evt);
-            }
-        });
-
-        ResetButton_Customer1.setText("Reset");
-        ResetButton_Customer1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ResetButton_Customer1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout emp_registernewcustomerLayout = new javax.swing.GroupLayout(emp_registernewcustomer);
-        emp_registernewcustomer.setLayout(emp_registernewcustomerLayout);
-        emp_registernewcustomerLayout.setHorizontalGroup(
-            emp_registernewcustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(emp_registernewcustomerLayout.createSequentialGroup()
-                .addGap(174, 174, 174)
-                .addGroup(emp_registernewcustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(emp_registernewcustomerLayout.createSequentialGroup()
-                        .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(117, 117, 117)
-                        .addComponent(emp_nameregistercust, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(emp_registernewcustomerLayout.createSequentialGroup()
-                        .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(emp_contactregistercust, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(emp_registernewcustomerLayout.createSequentialGroup()
-                        .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(111, 111, 111)
-                        .addComponent(emp_emailregistercust, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(emp_registernewcustomerLayout.createSequentialGroup()
-                        .addComponent(RegisterNewcustomer_button1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(175, 175, 175)
-                        .addComponent(ResetButton_Customer1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(184, Short.MAX_VALUE))
-        );
-        emp_registernewcustomerLayout.setVerticalGroup(
-            emp_registernewcustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(emp_registernewcustomerLayout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addGroup(emp_registernewcustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(emp_nameregistercust, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(emp_registernewcustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(emp_registernewcustomerLayout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(emp_contactregistercust, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(emp_registernewcustomerLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(emp_registernewcustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(emp_registernewcustomerLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(emp_emailregistercust, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, emp_registernewcustomerLayout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(75, 75, 75)
-                .addGroup(emp_registernewcustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ResetButton_Customer1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RegisterNewcustomer_button1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(66, 66, 66))
-        );
-
-        jLayeredPane2.setLayer(emp_owndetails, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane2.setLayer(emp_registernewcustomer, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
-        jLayeredPane2.setLayout(jLayeredPane2Layout);
-        jLayeredPane2Layout.setHorizontalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 900, Short.MAX_VALUE)
-            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(emp_owndetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jLayeredPane2Layout.createSequentialGroup()
-                    .addComponent(emp_registernewcustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 33, Short.MAX_VALUE)))
-        );
-        jLayeredPane2Layout.setVerticalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 570, Short.MAX_VALUE)
-            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(emp_owndetails, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(emp_registernewcustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel10.add(jLayeredPane2);
-        jLayeredPane2.setBounds(300, 170, 900, 570);
-
-        EmployeeTab.addTab("Employee", jPanel10);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1770,477 +1501,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jPanel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel18MouseClicked
-         // TODO add your handling code here: Transaction Details Panel Table Left Side
-        jPanel18.setBackground(new Color(110, 89,222));
-        jPanel13.setBackground(new Color(54, 33,89));
-        jPanel14.setBackground(new Color(54, 33,89));
-        jPanel15.setBackground(new Color(54, 33,89)); 
-        jPanel22.setBackground(new Color(54, 33,89));
-      
-        jLabel_Label.setText("Transaction Details");
-       
-        jDateChooser_EndDate.setDate(null);
-        jDateChooser_StartDate.setDate(null);
-        AddEmployee.setVisible(false);
-        AddUpateEmployee.setVisible(false);
-        Emprecords.setVisible(false);
-        Customer.setVisible(false);
-        transaction.setVisible(true);
-
-       
-        
-        DefaultTableModel m = (DefaultTableModel) jTable_transactionDetails.getModel();
-        m.setRowCount(0);
-
-        DefaultTableModel  model = (DefaultTableModel) jTable_transactionDetails.getModel();
-        Object row[] = new Object[5];
-
-        System.out.println("Final "+transdetailscomplete.size());
-
-        long totaltransaction = 0l;
-        for(int i = 0;i < transdetailscomplete.size();i++)
-        {
-            row[0] = transdetailscomplete.get(i).getID();
-            row[1] = transdetailscomplete.get(i).getCardNo();
-            row[2] = transdetailscomplete.get(i).getEmpName();
-            row[3] = transdetailscomplete.get(i).getAmount();
-            row[4] = transdetailscomplete.get(i).getDate();
-            totaltransaction  = transdetailscomplete.get(i).getAmount() + totaltransaction;
-            model.addRow(row);
-        }
-
-        // transactiondetails
-        jLabel3_totalTransaction.setText(""+totaltransaction);
-    }//GEN-LAST:event_jPanel18MouseClicked
-
-    private void jPanel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel15MouseClicked
-        // TODO add your handling code here: Employee records
-        //13 14 15 18
-        //362159
-        jPanel18.setBackground(new Color(54, 33,89));
-        jPanel13.setBackground(new Color(54, 33,89));
-        jPanel14.setBackground(new Color(54, 33,89));
-        jPanel15.setBackground(new Color(110, 89,222)); 
-        jPanel22.setBackground(new Color(54, 33,89));
-
-      
-        jLabel_Label.setText("Employees Records");
-        AddEmployee.setVisible(false);
-        AddUpateEmployee.setVisible(false);
-        transaction.setVisible(false);
-        Emprecords.setVisible(true);
-        Customer.setVisible(false);
-       
-        //to display record into the table
-        DefaultTableModel m = (DefaultTableModel) jTable_EmpRecord.getModel();
-        m.setRowCount(0);
-        DefaultTableModel  model = (DefaultTableModel) jTable_EmpRecord.getModel();
-        Object row[] = new Object[9];
-        for(int i=0;i < currentgamezoneusers.size();i++)
-        {
-            row[0] = currentgamezoneusers.get(i).getID();
-            row[1] = currentgamezoneusers.get(i).getName();
-            row[2] = currentgamezoneusers.get(i).getAddress();
-            row[3] = currentgamezoneusers.get(i).getContact();
-            row[4] = currentgamezoneusers.get(i).getEmail();
-            row[5] = currentgamezoneusers.get(i).getType();
-            row[6] = currentgamezoneusers.get(i).getGameZoneID();
-            row[7] = currentgamezoneusers.get(i).getPassword();
-            row[8] = currentgamezoneusers.get(i).getUserName();
-            model.addRow(row);
-
-        }
-
-    }//GEN-LAST:event_jPanel15MouseClicked
-
-    private void jPanel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel14MouseClicked
-        // TODO add your handling code here: update and delete employee button click event  (panel)
-        jPanel18.setBackground(new Color(54, 33,89));
-        jPanel13.setBackground(new Color(54, 33,89));
-        jPanel14.setBackground(new Color(110, 89,222));
-        jPanel15.setBackground(new Color(54, 33,89)); 
-        jPanel22.setBackground(new Color(54, 33,89));
-        
-        jLabel_Label.setText("Update/Delete Employee");
-        
-        
-        AddEmployee.setVisible(false);
-        AddUpateEmployee.setVisible(true);
-        Emprecords.setVisible(false);
-        transaction.setVisible(false);
-        Customer.setVisible(false);
- 
- 
-        DefaultTableModel m = (DefaultTableModel) jTable_updatedelete.getModel();
-        m.setRowCount(0);
-        DefaultTableModel  model = (DefaultTableModel) jTable_updatedelete.getModel();
-        Object row[] = new Object[9];
-        for(int i=0;i < currentgamezoneusers.size();i++)
-        {
-            row[0] = currentgamezoneusers.get(i).getID();
-            row[1] = currentgamezoneusers.get(i).getName();
-            row[2] = currentgamezoneusers.get(i).getAddress();
-            row[3] = currentgamezoneusers.get(i).getContact();
-            row[4] = currentgamezoneusers.get(i).getEmail();
-            row[5] = currentgamezoneusers.get(i).getType();
-            row[6] = currentgamezoneusers.get(i).getGameZoneID();
-            row[7] = currentgamezoneusers.get(i).getPassword();
-            row[8] = currentgamezoneusers.get(i).getUserName();
-            model.addRow(row);
-
-        }
-    }//GEN-LAST:event_jPanel14MouseClicked
-
-    private void jPanel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel13MouseClicked
-        // TODO add your handling code here: Add new employee button click event (panel)
-        jPanel18.setBackground(new Color(54, 33,89));
-        jPanel13.setBackground(new Color(110, 89,222));
-        jPanel14.setBackground(new Color(54, 33,89));
-        jPanel15.setBackground(new Color(54, 33,89)); 
-        jLabel_Label.setText("Add New Employee");
-        jPanel22.setBackground(new Color(54, 33,89));
-        
- 
-        AddEmployee.setVisible(true);
-        AddUpateEmployee.setVisible(false);
-        Emprecords.setVisible(false);
-        transaction.setVisible(false);
-        Customer.setVisible(false);
-    }//GEN-LAST:event_jPanel13MouseClicked
     
-    //Method to ADD new GameZoneEmployee
-    private void AddNewEmployee_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddNewEmployee_ButtonActionPerformed
-        // TODO add your handling code here:ADD button to add Employee
-
-        
-        if(currentgamezoneusers.size() == currentgamezone.getMax_Employee())
-        {
-                     JOptionPane.showMessageDialog(jPanel1,
-                     "You can not register more then "+currentgamezone.getMax_Employee()+ "Employees ,contact product owner to increase No of employees",
-                     "Inane error",
-                      JOptionPane.ERROR_MESSAGE);
-                      return ;
-        }
-        String username = AddEmpName_textfield.getText();
-        String password = AddEmpPassword_textfield.getText();
-        String username2 = AddEmpUserName_textfield.getText();
-        
-        if(passwordcheck.containsKey(username2) || username2.equals("admin"))
-        {
-                     JOptionPane.showMessageDialog(jPanel1,
-                     "This UserName is Taken ",
-                     "Inane error",
-                      JOptionPane.ERROR_MESSAGE);
-                      return ;
-        }
-        
-        if(username.length() == 0 || password.length() == 0 || username2.length() == 0 )
-        {
-                     JOptionPane.showMessageDialog(jPanel1,
-                     "Please Enter Mandatory Details",
-                     "Inane error",
-                      JOptionPane.ERROR_MESSAGE);
-                      return ;
-        }
-    
-         if(AddEmpContact_textfield.getText().length()!=10)
-         {
-               JOptionPane.showMessageDialog(jPanel1,
-                     "Invalid Contact No",
-                     "Inane error",
-                      JOptionPane.ERROR_MESSAGE);
-                      return ;
-         }
-         
-        User newuser = new User();
-        newuser.setName(AddEmpName_textfield.getText());
-        newuser.setType("emp");
-        newuser.setGameZoneID(currentuser.getGameZoneID());
-        newuser.setAddress(AddEmpAddress_textfield.getText());
-        newuser.setContact(AddEmpContact_textfield.getText());
-        newuser.setEmail(AddEmpEmail_textfield.getText());
-        newuser.setPassword(AddEmpPassword_textfield.getText());
-        newuser.setUserName(username2);
-
-        
-              SwingWorker work = new SwingWorker<String , Integer>() 
-                 {
-	            @Override
-	            protected  String  doInBackground() throws Exception 
-	            {
-
-                    UserInterface Dao = null;
-                    try 
-                    {
-                        Dao = UserFactory.getInstance();
-                        Dao.AddEmp(newuser,currentgamezone.getName());
-                        AddEmp_flag = true;
-                    }
-                    catch (Exception ex) 
-                    {
-                    AddEmp_flag = false;
-                    Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                 
-
-                        return "end";
-	                
-	            }//do backgrounf ENDS
-
-
-	            @Override
-	            protected void done()
-                    {
-                        
-                      rechargeloadingdialoge.dispose();
-	            }
-	        };
-        final ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/Images/recharge.gif"));
-        work.execute();
-        JOptionPane pane = new JOptionPane("", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon,new Object[]{}, null);
-        rechargeloadingdialoge = pane.createDialog(this,"Please wait ");
-        rechargeloadingdialoge.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-      
-       
-        rechargeloadingdialoge.setVisible(true);   
-                 
-        
-        if(AddEmp_flag == false)
-        {
-            JOptionPane.showMessageDialog(jPanel1,
-            "Adding Employee Failed.",
-            "Inane error",
-            JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        else
-        {
-                      UpdateEmployeeListThread updateemployeelist = new UpdateEmployeeListThread(currentgamezoneusers,currentgamezone.getName(),rechargeloadingdialoge);
-                      updateemployeelist.start();
-                      
-                      UpdatePasswordCheck updatepasswordcheck = new UpdatePasswordCheck(currentgamezone.getName(),passwordcheck);
-                      updatepasswordcheck.start();
-                      
-                      JOptionPane.showMessageDialog(jPanel1,
-                      "Adding Employee Success.",
-                      "Inane error",
-                      JOptionPane.ERROR_MESSAGE);
-                      // now updating the customer list 
-                      
-                      
-        }
-                 
-        AddEmpName_textfield.setText("");
-        AddEmpAddress_textfield.setText("");
-        AddEmpPassword_textfield.setText("");
-        AddEmpEmail_textfield.setText("");
-        AddEmpContact_textfield.setText("");
-        AddEmpUserName_textfield.setText("");
-        currentnoofemployeelabel.setText(currentgamezoneusers.size()+"");
-        AddEmp_flag = false;
-    }//GEN-LAST:event_AddNewEmployee_ButtonActionPerformed
-
-    private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
-        // TODO add your handling code here:1000rs
-        jTextField2.setText("1000");
-    }//GEN-LAST:event_jRadioButton4ActionPerformed
-
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
-        // TODO add your handling code here:500rs
-        jTextField2.setText("500");
-    }//GEN-LAST:event_jRadioButton3ActionPerformed
-
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:200 rs
-        jTextField2.setText("200");
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
-
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:100 radio button
-        jTextField2.setText("100");
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
-
-    private void ResetValuestozerobuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetValuestozerobuttonActionPerformed
-        // TODO add your handling code here://Reset button code In Recharge Tab
-        jTextField1.setText("");
-        jTextField2.setText("");
-        Textfiled_ExistingAmount.setText("");
-    }//GEN-LAST:event_ResetValuestozerobuttonActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:Recharge Button in rechargeb tab
-        String cardno = jTextField1.getText();
-        String amount = jTextField2.getText();
-        int amt =0;
-        //validation code
-        if("".equals(cardno) || "".equals(amount))
-        {
-            if("".equals(cardno))
-            {
-
-                JOptionPane.showMessageDialog(jPanel1,
-                    "Please Scan The Card .",
-                    "Inane error",
-                    JOptionPane.ERROR_MESSAGE);
-                return ;
-
-            }else
-            {
-                JOptionPane.showMessageDialog(jPanel1,
-                "Please Enter Amount.",
-                "Inane error",
-                JOptionPane.ERROR_MESSAGE);
-                return ;
-            }
-
-        }
-        try
-        {
-            //Converting String amount into Integer value
-            amt = Integer.parseInt(amount);
-
-        }catch(NumberFormatException e)
-        {
-
-            JOptionPane.showMessageDialog(jPanel1,
-            "Please Enter A Valid Amount Amount.",
-            "Inane error",
-            JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        //first writting amout to card serial communication code
-        RechargeWait = new CountDownLatch(1); //for stoping the gui
-        try 
-        {
-           
-            FactoryClass.getCommObj().sendData(amount);
-            RechargeWait.await();
-            
-        } 
-        catch (IOException ex) 
-        {
-           JOptionPane.showMessageDialog(jPanel1,
-            "Error in Recharge ,Please Check Com Port Connection",
-            "Inane error",
-            JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(jPanel1,
-            "Something went wrong  "+e,
-            "Inane error",
-            JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-    
-        
-        //now doing recharge
-
-        if(ComportRecharge == false)
-        {
-            
-            JOptionPane.showMessageDialog(jPanel1,
-            "Error in HardWare ,Please Check the connection",
-            "Inane error",
-            JOptionPane.ERROR_MESSAGE);
-            return;
-            
-        }
-        
-        ComportRecharge = false;
-        
-        Recharge rec = new Recharge();
-        long millis=System.currentTimeMillis();
-        java.sql.Timestamp date = new Timestamp(millis);
-       
-        rec.setAmount(amt);
-        rec.setCardNo(cardno);
-        rec.setEmpName(currentuser.getName());
-        rec.setDate(date);
-      
-        //Details Gather Complete now Recharge 
-        //step 1 - Record Save to Database 
-        //step 2 - Recharge to the card (com port recharge)     
-        //step 3 - update Transaction details
-        
-        
-                 SwingWorker work = new SwingWorker<String , Integer>() 
-                 {
-	            @Override
-	            protected  String  doInBackground() throws Exception 
-	            {
-	              String TableName = currentgamezone.getName()+"_transaction";
-
-                     TransactionInterface Dao = null ;
-                     try 
-                       {
-                          Dao = TransactionFactory.getInstance();
-                          Dao.Recharge(rec, TableName);
-                          rech_flag = true;
-                       } 
-                       catch (Exception ex)
-                       {
-                       //Error In Transaction
-                        Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
-                        rech_flag = false;
-                       }
-    
-                        return "end";
-	                
-	             }//do backgrounf ENDS
-
-
-	            @Override
-	            protected void done()
-                    {
-                        
-                      rechargeloadingdialoge.dispose();
-	            }
-	        };
-        
-                 
-        final ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/Images/recharge.gif"));
-        work.execute();
-        JOptionPane pane = new JOptionPane("", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon,new Object[]{}, null);
-        rechargeloadingdialoge = pane.createDialog(this,"Please wait ");
-        rechargeloadingdialoge.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-        rechargeloadingdialoge.setVisible(true); 
-        //jDialog.show();  this method is depricated there using setVisible method for showing the dialoge box 
-         
-                 
-     
-          if(rech_flag == false)
-          {
-                System.out.println("Error in recharge");
-                JOptionPane.showMessageDialog(jPanel1,
-                "Recharge Failed Check Internet Connection",
-                "Inane error",
-                JOptionPane.ERROR_MESSAGE);
-           
-                return ;
-          }else
-          {
-              
-             UpdateTransactionListThread updatetransaction = new UpdateTransactionListThread(transdetailscomplete, currentgamezone.getName());
-             updatetransaction.start();
-             JOptionPane.showMessageDialog(jPanel1,
-            "Recharge Success",
-            "Inane error",
-            JOptionPane.PLAIN_MESSAGE);
-          }
-        
-        rech_flag = false;
-        //jTextField1.setText("");
-        //jTextField2.setText("");
-        //Textfiled_ExistingAmount.setText("");
-        
-     
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:Refresh Button Code
         
@@ -2308,361 +1569,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         // TODO add your handling code here:Exit button
         System.exit(0);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:search button to search transaction between perticular dates 
-        java.util.Date startdate;
-        java.util.Date enddate;
-        if(jDateChooser_StartDate.getDate() == null || jDateChooser_EndDate.getDate() == null)
-        {
-            jLabel_validDate.setText("Enter Valid Dates");
-            return;
-        }
-        try
-        {
-            startdate  = jDateChooser_StartDate.getDate(); 
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(startdate);
- 
-// Set time fields to zero
-cal.set(Calendar.HOUR_OF_DAY, 0);
-cal.set(Calendar.MINUTE, 0);
-cal.set(Calendar.SECOND, 0);
-cal.set(Calendar.MILLISECOND, 0);
- 
-// Put it back in the Date object
-         startdate = cal.getTime();
-         //startdate  = jDateChooser_StartDate.getDate(); 
-        
-         enddate =jDateChooser_EndDate.getDate();
-         
-            Calendar cal2 = Calendar.getInstance();
-            cal2.setTime(enddate);
- 
-// Set time fields to zero
-cal2.set(Calendar.HOUR_OF_DAY, 24);
-
- 
-// Put it back in the Date object
-         enddate = cal2.getTime();
-        }
-        catch(Exception e)
-        {
-            
-            jLabel_validDate.setText("Enter Valid Dates");
-            return;
-        }
-      
-        
-        
-
-        
-       //Getting data from the amzone database
-       
-       ArrayList<Recharge> list  = null;
-       try
-       {
-       TransactionInterface Dao = TransactionFactory.getInstance();
-       list = Dao.GetTransactionDetailsPerticularDates(currentgamezone.getName()+"_transaction", new java.sql.Date(startdate.getTime()), new java.sql.Date(enddate.getTime()));
-       }
-      catch(Exception e)
-       {  
-         JOptionPane.showMessageDialog(jPanel1,
-         "Unable to Connect To Internet ,Please check your internet Connection.",
-         "Inane error",
-          JOptionPane.ERROR_MESSAGE);
-           return ;
-    
-        }
-         
-        
-        DefaultTableModel m = (DefaultTableModel) jTable_transactionDetails.getModel();
-        m.setRowCount(0);
-
-        DefaultTableModel  model = (DefaultTableModel) jTable_transactionDetails.getModel();
-        Object row[] = new Object[5];
-
-       
-        long totaltransaction = 0l;
-        for(int i = 0;i < list.size();i++)
-        {
-            java.sql.Timestamp trans_date = list.get(i).getDate();
-            
-            //if(trans_date.after(statTimestamp) && trans_date.before(endTimestamp))
-           // {
-            row[0] = list.get(i).getID();
-            row[1] = list.get(i).getCardNo();
-            row[2] = list.get(i).getEmpName();
-            row[3] = list.get(i).getAmount();
-            row[4] = list.get(i).getDate();
-            totaltransaction  = list.get(i).getAmount() + totaltransaction;
-
-            model.addRow(row);
-           // }
-        
-        }
-        
-        jLabel3_totalTransaction.setText(""+totaltransaction);
-        jLabel_validDate.setText("");
-        
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jTable_EmpRecordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_EmpRecordMouseClicked
-        // TODO add your handling code here:
-        
-       
-//        if(evt.getButton() == MouseEvent.BUTTON1)
-//        {
-//            return ;
-//        }
-//        
-//        int r = jTable_EmpRecord.rowAtPoint(evt.getPoint());
-//        if (r >= 0 && r < jTable_EmpRecord.getRowCount()) {
-//            jTable_EmpRecord.setRowSelectionInterval(r, r);
-//        } else {
-//            jTable_EmpRecord.clearSelection();
-//        }
-//        //for getting locatiopn
-//        PointerInfo a = MouseInfo.getPointerInfo();
-//        Point b = a.getLocation();
-//        int x = (int) b.getX();
-//        int y = (int) b.getY();
-//        jPopupMenu1.setLocation(x, y);
-//        jMenuItem3.setText("Delete Employee");
-//        jMenuItem4.setText("Update Employee");
-//        
-//        jPopupMenu1.setVisible(true);
-        
-    }//GEN-LAST:event_jTable_EmpRecordMouseClicked
-
-    private void jTable_updatedeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_updatedeleteMouseClicked
-        // TODO add your handling code here:Mouse Click on Update / Delete Jtable
-        
-        //Code for popup window for deleting and updating the employess
-       
-         User user = new User(); 
-         int row = jTable_updatedelete.getSelectedRow();
-       
-         String ID = jTable_updatedelete.getModel().getValueAt(row, 0).toString();
-         String Name = jTable_updatedelete.getModel().getValueAt(row, 1).toString();
-         String addres = jTable_updatedelete.getModel().getValueAt(row, 2).toString();
-         String contact = jTable_updatedelete.getModel().getValueAt(row, 3).toString();
-         String email = jTable_updatedelete.getModel().getValueAt(row, 4).toString();
-         String type = jTable_updatedelete.getModel().getValueAt(row, 5).toString();
-         String gamezoneid = jTable_updatedelete.getModel().getValueAt(row, 6).toString();
-         String password = jTable_updatedelete.getModel().getValueAt(row, 7).toString();
-         String username = jTable_updatedelete.getModel().getValueAt(row, 8).toString();
-          
-         
-         user.setID(Integer.parseInt(ID ));
-         user.setEmail(email);
-         user.setName(Name);
-         user.setContact(contact);
-         user.setType(type);
-         user.setPassword(password);
-         user.setAddress(addres);
-         user.setGameZoneID(Integer.parseInt(gamezoneid));
-         user.setUserName(username);
-         
-        
-       
-        
-        Updata_DeleteEmployee newframe = new Updata_DeleteEmployee(user,this, currentgamezone.getName(),currentgamezoneusers,passwordcheck,jTable_updatedelete,currentnoofemployeelabel);
-        newframe.setVisible(true);
-        setVisible(false);
-        
-        
-        
-    }//GEN-LAST:event_jTable_updatedeleteMouseClicked
-
-    private void jPanel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel22MouseClicked
-        // TODO add your handling code here:
-        jPanel18.setBackground(new Color(54, 33,89));
-        jPanel13.setBackground(new Color(54, 33,89));
-        jPanel14.setBackground(new Color(54, 33,89));
-        jPanel15.setBackground(new Color(54, 33,89)); 
-        jPanel22.setBackground(new Color(110, 89,222));
-        
-        
-        jLabel_Label.setText("Register New Customer");
-        
-         AddEmployee.setVisible(false);
-         AddUpateEmployee.setVisible(false);
-         Emprecords.setVisible(false);
-         Customer.setVisible(true);
-         transaction.setVisible(false);
-         
-         
-     
-         
-        DefaultTableModel m = (DefaultTableModel) jTable_customers.getModel();
-        m.setRowCount(0);
-
-        DefaultTableModel  model = (DefaultTableModel) jTable_customers.getModel();
-        Object row[] = new Object[4];
-        for(int i = 0;i < customerlist.size();i++)
-        {
-            row[0] = customerlist.get(i).getId();
-            row[1] = customerlist.get(i).getName();
-            row[2] = customerlist.get(i).getContact();
-            row[3] = customerlist.get(i).getEmailId();
-           
-            model.addRow(row);
-            
-        
-        }
-         
-         
-    }//GEN-LAST:event_jPanel22MouseClicked
-
-    private void CustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CustomerMouseClicked
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_CustomerMouseClicked
-
-    private void RegisterNewcustomer_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterNewcustomer_buttonActionPerformed
-        // TODO add your handling code here:Register Customer button
-        String contact =jTextField_regcontact.getText();
-        String email   =jTextField_regemail.getText();
-        String name = jTextField_regname.getText();
-        
-        if(contact.length() == 0 || name.length() == 0)
-        {
-            JOptionPane.showMessageDialog(jPanel1,
-           "Name and Contact are Mandatory",
-           "Inane error",
-            JOptionPane.ERROR_MESSAGE);
-            return;
-            
-        }
-        
-        
-        Customers newcustomer = new Customers();
-        newcustomer.setName(name);
-        newcustomer.setContact(contact);
-        newcustomer.setEmailId(email);
-        
-                 SwingWorker work = new SwingWorker<String , Integer>() 
-                 {
-	            @Override
-	            protected  String  doInBackground() throws Exception 
-	            {
-	            
-                    try 
-                    {
-                        CustomerInterface Dao = Customerfactory.getInstance();
-                        boolean respponce =  Dao.registerCust(newcustomer, currentgamezone.getName()+"_customers");
-                         
-                        if(respponce == false)
-                         {
-                             RegisterCustomer = false;
-                         }else
-                         {
-                             RegisterCustomer = true;
-                         }
-                         } catch (Exception ex)
-                         {
-                       
-                             RegisterCustomer = false;
-                         }
-                  
-                       
-                        return "end";
-	                
-	            }//do backgrounf ENDS
-
-
-	            @Override
-	            protected void done()
-                    {
-                        
-                     rechargeloadingdialoge.setVisible(false);
-	            }
-	        };
-        
-                 
-        final ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/Images/recharge.gif"));
-        work.execute();
-        JOptionPane pane = new JOptionPane("", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon,new Object[]{}, null);
-        rechargeloadingdialoge = pane.createDialog(this,"Please wait ");
-        rechargeloadingdialoge.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-      
-        
-        rechargeloadingdialoge.setVisible(true);   
-                 
-     
-          if(RegisterCustomer == false)
-          {
-                System.out.println("Error in recharge");
-                JOptionPane.showMessageDialog(jPanel1,
-                "Registeration Failed",
-                "Inane error",
-                JOptionPane.ERROR_MESSAGE);
-                return ;
-          }else
-          {
-        
-            UpdateCustomerListThread updatecustomerlist = new UpdateCustomerListThread(customerlist,currentgamezone.getName());
-            updatecustomerlist.start();
-               
-            JOptionPane.showMessageDialog(jPanel1,
-            "Customer Registered Success",
-            "Inane error",
-            JOptionPane.ERROR_MESSAGE);
-            //now updating the customer list
-          }
-         
-
-        
-        RegisterCustomer = false;
-        jTextField_regcontact.setText("");
-        jTextField_regemail.setText("");
-        jTextField_regname.setText("");
-        
-        
-        //code for filled table with new customer list  
-        DefaultTableModel m = (DefaultTableModel) jTable_customers.getModel();
-        m.setRowCount(0);
-
-        DefaultTableModel  model = (DefaultTableModel) jTable_customers.getModel();
-        Object row[] = new Object[4];
-        for(int i = 0;i < customerlist.size();i++)
-        {
-            row[0] = customerlist.get(i).getId();
-            row[1] = customerlist.get(i).getName();
-            row[2] = customerlist.get(i).getContact();
-            row[3] = customerlist.get(i).getEmailId();
-           
-            model.addRow(row);
-            
-        
-        }
-        Noofcustomerlabel.setText(customerlist.size()+"");
-        
-    }//GEN-LAST:event_RegisterNewcustomer_buttonActionPerformed
-
-    private void ResetButton_CustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButton_CustomerActionPerformed
-        // TODO add your handling code here: reset button register customer
-        jTextField_regcontact.setText("");
-        jTextField_regemail.setText("");
-        jTextField_regname.setText("");
-    }//GEN-LAST:event_ResetButton_CustomerActionPerformed
-
-    private void transactionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transactionMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_transactionMouseClicked
-
-    private void jLabel_OwnerName1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_OwnerName1MouseClicked
-        // TODO add your handling code here:exit button 
-        Connection conn = Connect.getconnection();
-        
-        try{conn.close();}
-        catch(Exception e)
-        {
-            System.out.println("e");
-        }
-        System.exit(0);
-    }//GEN-LAST:event_jLabel_OwnerName1MouseClicked
     //Method for sending email 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
        
@@ -2750,306 +1656,55 @@ cal2.set(Calendar.HOUR_OF_DAY, 24);
           
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //TODO add your handling code here:
-        String cardno = jTextField1.getText();
-        if(cardno.length() == 0 )
-        {
-             JOptionPane.showMessageDialog(jPanel1,
-              "Please Enter Card No.",
-              "Inane error",
-              JOptionPane.ERROR_MESSAGE);
-              return ;  
-        }
-        if("".equals(cardno))
-        {
-              JOptionPane.showMessageDialog(jPanel1,
-              "Please Enter Card No.",
-              "Inane error",
-              JOptionPane.ERROR_MESSAGE);
-              return ;
-        }
-        try 
-        {
-            FactoryClass.getCommObj().sendData("reset");
-        }
-        catch (IOException ex)
-        {
-             JOptionPane.showMessageDialog(jPanel1,
-              "Error in ReFund.",
-              "Inane error",
-              JOptionPane.ERROR_MESSAGE);
-              return ;
-        }
-        
-        
-               JOptionPane.showMessageDialog(jPanel1,
-              "Refund Success",
-              "Inane error",
-              JOptionPane.ERROR_MESSAGE);
-              return ;
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void UpdateEmplloyeeSearch_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateEmplloyeeSearch_ButtonActionPerformed
-        // TODO add your handling code here:
-        String Name = EmplyeeIdInput.getText();
-        
-        Name = Name.trim();
-        
-        for(User user : currentgamezoneusers)
-        {
-            String as =user.getName();
-            String asas = Name;
-            boolean df= as.equalsIgnoreCase(asas);
-            boolean asd = as.equals(asas);
-            if(user.getName().trim().equalsIgnoreCase(Name))
-            {
-            DefaultTableModel m = (DefaultTableModel) jTable_updatedelete.getModel();
-            m.setRowCount(0);
-            DefaultTableModel  model = (DefaultTableModel) jTable_updatedelete.getModel();
-            Object row[] = new Object[9];
-            row[0] = user.getID();
-            row[1] = user.getName();
-            row[2] = user.getAddress();
-            row[3] = user.getContact();
-            row[4] = user.getEmail();
-            row[5] = user.getType();
-            row[6] = user.getGameZoneID();
-            row[7] = user.getPassword();
-            row[8] = user.getAddress();
-            model.addRow(row);
-
-            return;
-            }
-        }
-         JOptionPane.showMessageDialog(jPanel1,
-         "No Employee Found For this Name",
-         "Inane error",
-         JOptionPane.ERROR_MESSAGE);
-         return;
-        
-    }//GEN-LAST:event_UpdateEmplloyeeSearch_ButtonActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        
-        String Name = Employeeidinput.getText();
-        Name = Name.trim();
-        
-        for(User user : currentgamezoneusers)
-        {
-            boolean ss = Name.equalsIgnoreCase(user.getName());
-            if(user.getName().trim().equalsIgnoreCase(Name))
-            {
-            DefaultTableModel m = (DefaultTableModel) jTable_EmpRecord.getModel();
-            m.setRowCount(0);
-            DefaultTableModel  model = (DefaultTableModel) jTable_EmpRecord.getModel();
-            Object row[] = new Object[9];
-            row[0] = user.getID();
-            row[1] = user.getName();
-            row[2] = user.getAddress();
-            row[3] = user.getContact();
-            row[4] = user.getEmail();
-            row[5] = user.getType();
-            row[6] = user.getGameZoneID();
-            row[7] = user.getPassword();
-            row[8] = user.getAddress();
-            model.addRow(row);
-
-            return;
-            }
-        }
-        
-            JOptionPane.showMessageDialog(jPanel1,
-            "No Employee Found For this Name",
-            "Inane error",
-            JOptionPane.ERROR_MESSAGE);
-            return;
-        
-        
-        
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:Perticular day today collection
-         if(jDateChooser_todayCollection.getDate() == null )
-         {
-              JOptionPane.showMessageDialog(jPanel1,
-                     "Please Provide Date.",
-                     "Inane error",
-                      JOptionPane.ERROR_MESSAGE);
-                      return ;
-         }
-          java.util.Date date  = jDateChooser_todayCollection.getDate(); 
-          Calendar cal = Calendar.getInstance();
-          cal.setTime(date);
- 
-// Set time fields to zero
-cal.set(Calendar.HOUR_OF_DAY, 0);
-cal.set(Calendar.MINUTE, 0);
-cal.set(Calendar.SECOND, 0);
-cal.set(Calendar.MILLISECOND, 0);
- 
-// Put it back in the Date object
-         date = cal.getTime();
-        
-         ArrayList<Games> gamelistper = null;
-         StallInterface Dao = StallFactory.getInstance();
-         try
-         {
-         gamelistper = Dao.GetGamesPerticularDate(currentgamezone.getName(), date);
-         }
-         catch(Exception e)
-         {
-                 JOptionPane.showMessageDialog(jPanel1,
-                     "Unable to Connect To Internet ,Please check your internet Connection.",
-                     "Inane error",
-                      JOptionPane.ERROR_MESSAGE);
-                      return ;
-         }
-         if(gamelistper.isEmpty())
-         {
-               JOptionPane.showMessageDialog(jPanel1,
-                     "No record for  this perticular date.",
-                     "Inane error",
-                      JOptionPane.ERROR_MESSAGE);
-                      return ;
-         }
-         else{
-       DefaultTableModel m = (DefaultTableModel) TodaysCollectionTable.getModel();
-       m.setRowCount(0);
-       for(Games game : gamelistper)
-       {
-        DefaultTableModel  model = (DefaultTableModel) TodaysCollectionTable.getModel();
-        Object row[] = new Object[2];
-      
-            row[0] = game.getGameName();
-            row[1] = game.getAmount();
-            model.addRow(row);
-            
-        
-       }
-         }
-           
-         
-         
-        
-    }//GEN-LAST:event_jButton4ActionPerformed
-
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:Code for Logoff
         setVisible(false);
-        l.setVisible(true);
+        dispose();
+        
+        FactoryClass.commObj.close();
+        FactoryClass.commObj2.close();
+        
+        Loginform.setVisible(true);
         
         
         
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-    private void RegisterNewcustomer_button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterNewcustomer_button1ActionPerformed
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:to add new games and view existing games 
+        
+         GameNameSetting gameNameSetting = new GameNameSetting(this, true,gamelist);
+         gameNameSetting.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void EmployeeTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EmployeeTabMouseClicked
+        // TODO add your handling code here:employee tab click
+//        emp_registernewcustomer.setVisible(false);
+//        Emp_owndetailsPanel.setBackground(new Color(110, 89,222));
+//        emptab_name.setText(currentuser.getName());
+//        emptab_address.setText(currentuser.getAddress());
+//        emptab_contact.setText(currentuser.getContact());
+//        emptab_emailid.setText(currentuser.getEmail());
+//        emptab_password.setText(currentuser.getPassword());
+//        emptab_username.setText(currentuser.getUserName());
+    }//GEN-LAST:event_EmployeeTabMouseClicked
+
+    private void jPanel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel22MouseClicked
         // TODO add your handling code here:
-        
-         String contact =emp_contactregistercust.getText();
-        String email   =emp_emailregistercust.getText();
-        String name = emp_nameregistercust.getText();
-        
-        if(contact.length() == 0 || name.length() == 0)
-        {
-            JOptionPane.showMessageDialog(jPanel1,
-           "Name and Contact are Mandatory",
-           "Inane error",
-            JOptionPane.ERROR_MESSAGE);
-            return;
-            
-        }
-        
-        
-        Customers newcustomer = new Customers();
-        newcustomer.setName(name);
-        newcustomer.setContact(contact);
-        newcustomer.setEmailId(email);
-        
-                 SwingWorker work = new SwingWorker<String , Integer>() 
-                 {
-	            @Override
-	            protected  String  doInBackground() throws Exception 
-	            {
-	            
-                    try 
-                    {
-                        CustomerInterface Dao = Customerfactory.getInstance();
-                        boolean respponce =  Dao.registerCust(newcustomer, currentgamezone.getName()+"_customers");
-                         
-                        if(respponce == false)
-                         {
-                             RegisterCustomer = false;
-                         }else
-                         {
-                             RegisterCustomer = true;
-                         }
-                         } catch (Exception ex)
-                         {
-                       
-                             RegisterCustomer = false;
-                         }
-                  
-                       
-                        return "end";
-	                
-	            }//do backgrounf ENDS
+        jPanel18.setBackground(new Color(54, 33,89));
+        jPanel13.setBackground(new Color(54, 33,89));
+        jPanel14.setBackground(new Color(54, 33,89));
+        jPanel15.setBackground(new Color(54, 33,89));
+        jPanel22.setBackground(new Color(110, 89,222));
 
+        jLabel_Label.setText("Register New Customer");
 
-	            @Override
-	            protected void done()
-                    {
-                        
-                     rechargeloadingdialoge.setVisible(false);
-	            }
-	        };
-        
-                 
-        final ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/Images/recharge.gif"));
-        work.execute();
-        JOptionPane pane = new JOptionPane("", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon,new Object[]{}, null);
-        rechargeloadingdialoge = pane.createDialog(this,"Please wait ");
-        rechargeloadingdialoge.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-      
-        
-        rechargeloadingdialoge.setVisible(true);   
-                 
-     
-          if(RegisterCustomer == false)
-          {
-                System.out.println("Error in recharge");
-                JOptionPane.showMessageDialog(jPanel1,
-                "Registeration Failed",
-                "Inane error",
-                JOptionPane.ERROR_MESSAGE);
-                return ;
-          }else
-          {
-        
-            UpdateCustomerListThread updatecustomerlist = new UpdateCustomerListThread(customerlist,currentgamezone.getName());
-            updatecustomerlist.start();
-               
-            JOptionPane.showMessageDialog(jPanel1,
-            "Customer Registered Success",
-            "Inane error",
-            JOptionPane.ERROR_MESSAGE);
-            //now updating the customer list
-          }
-         
+        AddEmployee.setVisible(false);
+        AddUpateEmployee.setVisible(false);
+        Emprecords.setVisible(false);
+        Customer.setVisible(true);
+        transaction.setVisible(false);
 
-        
-        RegisterCustomer = false;
-      
-       emp_contactregistercust.setText("");
-       emp_emailregistercust.setText("");
-       emp_nameregistercust.setText("");
-        
-        
-        
-        //code for filled table with new customer list  
         DefaultTableModel m = (DefaultTableModel) jTable_customers.getModel();
         m.setRowCount(0);
 
@@ -3061,76 +1716,936 @@ cal.set(Calendar.MILLISECOND, 0);
             row[1] = customerlist.get(i).getName();
             row[2] = customerlist.get(i).getContact();
             row[3] = customerlist.get(i).getEmailId();
-           
+
             model.addRow(row);
-            
-        
+
+        }
+
+    }//GEN-LAST:event_jPanel22MouseClicked
+
+    private void jLabel_OwnerName1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel_OwnerName1MouseClicked
+        // TODO add your handling code here:exit button
+        Connection conn = Connect.getconnection();
+
+        try{conn.close();}
+        catch(Exception e)
+        {
+            System.out.println("e");
+        }
+        System.exit(0);
+    }//GEN-LAST:event_jLabel_OwnerName1MouseClicked
+
+    private void jPanel18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel18MouseClicked
+        // TODO add your handling code here: Transaction Details Panel Table Left Side
+        jPanel18.setBackground(new Color(110, 89,222));
+        jPanel13.setBackground(new Color(54, 33,89));
+        jPanel14.setBackground(new Color(54, 33,89));
+        jPanel15.setBackground(new Color(54, 33,89));
+        jPanel22.setBackground(new Color(54, 33,89));
+
+        jLabel_Label.setText("Transaction Details");
+
+        jDateChooser_EndDate.setDate(null);
+        jDateChooser_StartDate.setDate(null);
+        AddEmployee.setVisible(false);
+        AddUpateEmployee.setVisible(false);
+        Emprecords.setVisible(false);
+        Customer.setVisible(false);
+        transaction.setVisible(true);
+
+        DefaultTableModel m = (DefaultTableModel) jTable_transactionDetails.getModel();
+        m.setRowCount(0);
+
+        DefaultTableModel  model = (DefaultTableModel) jTable_transactionDetails.getModel();
+        Object row[] = new Object[5];
+
+        System.out.println("Final "+transdetailscomplete.size());
+
+        long totaltransaction = 0l;
+        for(int i = 0;i < transdetailscomplete.size();i++)
+        {
+            row[0] = transdetailscomplete.get(i).getID();
+            row[1] = transdetailscomplete.get(i).getCardNo();
+            row[2] = transdetailscomplete.get(i).getEmpName();
+            row[3] = transdetailscomplete.get(i).getAmount();
+            row[4] = transdetailscomplete.get(i).getDate();
+            totaltransaction  = transdetailscomplete.get(i).getAmount() + totaltransaction;
+            model.addRow(row);
+        }
+
+        // transactiondetails
+        jLabel3_totalTransaction.setText(""+totaltransaction);
+    }//GEN-LAST:event_jPanel18MouseClicked
+
+    private void jPanel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel15MouseClicked
+        // TODO add your handling code here: Employee records
+        //13 14 15 18
+        //362159
+        jPanel18.setBackground(new Color(54, 33,89));
+        jPanel13.setBackground(new Color(54, 33,89));
+        jPanel14.setBackground(new Color(54, 33,89));
+        jPanel15.setBackground(new Color(110, 89,222));
+        jPanel22.setBackground(new Color(54, 33,89));
+
+        jLabel_Label.setText("Employees Records");
+        AddEmployee.setVisible(false);
+        AddUpateEmployee.setVisible(false);
+        transaction.setVisible(false);
+        Emprecords.setVisible(true);
+        Customer.setVisible(false);
+
+        //to display record into the table
+        DefaultTableModel m = (DefaultTableModel) jTable_EmpRecord.getModel();
+        m.setRowCount(0);
+        DefaultTableModel  model = (DefaultTableModel) jTable_EmpRecord.getModel();
+        Object row[] = new Object[9];
+        for(int i=0;i < currentgamezoneusers.size();i++)
+        {
+            row[0] = currentgamezoneusers.get(i).getID();
+            row[1] = currentgamezoneusers.get(i).getName();
+            row[2] = currentgamezoneusers.get(i).getAddress();
+            row[3] = currentgamezoneusers.get(i).getContact();
+            row[4] = currentgamezoneusers.get(i).getEmail();
+            row[5] = currentgamezoneusers.get(i).getType();
+            row[6] = currentgamezoneusers.get(i).getGameZoneID();
+            row[7] = currentgamezoneusers.get(i).getPassword();
+            row[8] = currentgamezoneusers.get(i).getUserName();
+            model.addRow(row);
+
+        }
+    }//GEN-LAST:event_jPanel15MouseClicked
+
+    private void jPanel14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel14MouseClicked
+        // TODO add your handling code here: update and delete employee button click event  (panel)
+        jPanel18.setBackground(new Color(54, 33,89));
+        jPanel13.setBackground(new Color(54, 33,89));
+        jPanel14.setBackground(new Color(110, 89,222));
+        jPanel15.setBackground(new Color(54, 33,89));
+        jPanel22.setBackground(new Color(54, 33,89));
+
+        jLabel_Label.setText("Update/Delete Employee");
+
+        AddEmployee.setVisible(false);
+        AddUpateEmployee.setVisible(true);
+        Emprecords.setVisible(false);
+        transaction.setVisible(false);
+        Customer.setVisible(false);
+
+        DefaultTableModel m = (DefaultTableModel) jTable_updatedelete.getModel();
+        m.setRowCount(0);
+        DefaultTableModel  model = (DefaultTableModel) jTable_updatedelete.getModel();
+        Object row[] = new Object[9];
+        for(int i=0;i < currentgamezoneusers.size();i++)
+        {
+            row[0] = currentgamezoneusers.get(i).getID();
+            row[1] = currentgamezoneusers.get(i).getName();
+            row[2] = currentgamezoneusers.get(i).getAddress();
+            row[3] = currentgamezoneusers.get(i).getContact();
+            row[4] = currentgamezoneusers.get(i).getEmail();
+            row[5] = currentgamezoneusers.get(i).getType();
+            row[6] = currentgamezoneusers.get(i).getGameZoneID();
+            row[7] = currentgamezoneusers.get(i).getPassword();
+            row[8] = currentgamezoneusers.get(i).getUserName();
+            model.addRow(row);
+
+        }
+    }//GEN-LAST:event_jPanel14MouseClicked
+
+    private void jPanel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel13MouseClicked
+        // TODO add your handling code here: Add new employee button click event (panel)
+        jPanel18.setBackground(new Color(54, 33,89));
+        jPanel13.setBackground(new Color(110, 89,222));
+        jPanel14.setBackground(new Color(54, 33,89));
+        jPanel15.setBackground(new Color(54, 33,89));
+        jLabel_Label.setText("Add New Employee");
+        jPanel22.setBackground(new Color(54, 33,89));
+
+        AddEmployee.setVisible(true);
+        AddUpateEmployee.setVisible(false);
+        Emprecords.setVisible(false);
+        transaction.setVisible(false);
+        Customer.setVisible(false);
+    }//GEN-LAST:event_jPanel13MouseClicked
+
+    private void CustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CustomerMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_CustomerMouseClicked
+
+    private void ResetButton_CustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButton_CustomerActionPerformed
+        // TODO add your handling code here: reset button register customer
+        jTextField_regcontact.setText("");
+        jTextField_regemail.setText("");
+        jTextField_regname.setText("");
+    }//GEN-LAST:event_ResetButton_CustomerActionPerformed
+
+    private void RegisterNewcustomer_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterNewcustomer_buttonActionPerformed
+        // TODO add your handling code here:Register Customer button
+        String contact =jTextField_regcontact.getText();
+        String email   =jTextField_regemail.getText();
+        String name = jTextField_regname.getText();
+
+        if(contact.length() == 0 || name.length() == 0)
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+                "Name and Contact are Mandatory",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+
+        }
+
+        Customers newcustomer = new Customers();
+        newcustomer.setName(name);
+        newcustomer.setContact(contact);
+        newcustomer.setEmailId(email);
+
+        SwingWorker work = new SwingWorker<String , Integer>()
+        {
+            @Override
+            protected  String  doInBackground() throws Exception
+            {
+
+                try
+                {
+                    CustomerInterface Dao = Customerfactory.getInstance();
+                    boolean respponce =  Dao.registerCust(newcustomer, currentgamezone.getName()+"_customers");
+
+                    if(respponce == false)
+                    {
+                        RegisterCustomer = false;
+                    }else
+                    {
+                        RegisterCustomer = true;
+                    }
+                } catch (Exception ex)
+                {
+
+                    RegisterCustomer = false;
+                }
+
+                return "end";
+
+            }//do backgrounf ENDS
+
+            @Override
+            protected void done()
+            {
+
+                rechargeloadingdialoge.setVisible(false);
+            }
+        };
+
+        final ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/Images/recharge.gif"));
+        work.execute();
+        JOptionPane pane = new JOptionPane("", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon,new Object[]{}, null);
+        rechargeloadingdialoge = pane.createDialog(this,"Please wait ");
+        rechargeloadingdialoge.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+
+        rechargeloadingdialoge.setVisible(true);
+
+        if(RegisterCustomer == false)
+        {
+            System.out.println("Error in recharge");
+            JOptionPane.showMessageDialog(jPanel1,
+                "Registeration Failed",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+            return ;
+        }else
+        {
+
+            UpdateCustomerListThread updatecustomerlist = new UpdateCustomerListThread(customerlist,currentgamezone.getName());
+            updatecustomerlist.start();
+
+            JOptionPane.showMessageDialog(jPanel1,
+                "Customer Registered Success",
+                "Success",
+                JOptionPane.PLAIN_MESSAGE);
+            //now updating the customer list
+        }
+
+        RegisterCustomer = false;
+        jTextField_regcontact.setText("");
+        jTextField_regemail.setText("");
+        jTextField_regname.setText("");
+
+        //code for filled table with new customer list
+        DefaultTableModel m = (DefaultTableModel) jTable_customers.getModel();
+        m.setRowCount(0);
+
+        DefaultTableModel  model = (DefaultTableModel) jTable_customers.getModel();
+        Object row[] = new Object[4];
+        for(int i = 0;i < customerlist.size();i++)
+        {
+            row[0] = customerlist.get(i).getId();
+            row[1] = customerlist.get(i).getName();
+            row[2] = customerlist.get(i).getContact();
+            row[3] = customerlist.get(i).getEmailId();
+
+            model.addRow(row);
+
         }
         Noofcustomerlabel.setText(customerlist.size()+"");
-        
-        
-        
-    }//GEN-LAST:event_RegisterNewcustomer_button1ActionPerformed
 
-    private void ResetButton_Customer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButton_Customer1ActionPerformed
+    }//GEN-LAST:event_RegisterNewcustomer_buttonActionPerformed
+
+    private void transactionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transactionMouseClicked
         // TODO add your handling code here:
-        
-        emp_nameregistercust.setText("");
-        emp_emailregistercust.setText("");
-          emp_contactregistercust.setText("");
-    }//GEN-LAST:event_ResetButton_Customer1ActionPerformed
+    }//GEN-LAST:event_transactionMouseClicked
 
-    private void Emp_owndetailsPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Emp_owndetailsPanelMouseClicked
-        // TODO add your handling code here:Own Details panel click Employee tab
-        Emp_owndetailsPanel.setBackground(new Color(110, 89,222));
-        emp_registercustomerpanel.setBackground(new Color(54, 33,89));
-        
-      
-        Employee_headingtab.setText("Own Details");
-     
-        emp_registernewcustomer.setVisible(false);
-        emp_owndetails.setVisible(true);
-        
-        emptab_name.setText(currentuser.getName());
-        emptab_address.setText(currentuser.getAddress());
-        emptab_contact.setText(currentuser.getContact());
-        emptab_emailid.setText(currentuser.getEmail());
-        emptab_password.setText(currentuser.getPassword());
-        emptab_username.setText(currentuser.getUserName());
-    
-    }//GEN-LAST:event_Emp_owndetailsPanelMouseClicked
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:search button to search transaction between perticular dates
+        java.util.Date startdate;
+        java.util.Date enddate;
+        if(jDateChooser_StartDate.getDate() == null || jDateChooser_EndDate.getDate() == null)
+        {
+            jLabel_validDate.setText("Enter Valid Dates");
+            return;
+        }
+        try
+        {
+            startdate  = jDateChooser_StartDate.getDate();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(startdate);
 
-    private void emp_registercustomerpanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_emp_registercustomerpanelMouseClicked
-        // TODO add your handling code here:Add customer Employee
-        emp_registercustomerpanel.setBackground(new Color(110, 89,222));
-        Emp_owndetailsPanel.setBackground(new Color(54, 33,89));
-        
-      
-        Employee_headingtab.setText("Register New Customer");
-     
-        emp_owndetails.setVisible(false);
-        emp_registernewcustomer.setVisible(true);
-        
-    }//GEN-LAST:event_emp_registercustomerpanelMouseClicked
+            // Set time fields to zero
+            cal.set(Calendar.HOUR_OF_DAY, 0);
+            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.SECOND, 0);
+            cal.set(Calendar.MILLISECOND, 0);
 
-    private void EmployeeTabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EmployeeTabMouseClicked
-        // TODO add your handling code here:employee tab click
-        emp_registernewcustomer.setVisible(false);
-         Emp_owndetailsPanel.setBackground(new Color(110, 89,222));
-            emptab_name.setText(currentuser.getName());
-        emptab_address.setText(currentuser.getAddress());
-           emptab_contact.setText(currentuser.getContact());
-        emptab_emailid.setText(currentuser.getEmail());
-           emptab_password.setText(currentuser.getPassword());
-        emptab_username.setText(currentuser.getUserName());
-    }//GEN-LAST:event_EmployeeTabMouseClicked
+            // Put it back in the Date object
+            startdate = cal.getTime();
+            //startdate  = jDateChooser_StartDate.getDate();
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:to add new games and view existing games 
-        
-         GameNameSetting gameNameSetting = new GameNameSetting(this, true,gamelist);
-         gameNameSetting.setVisible(true);
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+            enddate =jDateChooser_EndDate.getDate();
+
+            Calendar cal2 = Calendar.getInstance();
+            cal2.setTime(enddate);
+
+            // Set time fields to zero
+            cal2.set(Calendar.HOUR_OF_DAY, 24);
+
+            // Put it back in the Date object
+            enddate = cal2.getTime();
+        }
+        catch(Exception e)
+        {
+
+            jLabel_validDate.setText("Enter Valid Dates");
+            return;
+        }
+
+        //Getting data from the amzone database
+
+        ArrayList<Recharge> list  = null;
+        try
+        {
+            TransactionInterface Dao = TransactionFactory.getInstance();
+            list = Dao.GetTransactionDetailsPerticularDates(currentgamezone.getName()+"_transaction", new java.sql.Date(startdate.getTime()), new java.sql.Date(enddate.getTime()));
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+                "Unable to Connect To Internet ,Please check your internet Connection.",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+            return ;
+
+        }
+
+        DefaultTableModel m = (DefaultTableModel) jTable_transactionDetails.getModel();
+        m.setRowCount(0);
+
+        DefaultTableModel  model = (DefaultTableModel) jTable_transactionDetails.getModel();
+        Object row[] = new Object[5];
+
+        long totaltransaction = 0l;
+        for(int i = 0;i < list.size();i++)
+        {
+            java.sql.Timestamp trans_date = list.get(i).getDate();
+
+            //if(trans_date.after(statTimestamp) && trans_date.before(endTimestamp))
+            // {
+                row[0] = list.get(i).getID();
+                row[1] = list.get(i).getCardNo();
+                row[2] = list.get(i).getEmpName();
+                row[3] = list.get(i).getAmount();
+                row[4] = list.get(i).getDate();
+                totaltransaction  = list.get(i).getAmount() + totaltransaction;
+
+                model.addRow(row);
+                // }
+
+        }
+
+        jLabel3_totalTransaction.setText(""+totaltransaction);
+        jLabel_validDate.setText("");
+
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+
+        String Name = Employeeidinput.getText();
+        Name = Name.trim();
+
+        for(User user : currentgamezoneusers)
+        {
+            boolean ss = Name.equalsIgnoreCase(user.getName());
+            if(user.getName().trim().equalsIgnoreCase(Name))
+            {
+                DefaultTableModel m = (DefaultTableModel) jTable_EmpRecord.getModel();
+                m.setRowCount(0);
+                DefaultTableModel  model = (DefaultTableModel) jTable_EmpRecord.getModel();
+                Object row[] = new Object[9];
+                row[0] = user.getID();
+                row[1] = user.getName();
+                row[2] = user.getAddress();
+                row[3] = user.getContact();
+                row[4] = user.getEmail();
+                row[5] = user.getType();
+                row[6] = user.getGameZoneID();
+                row[7] = user.getPassword();
+                row[8] = user.getAddress();
+                model.addRow(row);
+
+                return;
+            }
+        }
+
+        JOptionPane.showMessageDialog(jPanel1,
+            "No Employee Found For this Name",
+            "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+        return;
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTable_EmpRecordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_EmpRecordMouseClicked
+        // TODO add your handling code here:
+
+        //        if(evt.getButton() == MouseEvent.BUTTON1)
+        //        {
+            //            return ;
+            //        }
+        //
+        //        int r = jTable_EmpRecord.rowAtPoint(evt.getPoint());
+        //        if (r >= 0 && r < jTable_EmpRecord.getRowCount()) {
+            //            jTable_EmpRecord.setRowSelectionInterval(r, r);
+            //        } else {
+            //            jTable_EmpRecord.clearSelection();
+            //        }
+        //        //for getting locatiopn
+        //        PointerInfo a = MouseInfo.getPointerInfo();
+        //        Point b = a.getLocation();
+        //        int x = (int) b.getX();
+        //        int y = (int) b.getY();
+        //        jPopupMenu1.setLocation(x, y);
+        //        jMenuItem3.setText("Delete Employee");
+        //        jMenuItem4.setText("Update Employee");
+        //
+        //        jPopupMenu1.setVisible(true);
+
+    }//GEN-LAST:event_jTable_EmpRecordMouseClicked
+
+    private void jTable_updatedeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_updatedeleteMouseClicked
+        // TODO add your handling code here:Mouse Click on Update / Delete Jtable
+
+        //Code for popup window for deleting and updating the employess
+
+        User user = new User();
+        int row = jTable_updatedelete.getSelectedRow();
+
+        String ID = jTable_updatedelete.getModel().getValueAt(row, 0).toString();
+        String Name = jTable_updatedelete.getModel().getValueAt(row, 1).toString();
+        String addres = jTable_updatedelete.getModel().getValueAt(row, 2).toString();
+        String contact = jTable_updatedelete.getModel().getValueAt(row, 3).toString();
+        String email = jTable_updatedelete.getModel().getValueAt(row, 4).toString();
+        String type = jTable_updatedelete.getModel().getValueAt(row, 5).toString();
+        String gamezoneid = jTable_updatedelete.getModel().getValueAt(row, 6).toString();
+        String password = jTable_updatedelete.getModel().getValueAt(row, 7).toString();
+        String username = jTable_updatedelete.getModel().getValueAt(row, 8).toString();
+
+        user.setID(Integer.parseInt(ID ));
+        user.setEmail(email);
+        user.setName(Name);
+        user.setContact(contact);
+        user.setType(type);
+        user.setPassword(password);
+        user.setAddress(addres);
+        user.setGameZoneID(Integer.parseInt(gamezoneid));
+        user.setUserName(username);
+
+        Updata_DeleteEmployee newframe = new Updata_DeleteEmployee(user,this, currentgamezone.getName(),currentgamezoneusers,passwordcheck,jTable_updatedelete,currentnoofemployeelabel);
+        newframe.setVisible(true);
+        setVisible(false);
+
+    }//GEN-LAST:event_jTable_updatedeleteMouseClicked
+
+    private void UpdateEmplloyeeSearch_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateEmplloyeeSearch_ButtonActionPerformed
+        // TODO add your handling code here:
+        String Name = EmplyeeIdInput.getText();
+
+        Name = Name.trim();
+
+        for(User user : currentgamezoneusers)
+        {
+            String as =user.getName();
+            String asas = Name;
+            boolean df= as.equalsIgnoreCase(asas);
+            boolean asd = as.equals(asas);
+            if(user.getName().trim().equalsIgnoreCase(Name))
+            {
+                DefaultTableModel m = (DefaultTableModel) jTable_updatedelete.getModel();
+                m.setRowCount(0);
+                DefaultTableModel  model = (DefaultTableModel) jTable_updatedelete.getModel();
+                Object row[] = new Object[9];
+                row[0] = user.getID();
+                row[1] = user.getName();
+                row[2] = user.getAddress();
+                row[3] = user.getContact();
+                row[4] = user.getEmail();
+                row[5] = user.getType();
+                row[6] = user.getGameZoneID();
+                row[7] = user.getPassword();
+                row[8] = user.getAddress();
+                model.addRow(row);
+
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(jPanel1,
+            "No Employee Found For this Name",
+            "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+        return;
+
+    }//GEN-LAST:event_UpdateEmplloyeeSearch_ButtonActionPerformed
+
+    //Method to ADD new GameZoneEmployee
+    private void AddNewEmployee_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddNewEmployee_ButtonActionPerformed
+        // TODO add your handling code here:ADD button to add Employee
+
+        if(currentgamezoneusers.size() == currentgamezone.getMax_Employee())
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+                "You can not register more then "+currentgamezone.getMax_Employee()+ "Employees ,contact product owner to increase No of employees",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+            return ;
+        }
+        String username = AddEmpName_textfield.getText();
+        String password = AddEmpPassword_textfield.getText();
+        String username2 = AddEmpUserName_textfield.getText();
+
+        if(passwordcheck.containsKey(username2) || username2.equals("admin"))
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+                "This UserName is Taken ",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+            return ;
+        }
+
+        if(username.length() == 0 || password.length() == 0 || username2.length() == 0 )
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+                "Please Enter Mandatory Details",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+            return ;
+        }
+
+        if(AddEmpContact_textfield.getText().length()!=10)
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+                "Invalid Contact No",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+            return ;
+        }
+
+        User newuser = new User();
+        newuser.setName(AddEmpName_textfield.getText());
+        newuser.setType("emp");
+        newuser.setGameZoneID(currentuser.getGameZoneID());
+        newuser.setAddress(AddEmpAddress_textfield.getText());
+        newuser.setContact(AddEmpContact_textfield.getText());
+        newuser.setEmail(AddEmpEmail_textfield.getText());
+        newuser.setPassword(AddEmpPassword_textfield.getText());
+        newuser.setUserName(username2);
+
+        SwingWorker work = new SwingWorker<String , Integer>()
+        {
+            @Override
+            protected  String  doInBackground() throws Exception
+            {
+
+                UserInterface Dao = null;
+                try
+                {
+                    Dao = UserFactory.getInstance();
+                    Dao.AddEmp(newuser,currentgamezone.getName());
+                    AddEmp_flag = true;
+                }
+                catch (Exception ex)
+                {
+                    AddEmp_flag = false;
+                    Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                return "end";
+
+            }//do backgrounf ENDS
+
+            @Override
+            protected void done()
+            {
+
+                rechargeloadingdialoge.dispose();
+            }
+        };
+        final ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/Images/recharge.gif"));
+        work.execute();
+        JOptionPane pane = new JOptionPane("", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon,new Object[]{}, null);
+        rechargeloadingdialoge = pane.createDialog(this,"Please wait ");
+        rechargeloadingdialoge.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+
+        rechargeloadingdialoge.setVisible(true);
+
+        if(AddEmp_flag == false)
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+                "Adding Employee Failed.",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        else
+        {
+            UpdateEmployeeListThread updateemployeelist = new UpdateEmployeeListThread(currentgamezoneusers,currentgamezone.getName(),rechargeloadingdialoge);
+            updateemployeelist.start();
+
+            UpdatePasswordCheck updatepasswordcheck = new UpdatePasswordCheck(currentgamezone.getName(),passwordcheck);
+            updatepasswordcheck.start();
+
+            JOptionPane.showMessageDialog(jPanel1,
+                "Adding Employee Success.",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+            // now updating the customer list
+
+        }
+
+        AddEmpName_textfield.setText("");
+        AddEmpAddress_textfield.setText("");
+        AddEmpPassword_textfield.setText("");
+        AddEmpEmail_textfield.setText("");
+        AddEmpContact_textfield.setText("");
+        AddEmpUserName_textfield.setText("");
+        currentnoofemployeelabel.setText(currentgamezoneusers.size()+"");
+        AddEmp_flag = false;
+    }//GEN-LAST:event_AddNewEmployee_ButtonActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:Perticular day today collection
+        if(jDateChooser_todayCollection.getDate() == null )
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+                "Please Provide Date.",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+            return ;
+        }
+        java.util.Date date  = jDateChooser_todayCollection.getDate();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+
+        // Set time fields to zero
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
+        // Put it back in the Date object
+        date = cal.getTime();
+
+        ArrayList<Games> gamelistper = null;
+        StallInterface Dao = StallFactory.getInstance();
+        try
+        {
+            gamelistper = Dao.GetGamesPerticularDate(currentgamezone.getName(), date);
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+                "Unable to Connect To Internet ,Please check your internet Connection.",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+            return ;
+        }
+        if(gamelistper.isEmpty())
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+                "No record for  this perticular date.",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+            return ;
+        }
+        else{
+            DefaultTableModel m = (DefaultTableModel) TodaysCollectionTable.getModel();
+            m.setRowCount(0);
+            for(Games game : gamelistper)
+            {
+                DefaultTableModel  model = (DefaultTableModel) TodaysCollectionTable.getModel();
+                Object row[] = new Object[2];
+
+                row[0] = game.getGameName();
+                row[1] = game.getAmount();
+                model.addRow(row);
+
+            }
+        }
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:Register Customer
+        RegisterCustomer registerCustomer = new  RegisterCustomer(this, true,Noofcustomerlabel,jTable_customers,customerlist,currentgamezone);
+        registerCustomer.setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void ResetValuestozerobuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetValuestozerobuttonActionPerformed
+        // TODO add your handling code here://Reset button code In Recharge Tab
+        jTextField1.setText("");
+        jTextField2.setText("");
+        Textfiled_ExistingAmount.setText("");
+    }//GEN-LAST:event_ResetValuestozerobuttonActionPerformed
+
+    private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
+        // TODO add your handling code here:1000rs
+        jTextField2.setText("1000");
+    }//GEN-LAST:event_jRadioButton4ActionPerformed
+
+    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+        // TODO add your handling code here:500rs
+        jTextField2.setText("500");
+    }//GEN-LAST:event_jRadioButton3ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:200 rs
+        jTextField2.setText("200");
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:100 radio button
+        jTextField2.setText("100");
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:Recharge Button in rechargeb tab
+        String cardno = jTextField1.getText();
+        String amount = jTextField2.getText();
+        int amt =0;
+        //validation code
+        if("".equals(cardno) || "".equals(amount))
+        {
+            if("".equals(cardno))
+            {
+
+                JOptionPane.showMessageDialog(jPanel1,
+                    "Please Scan The Card .",
+                    "Inane error",
+                    JOptionPane.ERROR_MESSAGE);
+                return ;
+
+            }else
+            {
+                JOptionPane.showMessageDialog(jPanel1,
+                    "Please Enter Amount.",
+                    "Inane error",
+                    JOptionPane.ERROR_MESSAGE);
+                return ;
+            }
+
+        }
+        try
+        {
+            //Converting String amount into Integer value
+            amt = Integer.parseInt(amount);
+
+        }catch(NumberFormatException e)
+        {
+
+            JOptionPane.showMessageDialog(jPanel1,
+                "Please Enter A Valid Amount Amount.",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        //first writting amout to card serial communication code
+        RechargeWait = new CountDownLatch(1); //for stoping the gui
+        try
+        {
+
+            FactoryClass.getCommObj().sendData(amount);
+            RechargeWait.await();
+
+        }
+        catch (IOException ex)
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+                "Error in Recharge ,Please Check Com Port Connection",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+                "Something went wrong  "+e,
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //now doing recharge
+
+        if(ComportRecharge == false)
+        {
+
+            JOptionPane.showMessageDialog(jPanel1,
+                "Error in HardWare ,Please Check the connection",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+
+        }
+
+        ComportRecharge = false;
+
+        Recharge rec = new Recharge();
+        long millis=System.currentTimeMillis();
+        java.sql.Timestamp date = new Timestamp(millis);
+
+        rec.setAmount(amt);
+        rec.setCardNo(cardno);
+        rec.setEmpName(currentuser.getName());
+        rec.setDate(date);
+
+        //Details Gather Complete now Recharge
+        //step 1 - Record Save to Database
+        //step 2 - Recharge to the card (com port recharge)
+        //step 3 - update Transaction details
+
+        SwingWorker work = new SwingWorker<String , Integer>()
+        {
+            @Override
+            protected  String  doInBackground() throws Exception
+            {
+                String TableName = currentgamezone.getName()+"_transaction";
+
+                TransactionInterface Dao = null ;
+                try
+                {
+                    Dao = TransactionFactory.getInstance();
+                    Dao.Recharge(rec, TableName);
+                    rech_flag = true;
+                }
+                catch (Exception ex)
+                {
+                    //Error In Transaction
+                    Logger.getLogger(MainScreen_StallOwner.class.getName()).log(Level.SEVERE, null, ex);
+                    rech_flag = false;
+                }
+
+                return "end";
+
+            }//do backgrounf ENDS
+
+            @Override
+            protected void done()
+            {
+
+                rechargeloadingdialoge.dispose();
+            }
+        };
+
+        final ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/Images/recharge.gif"));
+        work.execute();
+        JOptionPane pane = new JOptionPane("", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon,new Object[]{}, null);
+        rechargeloadingdialoge = pane.createDialog(this,"Please wait ");
+        rechargeloadingdialoge.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        rechargeloadingdialoge.setVisible(true);
+        //jDialog.show();  this method is depricated there using setVisible method for showing the dialoge box
+
+        if(rech_flag == false)
+        {
+            System.out.println("Error in recharge");
+            JOptionPane.showMessageDialog(jPanel1,
+                "Recharge Failed Check Internet Connection",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+
+            return ;
+        }else
+        {
+
+            UpdateTransactionListThread updatetransaction = new UpdateTransactionListThread(transdetailscomplete, currentgamezone.getName());
+            updatetransaction.start();
+            JOptionPane.showMessageDialog(jPanel1,
+                "Recharge Success",
+                "Inane error",
+                JOptionPane.PLAIN_MESSAGE);
+        }
+
+        rech_flag = false;
+        //jTextField1.setText("");
+        //jTextField2.setText("");
+        //Textfiled_ExistingAmount.setText("");
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //TODO add your handling code here:
+        String cardno = jTextField1.getText();
+        if(cardno.length() == 0 )
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+                "Please Enter Card No.",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+            return ;
+        }
+        if("".equals(cardno))
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+                "Please Enter Card No.",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+            return ;
+        }
+        try
+        {
+            FactoryClass.getCommObj().sendData("reset");
+        }
+        catch (IOException ex)
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+                "Error in ReFund.",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+            return ;
+        }
+
+        JOptionPane.showMessageDialog(jPanel1,
+            "Refund Success",
+            "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+        return ;
+    }//GEN-LAST:event_jButton1ActionPerformed
  	public static java.sql.Timestamp convert(java.util.Date date)
 	{
 		return new java.sql.Timestamp(date.getTime());
@@ -3249,41 +2764,27 @@ cal.set(Calendar.MILLISECOND, 0);
     private javax.swing.JButton AddNewEmployee_Button;
     private javax.swing.JPanel AddUpateEmployee;
     private javax.swing.JPanel Customer;
-    private javax.swing.JPanel Emp_owndetailsPanel;
     private javax.swing.JTabbedPane EmployeeTab;
-    private javax.swing.JLabel Employee_headingtab;
     private javax.swing.JTextField Employeeidinput;
     private javax.swing.JTextField EmplyeeIdInput;
     private javax.swing.JPanel Emprecords;
-    public javax.swing.JLabel Label_clock;
+    private javax.swing.JLabel Label_clock;
     private javax.swing.JLabel Noofcustomerlabel;
+    private javax.swing.JPanel Othertrasactions;
     private javax.swing.JButton RegisterNewcustomer_button;
-    private javax.swing.JButton RegisterNewcustomer_button1;
     private javax.swing.JButton ResetButton_Customer;
-    private javax.swing.JButton ResetButton_Customer1;
     private javax.swing.JButton ResetValuestozerobutton;
-    public javax.swing.JTextField Textfiled_ExistingAmount;
+    private javax.swing.JTextField Textfiled_ExistingAmount;
     private javax.swing.JTable TodaysCollectionTable;
     private javax.swing.JButton UpdateEmplloyeeSearch_Button;
     private javax.swing.JLabel UserNameUniqueLabel;
     private javax.swing.ButtonGroup buttonGroup1;
-    public javax.swing.JLabel currentnoofemployeelabel;
-    private javax.swing.JTextField emp_contactregistercust;
-    private javax.swing.JTextField emp_emailregistercust;
-    private javax.swing.JTextField emp_nameregistercust;
-    private javax.swing.JPanel emp_owndetails;
-    private javax.swing.JPanel emp_registercustomerpanel;
-    private javax.swing.JPanel emp_registernewcustomer;
-    private javax.swing.JTextField emptab_address;
-    private javax.swing.JTextField emptab_contact;
-    private javax.swing.JTextField emptab_emailid;
-    private javax.swing.JTextField emptab_name;
-    private javax.swing.JTextField emptab_password;
-    private javax.swing.JTextField emptab_username;
+    private javax.swing.JLabel currentnoofemployeelabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
     private com.toedter.calendar.JDateChooser jDateChooser_EndDate;
     private com.toedter.calendar.JDateChooser jDateChooser_StartDate;
@@ -3320,26 +2821,14 @@ cal.set(Calendar.MILLISECOND, 0);
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel3_totalTransaction;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel_GameZoneNAme;
-    private javax.swing.JLabel jLabel_GameZoneNAme1;
     private javax.swing.JLabel jLabel_Label;
     private javax.swing.JLabel jLabel_OwnerName;
     private javax.swing.JLabel jLabel_OwnerName1;
@@ -3347,7 +2836,6 @@ cal.set(Calendar.MILLISECOND, 0);
     private javax.swing.JLabel jLabel_currentempname2;
     private javax.swing.JLabel jLabel_validDate;
     private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -3359,11 +2847,9 @@ cal.set(Calendar.MILLISECOND, 0);
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
-    public javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
@@ -3384,19 +2870,20 @@ cal.set(Calendar.MILLISECOND, 0);
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable_EmpRecord;
     private javax.swing.JTable jTable_customers;
     private javax.swing.JTable jTable_transactionDetails;
     private javax.swing.JTable jTable_updatedelete;
-    public javax.swing.JTextField jTextField1;
-    public javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField_regcontact;
     private javax.swing.JTextField jTextField_regemail;
     private javax.swing.JTextField jTextField_regname;

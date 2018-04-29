@@ -26,7 +26,7 @@ public class FactoryClass
         cardRechargerPort = "";
     }
 
-    private static CommPortTest commObj,commObj2;
+    public static CommPortTest commObj,commObj2;
     private static MainScreen_StallOwner MainGui; 
     private static String zigbeePort;
     private static String cardRechargerPort;
