@@ -248,6 +248,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
              Emprecords.setVisible(false);
              transaction.setVisible(false);
              Customer.setVisible(false);
+             OtherTransactions.setVisible(false);
             
             
             
@@ -419,8 +420,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         transaction = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_transactionDetails = new javax.swing.JTable();
-        jPanel20 = new javax.swing.JPanel();
-        jProgressBar1 = new javax.swing.JProgressBar();
         jDateChooser_StartDate = new com.toedter.calendar.JDateChooser();
         jDateChooser_EndDate = new com.toedter.calendar.JDateChooser();
         jButton7 = new javax.swing.JButton();
@@ -440,9 +439,16 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jTable_customers = new javax.swing.JTable();
         RegisterNewcustomer_button = new javax.swing.JButton();
         ResetButton_Customer = new javax.swing.JButton();
-        Othertrasactions = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        OtherTransactions = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        OthertrasactionsTable = new javax.swing.JTable();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel_validDate1 = new javax.swing.JLabel();
+        jButton8 = new javax.swing.JButton();
+        jDateChooser_EndDate2 = new com.toedter.calendar.JDateChooser();
+        jDateChooser_StartDate2 = new com.toedter.calendar.JDateChooser();
+        jButton9 = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -466,8 +472,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel31 = new javax.swing.JLabel();
         Noofcustomerlabel = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
-        jLabel36 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel_Label = new javax.swing.JLabel();
         Label_clock = new javax.swing.JLabel();
@@ -928,32 +934,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         transaction.add(jScrollPane2);
         jScrollPane2.setBounds(0, 160, 860, 402);
-
-        jPanel20.setBackground(new java.awt.Color(0, 0, 0));
-
-        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
-        jPanel20.setLayout(jPanel20Layout);
-        jPanel20Layout.setHorizontalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
-            .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel20Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jPanel20Layout.setVerticalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 210, Short.MAX_VALUE)
-            .addGroup(jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel20Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-
-        transaction.add(jPanel20);
-        jPanel20.setBounds(260, 220, 350, 210);
         transaction.add(jDateChooser_StartDate);
         jDateChooser_StartDate.setBounds(121, 50, 150, 40);
         transaction.add(jDateChooser_EndDate);
@@ -985,7 +965,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         jLabel_validDate.setForeground(new java.awt.Color(255, 0, 0));
         transaction.add(jLabel_validDate);
-        jLabel_validDate.setBounds(40, 30, 110, 20);
+        jLabel_validDate.setBounds(40, 30, 250, 20);
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel15.setText("Total Collection");
@@ -1060,31 +1040,63 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         Customer.add(ResetButton_Customer);
         ResetButton_Customer.setBounds(540, 170, 90, 23);
 
-        Othertrasactions.setBackground(new java.awt.Color(255, 255, 255));
-        Othertrasactions.setLayout(null);
+        OtherTransactions.setBackground(new java.awt.Color(255, 255, 255));
+        OtherTransactions.setLayout(null);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        OthertrasactionsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "CustomerName", "PhoneNo", "CardNo", "Method", "Amount", "Date"
             }
         ));
-        jScrollPane5.setViewportView(jTable1);
+        OthertrasactionsTable.setEnabled(false);
+        jScrollPane7.setViewportView(OthertrasactionsTable);
 
-        Othertrasactions.add(jScrollPane5);
-        jScrollPane5.setBounds(0, 280, 870, 280);
+        OtherTransactions.add(jScrollPane7);
+        jScrollPane7.setBounds(0, 290, 860, 308);
+
+        jLabel36.setText("Start Date");
+        OtherTransactions.add(jLabel36);
+        jLabel36.setBounds(40, 70, 80, 14);
+
+        jLabel40.setText("End Date");
+        OtherTransactions.add(jLabel40);
+        jLabel40.setBounds(40, 120, 70, 14);
+
+        jLabel_validDate1.setForeground(new java.awt.Color(255, 0, 0));
+        OtherTransactions.add(jLabel_validDate1);
+        jLabel_validDate1.setBounds(40, 30, 230, 20);
+
+        jButton8.setText("Search");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        OtherTransactions.add(jButton8);
+        jButton8.setBounds(300, 50, 150, 40);
+        OtherTransactions.add(jDateChooser_EndDate2);
+        jDateChooser_EndDate2.setBounds(120, 110, 150, 40);
+        OtherTransactions.add(jDateChooser_StartDate2);
+        jDateChooser_StartDate2.setBounds(121, 50, 150, 40);
+
+        jButton9.setText("Get This Month");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+        OtherTransactions.add(jButton9);
+        jButton9.setBounds(300, 110, 150, 40);
 
         jLayeredPane1.setLayer(AddEmployee, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(AddUpateEmployee, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(Emprecords, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(transaction, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(Customer, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(Othertrasactions, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(OtherTransactions, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -1100,7 +1112,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(Customer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(Othertrasactions, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(OtherTransactions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1114,7 +1126,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(Customer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(Othertrasactions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(OtherTransactions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
@@ -1338,29 +1350,39 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        jLabel36.setText("jLabel36");
+        jPanel10.setBackground(new java.awt.Color(54, 33, 89));
+        jPanel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel10MouseClicked(evt);
+            }
+        });
 
-        jLabel38.setText("jLabel38");
+        jLabel39.setBackground(new java.awt.Color(54, 33, 89));
+        jLabel39.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel39.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel39.setText("Other Trasactions");
+
+        jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/newtransaction (2).png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addComponent(jLabel38)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel36)
-                .addGap(68, 68, 68))
+                .addGap(69, 69, 69)
+                .addComponent(jLabel41)
+                .addGap(36, 36, 36)
+                .addComponent(jLabel39)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel36)
-                    .addComponent(jLabel38))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel41)
+                    .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -1707,7 +1729,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel14.setBackground(new Color(54, 33,89));
         jPanel15.setBackground(new Color(54, 33,89));
         jPanel22.setBackground(new Color(110, 89,222));
-
+        jPanel10.setBackground(new Color(54, 33,89));
         jLabel_Label.setText("Register New Customer");
 
         AddEmployee.setVisible(false);
@@ -1715,6 +1737,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         Emprecords.setVisible(false);
         Customer.setVisible(true);
         transaction.setVisible(false);
+        OtherTransactions.setVisible(true);
 
         DefaultTableModel m = (DefaultTableModel) jTable_customers.getModel();
         m.setRowCount(0);
@@ -1753,7 +1776,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel14.setBackground(new Color(54, 33,89));
         jPanel15.setBackground(new Color(54, 33,89));
         jPanel22.setBackground(new Color(54, 33,89));
-
+          jPanel10.setBackground(new Color(54, 33,89));
         jLabel_Label.setText("Transaction Details");
 
         jDateChooser_EndDate.setDate(null);
@@ -1763,7 +1786,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         Emprecords.setVisible(false);
         Customer.setVisible(false);
         transaction.setVisible(true);
-
+        OtherTransactions.setVisible(false);
         DefaultTableModel m = (DefaultTableModel) jTable_transactionDetails.getModel();
         m.setRowCount(0);
 
@@ -1797,13 +1820,14 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel14.setBackground(new Color(54, 33,89));
         jPanel15.setBackground(new Color(110, 89,222));
         jPanel22.setBackground(new Color(54, 33,89));
-
+        jPanel10.setBackground(new Color(54, 33,89));
         jLabel_Label.setText("Employees Records");
         AddEmployee.setVisible(false);
         AddUpateEmployee.setVisible(false);
         transaction.setVisible(false);
         Emprecords.setVisible(true);
         Customer.setVisible(false);
+        OtherTransactions.setVisible(false);
 
         //to display record into the table
         DefaultTableModel m = (DefaultTableModel) jTable_EmpRecord.getModel();
@@ -1833,7 +1857,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel14.setBackground(new Color(110, 89,222));
         jPanel15.setBackground(new Color(54, 33,89));
         jPanel22.setBackground(new Color(54, 33,89));
-
+       jPanel10.setBackground(new Color(54, 33,89));
         jLabel_Label.setText("Update/Delete Employee");
 
         AddEmployee.setVisible(false);
@@ -1841,6 +1865,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         Emprecords.setVisible(false);
         transaction.setVisible(false);
         Customer.setVisible(false);
+        OtherTransactions.setVisible(false);
 
         DefaultTableModel m = (DefaultTableModel) jTable_updatedelete.getModel();
         m.setRowCount(0);
@@ -1870,12 +1895,14 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel15.setBackground(new Color(54, 33,89));
         jLabel_Label.setText("Add New Employee");
         jPanel22.setBackground(new Color(54, 33,89));
+         jPanel10.setBackground(new Color(54, 33,89));
 
         AddEmployee.setVisible(true);
         AddUpateEmployee.setVisible(false);
         Emprecords.setVisible(false);
         transaction.setVisible(false);
         Customer.setVisible(false);
+        OtherTransactions.setVisible(false);
     }//GEN-LAST:event_jPanel13MouseClicked
 
     private void CustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CustomerMouseClicked
@@ -2013,6 +2040,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         {
             jLabel_validDate.setText("Enter Valid Dates");
             return;
+        }
+          if(jDateChooser_StartDate.getDate().after(jDateChooser_EndDate.getDate()))
+        {
+          jLabel_validDate1.setText("start Date Can't be greater then end date");
+            return;  
         }
         try
         {
@@ -2653,8 +2685,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         JOptionPane.showMessageDialog(jPanel1,
             "Refund Success",
-            "Inane error",
-            JOptionPane.ERROR_MESSAGE);
+            "Success",
+            JOptionPane.PLAIN_MESSAGE);
         return ;
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -2666,6 +2698,151 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
         
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:Other Trasaction perticular date
+        
+        java.util.Date startdate;
+        java.util.Date enddate;
+        if(jDateChooser_StartDate2.getDate() == null || jDateChooser_EndDate2.getDate() == null)
+        {
+            jLabel_validDate1.setText("Enter Valid Dates");
+            return;
+        }
+        if(jDateChooser_StartDate2.getDate().after(jDateChooser_EndDate2.getDate()))
+        {
+          jLabel_validDate1.setText("start Date Can't be greater then end date");
+            return;  
+        }
+        try
+        {
+            startdate  = jDateChooser_StartDate2.getDate();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(startdate);
+
+            // Set time fields to zero
+            cal.set(Calendar.HOUR_OF_DAY, 0);
+            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.SECOND, 0);
+            cal.set(Calendar.MILLISECOND, 0);
+
+            // Put it back in the Date object
+            startdate = cal.getTime();
+            //startdate  = jDateChooser_StartDate.getDate();
+
+            enddate =jDateChooser_EndDate2.getDate();
+
+            Calendar cal2 = Calendar.getInstance();
+            cal2.setTime(enddate);
+
+            // Set time fields to zero
+            cal2.set(Calendar.HOUR_OF_DAY, 24);
+
+            // Put it back in the Date object
+            enddate = cal2.getTime();
+        }
+        catch(Exception e)
+        {
+
+            jLabel_validDate1.setText("Enter Valid Dates");
+            return;
+        }
+
+        //Getting data from the amzone database
+
+        ArrayList<gamecenter.OtherTrasactions> list  = null;
+        try
+        {
+            TransactionInterface Dao = TransactionFactory.getInstance();
+            list = Dao.GetOthertrasactionsPerticularDates(currentgamezone.getName()+"_other_transaction", new java.sql.Date(startdate.getTime()), new java.sql.Date(enddate.getTime()));
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+                "Unable to Connect To Internet ,Please check your internet Connection.",
+                "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+            return ;
+
+        }
+            DefaultTableModel m = (DefaultTableModel) OthertrasactionsTable.getModel();
+           m.setRowCount(0);
+           DefaultTableModel  model = (DefaultTableModel) OthertrasactionsTable.getModel();
+           Object row[] = new Object[8];
+           for(int i=0 ; i<list.size() ; i++)
+           {
+           row[0] = list.get(i).getID();
+           row[1] = list.get(i).getCustomerName();
+           row[2] = list.get(i).getPhoneNo();
+           row[3] = list.get(i).getCardNo();
+           row[4] =list.get(i).getMethod();
+           row[5] = list.get(i).getMoney();
+           row[6] = list.get(i).getDate();
+      
+           model.addRow(row);  
+           }
+            jLabel_validDate1.setText("");
+
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        //Other Trasaction this Month
+        
+        ArrayList<gamecenter.OtherTrasactions> otherTrasactionses= null;
+        try
+        {
+            TransactionInterface Dao = TransactionFactory.getInstance();
+          otherTrasactionses=  Dao.GetOthertrasactions(currentgamezone.getName()+"_other_transaction");
+            
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(jPanel1,
+            "Internet Connection Error",
+            "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+        return ;
+        }
+        
+           DefaultTableModel m = (DefaultTableModel) OthertrasactionsTable.getModel();
+           m.setRowCount(0);
+           DefaultTableModel  model = (DefaultTableModel) OthertrasactionsTable.getModel();
+           Object row[] = new Object[8];
+           for(int i=0 ; i<otherTrasactionses.size() ; i++)
+           {
+           row[0] = otherTrasactionses.get(i).getID();
+           row[1] = otherTrasactionses.get(i).getCustomerName();
+           row[2] = otherTrasactionses.get(i).getPhoneNo();
+           row[3] = otherTrasactionses.get(i).getCardNo();
+           row[4] =otherTrasactionses.get(i).getMethod();
+           row[5] = otherTrasactionses.get(i).getMoney();
+           row[6] = otherTrasactionses.get(i).getDate();
+      
+           model.addRow(row);  
+           }
+       
+        
+        
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jPanel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseClicked
+        // TODO add your handling code here:
+        jPanel18.setBackground(new Color(54, 33,89));
+        jPanel13.setBackground(new Color(54, 33,89));
+        jPanel14.setBackground(new Color(54, 33,89));
+        jPanel15.setBackground(new Color(54 , 33 , 89));
+        jPanel22.setBackground(new Color(54, 33,89));
+        jPanel10.setBackground(new Color(110, 89,222));
+        jLabel_Label.setText("Employees Records");
+        AddEmployee.setVisible(false);
+        AddUpateEmployee.setVisible(false);
+        transaction.setVisible(false);
+        Emprecords.setVisible(false);
+        OtherTransactions.setVisible(true);
+        Customer.setVisible(false);
+          jLabel_Label.setText("Others Transaction Details");
+        
+    }//GEN-LAST:event_jPanel10MouseClicked
  	public static java.sql.Timestamp convert(java.util.Date date)
 	{
 		return new java.sql.Timestamp(date.getTime());
@@ -2790,7 +2967,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JPanel Emprecords;
     public javax.swing.JLabel Label_clock;
     private javax.swing.JLabel Noofcustomerlabel;
-    private javax.swing.JPanel Othertrasactions;
+    private javax.swing.JPanel OtherTransactions;
+    private javax.swing.JTable OthertrasactionsTable;
     private javax.swing.JButton RegisterNewcustomer_button;
     private javax.swing.JButton ResetButton_Customer;
     private javax.swing.JButton ResetValuestozerobutton;
@@ -2807,8 +2985,12 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private com.toedter.calendar.JDateChooser jDateChooser_EndDate;
+    private com.toedter.calendar.JDateChooser jDateChooser_EndDate2;
     private com.toedter.calendar.JDateChooser jDateChooser_StartDate;
+    private com.toedter.calendar.JDateChooser jDateChooser_StartDate2;
     private com.toedter.calendar.JDateChooser jDateChooser_todayCollection;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -2841,9 +3023,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel3_totalTransaction;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -2856,6 +3040,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JLabel jLabel_currentEMpName;
     private javax.swing.JLabel jLabel_currentempname2;
     private javax.swing.JLabel jLabel_validDate;
+    private javax.swing.JLabel jLabel_validDate1;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
@@ -2873,7 +3058,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -2882,7 +3066,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
@@ -2891,14 +3074,13 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable_EmpRecord;
     private javax.swing.JTable jTable_customers;
     private javax.swing.JTable jTable_transactionDetails;

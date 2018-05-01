@@ -205,8 +205,7 @@ public class TransactionImplementation implements TransactionInterface
     {
         ArrayList<OtherTrasactions> transactiondetails = new ArrayList<>();
         
-        TransDetails = "SELECT * FROM GameZoneDB."+TableName+" WHERE MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE()) ORDER BY  Date desc" ;
-        
+         TransDetails = "SELECT * FROM GameZoneDB."+TableName+" WHERE DATE(Date)>= '"+Start+"' AND DATE(Date) <= '"+End+"'" ;
                    Statement stmt=conn.createStatement();  
                    ResultSet rs = stmt.executeQuery(TransDetails);
                    while(rs.next())  
