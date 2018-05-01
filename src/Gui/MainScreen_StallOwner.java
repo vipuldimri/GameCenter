@@ -497,10 +497,10 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel2.setBackground(new java.awt.Color(153, 153, 255));
         jPanel2.setLayout(null);
 
-        jPanel4.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel4.setBackground(new java.awt.Color(153, 153, 255));
         jPanel4.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -552,7 +552,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel4.add(jButton2);
         jButton2.setBounds(60, 340, 170, 70);
 
-        jRadioButton1.setBackground(new java.awt.Color(0, 0, 0));
+        jRadioButton1.setBackground(new java.awt.Color(153, 153, 255));
         jRadioButton1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jRadioButton1.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton1.setText("100");
@@ -562,9 +562,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(jRadioButton1);
-        jRadioButton1.setBounds(240, 260, 107, 37);
+        jRadioButton1.setBounds(350, 260, 107, 37);
 
-        jRadioButton2.setBackground(new java.awt.Color(0, 0, 0));
+        jRadioButton2.setBackground(new java.awt.Color(153, 153, 255));
         jRadioButton2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jRadioButton2.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton2.setText("200");
@@ -574,9 +574,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(jRadioButton2);
-        jRadioButton2.setBounds(430, 260, 110, 40);
+        jRadioButton2.setBounds(500, 260, 110, 40);
 
-        jRadioButton3.setBackground(new java.awt.Color(0, 0, 0));
+        jRadioButton3.setBackground(new java.awt.Color(153, 153, 255));
         jRadioButton3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jRadioButton3.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton3.setText("500");
@@ -586,9 +586,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(jRadioButton3);
-        jRadioButton3.setBounds(580, 260, 71, 37);
+        jRadioButton3.setBounds(670, 260, 71, 37);
 
-        jRadioButton4.setBackground(new java.awt.Color(0, 0, 0));
+        jRadioButton4.setBackground(new java.awt.Color(153, 153, 255));
         jRadioButton4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jRadioButton4.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButton4.setText("1000");
@@ -598,7 +598,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(jRadioButton4);
-        jRadioButton4.setBounds(780, 260, 85, 37);
+        jRadioButton4.setBounds(820, 260, 85, 37);
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
