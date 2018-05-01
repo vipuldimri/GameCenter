@@ -31,6 +31,7 @@ public class GameCenter
         {
             Thread.sleep(60);
             splash.Loading_Label.setText("Loading .... "+i+" %");
+            splash.jProgressBar1.setValue(i);
             if(i==100)
             {
                 backgroundthread1.join();
