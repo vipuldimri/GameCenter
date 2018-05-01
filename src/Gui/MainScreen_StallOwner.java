@@ -364,6 +364,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel_currentEMpName = new javax.swing.JLabel();
         ResetValuestozerobutton = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -533,7 +534,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(jButton1);
-        jButton1.setBounds(580, 340, 170, 70);
+        jButton1.setBounds(490, 340, 170, 70);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Recharge.png"))); // NOI18N
         jButton2.setText("Recharge ");
@@ -543,7 +544,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(jButton2);
-        jButton2.setBounds(120, 340, 170, 70);
+        jButton2.setBounds(60, 340, 170, 70);
 
         jRadioButton1.setBackground(new java.awt.Color(0, 0, 0));
         jRadioButton1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -612,7 +613,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(ResetValuestozerobutton);
-        ResetValuestozerobutton.setBounds(350, 340, 180, 70);
+        ResetValuestozerobutton.setBounds(270, 340, 180, 70);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Customer.png"))); // NOI18N
         jButton5.setText("Register Customer");
@@ -622,7 +623,17 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(jButton5);
-        jButton5.setBounds(810, 340, 230, 70);
+        jButton5.setBounds(700, 340, 230, 70);
+
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Cards.png"))); // NOI18N
+        jButton6.setText("Other trasaction");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton6);
+        jButton6.setBounds(960, 340, 190, 70);
 
         jPanel2.add(jPanel4);
         jPanel4.setBounds(2, 7, 1200, 440);
@@ -2646,6 +2657,15 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             JOptionPane.ERROR_MESSAGE);
         return ;
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:OtherTrasaction 
+        
+        OtherTrasactions other = new OtherTrasactions(this, true,currentgamezone);
+        other.setVisible(true);
+        
+        
+    }//GEN-LAST:event_jButton6ActionPerformed
  	public static java.sql.Timestamp convert(java.util.Date date)
 	{
 		return new java.sql.Timestamp(date.getTime());
@@ -2768,23 +2788,24 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JTextField Employeeidinput;
     private javax.swing.JTextField EmplyeeIdInput;
     private javax.swing.JPanel Emprecords;
-    private javax.swing.JLabel Label_clock;
+    public javax.swing.JLabel Label_clock;
     private javax.swing.JLabel Noofcustomerlabel;
     private javax.swing.JPanel Othertrasactions;
     private javax.swing.JButton RegisterNewcustomer_button;
     private javax.swing.JButton ResetButton_Customer;
     private javax.swing.JButton ResetValuestozerobutton;
-    private javax.swing.JTextField Textfiled_ExistingAmount;
+    public javax.swing.JTextField Textfiled_ExistingAmount;
     private javax.swing.JTable TodaysCollectionTable;
     private javax.swing.JButton UpdateEmplloyeeSearch_Button;
     private javax.swing.JLabel UserNameUniqueLabel;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JLabel currentnoofemployeelabel;
+    public javax.swing.JLabel currentnoofemployeelabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private com.toedter.calendar.JDateChooser jDateChooser_EndDate;
     private com.toedter.calendar.JDateChooser jDateChooser_StartDate;
@@ -2847,7 +2868,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
+    public javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel18;
@@ -2882,8 +2903,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JTable jTable_customers;
     private javax.swing.JTable jTable_transactionDetails;
     private javax.swing.JTable jTable_updatedelete;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    public javax.swing.JTextField jTextField1;
+    public javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField_regcontact;
     private javax.swing.JTextField jTextField_regemail;
     private javax.swing.JTextField jTextField_regname;
