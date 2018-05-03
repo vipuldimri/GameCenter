@@ -515,7 +515,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Amount");
         jPanel4.add(jLabel2);
-        jLabel2.setBounds(350, 160, 100, 30);
+        jLabel2.setBounds(360, 160, 100, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -606,10 +606,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel4.add(jLabel27);
         jLabel27.setBounds(890, 0, 110, 30);
 
+        jLabel_currentEMpName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel_currentEMpName.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_currentEMpName.setText("jLabel28");
         jPanel4.add(jLabel_currentEMpName);
-        jLabel_currentEMpName.setBounds(1010, 10, 40, 14);
+        jLabel_currentEMpName.setBounds(1010, 2, 170, 30);
 
         ResetValuestozerobutton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Clear.png"))); // NOI18N
         ResetValuestozerobutton.setText("Clear");
