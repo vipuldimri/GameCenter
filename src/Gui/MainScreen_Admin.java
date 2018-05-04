@@ -20,6 +20,9 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import Database.GameZoneDetailsAndName;
 import gamecenter.Clock;
+import gamecenter.Games;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Timer;
 public class MainScreen_Admin extends javax.swing.JFrame 
 {
@@ -174,6 +177,11 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jComboBox_allgamezones = new javax.swing.JComboBox<>();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable_transaction = new javax.swing.JTable();
+        jLabel10 = new javax.swing.JLabel();
+        jDateChooser_todayCollection_from = new com.toedter.calendar.JDateChooser();
+        jDateChooser_todayCollection_from1 = new com.toedter.calendar.JDateChooser();
+        jDateChooser_todayCollection_to = new com.toedter.calendar.JDateChooser();
+        jButton2 = new javax.swing.JButton();
         EmployeeDetails = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jComboBox1_selectgamezoneemployee = new javax.swing.JComboBox<>();
@@ -402,9 +410,9 @@ public class MainScreen_Admin extends javax.swing.JFrame
         GameZoneTransaction.setBackground(new java.awt.Color(255, 255, 255));
         GameZoneTransaction.setLayout(null);
 
-        jLabel8.setText("Select GameZone");
+        jLabel8.setText("Total collection");
         GameZoneTransaction.add(jLabel8);
-        jLabel8.setBounds(65, 28, 83, 14);
+        jLabel8.setBounds(620, 80, 190, 40);
 
         jComboBox_allgamezones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -412,7 +420,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
             }
         });
         GameZoneTransaction.add(jComboBox_allgamezones);
-        jComboBox_allgamezones.setBounds(201, 28, 28, 20);
+        jComboBox_allgamezones.setBounds(201, 28, 180, 20);
 
         jTable_transaction.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -426,7 +434,26 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jScrollPane4.setViewportView(jTable_transaction);
 
         GameZoneTransaction.add(jScrollPane4);
-        jScrollPane4.setBounds(0, 113, 900, 402);
+        jScrollPane4.setBounds(0, 150, 900, 390);
+
+        jLabel10.setText("Select GameZone");
+        GameZoneTransaction.add(jLabel10);
+        jLabel10.setBounds(65, 28, 130, 14);
+        GameZoneTransaction.add(jDateChooser_todayCollection_from);
+        jDateChooser_todayCollection_from.setBounds(60, 80, 150, 40);
+        GameZoneTransaction.add(jDateChooser_todayCollection_from1);
+        jDateChooser_todayCollection_from1.setBounds(420, 620, 150, 40);
+        GameZoneTransaction.add(jDateChooser_todayCollection_to);
+        jDateChooser_todayCollection_to.setBounds(250, 80, 150, 40);
+
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        GameZoneTransaction.add(jButton2);
+        jButton2.setBounds(430, 90, 73, 23);
 
         EmployeeDetails.setBackground(new java.awt.Color(255, 255, 255));
         EmployeeDetails.setLayout(null);
@@ -649,80 +676,60 @@ public class MainScreen_Admin extends javax.swing.JFrame
     //Method for get transaction for perticular GameZone
     private void jComboBox_allgamezonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_allgamezonesActionPerformed
         // TODO add your handling code here:action event on conbo box
-        String GamezoneName = jComboBox_allgamezones.getSelectedItem().toString();
-        if(GamezoneName.equals("Select GameZone"))
-        {
-            return ;
-        }
-     
-      
-        //Background worker for getting the data from the server 
-        SwingWorker work = new SwingWorker<String , Integer>() {
-	            @Override
-	            protected  String  doInBackground() throws Exception 
-	            {
-	              
-                     try 
-                      {
-                           TransactionInterface Dao;
-                           Dao = TransactionFactory.getInstance();
-                            String TransactionTableName = GamezoneName+"_transaction";
-                           transactionlist  = Dao.GetTransactionDetails(TransactionTableName);
-                      } 
-                     catch (Exception ex) 
-                      {
-                           System.out.println(ex);
-                           Logger.getLogger(Background_GetTransactionDetails.class.getName()).log(Level.SEVERE, null, ex);
-                      }
-                        //Arguments is table Name
-               
-                       
-                     
-                                          
-                        jDialog.dispose();
-                        return "end";
-	                
-	            }//do backgrounf ENDS
-
-
-	            @Override
-	            protected void done()
-                    {
-                        
         
-	            }
-	        };
-        final ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/Images/Loading.gif"));
-        work.execute();
-        JOptionPane pane = new JOptionPane("", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon,new Object[]{}, null);
-        jDialog = pane.createDialog(this,"Loading Date");
-        jDialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        return;
+//        String GamezoneName = jComboBox_allgamezones.getSelectedItem().toString();
+//        if(GamezoneName.equals("Select GameZone"))
+//        {
+//            return ;
+//        }
+//     
+//      
+//        //Background worker for getting the data from the server 
+//        SwingWorker work = new SwingWorker<String , Integer>() {
+//	            @Override
+//	            protected  String  doInBackground() throws Exception 
+//	            {
+//	              
+//                     try 
+//                      {
+//                         
+//                      } 
+//                     catch (Exception ex) 
+//                      {
+//                           System.out.println(ex);
+//                           
+//                      }
+//                        //Arguments is table Name
+//               
+//                       
+//                     
+//                                          
+//                        jDialog.dispose();
+//                        return "end";
+//	                
+//	            }//do backgrounf ENDS
+//
+//
+//	            @Override
+//	            protected void done()
+//                    {
+//                        
+//        
+//	            }
+//	        };
+      //  final ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource("/Images/Loading.gif"));
+        //work.execute();
+        //JOptionPane pane = new JOptionPane("", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, icon,new Object[]{}, null);
+        //jDialog = pane.createDialog(this,"Loading Date");
+        //jDialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
       
         //jDialog.show();  this method is depricated there using setVisible method for showing the dialoge box 
-        jDialog.setVisible(true);
+        //jDialog.setVisible(true);
  
-                
-        //Filling the Jtable 
-        DefaultTableModel m = (DefaultTableModel) jTable_transaction.getModel();
-        m.setRowCount(0);
-        
-        DefaultTableModel  model = (DefaultTableModel) jTable_transaction.getModel();
-        Object row[] = new Object[5];
-        for(int i=0;i < transactionlist.size();i++)
-        {
-        row[0] = transactionlist.get(i).getID();
-        row[1] = transactionlist.get(i).getCardNo(); 
-        row[2] = transactionlist.get(i).getEmpName(); 
-        row[3] = transactionlist.get(i).getAmount();
-        row[4] = transactionlist.get(i).getDate();
-      
-      
-        model.addRow(row);
-        
-        
         
 
-        }
+        
         
     }//GEN-LAST:event_jComboBox_allgamezonesActionPerformed
 
@@ -837,6 +844,129 @@ public class MainScreen_Admin extends javax.swing.JFrame
         
     }//GEN-LAST:event_jComboBox1_selectgamezoneemployeeActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    
+        if(jComboBox_allgamezones.getSelectedItem().toString().equals("Select GameZone"))
+        {
+            JOptionPane.showMessageDialog(this,
+            "Please select a gamezone.",
+            "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+         if(jDateChooser_todayCollection_from.getDate() == null || jDateChooser_todayCollection_to.getDate() == null)
+        {
+            JOptionPane.showMessageDialog(this,
+            "Please Provide Proper Dates.",
+            "Inane error",
+                JOptionPane.ERROR_MESSAGE);
+            return ;
+        }
+      
+        HashMap<String,Long> amountmapping = new HashMap<>();
+       Long amount = 0l;
+        java.util.Date date  = jDateChooser_todayCollection_from.getDate();
+        java.util.Date date2  = jDateChooser_todayCollection_to.getDate();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTime(date2);
+
+        // Set time fields to zero
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
+        // Put it back in the Date object
+        date = cal.getTime();
+
+        
+        cal2.set(Calendar.HOUR_OF_DAY, 23);
+        cal2.set(Calendar.MINUTE, 0);
+        cal2.set(Calendar.SECOND, 0);
+        cal2.set(Calendar.MILLISECOND, 0);
+
+        // Put it back in the Date object
+        date2 = cal2.getTime();
+        
+        
+        ArrayList<Games> gamelistper = null;
+        StallInterface Dao = StallFactory.getInstance();
+        try
+        {
+            gamelistper = Dao.GetGamesPerticularDateRange(jComboBox_allgamezones.getSelectedItem().toString(), date,date2);
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this,
+            "Unable to Connect To Internet ,Please check your internet Connection.",
+            "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+            jLabel8.setText("No internet connection");
+            return ;
+        }
+        if(gamelistper.isEmpty())
+        {
+            JOptionPane.showMessageDialog(this,
+            "No record for  this perticular date.",
+            "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+            jLabel8.setText("No records fouond for perticular date");
+            return ;
+        }
+        else{
+            DefaultTableModel m = (DefaultTableModel) jTable_transaction.getModel();
+            m.setRowCount(0);
+            for(Games game : gamelistper)
+            {
+
+                if(amountmapping.containsKey(game.getGameName()))
+                {
+                 long current = Long.parseLong(game.getAmount());
+                 long old = amountmapping.get(game.getGameName());
+                 long newamount = old + current;
+                 amountmapping.put(game.getGameName(), newamount);
+                    
+                }
+                else
+                {
+                long current = Long.parseLong(game.getAmount());
+                amountmapping.put(game.getGameName(), current);
+                }
+                
+              
+
+            }
+            
+               java.util.Set<String>  set = amountmapping.keySet();
+               for(String key : set)
+               {
+                DefaultTableModel  model = (DefaultTableModel) jTable_transaction.getModel();
+                Object row[] = new Object[2];
+
+                row[0] = key;
+                row[1] = amountmapping.get(key);
+               
+                amount = amount + amountmapping.get(key);
+                  
+                model.addRow(row);
+            
+               }
+              
+        }
+        
+        
+        jLabel8.setText("Today collection is "+amount);
+        
+        
+        
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -886,10 +1016,15 @@ public class MainScreen_Admin extends javax.swing.JFrame
     private javax.swing.JPanel ViewGameZone;
     private javax.swing.JLayeredPane WorkingScreen_layeredPanel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1_selectgamezoneemployee;
     private javax.swing.JComboBox<String> jComboBox_allgamezones;
     private javax.swing.JComboBox<String> jComboBox_sub;
+    private com.toedter.calendar.JDateChooser jDateChooser_todayCollection_from;
+    private com.toedter.calendar.JDateChooser jDateChooser_todayCollection_from1;
+    private com.toedter.calendar.JDateChooser jDateChooser_todayCollection_to;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
