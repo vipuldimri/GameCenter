@@ -189,6 +189,7 @@ public class StallImplements implements StallInterface
        
         java.sql.Date d = new java.sql.Date(date.getTime());
         String Query="SELECT * FROM GameZoneDB."+GameZoneName+"_games  WHERE Date = '"+d+"';";
+        
         ArrayList<Games> gameslist = new ArrayList<>();
         Statement stmt=conn.createStatement();  
         ResultSet rs = stmt.executeQuery(Query);
@@ -201,6 +202,30 @@ public class StallImplements implements StallInterface
                    
                    
                    return gameslist;
+    }
+
+    @Override
+    public ArrayList<Games> GetGamesPerticularDateRange(String GameZoneName, Date startdate, Date Enddate) throws Exception 
+    {
+        java.sql.Date sdate = new java.sql.Date(startdate.getTime());
+        java.sql.Date edate = new java.sql.Date(Enddate.getTime());
+        
+        
+        String Query="SELECT * FROM GameZoneDB."+GameZoneName+"_games  WHERE Date >= '"+sdate+"' AND Date <= '"+edate+"';";
+       System.out.println(Query);
+        ArrayList<Games> gameslist = new ArrayList<>();
+        Statement stmt=conn.createStatement();  
+        ResultSet rs = stmt.executeQuery(Query);
+                   
+                   while(rs.next())  
+                   {
+                    Games game = new Games(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getDate(4));
+                    gameslist.add(game);
+                   }
+                   
+                   
+                   return gameslist;
+       
     }
     
 }

@@ -17,4 +17,7 @@ public interface StallInterface
     public  Date GetCurrentDate()throws Exception;
     
     public ArrayList<Games> GetGamesPerticularDate(String GameZoneName,Date date)throws Exception;
+    
+      
+    public ArrayList<Games> GetGamesPerticularDateRange(String GameZoneName,Date startdate,Date Enddate)throws Exception;
 }

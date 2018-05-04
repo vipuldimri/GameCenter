@@ -170,10 +170,10 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_Gamezone = new javax.swing.JTable();
         GameZoneTransaction = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable_transaction = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         jComboBox_allgamezones = new javax.swing.JComboBox<>();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable_transaction = new javax.swing.JTable();
         EmployeeDetails = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jComboBox1_selectgamezoneemployee = new javax.swing.JComboBox<>();
@@ -400,47 +400,33 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jScrollPane2.setBounds(0, 242, 900, 300);
 
         GameZoneTransaction.setBackground(new java.awt.Color(255, 255, 255));
-
-        jTable_transaction.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "CardN0", "EmpName", "Amount", "Date"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable_transaction);
+        GameZoneTransaction.setLayout(null);
 
         jLabel8.setText("Select GameZone");
+        GameZoneTransaction.add(jLabel8);
+        jLabel8.setBounds(65, 28, 83, 14);
 
         jComboBox_allgamezones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox_allgamezonesActionPerformed(evt);
             }
         });
+        GameZoneTransaction.add(jComboBox_allgamezones);
+        jComboBox_allgamezones.setBounds(201, 28, 28, 20);
 
-        javax.swing.GroupLayout GameZoneTransactionLayout = new javax.swing.GroupLayout(GameZoneTransaction);
-        GameZoneTransaction.setLayout(GameZoneTransactionLayout);
-        GameZoneTransactionLayout.setHorizontalGroup(
-            GameZoneTransactionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
-            .addGroup(GameZoneTransactionLayout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(jLabel8)
-                .addGap(53, 53, 53)
-                .addComponent(jComboBox_allgamezones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        GameZoneTransactionLayout.setVerticalGroup(
-            GameZoneTransactionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GameZoneTransactionLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(GameZoneTransactionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jComboBox_allgamezones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        jTable_transaction.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "GameName", "amount"
+            }
+        ));
+        jTable_transaction.setEnabled(false);
+        jScrollPane4.setViewportView(jTable_transaction);
+
+        GameZoneTransaction.add(jScrollPane4);
+        jScrollPane4.setBounds(0, 113, 900, 402);
 
         EmployeeDetails.setBackground(new java.awt.Color(255, 255, 255));
         EmployeeDetails.setLayout(null);
@@ -775,7 +761,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
     private void jComboBox1_selectgamezoneemployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1_selectgamezoneemployeeActionPerformed
         // TODO add your handling code here:Employee ComboBox Event
         
-         String GamezoneName = jComboBox1_selectgamezoneemployee.getSelectedItem().toString();
+        String GamezoneName = jComboBox1_selectgamezoneemployee.getSelectedItem().toString();
         if(GamezoneName.equals("Select GameZone"))
         {
             return ;
@@ -923,9 +909,9 @@ public class MainScreen_Admin extends javax.swing.JFrame
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel_OwnerName1;
     private javax.swing.JLabel jLabel_Sub;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTable jTable_Emploe;
     private javax.swing.JTable jTable_Gamezone;
