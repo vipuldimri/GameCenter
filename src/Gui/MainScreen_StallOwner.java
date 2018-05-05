@@ -130,6 +130,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         AddEmployee.setVisible(false);
         transaction.setVisible(false);
         EmployeeTab.setEnabledAt(2, false);
+        EmployeeTab.setEnabledAt(1, false);
        
         
         TransactionDetailsWaitLock = new CountDownLatch(1);
@@ -2690,7 +2691,7 @@ long amount = 0l;
         if(cardno.length() == 0 )
         {
             JOptionPane.showMessageDialog(jPanel1,
-                "Please Enter Card No.",
+                "Please scan the card.",
                 "Inane error",
                 JOptionPane.ERROR_MESSAGE);
             return ;
@@ -2698,7 +2699,7 @@ long amount = 0l;
         if("".equals(cardno))
         {
             JOptionPane.showMessageDialog(jPanel1,
-                "Please Enter Card No.",
+                "Please scan the card",
                 "Inane error",
                 JOptionPane.ERROR_MESSAGE);
             return ;
@@ -2720,7 +2721,7 @@ long amount = 0l;
             "Refund Success",
             "Success",
             JOptionPane.PLAIN_MESSAGE);
-        return ;
+     
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
