@@ -748,7 +748,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel3.add(jDateChooser_todayCollection_to);
         jDateChooser_todayCollection_to.setBounds(630, 620, 150, 40);
         jPanel3.add(jDateChooser_todayCollection_from);
-        jDateChooser_todayCollection_from.setBounds(420, 620, 150, 40);
+        jDateChooser_todayCollection_from.setBounds(420, 630, 150, 40);
 
         jButton10.setText("Get Record");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
@@ -1089,7 +1089,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
             },
             new String [] {
-                "ID", "CustomerName", "PhoneNo", "CardNo", "Method", "Amount", "Date"
+                "ID", "CustomerName", "CardNo", "ExpireDate", "Method", "Amount", "Date"
             }
         ));
         OthertrasactionsTable.setEnabled(false);
@@ -2801,12 +2801,13 @@ long amount = 0l;
             DefaultTableModel m = (DefaultTableModel) OthertrasactionsTable.getModel();
            m.setRowCount(0);
            DefaultTableModel  model = (DefaultTableModel) OthertrasactionsTable.getModel();
-           Object row[] = new Object[8];
+           Object row[] = new Object[7];
            for(int i=0 ; i<list.size() ; i++)
            {
-           row[0] = list.get(i).getID();
+         
+               row[0] = list.get(i).getID();
            row[1] = list.get(i).getCustomerName();
-           row[2] = list.get(i).getPhoneNo();
+           row[2] = list.get(i).getExpireDate();
            row[3] = list.get(i).getCardNo();
            row[4] =list.get(i).getMethod();
            row[5] = list.get(i).getMoney();
@@ -2845,8 +2846,8 @@ long amount = 0l;
            {
            row[0] = otherTrasactionses.get(i).getID();
            row[1] = otherTrasactionses.get(i).getCustomerName();
-           row[2] = otherTrasactionses.get(i).getPhoneNo();
-           row[3] = otherTrasactionses.get(i).getCardNo();
+           row[2] = otherTrasactionses.get(i).getCardNo();
+           row[3] = otherTrasactionses.get(i).getExpireDate();
            row[4] =otherTrasactionses.get(i).getMethod();
            row[5] = otherTrasactionses.get(i).getMoney();
            row[6] = otherTrasactionses.get(i).getDate();

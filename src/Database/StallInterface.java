@@ -6,7 +6,7 @@ import gamecenter.Games;
 public interface StallInterface 
 {
     
-   // public void AddGameZone(StallInterface stall);
+    public void AddGameZone(StallInterface stall)throws Exception;
     public GameZoneDetailsAndName GetAllGameZone() throws Exception;
     
     public ArrayList<Games> GetGames(String GameZoneName)throws Exception;

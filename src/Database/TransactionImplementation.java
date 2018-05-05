@@ -154,14 +154,13 @@ public class TransactionImplementation implements TransactionInterface
                        OtherTrasactions otherTrasactions = new OtherTrasactions();
                        otherTrasactions.setID(rs.getInt(1));
                        otherTrasactions.setCustomerName(rs.getString(2));
-                       otherTrasactions.setPhoneNo(rs.getString(3));
-                       otherTrasactions.setCardNo(rs.getString(4));
-                       otherTrasactions.setMethod(rs.getString(5));
-                       otherTrasactions.setMoney(rs.getString(6));
-                       otherTrasactions.setDate(rs.getTimestamp(7));
-              
+                       otherTrasactions.setCardNo(rs.getString(3));
+                       otherTrasactions.setMethod(rs.getString(4));
+                       otherTrasactions.setMoney(rs.getString(5));
+                       otherTrasactions.setDate(rs.getTimestamp(6));
+                       otherTrasactions.setExpireDate(rs.getDate(7));
+                       
                        transactiondetails.add(otherTrasactions);
-                  
                    }
         
         
@@ -180,19 +179,20 @@ public class TransactionImplementation implements TransactionInterface
             Statement stmt=conn.createStatement();  
             ResultSet rs = stmt.executeQuery(TransDetails);
             while(rs.next())  
-                      {
+            {
                        OtherTrasactions otherTrasactions = new OtherTrasactions();
                        otherTrasactions.setID(rs.getInt(1));
                        otherTrasactions.setCustomerName(rs.getString(2));
-                       otherTrasactions.setPhoneNo(rs.getString(3));
-                       otherTrasactions.setCardNo(rs.getString(4));
-                       otherTrasactions.setMethod(rs.getString(5));
-                       otherTrasactions.setMoney(rs.getString(6));
-                       otherTrasactions.setDate(rs.getTimestamp(7));
-              
+                       otherTrasactions.setCardNo(rs.getString(3));
+                       otherTrasactions.setMethod(rs.getString(4));
+                       otherTrasactions.setMoney(rs.getString(5));
+                       otherTrasactions.setDate(rs.getTimestamp(6));
+                       otherTrasactions.setExpireDate(rs.getDate(7));
+                    
+                       
                        old.add(otherTrasactions);
                   
-                   }
+            }
         
         
            
@@ -213,11 +213,12 @@ public class TransactionImplementation implements TransactionInterface
                        OtherTrasactions otherTrasactions = new OtherTrasactions();
                        otherTrasactions.setID(rs.getInt(1));
                        otherTrasactions.setCustomerName(rs.getString(2));
-                       otherTrasactions.setPhoneNo(rs.getString(3));
-                       otherTrasactions.setCardNo(rs.getString(4));
-                       otherTrasactions.setMethod(rs.getString(5));
-                       otherTrasactions.setMoney(rs.getString(6));
-                       otherTrasactions.setDate(rs.getTimestamp(7));
+                       otherTrasactions.setCardNo(rs.getString(3));
+                       otherTrasactions.setMethod(rs.getString(4));
+                       otherTrasactions.setMoney(rs.getString(5));
+                       otherTrasactions.setDate(rs.getTimestamp(6));
+                       otherTrasactions.setExpireDate(rs.getDate(7));
+                       
                        transactiondetails.add(otherTrasactions);
                   
                    }
@@ -231,17 +232,18 @@ public class TransactionImplementation implements TransactionInterface
     @Override
     public void RechargeOtherMethod(OtherTrasactions rec, String TableName) throws Exception {
         
-           Rech = "INSERT INTO "+TableName+" (CustomerName, PhoneNo, CardNo, Method, Money, Date) VALUES (?,?,?,?,?,?)";
+           Rech = "INSERT INTO "+TableName+" (CustomerName, CardNo, Method, Money, Date ,ExpireDate) VALUES (?,?,?,?,?,?)";
            PreparedStatement pstmt = conn.prepareStatement(Rech);
-           pstmt.setString(1, rec.getCustomerName());
-           pstmt.setString(2, rec.getPhoneNo());
-           pstmt.setString(3,rec.getCardNo());
-           pstmt.setString(4,rec.getMethod());
-           pstmt.setString(5,rec.getMoney());
-           pstmt.setTimestamp(6, rec.getDate());
-         
           
-            pstmt.executeUpdate();
+           
+           pstmt.setString(1, rec.getCustomerName());
+           pstmt.setString(2,rec.getCardNo());
+           pstmt.setString(3,rec.getMethod());
+           pstmt.setString(4,rec.getMoney());
+           pstmt.setTimestamp(5, rec.getDate());
+           pstmt.setDate(6, rec.getExpireDate());
+          
+           pstmt.executeUpdate();
          
     }
     

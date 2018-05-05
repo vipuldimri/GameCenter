@@ -64,7 +64,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox3"/>
+        <Property name="text" type="java.lang.String" value="football"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -74,7 +74,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox4"/>
+        <Property name="text" type="java.lang.String" value="golf"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -84,7 +84,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox5">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox5"/>
+        <Property name="text" type="java.lang.String" value="cricket"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

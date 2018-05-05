@@ -14,25 +14,20 @@ import java.util.ArrayList;
  *
  * @author u20o90
  */
-public class GameNameSetting extends javax.swing.JDialog {
+public class GameNameSetting extends javax.swing.JDialog
+{
 
-    /**
-     * Creates new form GameNameSetting
-     */
-    ArrayList<Games> gamelist;
-    public GameNameSetting(java.awt.Frame parent, boolean modal,ArrayList<Games> gamelist) {
-        super(parent, modal);
-        initComponents();
-         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+    
+
+    public GameNameSetting(java.awt.Frame parent, boolean modal) 
+    {
+    super(parent, modal);
+    initComponents();
+    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
     int x = (int) ((dimension.getWidth() - getWidth()) / 2);
     int y = (int) ((dimension.getHeight() - getHeight()) / 2);
     setLocation(x, y);
-    this.gamelist = gamelist;
-         
-         for(Games game : gamelist)
-         {
-        
-         }
+
     }
 
     /**
@@ -78,15 +73,15 @@ public class GameNameSetting extends javax.swing.JDialog {
         getContentPane().add(jCheckBox2);
         jCheckBox2.setBounds(110, 140, 80, 30);
 
-        jCheckBox3.setText("jCheckBox3");
+        jCheckBox3.setText("football");
         getContentPane().add(jCheckBox3);
         jCheckBox3.setBounds(110, 180, 110, 23);
 
-        jCheckBox4.setText("jCheckBox4");
+        jCheckBox4.setText("golf");
         getContentPane().add(jCheckBox4);
         jCheckBox4.setBounds(110, 220, 120, 23);
 
-        jCheckBox5.setText("jCheckBox5");
+        jCheckBox5.setText("cricket");
         getContentPane().add(jCheckBox5);
         jCheckBox5.setBounds(110, 260, 160, 23);
 
@@ -135,8 +130,12 @@ public class GameNameSetting extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddGameButtonActionPerformed
+
         // TODO add your handling code here:Submit button add games
+    if(jCheckBox3.isSelected())
+    {
         
+    }        
         
         
     }//GEN-LAST:event_AddGameButtonActionPerformed

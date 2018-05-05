@@ -699,7 +699,7 @@
                 <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser_todayCollection_from">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="420" y="620" width="150" height="40"/>
+                      <AbsoluteConstraints x="420" y="630" width="150" height="40"/>
                     </Constraint>
                   </Constraints>
                 </Component>
@@ -1591,8 +1591,8 @@
                                           <Table columnCount="7" rowCount="0">
                                             <Column editable="true" title="ID" type="java.lang.Object"/>
                                             <Column editable="true" title="CustomerName" type="java.lang.Object"/>
-                                            <Column editable="true" title="PhoneNo" type="java.lang.Object"/>
                                             <Column editable="true" title="CardNo" type="java.lang.Object"/>
+                                            <Column editable="true" title="ExpireDate" type="java.lang.Object"/>
                                             <Column editable="true" title="Method" type="java.lang.Object"/>
                                             <Column editable="true" title="Amount" type="java.lang.Object"/>
                                             <Column editable="true" title="Date" type="java.lang.Object"/>

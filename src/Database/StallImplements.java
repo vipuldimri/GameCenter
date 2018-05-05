@@ -8,37 +8,31 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 public class StallImplements implements StallInterface
 {
- static final String AddEmp = "INSERT INTO GameZoneDB.users (Name,Address,Contact,Email,Type,GameZoneID,Password) VALUES(?,?,?,?,?,?,?)";
- static final String GetGameZones = "SELECT * from GameZoneDB.gamezone;";
+ 
+   static final String GetGameZones = "SELECT * from GameZoneDB.gamezone;";
  
     public String Errormessage ;
  
     public void AddGameZone(StallInterface stall)
     {
-        /*
-           try {
+            final String AddEmp = "INSERT INTO GameZoneDB.users (Name,Address,Contact,Email,Type,GameZoneID,Password) VALUES(?,?,?,?,?,?,?)";
+            final String AddGameZone = "";
+//            
+//            PreparedStatement pstmt = conn.prepareStatement(AddEmp);
+//            pstmt.setString(1, user.getName());
+//            pstmt.setString(2, user.getAddress());
+//            pstmt.setString(3, user.getContact());
+//            pstmt.setString(4, user.getEmail());
+//            pstmt.setString(5, user.getType());
+//            pstmt.setInt(6, user.getGameZoneID());
+//            pstmt.setString(7, user.getPassword());
+//            pstmt.executeUpdate();
            
-            PreparedStatement pstmt = conn.prepareStatement(AddEmp);
-            pstmt.setString(1, user.getName());
-            pstmt.setString(2, user.getAddress());
-            pstmt.setString(3, user.getContact());
-            pstmt.setString(4, user.getEmail());
-            pstmt.setString(5, user.getType());
-            pstmt.setInt(6, user.getGameZoneID());
-            pstmt.setString(7, user.getPassword());
-            pstmt.executeUpdate();
            
            
-           
-        } 
-        catch (SQLException ex) 
-        {
-            System.out.println(ex);
-            Logger.getLogger(UserImplements.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
+       
    
-        */
+        
     }
 
     @Override

@@ -5,6 +5,7 @@
  */
 package gamecenter;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 /**
@@ -15,7 +16,7 @@ public class OtherTrasactions
 {
     private int ID;
     private String CustomerName;
-    private String PhoneNo;
+    private java.sql.Date ExpireDate;
     private String CardNo;
     private String Method;
     private String Money;
@@ -37,14 +38,9 @@ public class OtherTrasactions
         this.CustomerName = CustomerName;
     }
 
-    public String getPhoneNo() {
-        return PhoneNo;
-    }
 
-    public void setPhoneNo(String PhoneNo) {
-        this.PhoneNo = PhoneNo;
-    }
 
+ 
     public String getCardNo() {
         return CardNo;
     }
@@ -69,14 +65,22 @@ public class OtherTrasactions
         this.Money = Money;
     }
 
-    public OtherTrasactions(int ID, String CustomerName, String PhoneNo, String CardNo, String Method, String Money, Timestamp Date) {
+    public OtherTrasactions(int ID, String CustomerName, java.sql.Date ExpireDate, String CardNo, String Method, String Money, Timestamp Date) {
         this.ID = ID;
         this.CustomerName = CustomerName;
-        this.PhoneNo = PhoneNo;
+        this.ExpireDate = ExpireDate;
         this.CardNo = CardNo;
         this.Method = Method;
         this.Money = Money;
         this.Date = Date;
+    }
+
+    public Date getExpireDate() {
+        return ExpireDate;
+    }
+
+    public void setExpireDate(Date ExpireDate) {
+        this.ExpireDate = ExpireDate;
     }
 
     public OtherTrasactions()
