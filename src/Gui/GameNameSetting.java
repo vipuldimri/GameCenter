@@ -155,7 +155,7 @@ public class GameNameSetting extends javax.swing.JDialog
         gamelist.add("Speed Ball");
     }
     
-        setVisible(false);
+    setVisible(false);
         
         
     }//GEN-LAST:event_AddGameButtonActionPerformed

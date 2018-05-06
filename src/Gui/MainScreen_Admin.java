@@ -664,7 +664,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
         try 
         {
             Dao = MainAdminFactory.getInstance();
-            Dao.AddGameZone(newgamezone);
+            Dao.AddGameZone(newgamezone,gameNameSetting.gamelist);
         } catch (Exception ex) 
         {
             

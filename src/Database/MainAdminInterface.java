@@ -9,9 +9,11 @@ package Database;
  *
  * @author vipul
  */
+import Gui.GameNameSetting;
 import gamecenter.Stall;
+import java.util.ArrayList;
 public interface MainAdminInterface 
 {
-    public void AddGameZone(Stall newgamezone)throws Exception;
+    public void AddGameZone(Stall newgamezone,ArrayList<String>  games)throws Exception;
     
 }

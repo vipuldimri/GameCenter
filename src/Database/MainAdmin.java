@@ -4,6 +4,7 @@ package Database;
 import static Database.Connect.conn;
 import static Database.StallImplements.GetGameZones;
 import static Database.TransactionImplementation.Rech;
+import Gui.GameNameSetting;
 import gamecenter.Stall;
 import gamecenter.User;
 import java.sql.Connection;
@@ -11,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,7 +25,7 @@ public class MainAdmin implements MainAdminInterface
         conn = Connect.getconnection();
     }
     @Override
-    public void AddGameZone(Stall stall) throws Exception
+    public void AddGameZone(Stall stall,ArrayList<String> games) throws Exception
     {
         /*
         1 . Add into GameZone List
@@ -153,6 +155,22 @@ public class MainAdmin implements MainAdminInterface
         pstmt2.setString(7, "admin");
         pstmt2.setInt(8,id);
         pstmt2.executeUpdate();
+        
+        
+        //now entering the game into games  table
+        
+        for(String gamename : games)
+        {
+            //now entering game one by one into database table
+        String insertgame = "INSERT INTO "+stall.getName()+"_games(GameName,Amount,Date) VALUES(?,?,CURRENT_DATE())";
+               
+        PreparedStatement pstmt3 = conn.prepareStatement(insertgame);
+        pstmt3.setString(1,gamename);
+        pstmt3.setString(2,"0");
+        pstmt3.executeUpdate();
+            
+            
+        }
               
               
        }
