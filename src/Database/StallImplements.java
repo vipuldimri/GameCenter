@@ -13,20 +13,25 @@ public class StallImplements implements StallInterface
  
     public String Errormessage ;
  
-    public void AddGameZone(StallInterface stall)
+   @Override
+    public void AddGameZone(Stall stall)throws Exception
     {
-            final String AddEmp = "INSERT INTO GameZoneDB.users (Name,Address,Contact,Email,Type,GameZoneID,Password) VALUES(?,?,?,?,?,?,?)";
-            final String AddGameZone = "";
-//            
-//            PreparedStatement pstmt = conn.prepareStatement(AddEmp);
-//            pstmt.setString(1, user.getName());
-//            pstmt.setString(2, user.getAddress());
-//            pstmt.setString(3, user.getContact());
-//            pstmt.setString(4, user.getEmail());
-//            pstmt.setString(5, user.getType());
-//            pstmt.setInt(6, user.getGameZoneID());
-//            pstmt.setString(7, user.getPassword());
-//            pstmt.executeUpdate();
+            final String AddGameZone = "insert  into gamezone(Address,Contact,Email,OwnerName,Max_Employee,Name,SubStartDate,Password,SubEndDate) VALUES(?,?,?,?,?,?,?,?,?)";
+                       
+            PreparedStatement pstmt = conn.prepareStatement(AddGameZone);
+            pstmt.setString(1,stall.getAddress() );
+            pstmt.setString(2, stall.getContact());
+            pstmt.setString(3, stall.getEmail());
+            pstmt.setString(4, stall.getOwnerName());
+            pstmt.setInt(5, stall.getMax_Employee());
+            pstmt.setString(6, stall.getName());
+            pstmt.setDate(7, stall.getSubStartDate());
+            pstmt.setString(8, stall.getPassword());
+            pstmt.setDate(9, stall.getSubEndDate());
+            pstmt.executeUpdate();
+           
+            
+            //Adding to gamezone table conpleted
            
            
            

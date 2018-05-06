@@ -23,7 +23,7 @@ public class MainAdmin implements MainAdminInterface
         conn = Connect.getconnection();
     }
     @Override
-    public void AddGameZone(Stall newgamezone) 
+    public void AddGameZone(Stall stall) throws Exception
     {
         /*
         1 . Add into GameZone List
@@ -33,36 +33,34 @@ public class MainAdmin implements MainAdminInterface
         5 .
         */
         
-    
-        String insert3 ="INSERT INTO `GameZoneDB`.`gamezone`(`Name`,`OwnerName`,`Address`,`Contact`,`Password`,`SubStartDate`,`SubEndDate`)VALUES(?,?,?,?,?,?,?);";
         
-        
-        String insertuser ="(`Name`,`Address`,`Contact`,`Email`,`Type`,`GameZoneID`,`Password`,`UserName`)VALUES(?,?,?,?,?,?,?,?);";
-
-        try
-        { 
-        
-         //conn.setAutoCommit(false);
-         PreparedStatement pstmt = conn.prepareStatement(insert3);
-         pstmt.setString(1, newgamezone.getName());
-         pstmt.setString(2, newgamezone.getOwnerName());
-         pstmt.setString(3,newgamezone.getAddress());
-         pstmt.setString(4, newgamezone.getContact());
-         pstmt.setString(5, newgamezone.getPassword());
-         pstmt.setDate(6,newgamezone.getSubStartDate());
-         pstmt.setDate(7, newgamezone.getSubEndDate()); 
-         pstmt.executeUpdate();
+            final String AddGameZone = "insert  into gamezone(Address,Contact,Email,OwnerName,Max_Employee,Name,SubStartDate,Password,SubEndDate) VALUES(?,?,?,?,?,?,?,?,?)";
+                       
+            PreparedStatement pstmt = conn.prepareStatement(AddGameZone);
+            pstmt.setString(1,stall.getAddress() );
+            pstmt.setString(2, stall.getContact());
+            pstmt.setString(3, stall.getEmail());
+            pstmt.setString(4, stall.getOwnerName());
+            pstmt.setInt(5, stall.getMax_Employee());
+            pstmt.setString(6, stall.getName());
+            pstmt.setDate(7, stall.getSubStartDate());
+            pstmt.setString(8, stall.getPassword());
+            pstmt.setDate(9, stall.getSubEndDate());
+            pstmt.executeUpdate();
+            
+            //Adding new gamezone done into gamezone table 
+           
+            
          
-            System.out.println("GameZone ADDED");
          
-              //above code updated for games 
+             //above code updated for games 
               //Below code works Fine Creating a Table
-              String TableName = newgamezone.getName();
+              String TableName = stall.getName();
               String FinalTableName = TableName+"_transaction";
               String temp ="CREATE TABLE "+FinalTableName;
               
               
-              String sql2 =temp+" (ID int(11) NOT NULL AUTO_INCREMENT,CardNo varchar(45) DEFAULT NULL,EmpName varchar(45) DEFAULT NULL,Amount int(11) DEFAULT NULL,Date datetime(6) DEFAULT NULL,PRIMARY KEY (ID))";
+              String sql2 =temp+"( ID  int auto_increment primary key,CardNo  varchar(45) null,EmpName varchar(45) null, Amount  int  null,Date    datetime(6) null);";
               
               Statement stmt2 = conn.createStatement() ;
             // create a new table
@@ -73,7 +71,7 @@ public class MainAdmin implements MainAdminInterface
               ///////////////////////////////
               
               
-              String TableName2 = newgamezone.getName();
+              String TableName2 = stall.getName();
               String FinalTableName2 = TableName+"_users";
               String temp2 ="CREATE TABLE "+FinalTableName2;
               
@@ -90,61 +88,73 @@ public class MainAdmin implements MainAdminInterface
              
               String FinalTableName3 = TableName+"_customers";
               String temp3 ="CREATE TABLE "+FinalTableName3;
-              
-            
               String query2 = temp3+"(Id      INT(100) AUTO_INCREMENT PRIMARY KEY, Name    VARCHAR(30) NOT NULL,Contact VARCHAR(30) NOT NULL, EmailId VARCHAR(50) NULL)";
-              //String sql22 =temp2+qu;
               Statement stmt222 = conn.createStatement() ;
               stmt222.execute(query2);
-              //////////////////////////////////
+       
               
+              String temp4 ="create table "+stall.getName()+"_games\n" +
+"(\n" +
+" ID       int auto_increment\n" +
+"   primary key,\n" +
+" GameName varchar(45)  not null,\n" +
+" Amount   varchar(200) not null,\n" +
+" Date     date         not null\n" +
+");\n" +
+"";
               
-              String FinalTableName4 = TableName+"_games";
-              String temp4 ="CREATE TABLE "+FinalTableName4;
-              
-            
-              String query3 = temp4+"(Id  INT(100) AUTO_INCREMENT PRIMARY KEY, Name    VARCHAR(30) NOT NULL,Contact VARCHAR(30) NOT NULL, EmailId VARCHAR(50) NULL)";
-              //String sql22 =temp2+qu;
+          
               Statement stmt2222 = conn.createStatement() ;
-              stmt222.execute(query3);
-              
-              /////////////////////////////////////////////
+              stmt2222.execute(temp4);
               
               
-              int gamezoneid = 0 ;
-              String getmaxidquery = "SELECT MAX(ID) AS LargestPrice FROM gamezone";
               
+              String other_t =  "create table "+stall.getName()+"_other_transaction\n" +
+"(\n" +
+"  ID           int auto_increment\n" +
+"    primary key,\n" +
+"  CustomerName varchar(20)  not null,\n" +
+"  CardNo       varchar(30)  null,\n" +
+"  Method       varchar(50)  not null,\n" +
+"  Money        varchar(100) not null,\n" +
+"  Date         datetime     not null,\n" +
+"  ExpireDate   date         null\n" +
+");\n" +
+"";
+        Statement stmt22222 = conn.createStatement() ;
+        stmt22222.execute(other_t);
+              
+        
+        String maxid = "select max(ID) from gamezone;";
+        int id=0;
+       
+      
                    Statement stmt=conn.createStatement();  
-                   ResultSet rs = stmt.executeQuery(getmaxidquery);
+                   ResultSet rs = stmt.executeQuery(maxid);
                    while(rs.next())  
                    {
-                    gamezoneid  = rs.getInt(1);
-                    break;
-
+                    id = rs.getInt(1);
+                   
                    }
-              
-              //////////////////////////////////////////////
-             String query4 = "INSERT INTO `"+FinalTableName2+"` "+insertuser;    
-             PreparedStatement pstmtuser = conn.prepareStatement(query4);
-             pstmtuser.setString(1, newgamezone.getOwnerName());
-             pstmtuser.setString(2, newgamezone.getAddress());
-             pstmtuser.setString(3,newgamezone.getContact());
-             pstmtuser.setString(4, "dummy@gmail.com");
-             pstmtuser.setString(5, "admin");
-             pstmtuser.setInt(6, gamezoneid);
-             pstmtuser.setString(7, newgamezone.getPassword());
-             pstmtuser.setString(8, newgamezone.getOwnerName()); 
-             pstmtuser.executeUpdate();
-
-        }  
-        catch(Exception e)
-        {
-
-            System.out.println("ERROR "+e);
-            
-        }
-           
+                   
         
+        
+        
+        
+        String insertuserdetails = "INSERT into "+stall.getName()+"_users(Name,UserName,Password,Email,Contact,Address,Type,GameZoneID) values (?,?,?,?,?,?,?,?);";
+        
+        PreparedStatement pstmt2 = conn.prepareStatement(insertuserdetails);
+        pstmt2.setString(1,stall.getOwnerName());
+        pstmt2.setString(2, stall.getOwnerName());
+        pstmt2.setString(3, stall.getPassword());
+        pstmt2.setString(4, stall.getEmail());
+        pstmt2.setString(5, stall.getContact());
+        pstmt2.setString(6, stall.getAddress());
+        pstmt2.setString(7, "admin");
+        pstmt2.setInt(8,id);
+        pstmt2.executeUpdate();
+              
+              
        }
     
     

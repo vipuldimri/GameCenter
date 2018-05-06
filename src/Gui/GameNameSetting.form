@@ -42,7 +42,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+    <Component class="javax.swing.JCheckBox" name="AirHockey">
       <Properties>
         <Property name="text" type="java.lang.String" value="Air Hockey"/>
       </Properties>
@@ -52,7 +52,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox2">
+    <Component class="javax.swing.JCheckBox" name="SpeedBall">
       <Properties>
         <Property name="text" type="java.lang.String" value="Speed Ball"/>
       </Properties>
@@ -62,7 +62,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox3">
+    <Component class="javax.swing.JCheckBox" name="football">
       <Properties>
         <Property name="text" type="java.lang.String" value="football"/>
       </Properties>
@@ -72,7 +72,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox4">
+    <Component class="javax.swing.JCheckBox" name="golf">
       <Properties>
         <Property name="text" type="java.lang.String" value="golf"/>
       </Properties>
@@ -82,7 +82,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox5">
+    <Component class="javax.swing.JCheckBox" name="Cricket">
       <Properties>
         <Property name="text" type="java.lang.String" value="cricket"/>
       </Properties>

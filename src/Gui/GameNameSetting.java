@@ -9,6 +9,7 @@ import gamecenter.Games;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import javax.swing.JEditorPane;
 
 /**
  *
@@ -18,7 +19,7 @@ public class GameNameSetting extends javax.swing.JDialog
 {
 
     
-
+    public ArrayList<String> gamelist;
     public GameNameSetting(java.awt.Frame parent, boolean modal) 
     {
     super(parent, modal);
@@ -27,6 +28,7 @@ public class GameNameSetting extends javax.swing.JDialog
     int x = (int) ((dimension.getWidth() - getWidth()) / 2);
     int y = (int) ((dimension.getHeight() - getHeight()) / 2);
     setLocation(x, y);
+    gamelist = new ArrayList<>();
 
     }
 
@@ -40,11 +42,11 @@ public class GameNameSetting extends javax.swing.JDialog
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
+        AirHockey = new javax.swing.JCheckBox();
+        SpeedBall = new javax.swing.JCheckBox();
+        football = new javax.swing.JCheckBox();
+        golf = new javax.swing.JCheckBox();
+        Cricket = new javax.swing.JCheckBox();
         jCheckBox6 = new javax.swing.JCheckBox();
         jCheckBox7 = new javax.swing.JCheckBox();
         jCheckBox8 = new javax.swing.JCheckBox();
@@ -65,25 +67,25 @@ public class GameNameSetting extends javax.swing.JDialog
         getContentPane().add(jLabel1);
         jLabel1.setBounds(120, 20, 360, 70);
 
-        jCheckBox1.setText("Air Hockey");
-        getContentPane().add(jCheckBox1);
-        jCheckBox1.setBounds(110, 100, 90, 30);
+        AirHockey.setText("Air Hockey");
+        getContentPane().add(AirHockey);
+        AirHockey.setBounds(110, 100, 90, 30);
 
-        jCheckBox2.setText("Speed Ball");
-        getContentPane().add(jCheckBox2);
-        jCheckBox2.setBounds(110, 140, 80, 30);
+        SpeedBall.setText("Speed Ball");
+        getContentPane().add(SpeedBall);
+        SpeedBall.setBounds(110, 140, 80, 30);
 
-        jCheckBox3.setText("football");
-        getContentPane().add(jCheckBox3);
-        jCheckBox3.setBounds(110, 180, 110, 23);
+        football.setText("football");
+        getContentPane().add(football);
+        football.setBounds(110, 180, 110, 23);
 
-        jCheckBox4.setText("golf");
-        getContentPane().add(jCheckBox4);
-        jCheckBox4.setBounds(110, 220, 120, 23);
+        golf.setText("golf");
+        getContentPane().add(golf);
+        golf.setBounds(110, 220, 120, 23);
 
-        jCheckBox5.setText("cricket");
-        getContentPane().add(jCheckBox5);
-        jCheckBox5.setBounds(110, 260, 160, 23);
+        Cricket.setText("cricket");
+        getContentPane().add(Cricket);
+        Cricket.setBounds(110, 260, 160, 23);
 
         jCheckBox6.setText("jCheckBox6");
         getContentPane().add(jCheckBox6);
@@ -132,10 +134,28 @@ public class GameNameSetting extends javax.swing.JDialog
     private void AddGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddGameButtonActionPerformed
 
         // TODO add your handling code here:Submit button add games
-    if(jCheckBox3.isSelected())
+    if(football.isSelected())
     {
-        
-    }        
+      gamelist.add("Football");
+    }
+    if(Cricket.isSelected())
+    {
+      gamelist.add("Cricket");
+    }
+    if(AirHockey.isSelected())
+    {
+      gamelist.add("Airhockey");
+    }
+    if(golf.isSelected())
+    {
+       gamelist.add("Golf");
+    }
+    if(SpeedBall.isSelected())
+    {
+        gamelist.add("Speed Ball");
+    }
+    
+        setVisible(false);
         
         
     }//GEN-LAST:event_AddGameButtonActionPerformed
@@ -178,16 +198,16 @@ public class GameNameSetting extends javax.swing.JDialog
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddGameButton;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox AirHockey;
+    private javax.swing.JCheckBox Cricket;
+    private javax.swing.JCheckBox SpeedBall;
+    private javax.swing.JCheckBox football;
+    private javax.swing.JCheckBox golf;
     private javax.swing.JCheckBox jCheckBox10;
     private javax.swing.JCheckBox jCheckBox11;
     private javax.swing.JCheckBox jCheckBox12;
     private javax.swing.JCheckBox jCheckBox13;
     private javax.swing.JCheckBox jCheckBox14;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JCheckBox jCheckBox8;

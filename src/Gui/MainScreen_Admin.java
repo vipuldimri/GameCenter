@@ -48,13 +48,14 @@ public class MainScreen_Admin extends javax.swing.JFrame
     ArrayList<User> employelist;
     
     
-    
+    GameNameSetting gameNameSetting;//for selecting the games for gamezone
     
     
     int LastId ;
     public MainScreen_Admin()
     {
         gamezonenames = new ArrayList<>();
+        gameNameSetting = null;
       
        try
        {
@@ -585,6 +586,17 @@ public class MainScreen_Admin extends javax.swing.JFrame
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:Create button  Main Add new GameZoneButton
       
+        
+        if(gameNameSetting == null || gameNameSetting.gamelist.isEmpty())
+        {
+                 JOptionPane.showMessageDialog(this,
+                 "Please Select atleast one game for GameZone",
+                 "Inane error",
+                 JOptionPane.ERROR_MESSAGE);
+                 return;
+            
+        }
+        
         String Gamezonename = jTextField_GameZoneName.getText();
         String Conact = jTextField_GameZoneOwnerContact.getText();
         String Password = jTextField_GameZoneOwnerPassword.getText();
@@ -665,7 +677,11 @@ public class MainScreen_Admin extends javax.swing.JFrame
             
         }
       
-        
+        JOptionPane.showMessageDialog(this,
+        "GameZone Added successfully",
+        "Inane error",
+        JOptionPane.ERROR_MESSAGE);
+                  
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -1024,7 +1040,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        GameNameSetting gameNameSetting = new GameNameSetting(this, rootPaneCheckingEnabled);
+        gameNameSetting = new GameNameSetting(this, rootPaneCheckingEnabled);
         gameNameSetting.setVisible(true);
         
     }//GEN-LAST:event_jButton3ActionPerformed
