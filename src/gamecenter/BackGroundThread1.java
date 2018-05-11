@@ -2,10 +2,12 @@ package gamecenter;
 import java.util.ArrayList;
 import Database.*;
 import Gui.*;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.HashMap;
+import java.util.Properties;
 /*
 Thread for gtting users  and stall (GameZone ) information from the database .
 
@@ -44,12 +46,25 @@ public class BackGroundThread1 extends Thread
         }
         try 
         {
+            String Gamezonename = "";
+            String Id="";
+            try 
+		{
+			Properties prop2 = new Properties();
+			prop2.load(new FileInputStream("c://stark//config.properties"));
+			Id = prop2.getProperty("ID");
+                        Gamezonename = prop2.getProperty("gamezonename");
+		
+		}catch(Exception eta){
+		   error_flag = true;
+		}
             UserInterface Dao   = UserFactory.getInstance();
-            users = Dao.getAllUsers("GameZone2");   ///change this according to gamezone
+            users = Dao.getAllUsers(Gamezonename);   ///change this according to gamezone
             //above lines gets all the users for current GameZone;
-            currentgamezone = Dao.getGameZoneDetails(2) ; //chnage this according to gamezone id;
+            int id =  Integer.parseInt(Id);
+            currentgamezone = Dao.getGameZoneDetails(id) ; //chnage this according to gamezone id;
             
-            passwordcheck = Dao.getUserNames("GameZone2"); //chnage this according to gamezone
+            passwordcheck = Dao.getUserNames(Gamezonename); //chnage this according to gamezone
             
         } 
         catch (Exception ex) 

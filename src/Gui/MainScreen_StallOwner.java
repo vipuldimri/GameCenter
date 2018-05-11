@@ -1649,7 +1649,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                     {
         String from = "starktechnologies2018@gmail.com";
         String password = "sample@123";
-        String to  = "dimrivipul.vd@gmail.com";               
+       // String to  = "dimrivipul.vd@gmail.com"; 
+       String to = currentgamezone.getEmail();
+       
         String sub = "Transaction Details for "+java.time.LocalDate.now();
         
 

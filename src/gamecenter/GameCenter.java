@@ -38,11 +38,11 @@ public class GameCenter
                 splash.setVisible(false);
                
                 //Code If Unable to connect Online Database Server 
-                if(backgroundthread1.users == null || backgroundthread1.currentgamezone == null || backgroundthread1.error_flag == true)
+                if(backgroundthread1.users == null || backgroundthread1.currentgamezone == null || backgroundthread1.error_flag == true || backgroundthread1.users.size() ==0 )
                 {
 
                      JOptionPane.showMessageDialog(splash,
-                     "Unable To Connect Server Please Check Your Internet Connection.",
+                     "Unable To Connect Server Please Check Your Internet Connection or your your details are incorrect.",
                      "Inane error",
                       JOptionPane.ERROR_MESSAGE);
                       System.exit(0);
