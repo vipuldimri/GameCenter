@@ -705,7 +705,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel_currentempname2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_currentempname2.setText("jLabel29");
         jPanel6.add(jLabel_currentempname2);
-        jLabel_currentempname2.setBounds(1020, 10, 51, 17);
+        jLabel_currentempname2.setBounds(1020, 10, 150, 17);
 
         jPanel3.add(jPanel6);
         jPanel6.setBounds(0, 10, 1180, 50);
@@ -952,7 +952,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         Emprecords.add(jButton3);
-        jButton3.setBounds(460, 70, 150, 60);
+        jButton3.setBounds(280, 80, 150, 60);
 
         transaction.setBackground(new java.awt.Color(255, 255, 255));
         transaction.addMouseListener(new java.awt.event.MouseAdapter() {

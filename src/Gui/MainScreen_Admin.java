@@ -305,9 +305,9 @@ public class MainScreen_Admin extends javax.swing.JFrame
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Company Name");
+        jLabel3.setText("Stark Technology");
         SidePanel.add(jLabel3);
-        jLabel3.setBounds(30, 60, 160, 60);
+        jLabel3.setBounds(60, 60, 160, 60);
         SidePanel.add(jSeparator4);
         jSeparator4.setBounds(60, 110, 150, 20);
 
@@ -322,22 +322,22 @@ public class MainScreen_Admin extends javax.swing.JFrame
         AddGameZone.add(jLabel7);
         jLabel7.setBounds(319, 14, 320, 40);
 
-        jLabel_Sub.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel_Sub.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel_Sub.setText("Sub Yr");
         AddGameZone.add(jLabel_Sub);
         jLabel_Sub.setBounds(490, 210, 100, 50);
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel11.setText("Owner Name");
         AddGameZone.add(jLabel11);
         jLabel11.setBounds(70, 150, 220, 60);
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel12.setText("Contact No");
         AddGameZone.add(jLabel12);
-        jLabel12.setBounds(70, 250, 220, 60);
+        jLabel12.setBounds(70, 260, 220, 60);
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel14.setText("GameZone Name");
         AddGameZone.add(jLabel14);
         jLabel14.setBounds(70, 50, 220, 60);
@@ -355,10 +355,10 @@ public class MainScreen_Admin extends javax.swing.JFrame
         AddGameZone.add(jButton1);
         jButton1.setBounds(350, 470, 230, 50);
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setText("Passsword");
         AddGameZone.add(jLabel9);
-        jLabel9.setBounds(70, 340, 170, 60);
+        jLabel9.setBounds(70, 350, 170, 60);
 
         jComboBox_sub.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jComboBox_sub.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 yr", "2 yr", "3 yr", "4 yr", " " }));
@@ -381,12 +381,12 @@ public class MainScreen_Admin extends javax.swing.JFrame
         AddGameZone.add(jTextField_GameZoneOwnerPassword);
         jTextField_GameZoneOwnerPassword.setBounds(70, 400, 230, 40);
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel15.setText("Max employess");
         AddGameZone.add(jLabel15);
         jLabel15.setBounds(490, 370, 220, 60);
 
-        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel19.setText("Address");
         AddGameZone.add(jLabel19);
         jLabel19.setBounds(490, 50, 220, 60);
@@ -404,7 +404,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
         AddGameZone.add(jButton3);
         jButton3.setBounds(70, 470, 110, 40);
 
-        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel21.setText("Email ID");
         AddGameZone.add(jLabel21);
         jLabel21.setBounds(490, 270, 220, 60);
@@ -421,20 +421,20 @@ public class MainScreen_Admin extends javax.swing.JFrame
 
             },
             new String [] {
-                "ID", "Name", "OwnerName", "Address", "Contact", "Password", "SubStartDate", "SubEndDate"
+                "ID", "Name", "OwnerName", "Address", "Contact", "Password", "SubStartDate", "SubEndDate", "MaxEmployee"
             }
         ));
         jScrollPane2.setViewportView(jTable_Gamezone);
 
         ViewGameZone.add(jScrollPane2);
-        jScrollPane2.setBounds(0, 242, 900, 300);
+        jScrollPane2.setBounds(0, 2, 900, 540);
 
         GameZoneTransaction.setBackground(new java.awt.Color(255, 255, 255));
         GameZoneTransaction.setLayout(null);
 
         jLabel8.setText("Total collection");
         GameZoneTransaction.add(jLabel8);
-        jLabel8.setBounds(620, 80, 190, 40);
+        jLabel8.setBounds(600, 80, 300, 40);
 
         jComboBox_allgamezones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -442,7 +442,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
             }
         });
         GameZoneTransaction.add(jComboBox_allgamezones);
-        jComboBox_allgamezones.setBounds(201, 28, 180, 20);
+        jComboBox_allgamezones.setBounds(201, 28, 180, 22);
 
         jTable_transaction.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -460,7 +460,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
 
         jLabel10.setText("Select GameZone");
         GameZoneTransaction.add(jLabel10);
-        jLabel10.setBounds(65, 28, 130, 14);
+        jLabel10.setBounds(65, 28, 130, 16);
         GameZoneTransaction.add(jDateChooser_todayCollection_from);
         jDateChooser_todayCollection_from.setBounds(60, 80, 150, 40);
         GameZoneTransaction.add(jDateChooser_todayCollection_from1);
@@ -468,14 +468,14 @@ public class MainScreen_Admin extends javax.swing.JFrame
         GameZoneTransaction.add(jDateChooser_todayCollection_to);
         jDateChooser_todayCollection_to.setBounds(250, 80, 150, 40);
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Get Records");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
         GameZoneTransaction.add(jButton2);
-        jButton2.setBounds(430, 90, 73, 23);
+        jButton2.setBounds(430, 80, 160, 40);
 
         EmployeeDetails.setBackground(new java.awt.Color(255, 255, 255));
         EmployeeDetails.setLayout(null);
@@ -490,7 +490,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
             }
         });
         EmployeeDetails.add(jComboBox1_selectgamezoneemployee);
-        jComboBox1_selectgamezoneemployee.setBounds(230, 40, 130, 20);
+        jComboBox1_selectgamezoneemployee.setBounds(230, 40, 130, 22);
 
         jTable_Emploe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -704,7 +704,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
         DefaultTableModel m = (DefaultTableModel) jTable_Gamezone.getModel();
         m.setRowCount(0);
         DefaultTableModel  model = (DefaultTableModel) jTable_Gamezone.getModel();
-        Object row[] = new Object[8];
+        Object row[] = new Object[9];
         for(int i=0;i < GameZoneList.size();i++)
         {
         row[0] = GameZoneList.get(i).getID();
@@ -715,6 +715,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
         row[5] = GameZoneList.get(i).getPassword();
         row[6] = GameZoneList.get(i).getSubStartDate();
         row[7] = GameZoneList.get(i).getSubEndDate();
+        row[8] = GameZoneList.get(i).getMax_Employee();
       
         model.addRow(row);
         
