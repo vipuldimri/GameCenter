@@ -594,7 +594,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(jRadioButton3);
-        jRadioButton3.setBounds(670, 260, 71, 37);
+        jRadioButton3.setBounds(670, 260, 73, 37);
 
         jRadioButton4.setBackground(new java.awt.Color(153, 153, 255));
         jRadioButton4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -606,7 +606,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jPanel4.add(jRadioButton4);
-        jRadioButton4.setBounds(820, 260, 85, 37);
+        jRadioButton4.setBounds(820, 260, 89, 37);
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(255, 255, 255));
@@ -992,11 +992,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         jLabel29.setText("Start Date");
         transaction.add(jLabel29);
-        jLabel29.setBounds(40, 70, 80, 14);
+        jLabel29.setBounds(40, 70, 80, 16);
 
         jLabel30.setText("End Date");
         transaction.add(jLabel30);
-        jLabel30.setBounds(40, 120, 70, 14);
+        jLabel30.setBounds(40, 120, 70, 16);
 
         jLabel3_totalTransaction.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3_totalTransaction.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
@@ -1071,7 +1071,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         Customer.add(RegisterNewcustomer_button);
-        RegisterNewcustomer_button.setBounds(540, 120, 90, 23);
+        RegisterNewcustomer_button.setBounds(540, 120, 90, 25);
 
         ResetButton_Customer.setText("Reset");
         ResetButton_Customer.addActionListener(new java.awt.event.ActionListener() {
@@ -1080,7 +1080,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         Customer.add(ResetButton_Customer);
-        ResetButton_Customer.setBounds(540, 170, 90, 23);
+        ResetButton_Customer.setBounds(540, 170, 90, 25);
 
         OtherTransactions.setBackground(new java.awt.Color(255, 255, 255));
         OtherTransactions.setLayout(null);
@@ -1101,11 +1101,11 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
 
         jLabel36.setText("Start Date");
         OtherTransactions.add(jLabel36);
-        jLabel36.setBounds(40, 70, 80, 14);
+        jLabel36.setBounds(40, 70, 80, 16);
 
         jLabel40.setText("End Date");
         OtherTransactions.add(jLabel40);
-        jLabel40.setBounds(40, 120, 70, 14);
+        jLabel40.setBounds(40, 120, 70, 16);
 
         jLabel_validDate1.setForeground(new java.awt.Color(255, 0, 0));
         OtherTransactions.add(jLabel_validDate1);
@@ -1248,7 +1248,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 .addGap(67, 67, 67)
                 .addComponent(jLabel18)
                 .addGap(27, 27, 27)
-                .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel14Layout.setVerticalGroup(
@@ -1383,13 +1383,12 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Noofcustomerlabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                    .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jPanel10.setBackground(new java.awt.Color(54, 33, 89));
@@ -1466,9 +1465,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(28, 28, 28)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_OwnerName, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_OwnerName1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1649,8 +1648,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
                     {
         String from = "starktechnologies2018@gmail.com";
         String password = "sample@123";
-       // String to  = "dimrivipul.vd@gmail.com"; 
-       String to = currentgamezone.getEmail();
+      
+        String to = currentgamezone.getEmail();
        
         String sub = "Transaction Details for "+java.time.LocalDate.now();
         
@@ -1759,6 +1758,8 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel15.setBackground(new Color(54, 33,89));
         jPanel22.setBackground(new Color(110, 89,222));
         jPanel10.setBackground(new Color(54, 33,89));
+        
+        
         jLabel_Label.setText("Register New Customer");
 
         AddEmployee.setVisible(false);
@@ -1766,7 +1767,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         Emprecords.setVisible(false);
         Customer.setVisible(true);
         transaction.setVisible(false);
-        OtherTransactions.setVisible(true);
+        OtherTransactions.setVisible(false);
 
         DefaultTableModel m = (DefaultTableModel) jTable_customers.getModel();
         m.setRowCount(0);
