@@ -40,7 +40,15 @@ public class GameCenter
                 //Code If Unable to connect Online Database Server 
                 if(backgroundthread1.users == null || backgroundthread1.currentgamezone == null || backgroundthread1.error_flag == true || backgroundthread1.users.size() ==0 )
                 {
-
+                        if(backgroundthread1.confiflag == true)
+                        {
+                          JOptionPane.showMessageDialog(splash,
+                         "Unable to read from config file please check Config file at location C://strack//config.properties",
+                         "Inane error",
+                      JOptionPane.ERROR_MESSAGE);
+                      System.exit(0);
+                      return;
+                        }
                      JOptionPane.showMessageDialog(splash,
                      "Unable To Connect Server Please Check Your Internet Connection or your your details are incorrect.",
                      "Inane error",

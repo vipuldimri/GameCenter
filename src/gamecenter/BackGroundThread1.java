@@ -24,6 +24,7 @@ public class BackGroundThread1 extends Thread
     HashMap<String, Boolean> passwordcheck;
     
     boolean error_flag = false;
+    boolean confiflag = false;
     BackGroundThread1()
     {
 
@@ -55,8 +56,10 @@ public class BackGroundThread1 extends Thread
 			Id = prop2.getProperty("ID");
                         Gamezonename = prop2.getProperty("gamezonename");
 		
-		}catch(Exception eta){
+		}catch(Exception eta)
+                {
 		   error_flag = true;
+                   confiflag = true;
 		}
             UserInterface Dao   = UserFactory.getInstance();
             users = Dao.getAllUsers(Gamezonename);   ///change this according to gamezone
