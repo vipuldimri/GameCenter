@@ -424,6 +424,11 @@ public class MainScreen_Admin extends javax.swing.JFrame
                 "ID", "Name", "OwnerName", "Address", "Contact", "Password", "SubStartDate", "SubEndDate", "MaxEmployee"
             }
         ));
+        jTable_Gamezone.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable_GamezoneMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable_Gamezone);
 
         ViewGameZone.add(jScrollPane2);
@@ -596,6 +601,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
                  return;
             
         }
+      
         
         String Gamezonename = jTextField_GameZoneName.getText();
         String Conact = jTextField_GameZoneOwnerContact.getText();
@@ -627,8 +633,33 @@ public class MainScreen_Admin extends javax.swing.JFrame
      
         
         
-        
+        if(gamezonenames.contains(Gamezonename))
+        {
+              JOptionPane.showMessageDialog(this,
+                 "GameZone of this name exits",
+                 "Inane error",
+                 JOptionPane.ERROR_MESSAGE);
+                 return;
+        }
       
+        
+          
+        
+        for(String gamezone : gamezonenames )
+        {
+            if(Gamezonename.trim().equalsIgnoreCase(gamezone.trim()))
+            {
+                
+                  JOptionPane.showMessageDialog(this,
+                 "GameZone of this name exits",
+                 "Inane error",
+                 JOptionPane.ERROR_MESSAGE);
+                 return;
+             
+            }
+            
+        }
+        
         String select = jComboBox_sub.getSelectedItem().toString();
         int subyears = Integer.parseInt(select.substring(0,1));
         
@@ -679,8 +710,8 @@ public class MainScreen_Admin extends javax.swing.JFrame
       
         JOptionPane.showMessageDialog(this,
         "GameZone Added successfully",
-        "Inane error",
-        JOptionPane.ERROR_MESSAGE);
+        "Success",
+        JOptionPane.PLAIN_MESSAGE);
                   
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -1045,6 +1076,44 @@ public class MainScreen_Admin extends javax.swing.JFrame
         gameNameSetting.setVisible(true);
         
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTable_GamezoneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_GamezoneMouseClicked
+        // TODO add your handling code here:
+        
+        
+        
+        
+        Stall stall = new Stall();
+        int row = jTable_Gamezone.getSelectedRow();
+
+        String ID = jTable_Gamezone.getModel().getValueAt(row, 0).toString();
+        String Name = jTable_Gamezone.getModel().getValueAt(row, 1).toString();
+        String OwnerName = jTable_Gamezone.getModel().getValueAt(row, 2).toString();
+        String Address = jTable_Gamezone.getModel().getValueAt(row, 3).toString();
+        String Contact = jTable_Gamezone.getModel().getValueAt(row, 4).toString();
+        String Password = jTable_Gamezone.getModel().getValueAt(row, 5).toString();
+        Date SubStartDate =(Date) jTable_Gamezone.getModel().getValueAt(row, 6);
+        Date SubEndDate = (Date)jTable_Gamezone.getModel().getValueAt(row, 7);
+        String MaxEmployee = jTable_Gamezone.getModel().getValueAt(row, 8).toString();
+
+        stall.setID(Integer.parseInt(ID ));
+        stall.setName(Name);
+        stall.setOwnerName(OwnerName);
+        stall.setContact(Contact);
+        stall.setPassword(Password);
+        stall.setSubStartDate(SubStartDate);
+        stall.setSubEndDate(SubEndDate);
+        stall.setMax_Employee(Integer.parseInt(MaxEmployee ));
+        stall.setAddress(Address);
+
+    
+        
+        
+        
+        Edit_DeleteGameZones edit_DeleteGameZones = new Edit_DeleteGameZones(this, rootPaneCheckingEnabled,stall);
+        edit_DeleteGameZones.setVisible(true);
+        
+    }//GEN-LAST:event_jTable_GamezoneMouseClicked
 
     /**
      * @param args the command line arguments

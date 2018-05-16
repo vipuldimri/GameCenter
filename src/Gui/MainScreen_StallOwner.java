@@ -383,9 +383,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         TodaysCollectionTable = new javax.swing.JTable();
         jSeparator5 = new javax.swing.JSeparator();
         jLabel35 = new javax.swing.JLabel();
-        jDateChooser_todayCollection = new com.toedter.calendar.JDateChooser();
-        jButton4 = new javax.swing.JButton();
-        jLabel38 = new javax.swing.JLabel();
         jDateChooser_todayCollection_to = new com.toedter.calendar.JDateChooser();
         jDateChooser_todayCollection_from = new com.toedter.calendar.JDateChooser();
         jButton10 = new javax.swing.JButton();
@@ -730,22 +727,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel35.setText("To");
         jPanel3.add(jLabel35);
         jLabel35.setBounds(600, 630, 80, 40);
-        jPanel3.add(jDateChooser_todayCollection);
-        jDateChooser_todayCollection.setBounds(420, 570, 150, 40);
-
-        jButton4.setText("Get Record");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jButton4);
-        jButton4.setBounds(630, 570, 120, 40);
-
-        jLabel38.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel38.setText("Get Collection Record for Perticular Date");
-        jPanel3.add(jLabel38);
-        jLabel38.setBounds(100, 560, 260, 40);
         jPanel3.add(jDateChooser_todayCollection_to);
         jDateChooser_todayCollection_to.setBounds(630, 620, 150, 40);
         jPanel3.add(jDateChooser_todayCollection_from);
@@ -2422,75 +2403,6 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         AddEmp_flag = false;
     }//GEN-LAST:event_AddNewEmployee_ButtonActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:Perticular day today collection
-        if(jDateChooser_todayCollection.getDate() == null )
-        {
-            JOptionPane.showMessageDialog(jPanel1,
-                "Please Provide Date.",
-                "Inane error",
-                JOptionPane.ERROR_MESSAGE);
-            return ;
-        }
-        java.util.Date date  = jDateChooser_todayCollection.getDate();
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-
-        // Set time fields to zero
-        cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-long amount = 0l;
-        // Put it back in the Date object
-        date = cal.getTime();
-
-        ArrayList<Games> gamelistper = null;
-        StallInterface Dao = StallFactory.getInstance();
-        try
-        {
-            gamelistper = Dao.GetGamesPerticularDate(currentgamezone.getName(), date);
-        }
-        catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(jPanel1,
-                "Unable to Connect To Internet ,Please check your internet Connection.",
-                "Inane error",
-                JOptionPane.ERROR_MESSAGE);
-            todaycollectionamount.setText("Check internet connection");
-            return ;
-        }
-        if(gamelistper.isEmpty())
-        {
-            JOptionPane.showMessageDialog(jPanel1,
-                "No record for  this perticular date.",
-                "Inane error",
-                JOptionPane.ERROR_MESSAGE);
-            return ;
-        }
-        else{
-            DefaultTableModel m = (DefaultTableModel) TodaysCollectionTable.getModel();
-            m.setRowCount(0);
-            
-            for(Games game : gamelistper)
-            {
-                DefaultTableModel  model = (DefaultTableModel) TodaysCollectionTable.getModel();
-                Object row[] = new Object[2];
-                
-                row[0] = game.getGameName();
-                
-                row[1] = game.getAmount();
-                long current = Long.parseLong(row[1].toString());
-                amount = amount + current;
-                model.addRow(row);
-
-            }
-        }
-        
-        todaycollectionamount.setText("Total Collection is Rs - "+amount);
-
-    }//GEN-LAST:event_jButton4ActionPerformed
-
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:Register Customer
         RegisterCustomer registerCustomer = new  RegisterCustomer(this, true,Noofcustomerlabel,jTable_customers,customerlist,currentgamezone);
@@ -3132,7 +3044,6 @@ long amount = 0l;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
@@ -3142,7 +3053,6 @@ long amount = 0l;
     private com.toedter.calendar.JDateChooser jDateChooser_EndDate2;
     private com.toedter.calendar.JDateChooser jDateChooser_StartDate;
     private com.toedter.calendar.JDateChooser jDateChooser_StartDate2;
-    private com.toedter.calendar.JDateChooser jDateChooser_todayCollection;
     private com.toedter.calendar.JDateChooser jDateChooser_todayCollection_from;
     private com.toedter.calendar.JDateChooser jDateChooser_todayCollection_to;
     private javax.swing.JLabel jLabel1;
@@ -3176,7 +3086,6 @@ long amount = 0l;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel3_totalTransaction;
     private javax.swing.JLabel jLabel4;
