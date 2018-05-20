@@ -1085,6 +1085,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
         
         Stall stall = new Stall();
         int row = jTable_Gamezone.getSelectedRow();
+           DefaultTableModel model = (DefaultTableModel) jTable_Gamezone.getModel();
 
         String ID = jTable_Gamezone.getModel().getValueAt(row, 0).toString();
         String Name = jTable_Gamezone.getModel().getValueAt(row, 1).toString();
@@ -1108,10 +1109,35 @@ public class MainScreen_Admin extends javax.swing.JFrame
 
     
         
+        int a=JOptionPane.showConfirmDialog(this,"Are you sure ,you want to delete "+Name);  
+        if(a==JOptionPane.YES_OPTION)
+        {  
+//                 
+//        Edit_DeleteGameZones edit_DeleteGameZones = new Edit_DeleteGameZones(this, rootPaneCheckingEnabled,stall);
+//        edit_DeleteGameZones.setVisible(true);
+            try
+            {
+           StallInterface Dao =  StallFactory.getInstance();
+           Dao.DeleteGameZone(Integer.parseInt(ID ), Name);
+            }
+            catch(Exception e)
+            {
+             JOptionPane.showMessageDialog(this,
+            "Unable to delete GameZone ,Please check your internet Connection." +e,
+            "Inane error",
+            JOptionPane.ERROR_MESSAGE);
+             return;
+                //Deletetion fail
+            }
+          
+           
+            JOptionPane.showMessageDialog(this,
+            "GameZone Deleted",
+            "success",
+            JOptionPane.PLAIN_MESSAGE);
+            model.removeRow(row);
         
-        
-        Edit_DeleteGameZones edit_DeleteGameZones = new Edit_DeleteGameZones(this, rootPaneCheckingEnabled,stall);
-        edit_DeleteGameZones.setVisible(true);
+         }  
         
     }//GEN-LAST:event_jTable_GamezoneMouseClicked
 

@@ -226,5 +226,42 @@ public class StallImplements implements StallInterface
                    return gameslist;
        
     }
+
+    @Override
+    public void DeleteGameZone(int ID, String Name) throws Exception 
+    {
+       String customer = "DROP TABLE "+Name+"_customers";
+       String users = "DROP TABLE "+Name+"_users";
+       String trasaction = "DROP TABLE "+Name+"_transaction";
+       String othertrasaction = "DROP TABLE "+Name+"_other_transaction";
+       String FromGameZone = "DELETE FROM gamezone where ID = "+ID;
+       String games ="DROP TABLE "+Name+"_games";
+       
+       
+       
+        
+      PreparedStatement preparedStmt = conn.prepareStatement(customer);
+      preparedStmt.execute();
+      
+       preparedStmt = null;
+      preparedStmt = conn.prepareStatement(users);
+      preparedStmt.execute();
+      
+       preparedStmt = null;
+      preparedStmt = conn.prepareStatement(trasaction);
+      preparedStmt.execute();
+      
+      preparedStmt = null;
+       preparedStmt = conn.prepareStatement(othertrasaction);
+      preparedStmt.execute();
+    
+      preparedStmt = null;
+       preparedStmt = conn.prepareStatement(games);
+      preparedStmt.execute();
+      
+      preparedStmt = null;
+       preparedStmt = conn.prepareStatement(FromGameZone);
+      preparedStmt.execute();
+    }
     
 }
