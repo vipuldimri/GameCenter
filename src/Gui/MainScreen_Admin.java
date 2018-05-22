@@ -225,7 +225,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jLabel16.setBounds(130, 40, 130, 17);
 
         SidePanel.add(AddGameZonepanel);
-        AddGameZonepanel.setBounds(0, 240, 300, 80);
+        AddGameZonepanel.setBounds(0, 250, 300, 70);
 
         viewgamezonepanel.setBackground(new java.awt.Color(54, 33, 89));
         viewgamezonepanel.addMouseListener(new java.awt.event.MouseAdapter() {

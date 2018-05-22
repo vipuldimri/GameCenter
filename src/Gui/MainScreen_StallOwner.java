@@ -730,7 +730,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jPanel3.add(jDateChooser_todayCollection_to);
         jDateChooser_todayCollection_to.setBounds(630, 620, 150, 40);
         jPanel3.add(jDateChooser_todayCollection_from);
-        jDateChooser_todayCollection_from.setBounds(420, 630, 150, 40);
+        jDateChooser_todayCollection_from.setBounds(420, 620, 150, 40);
 
         jButton10.setText("Get Record");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
@@ -749,7 +749,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jLabel43.setForeground(new java.awt.Color(255, 255, 255));
         jLabel43.setText("From");
         jPanel3.add(jLabel43);
-        jLabel43.setBounds(370, 620, 80, 40);
+        jLabel43.setBounds(370, 630, 80, 40);
 
         jLabel44.setForeground(new java.awt.Color(255, 255, 255));
         jLabel44.setText("Get Collection for a interval");
@@ -2900,7 +2900,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         }
         
         
-        todaycollectionamount.setText("Today collection is "+amount);
+             todaycollectionamount.setText("Today collection is "+amount);
         
         
         
