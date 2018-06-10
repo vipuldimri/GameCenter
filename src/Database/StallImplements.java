@@ -237,13 +237,16 @@ public class StallImplements implements StallInterface
        String FromGameZone = "DELETE FROM gamezone where ID = "+ID;
        String games ="DROP TABLE "+Name+"_games";
        
+       PreparedStatement preparedStmt = conn.prepareStatement(customer);
        
-       
-        
-      PreparedStatement preparedStmt = conn.prepareStatement(customer);
+        try{
+
       preparedStmt.execute();
-      
-       preparedStmt = null;
+        }catch(Exception e)
+        {
+            
+        }
+      preparedStmt = null;
       preparedStmt = conn.prepareStatement(users);
       preparedStmt.execute();
       
@@ -262,6 +265,19 @@ public class StallImplements implements StallInterface
       preparedStmt = null;
        preparedStmt = conn.prepareStatement(FromGameZone);
       preparedStmt.execute();
+  
+    
+    }
+
+    @Override
+    public void AddNewGames(String GameZoneName, String Game) throws Exception 
+    {
+       
+            final String AddGames = "INSERT into "+GameZoneName+"_games (GameName, Amount, Date) values ('"+Game+"',0,curdate());";
+            PreparedStatement pstmt = conn.prepareStatement(AddGames);
+            pstmt.executeUpdate();
+        
+        
     }
     
 }

@@ -74,6 +74,7 @@ public class BackGroundThread1 extends Thread
         {
            error_flag =true;
            System.out.println("ERROR ");
+           System.exit(0);
            
         }   
         

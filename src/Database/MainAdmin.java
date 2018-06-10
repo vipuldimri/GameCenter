@@ -64,8 +64,9 @@ public class MainAdmin implements MainAdminInterface
               
               String sql2 =temp+"( ID  int auto_increment primary key,CardNo  varchar(45) null,EmpName varchar(45) null, Amount  int  null,Date    datetime(6) null);";
               
+        
               Statement stmt2 = conn.createStatement() ;
-            // create a new table
+              // create a new table
               stmt2.execute(sql2);
               
          
@@ -75,7 +76,7 @@ public class MainAdmin implements MainAdminInterface
               
               String TableName2 = stall.getName();
               String FinalTableName2 = TableName+"_users";
-              String temp2 ="CREATE TABLE "+FinalTableName2;
+              String temp2 ="CREATE TABLE '"+FinalTableName2+"'";
               
             
               String query = temp2+"(ID INT AUTO_INCREMENT PRIMARY KEY,Name       VARCHAR(20) NOT NULL,Address    VARCHAR(50) NULL, Contact    VARCHAR(20) NULL, Email      VARCHAR(30) NULL,Type       VARCHAR(10) NOT NULL,GameZoneID INT         NOT NULL,Password   VARCHAR(20) NOT NULL,UserName   VARCHAR(45) NOT NULL, CONSTRAINT UserName_UNIQUE UNIQUE (UserName))";
@@ -89,13 +90,13 @@ public class MainAdmin implements MainAdminInterface
               
              
               String FinalTableName3 = TableName+"_customers";
-              String temp3 ="CREATE TABLE "+FinalTableName3;
+              String temp3 ="CREATE TABLE '"+FinalTableName3+"'";
               String query2 = temp3+"(Id      INT(100) AUTO_INCREMENT PRIMARY KEY, Name    VARCHAR(30) NOT NULL,Contact VARCHAR(30) NOT NULL, EmailId VARCHAR(50) NULL)";
               Statement stmt222 = conn.createStatement() ;
               stmt222.execute(query2);
        
               
-              String temp4 ="create table "+stall.getName()+"_games\n" +
+              String temp4 ="create table '"+stall.getName()+"_games'\n" +
 "(\n" +
 " ID       int auto_increment\n" +
 "   primary key,\n" +
@@ -111,7 +112,7 @@ public class MainAdmin implements MainAdminInterface
               
               
               
-              String other_t =  "create table "+stall.getName()+"_other_transaction\n" +
+              String other_t =  "create table '"+stall.getName()+"_other_transaction'\n" +
 "(\n" +
 "  ID           int auto_increment\n" +
 "    primary key,\n" +
@@ -143,7 +144,7 @@ public class MainAdmin implements MainAdminInterface
         
         
         
-        String insertuserdetails = "INSERT into "+stall.getName()+"_users(Name,UserName,Password,Email,Contact,Address,Type,GameZoneID) values (?,?,?,?,?,?,?,?);";
+        String insertuserdetails = "INSERT into '"+stall.getName()+"_users'(Name,UserName,Password,Email,Contact,Address,Type,GameZoneID) values (?,?,?,?,?,?,?,?);";
         
         PreparedStatement pstmt2 = conn.prepareStatement(insertuserdetails);
         pstmt2.setString(1,stall.getOwnerName());

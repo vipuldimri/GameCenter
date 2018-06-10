@@ -22,4 +22,7 @@ public interface StallInterface
     public ArrayList<Games> GetGamesPerticularDateRange(String GameZoneName,Date startdate,Date Enddate)throws Exception;
     
     public void DeleteGameZone(int ID ,String Name)throws Exception;
+    
+    public void AddNewGames(String GameZoneName ,String Game)throws Exception;
+    
 }

@@ -13,7 +13,6 @@ import gamecenter.Background_GetTransactionDetails;
 import gamecenter.Recharge;
 import java.awt.Color;
 import java.sql.Connection;
-import java.util.concurrent.CountDownLatch;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -71,7 +70,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
            //Error in getting GameZone
            
        }
-       if(GameZoneList == null || GameZoneList.size() ==0 )
+       if(GameZoneList == null || GameZoneList.size() ==0)
        {
            //Error again
        }
@@ -101,7 +100,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
        }
         
                
-       ///clock
+ 
        
               java.util.Date date=new java.util.Date();
 		String dip=date.toString();
@@ -112,14 +111,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
 		int period= 1000;
 		Clock clock = new Clock(Label_clockadmin);
 		time.scheduleAtFixedRate(clock, delay,period);
-                //
-                
-       
-       //
-  
-      
-    
-       
+ 
        
        
     }
@@ -173,6 +165,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jButton3 = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
         jTextField_GameZoneEmail = new javax.swing.JTextField();
+        Addgamescheckbox = new javax.swing.JCheckBox();
         ViewGameZone = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_Gamezone = new javax.swing.JTable();
@@ -346,7 +339,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
         AddGameZone.add(jTextField_GameZoneAddress);
         jTextField_GameZoneAddress.setBounds(490, 110, 350, 50);
 
-        jButton1.setText("Add GameZone");
+        jButton1.setText("Add GameZone / Games");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -412,6 +405,10 @@ public class MainScreen_Admin extends javax.swing.JFrame
         jTextField_GameZoneEmail.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         AddGameZone.add(jTextField_GameZoneEmail);
         jTextField_GameZoneEmail.setBounds(490, 320, 350, 40);
+
+        Addgamescheckbox.setText("Add Games Only");
+        AddGameZone.add(Addgamescheckbox);
+        Addgamescheckbox.setBounds(310, 120, 140, 25);
 
         ViewGameZone.setBackground(new java.awt.Color(255, 255, 255));
         ViewGameZone.setLayout(null);
@@ -591,6 +588,120 @@ public class MainScreen_Admin extends javax.swing.JFrame
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:Create button  Main Add new GameZoneButton
       
+         if(Addgamescheckbox.isSelected())
+         {
+             
+             if(jTextField_GameZoneName.getText().length() == 0 )
+             {
+                  JOptionPane.showMessageDialog(this,
+                  "First Select GameZone",
+                  "Inane error",
+                  JOptionPane.ERROR_MESSAGE);
+                  return;
+             
+                 
+             }
+             String gamezonename = jTextField_GameZoneName.getText().trim();
+                 
+             for(String gamezone : gamezonenames)
+                 {
+                     if(gamezone.equals(gamezonename))
+                     {
+                            JOptionPane.showMessageDialog(this,
+                            "GameZone Found",
+                            "Message",
+                            JOptionPane.PLAIN_MESSAGE);
+                            
+                            ArrayList<String> newgames = new ArrayList<>();
+                            String gamesstring ="";
+                            while(true)
+                            {
+                                    String GameZoneG = JOptionPane.showInputDialog(this,"Enter Game Name");
+                                    if(GameZoneG == null || GameZoneG.length()==0)
+                                    {
+                                        JOptionPane.showMessageDialog(this,
+                                        "Empty String ",
+                                        "Inane error",
+                                        JOptionPane.ERROR_MESSAGE);
+                                         return;
+                                     }else
+                                     {
+                                         newgames.add(GameZoneG);
+                                         gamesstring  = gamesstring + GameZoneG  + " , ";
+                                     }
+                                       
+                               int a=JOptionPane.showConfirmDialog(this,"Add MoreGames ??");  
+                               if(a==JOptionPane.CANCEL_OPTION)
+                                {                   
+                                    break;
+                                }  
+                               if(a==JOptionPane.NO_OPTION)
+                               {
+                                   break;
+                               }
+                               
+                                     
+                            }
+                       
+                            
+                            
+                            
+                            JOptionPane.showMessageDialog(this,
+                            "Click ok to add Games "+gamesstring,
+                            "Message",
+                            JOptionPane.PLAIN_MESSAGE);
+                            
+                            String currentGame="";
+                            try
+                            {
+                        
+                              for(String G : newgames)
+                              {  
+                                   currentGame = G;   
+                                   StallInterface Dao = StallFactory.getInstance();
+                                   Dao.AddNewGames(gamezonename, G);
+                              }
+                          
+                           
+                            }catch(Exception e)
+                            {
+                                  JOptionPane.showMessageDialog(this,
+                                  "Error Adding Game  :  "+ currentGame +"  and games You add After This game  "+e,
+                                  "Error",
+                                  JOptionPane.ERROR_MESSAGE);
+                             return ;
+                            }
+                         
+                               JOptionPane.showMessageDialog(this,
+                               "Games ADDED "+gamesstring,
+                               "Message",
+                               JOptionPane.PLAIN_MESSAGE);
+                            
+                               return ;
+                            
+                     }
+                
+                 }
+             
+            
+                 JOptionPane.showMessageDialog(this,
+                  "No gamezone found for this name",
+                  "Inane error",
+                  JOptionPane.ERROR_MESSAGE);
+                  return;
+             
+             
+         }
+        
+         int a=JOptionPane.showConfirmDialog(this,"Please Check the Infomation before adding new gamezone ,click ok to proceed and cancel for recheck");  
+        if(a==JOptionPane.CANCEL_OPTION)
+        {                   
+                       return ;
+         }  
+          if(a==JOptionPane.NO_OPTION)
+        {                   
+                       return ;
+         }  
         
         if(gameNameSetting == null || gameNameSetting.gamelist.isEmpty())
         {
@@ -1179,6 +1290,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AddGameZone;
     private javax.swing.JPanel AddGameZonepanel;
+    private javax.swing.JCheckBox Addgamescheckbox;
     private javax.swing.JPanel EmployeeDeatilsPanel;
     private javax.swing.JPanel EmployeeDetails;
     private javax.swing.JPanel GameZoneTransaction;
