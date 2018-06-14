@@ -77,7 +77,8 @@ public class StallImplements implements StallInterface
                     Games game = new Games(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getDate(4));
                     gameslist.add(game);
                    }
-               //Code for new Day    
+             
+                   //Code for new Day    
                if(gameslist.isEmpty() == true)
                {                
                   //Query for Creating new entry for a day 
@@ -272,7 +273,62 @@ public class StallImplements implements StallInterface
     @Override
     public void AddNewGames(String GameZoneName, String Game) throws Exception 
     {
-       
+        String Query="SELECT * FROM GameZoneDB."+GameZoneName+"_games  WHERE Date = curdate();";
+        ArrayList<Games> gameslist = new ArrayList<>();
+        Statement stmt=conn.createStatement();  
+        ResultSet rs = stmt.executeQuery(Query);
+                   
+        while(rs.next())  
+        {
+                 Games game = new Games(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getDate(4));
+                 gameslist.add(game);
+        }
+             
+                   //Code for new Day    
+               if(gameslist.isEmpty() == true)
+               {                
+                  //Query for Creating new entry for a day 
+                  String Creatingnewentry = "select MAX(Date) from "+GameZoneName+"_games ;";
+                  java.sql.Date maxdate = null;
+                  ArrayList<String> GamesAvailable = new ArrayList<>();
+                  Statement stmt3=conn.createStatement();  
+                  ResultSet rs2 = stmt.executeQuery(Creatingnewentry);
+                  while(rs2.next())  
+                  {
+                   maxdate = rs2.getDate(1);
+                  }  
+                  long millis=System.currentTimeMillis();  
+                  java.sql.Date currentdate=new java.sql.Date(millis);    
+                  if(maxdate.before(currentdate))
+                  {
+                  //create new entry  select DISTINCT(GameName) from GameZone2_games;
+                  String getallgames = "select DISTINCT(GameName) from "+GameZoneName+"_games ;";
+                  Statement stmt4=conn.createStatement();  
+                  ResultSet rs3 = stmt.executeQuery(getallgames);
+                  while(rs3.next())  
+                  {
+                   GamesAvailable.add(rs3.getString(1));
+                  }
+                  
+                  for(String gamename : GamesAvailable)
+                  {
+                   final String addgamerow = "INSERT INTO "+GameZoneName+"_games (GameName,Amount,Date) VALUES ('"+gamename+"','0',curdate());";
+                   PreparedStatement pstmt = conn.prepareStatement(addgamerow);
+                   pstmt.executeUpdate();
+        
+                      
+                  }
+                  
+                  
+                  }else
+                  {
+                      
+                  }
+                
+               
+               }
+        
+        
             final String AddGames = "INSERT into "+GameZoneName+"_games (GameName, Amount, Date) values ('"+Game+"',0,curdate());";
             PreparedStatement pstmt = conn.prepareStatement(AddGames);
             pstmt.executeUpdate();
