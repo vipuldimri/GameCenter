@@ -328,7 +328,6 @@ public class StallImplements implements StallInterface
                
                }
         
-        
             final String AddGames = "INSERT into "+GameZoneName+"_games (GameName, Amount, Date) values ('"+Game+"',0,curdate());";
             PreparedStatement pstmt = conn.prepareStatement(AddGames);
             pstmt.executeUpdate();
