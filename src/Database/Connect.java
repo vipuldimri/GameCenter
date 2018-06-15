@@ -9,9 +9,10 @@ public class Connect
     {
         
                    conn = null;
+                   String urlnew ="jdbc:mysql://gamezone2.cn406nlqr1z7.us-east-2.rds.amazonaws.com:3306/GameZoneDB";
 	           String url =  "jdbc:mysql://gamezone.cn406nlqr1z7.us-east-2.rds.amazonaws.com:3306/GameZoneDB";
 	           Class.forName("com.mysql.jdbc.Driver");
-	           conn = DriverManager.getConnection (url,"vipuldimri","gamezone");
+	           conn = DriverManager.getConnection (urlnew,"vipuldimri","gamezone");
 	           System.out.println ("Database connection established");
 
     }

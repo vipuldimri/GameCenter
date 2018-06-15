@@ -27,13 +27,7 @@ public class MainAdmin implements MainAdminInterface
     @Override
     public void AddGameZone(Stall stall,ArrayList<String> games) throws Exception
     {
-        /*
-        1 . Add into GameZone List
-        2 . create its userttable
-        3 . create its transaction table
-        4 . create its customer table
-        5 .
-        */
+      
         
         
             final String AddGameZone = "insert  into gamezone(Address,Contact,Email,OwnerName,Max_Employee,Name,SubStartDate,Password,SubEndDate) VALUES(?,?,?,?,?,?,?,?,?)";
@@ -50,82 +44,95 @@ public class MainAdmin implements MainAdminInterface
             pstmt.setDate(9, stall.getSubEndDate());
             pstmt.executeUpdate();
             
-            //Adding new gamezone done into gamezone table 
-           
             
-         
-         
-             //above code updated for games 
-              //Below code works Fine Creating a Table
-              String TableName = stall.getName();
-              String FinalTableName = TableName+"_transaction";
-              String temp ="CREATE TABLE "+FinalTableName;
-              
-              
-              String sql2 =temp+"( ID  int auto_increment primary key,CardNo  varchar(45) null,EmpName varchar(45) null, Amount  int  null,Date    datetime(6) null);";
-              
+              String transactiontable = "create table "+stall.getName()+"_transaction\n" +
+"(\n" +
+"  ID      int auto_increment\n" +
+"    primary key,\n" +
+"  CardNo  varchar(45) null,\n" +
+"  EmpName varchar(45) null,\n" +
+"  Amount  int         null,\n" +
+"  Date    datetime(6) null\n" +
+");\n" +
+""            ;
         
-              Statement stmt2 = conn.createStatement() ;
-              // create a new table
-              stmt2.execute(sql2);
+              Statement statement = conn.createStatement() ;
+              statement.execute(transactiontable);
               
          
               
               ///////////////////////////////
               
               
-              String TableName2 = stall.getName();
-              String FinalTableName2 = TableName+"_users";
-              String temp2 ="CREATE TABLE '"+FinalTableName2+"'";
+              
+              
+              String Usertable ="create table "+stall.getName()+"_users\n" +
+"(\n" +
+"  ID         int auto_increment\n" +
+"    primary key,\n" +
+"  Name       varchar(20) not null,\n" +
+"  Address    varchar(50) null,\n" +
+"  Contact    varchar(20) null,\n" +
+"  Email      varchar(30) null,\n" +
+"  Type       varchar(10) not null,\n" +
+"  GameZoneID int         not null,\n" +
+"  Password   varchar(20) not null,\n" +
+"  UserName   varchar(45) not null,\n" +
+"  constraint UserName_UNIQUE\n" +
+"  unique (UserName)\n" +
+");";
               
             
-              String query = temp2+"(ID INT AUTO_INCREMENT PRIMARY KEY,Name       VARCHAR(20) NOT NULL,Address    VARCHAR(50) NULL, Contact    VARCHAR(20) NULL, Email      VARCHAR(30) NULL,Type       VARCHAR(10) NOT NULL,GameZoneID INT         NOT NULL,Password   VARCHAR(20) NOT NULL,UserName   VARCHAR(45) NOT NULL, CONSTRAINT UserName_UNIQUE UNIQUE (UserName))";
-              //String sql22 =temp2+qu;
-              Statement stmt22 = conn.createStatement() ;
-              stmt22.execute(query);
-              //////////////////////
+              
+               statement = conn.createStatement() ;
+               statement.execute(Usertable);
+            
               
               
                     
               
              
-              String FinalTableName3 = TableName+"_customers";
-              String temp3 ="CREATE TABLE '"+FinalTableName3+"'";
-              String query2 = temp3+"(Id      INT(100) AUTO_INCREMENT PRIMARY KEY, Name    VARCHAR(30) NOT NULL,Contact VARCHAR(30) NOT NULL, EmailId VARCHAR(50) NULL)";
+              String Customertable ="create table "+stall.getName()+"_customers\n" +
+"(\n" +
+"  Id      int(100) auto_increment\n" +
+"    primary key,\n" +
+"  Name    varchar(30) not null,\n" +
+"  Contact varchar(30) not null,\n" +
+"  EmailId varchar(50) null\n" +
+");\n" +
+"";
+     
               Statement stmt222 = conn.createStatement() ;
-              stmt222.execute(query2);
+              stmt222.execute(Customertable);
        
               
-              String temp4 ="create table '"+stall.getName()+"_games'\n" +
+              String Gamestable ="create table "+stall.getName()+"_games\n" +
 "(\n" +
-" ID       int auto_increment\n" +
-"   primary key,\n" +
-" GameName varchar(45)  not null,\n" +
-" Amount   varchar(200) not null,\n" +
-" Date     date         not null\n" +
-");\n" +
-"";
+"  ID       int auto_increment\n" +
+"    primary key,\n" +
+"  GameName varchar(45)  not null,\n" +
+"  Amount   varchar(200) not null,\n" +
+"  Date     date         not null\n" +
+");";
               
           
-              Statement stmt2222 = conn.createStatement() ;
-              stmt2222.execute(temp4);
+               statement = conn.createStatement() ;
+              statement.execute(Gamestable);
               
               
               
-              String other_t =  "create table '"+stall.getName()+"_other_transaction'\n" +
+              String other_t =  "create table "+stall.getName()+"_transaction\n" +
 "(\n" +
-"  ID           int auto_increment\n" +
+"  ID      int auto_increment\n" +
 "    primary key,\n" +
-"  CustomerName varchar(20)  not null,\n" +
-"  CardNo       varchar(30)  null,\n" +
-"  Method       varchar(50)  not null,\n" +
-"  Money        varchar(100) not null,\n" +
-"  Date         datetime     not null,\n" +
-"  ExpireDate   date         null\n" +
+"  CardNo  varchar(45) null,\n" +
+"  EmpName varchar(45) null,\n" +
+"  Amount  int         null,\n" +
+"  Date    datetime(6) null\n" +
 ");\n" +
 "";
-        Statement stmt22222 = conn.createStatement() ;
-        stmt22222.execute(other_t);
+         statement = conn.createStatement() ;
+         statement.execute(other_t);
               
         
         String maxid = "select max(ID) from gamezone;";
@@ -144,7 +151,7 @@ public class MainAdmin implements MainAdminInterface
         
         
         
-        String insertuserdetails = "INSERT into '"+stall.getName()+"_users'(Name,UserName,Password,Email,Contact,Address,Type,GameZoneID) values (?,?,?,?,?,?,?,?);";
+        String insertuserdetails = "INSERT into "+stall.getName()+"_users(Name,UserName,Password,Email,Contact,Address,Type,GameZoneID) values (?,?,?,?,?,?,?,?);";
         
         PreparedStatement pstmt2 = conn.prepareStatement(insertuserdetails);
         pstmt2.setString(1,stall.getOwnerName());

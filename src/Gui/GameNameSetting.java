@@ -166,7 +166,7 @@ public class GameNameSetting extends javax.swing.JDialog
 
         Horse2.setText("Horse -2");
         getContentPane().add(Horse2);
-        Horse2.setBounds(530, 340, 67, 23);
+        Horse2.setBounds(530, 340, 130, 23);
 
         toytrain1.setText("Toy Train - 1");
         getContentPane().add(toytrain1);
@@ -174,7 +174,7 @@ public class GameNameSetting extends javax.swing.JDialog
 
         Paystation1.setText("Play Station - 1");
         getContentPane().add(Paystation1);
-        Paystation1.setBounds(360, 380, 130, 23);
+        Paystation1.setBounds(360, 380, 140, 23);
 
         catchlight1.setText("Catch Light -1 ");
         getContentPane().add(catchlight1);
@@ -182,7 +182,7 @@ public class GameNameSetting extends javax.swing.JDialog
 
         bikerace1.setText("Bike race -1");
         getContentPane().add(bikerace1);
-        bikerace1.setBounds(110, 420, 81, 23);
+        bikerace1.setBounds(110, 420, 160, 23);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
