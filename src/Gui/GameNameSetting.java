@@ -243,12 +243,12 @@ public class GameNameSetting extends javax.swing.JDialog
              
     if(Enginetrain1.isSelected())
     {
-      gamelist.add("Engine train-1");
+      gamelist.add("Enginetrain-1");
     }
            
     if(Enginetrain1.isSelected())
     {
-      gamelist.add("Engine train-2");
+      gamelist.add("Enginetrain-2");
     }
    
       if(Basketball1.isSelected())

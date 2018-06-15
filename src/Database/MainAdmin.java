@@ -1,20 +1,13 @@
 
 package Database;
 
-import static Database.Connect.conn;
-import static Database.StallImplements.GetGameZones;
-import static Database.TransactionImplementation.Rech;
-import Gui.GameNameSetting;
+
 import gamecenter.Stall;
-import gamecenter.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class MainAdmin implements MainAdminInterface
 {
@@ -61,8 +54,7 @@ public class MainAdmin implements MainAdminInterface
               
          
               
-              ///////////////////////////////
-              
+          
               
               
               
@@ -120,18 +112,18 @@ public class MainAdmin implements MainAdminInterface
               statement.execute(Gamestable);
               
               
-              
-              String other_t =  "create table "+stall.getName()+"_transaction\n" +
+                 String other_t =  "create table "+stall.getName()+"_other_transaction\n" +
 "(\n" +
-"  ID      int auto_increment\n" +
+"  ID           int auto_increment\n" +
 "    primary key,\n" +
-"  CardNo  varchar(45) null,\n" +
-"  EmpName varchar(45) null,\n" +
-"  Amount  int         null,\n" +
-"  Date    datetime(6) null\n" +
-");\n" +
-"";
-         statement = conn.createStatement() ;
+"  CustomerName varchar(20)  not null,\n" +
+"  CardNo       varchar(30)  null,\n" +
+"  Method       varchar(50)  not null,\n" +
+"  Money        varchar(100) not null,\n" +
+"  Date         datetime     not null,\n" +
+"  ExpireDate   date         null\n" +
+");";
+        statement = conn.createStatement() ;
          statement.execute(other_t);
               
         

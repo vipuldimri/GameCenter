@@ -693,7 +693,7 @@ public class MainScreen_Admin extends javax.swing.JFrame
              
          }
         
-         int a=JOptionPane.showConfirmDialog(this,"Please Check the Infomation before adding new gamezone ,click ok to proceed and cancel for recheck");  
+        int a=JOptionPane.showConfirmDialog(this,"Please Check the Infomation before adding new gamezone ,click Yes to proceed and cancel for recheck");  
         if(a==JOptionPane.CANCEL_OPTION)
         {                   
                        return ;

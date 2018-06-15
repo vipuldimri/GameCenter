@@ -267,7 +267,7 @@ public class LoginScreen extends javax.swing.JFrame
 
      
         //Checking if admin login
-        if(username.equals("admin") && pass.equals("admin"))
+        if(username.equals("admin") && pass.equals("admin@admin"))
         {
             MainScreen_Admin admin = new MainScreen_Admin();
             admin.setVisible(true);
@@ -505,7 +505,7 @@ public class LoginScreen extends javax.swing.JFrame
 
      
         //Checking if admin login
-        if(username.equals("admin") && pass.equals("admin"))
+        if(username.equals("admin") && pass.equals("admin@admin"))
         {
             MainScreen_Admin admin = new MainScreen_Admin();
             admin.setVisible(true);
@@ -702,7 +702,7 @@ public class LoginScreen extends javax.swing.JFrame
 
      
         //Checking if admin login
-        if(username.equals("admin") && pass.equals("admin"))
+             if(username.equals("admin") && pass.equals("admin@admin"))
         {
             MainScreen_Admin admin = new MainScreen_Admin();
             admin.setVisible(true);
@@ -901,7 +901,7 @@ public class LoginScreen extends javax.swing.JFrame
 
      
         //Checking if admin login
-        if(username.equals("admin") && pass.equals("admin"))
+        if(username.equals("admin") && pass.equals("admin@admin"))
         {
             MainScreen_Admin admin = new MainScreen_Admin();
             admin.setVisible(true);
