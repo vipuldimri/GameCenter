@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Gui;
 
 import gamecenter.Games;
@@ -63,6 +59,11 @@ public class GameNameSetting extends javax.swing.JDialog
         Toycatcher = new javax.swing.JCheckBox();
         Rainbow = new javax.swing.JCheckBox();
         Speedball1 = new javax.swing.JCheckBox();
+        Horse2 = new javax.swing.JCheckBox();
+        toytrain1 = new javax.swing.JCheckBox();
+        Paystation1 = new javax.swing.JCheckBox();
+        catchlight1 = new javax.swing.JCheckBox();
+        bikerace1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(770, 529));
@@ -84,35 +85,35 @@ public class GameNameSetting extends javax.swing.JDialog
 
         Carracing1.setText("Car racing-1");
         getContentPane().add(Carracing1);
-        Carracing1.setBounds(110, 180, 110, 25);
+        Carracing1.setBounds(110, 180, 110, 23);
 
         Carracing2.setText("Car racing-2 ");
         getContentPane().add(Carracing2);
-        Carracing2.setBounds(110, 220, 120, 25);
+        Carracing2.setBounds(110, 220, 120, 23);
 
         DanceDance1.setText("Dance Dance-1");
         getContentPane().add(DanceDance1);
-        DanceDance1.setBounds(110, 260, 160, 25);
+        DanceDance1.setBounds(110, 260, 160, 23);
 
         Enginetrain2.setText("Engine train-2");
         getContentPane().add(Enginetrain2);
-        Enginetrain2.setBounds(360, 210, 120, 25);
+        Enginetrain2.setBounds(360, 210, 120, 23);
 
         DanceDance2.setText("Dance Dance-2");
         getContentPane().add(DanceDance2);
-        DanceDance2.setBounds(110, 300, 130, 25);
+        DanceDance2.setBounds(110, 300, 130, 23);
 
         Helicopter.setText("Helicopter");
         getContentPane().add(Helicopter);
-        Helicopter.setBounds(110, 340, 150, 25);
+        Helicopter.setBounds(110, 340, 150, 23);
 
         Spiderstorm.setText("Spider storm");
         getContentPane().add(Spiderstorm);
-        Spiderstorm.setBounds(530, 300, 150, 25);
+        Spiderstorm.setBounds(530, 300, 150, 23);
 
         Basketball1.setText("Basketball-1");
         getContentPane().add(Basketball1);
-        Basketball1.setBounds(360, 250, 120, 25);
+        Basketball1.setBounds(360, 250, 120, 23);
 
         TrackTrain2.setText("Track Train-2");
         getContentPane().add(TrackTrain2);
@@ -120,11 +121,11 @@ public class GameNameSetting extends javax.swing.JDialog
 
         TrackTrain1.setText("Track Train-1");
         getContentPane().add(TrackTrain1);
-        TrackTrain1.setBounds(360, 100, 150, 25);
+        TrackTrain1.setBounds(360, 100, 150, 23);
 
         Enginetrain1.setText("Engine train-1");
         getContentPane().add(Enginetrain1);
-        Enginetrain1.setBounds(360, 170, 130, 25);
+        Enginetrain1.setBounds(360, 170, 130, 23);
 
         AddGameButton.setText("Submit");
         AddGameButton.addActionListener(new java.awt.event.ActionListener() {
@@ -133,35 +134,55 @@ public class GameNameSetting extends javax.swing.JDialog
             }
         });
         getContentPane().add(AddGameButton);
-        AddGameButton.setBounds(320, 420, 140, 40);
+        AddGameButton.setBounds(320, 460, 140, 40);
 
         Basketball2.setText("Basketball-2");
         getContentPane().add(Basketball2);
-        Basketball2.setBounds(360, 290, 150, 25);
+        Basketball2.setBounds(360, 290, 150, 23);
 
-        Hammer.setText("Hammer");
+        Hammer.setText("Hammer - 1");
         getContentPane().add(Hammer);
-        Hammer.setBounds(360, 340, 150, 25);
+        Hammer.setBounds(360, 340, 150, 23);
 
         Speedball2.setText("Speedball-2");
         getContentPane().add(Speedball2);
-        Speedball2.setBounds(530, 260, 150, 25);
+        Speedball2.setBounds(530, 260, 150, 23);
 
-        Horse.setText("Horse");
+        Horse.setText("Horse -1");
         getContentPane().add(Horse);
-        Horse.setBounds(530, 100, 150, 25);
+        Horse.setBounds(530, 100, 150, 23);
 
-        Toycatcher.setText("Toy catcher");
+        Toycatcher.setText("Toy catcher -1");
         getContentPane().add(Toycatcher);
-        Toycatcher.setBounds(530, 140, 150, 25);
+        Toycatcher.setBounds(530, 140, 150, 23);
 
         Rainbow.setText("Rainbow");
         getContentPane().add(Rainbow);
-        Rainbow.setBounds(530, 180, 150, 25);
+        Rainbow.setBounds(530, 180, 150, 23);
 
         Speedball1.setText("Speedball-1");
         getContentPane().add(Speedball1);
-        Speedball1.setBounds(530, 220, 150, 25);
+        Speedball1.setBounds(530, 220, 150, 23);
+
+        Horse2.setText("Horse -2");
+        getContentPane().add(Horse2);
+        Horse2.setBounds(530, 340, 67, 23);
+
+        toytrain1.setText("Toy Train - 1");
+        getContentPane().add(toytrain1);
+        toytrain1.setBounds(110, 380, 120, 23);
+
+        Paystation1.setText("Play Station - 1");
+        getContentPane().add(Paystation1);
+        Paystation1.setBounds(360, 380, 130, 23);
+
+        catchlight1.setText("Catch Light -1 ");
+        getContentPane().add(catchlight1);
+        catchlight1.setBounds(530, 370, 120, 23);
+
+        bikerace1.setText("Bike race -1");
+        getContentPane().add(bikerace1);
+        bikerace1.setBounds(110, 420, 81, 23);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -171,21 +192,21 @@ public class GameNameSetting extends javax.swing.JDialog
         // TODO add your handling code here:Submit button add games
     if(AirHockey1.isSelected())
     {
-      gamelist.add("Air hockey-1");
+      gamelist.add("Airhockey-1");
     }
     if(AirHockey2.isSelected())
     {
-      gamelist.add("Air hockey-2");
+      gamelist.add("Airhockey-2");
     }
     
     
       if(DanceDance1.isSelected())
     {
-      gamelist.add("Dance Dance-1");
+      gamelist.add("Dance-1");
     }
     if(DanceDance2.isSelected())
     {
-      gamelist.add("Dance Dance-2");
+      gamelist.add("Dance-2");
     }
     
     
@@ -193,16 +214,16 @@ public class GameNameSetting extends javax.swing.JDialog
         
       if(Carracing1.isSelected())
     {
-      gamelist.add("Car racing-1");
+      gamelist.add("Carrace-1");
     }
     if(Carracing2.isSelected())
     {
-      gamelist.add("Car racing-2");
+      gamelist.add("Carrace-2");
     }
     
     
     
-         if(Helicopter.isSelected())
+    if(Helicopter.isSelected())
     {
       gamelist.add("Helicopter");
     }
@@ -210,12 +231,12 @@ public class GameNameSetting extends javax.swing.JDialog
          
     if(TrackTrain1.isSelected())
     {
-      gamelist.add("Track Train-1");
+      gamelist.add("Trktrain-1");
     }
            
     if(TrackTrain2.isSelected())
     {
-      gamelist.add("Track Train-2");
+      gamelist.add("Trktrain-2");
     }
    
     
@@ -237,25 +258,29 @@ public class GameNameSetting extends javax.swing.JDialog
            
     if(Basketball2.isSelected())
     {
-      gamelist.add("Basketball-1");
+      gamelist.add("Basketball-2");
     }
    
     
  
      if(Hammer.isSelected())
     {
-      gamelist.add("Hammer");
+      gamelist.add("Hammer-1");
     }
            
     if(Horse.isSelected())
     {
-      gamelist.add("Horse");
+      gamelist.add("Horse-1");
     }
     
+    if(Horse2.isSelected())
+    {
+      gamelist.add("Horse-2");
+    }
      
      if(Toycatcher.isSelected())
     {
-      gamelist.add("Toy catcher");
+      gamelist.add("Toycatcher-1");
     }
            
     if(Rainbow.isSelected())
@@ -267,22 +292,41 @@ public class GameNameSetting extends javax.swing.JDialog
          
      if(Speedball1.isSelected())
     {
-      gamelist.add("Speedball1");
+      gamelist.add("Speedball-1");
     }
            
     if(Speedball2.isSelected())
     {
-      gamelist.add("Speedball2");
+      gamelist.add("Speedball-2");
     }
     
     
                
     if(Spiderstorm.isSelected())
     {
-      gamelist.add("Spider storm");
+      gamelist.add("Spiderstorm");
     }
     
-
+    if(toytrain1.isSelected())
+    {
+        gamelist.add("Toytrain-1");
+    }
+    
+    
+     if(Paystation1.isSelected())
+    {
+        gamelist.add("Playstn-1");
+    }
+     
+    if(catchlight1.isSelected())
+    {
+      gamelist.add("Catchlight-1");
+    }
+    
+    if(bikerace1.isSelected())
+    {
+      gamelist.add("Bikerace-1");
+    }
         setVisible(false);
     
     }//GEN-LAST:event_AddGameButtonActionPerformed
@@ -338,6 +382,8 @@ public class GameNameSetting extends javax.swing.JDialog
     private javax.swing.JCheckBox Hammer;
     private javax.swing.JCheckBox Helicopter;
     private javax.swing.JCheckBox Horse;
+    private javax.swing.JCheckBox Horse2;
+    private javax.swing.JCheckBox Paystation1;
     private javax.swing.JCheckBox Rainbow;
     private javax.swing.JCheckBox Speedball1;
     private javax.swing.JCheckBox Speedball2;
@@ -345,6 +391,9 @@ public class GameNameSetting extends javax.swing.JDialog
     private javax.swing.JCheckBox Toycatcher;
     private javax.swing.JCheckBox TrackTrain1;
     private javax.swing.JCheckBox TrackTrain2;
+    private javax.swing.JCheckBox bikerace1;
+    private javax.swing.JCheckBox catchlight1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JCheckBox toytrain1;
     // End of variables declaration//GEN-END:variables
 }
