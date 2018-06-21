@@ -11,7 +11,7 @@ package Database;
  */
 public class UserFactory 
 {
-    public static UserInterface getInstance()throws Exception
+    public static UserInterface getInstance()
     {
         return new UserImplements();
     }

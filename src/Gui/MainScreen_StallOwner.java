@@ -486,6 +486,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -1504,6 +1505,14 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             }
         });
         jMenu1.add(jMenuItem3);
+
+        jMenuItem5.setText("ChangePassword");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem5);
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Refresh ");
@@ -2905,6 +2914,12 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
         
         
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        ChangePassword changePassword = new ChangePassword(this, true , currentuser , currentgamezone );
+        changePassword.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
  	public static java.sql.Timestamp convert(java.util.Date date)
 	{
 		return new java.sql.Timestamp(date.getTime());
@@ -2948,12 +2963,9 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
             try
             {
                 StallInterface Dao = StallFactory.getInstance();
-                //String oldString = Dao.GetAmount(currentgamezone.getName(), gamename);
-                //Long old = Long.parseLong(oldString);
-                //Long newamount = Long.parseLong(amount);
-                //updated = old +newamount;
                 updated = Long.parseLong(amount);
                 Dao.UpdateAmount(currentgamezone.getName(), updated+"", gamename);
+                
             }catch(Exception ex)
             {
                      JOptionPane.showMessageDialog(jPanel1,
@@ -3113,6 +3125,7 @@ public class MainScreen_StallOwner extends javax.swing.JFrame
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;

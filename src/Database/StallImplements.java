@@ -151,7 +151,6 @@ public class StallImplements implements StallInterface
                    while(rs.next())  
                    {
                     amount = rs.getString(1);
-                 
                    }
                    return amount;
     }
@@ -162,8 +161,7 @@ public class StallImplements implements StallInterface
             final String UpdateAmount = "UPDATE "+GameZoneName+"_games SET Amount = '"+Amount+"' WHERE GameName = '"+GameName+"' AND Date = curdate()";
             PreparedStatement pstmt = conn.prepareStatement(UpdateAmount);
             pstmt.executeUpdate();
-        
-             return true;
+            return true;
        
     }
 
@@ -284,7 +282,7 @@ public class StallImplements implements StallInterface
                  gameslist.add(game);
         }
              
-                   //Code for new Day    
+               //Code for new Day    
                if(gameslist.isEmpty() == true)
                {                
                   //Query for Creating new entry for a day 

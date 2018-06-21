@@ -24,5 +24,6 @@ public interface UserInterface
     public HashMap<String,Boolean> getUserNames(String GameZoneName)throws Exception;
         public HashMap<String,Boolean> getUserNames(String GameZoneName,HashMap<String,Boolean> old)throws Exception;
 
+     public void ChangePassword(User user , String newpassword , String GameZoneName) throws Exception;
     
 }

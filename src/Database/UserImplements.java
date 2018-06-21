@@ -19,7 +19,7 @@ public class UserImplements implements UserInterface
     
    
     Connection conn;
-    UserImplements()throws Exception
+    UserImplements()
     {
         
          conn = Connect.getconnection();
@@ -194,6 +194,19 @@ public class UserImplements implements UserInterface
         
       
         return old;
+    }
+
+    @Override
+    public void ChangePassword(User user, String newpassword,String GameZoneName) throws Exception
+    {
+        String query ="update "+GameZoneName+"_users set Password='"+newpassword+"' where  UserName = ?;";
+     
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setString(1, user.getUserName());
+
+
+        pstmt.executeUpdate();
+      
     }
     
 }

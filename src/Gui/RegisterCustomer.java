@@ -67,9 +67,9 @@ public class RegisterCustomer extends javax.swing.JDialog {
         jLabel41 = new javax.swing.JLabel();
         RegisterNewcustomer_button1 = new javax.swing.JButton();
         ResetButton_Customer1 = new javax.swing.JButton();
-        emp_emailregistercust = new javax.swing.JTextField();
-        emp_contactregistercust = new javax.swing.JTextField();
-        emp_nameregistercust = new javax.swing.JTextField();
+        Name = new javax.swing.JTextField();
+        Email = new javax.swing.JTextField();
+        Contact = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -109,17 +109,17 @@ public class RegisterCustomer extends javax.swing.JDialog {
         getContentPane().add(ResetButton_Customer1);
         ResetButton_Customer1.setBounds(320, 440, 140, 60);
 
-        emp_emailregistercust.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        getContentPane().add(emp_emailregistercust);
-        emp_emailregistercust.setBounds(150, 160, 300, 40);
+        Name.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        getContentPane().add(Name);
+        Name.setBounds(150, 160, 300, 40);
 
-        emp_contactregistercust.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        getContentPane().add(emp_contactregistercust);
-        emp_contactregistercust.setBounds(150, 270, 300, 40);
+        Email.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        getContentPane().add(Email);
+        Email.setBounds(150, 270, 300, 40);
 
-        emp_nameregistercust.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        getContentPane().add(emp_nameregistercust);
-        emp_nameregistercust.setBounds(150, 380, 300, 40);
+        Contact.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        getContentPane().add(Contact);
+        Contact.setBounds(150, 380, 300, 40);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Register New Customer");
@@ -132,9 +132,9 @@ public class RegisterCustomer extends javax.swing.JDialog {
     private void RegisterNewcustomer_button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterNewcustomer_button1ActionPerformed
         // TODO add your handling code here:
 
-        String contact =emp_contactregistercust.getText();
-        String email   =emp_emailregistercust.getText();
-        String name = emp_nameregistercust.getText();
+        String email =Email.getText();
+        String name   =Name.getText();
+        String contact = Contact.getText();
 
         if(contact.length() == 0 || name.length() == 0)
         {
@@ -218,9 +218,9 @@ public class RegisterCustomer extends javax.swing.JDialog {
 
         RegisterCustomer = false;
 
-        emp_contactregistercust.setText("");
-        emp_emailregistercust.setText("");
-        emp_nameregistercust.setText("");
+        Email.setText("");
+        Name.setText("");
+        Contact.setText("");
 
         //code for filled table with new customer list
         DefaultTableModel m = (DefaultTableModel) customertable.getModel();
@@ -245,9 +245,9 @@ public class RegisterCustomer extends javax.swing.JDialog {
     private void ResetButton_Customer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetButton_Customer1ActionPerformed
         // TODO add your handling code here:
 
-        emp_nameregistercust.setText("");
-        emp_emailregistercust.setText("");
-        emp_contactregistercust.setText("");
+        Contact.setText("");
+        Name.setText("");
+        Email.setText("");
     }//GEN-LAST:event_ResetButton_Customer1ActionPerformed
 
     /**
@@ -286,11 +286,11 @@ public class RegisterCustomer extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Contact;
+    private javax.swing.JTextField Email;
+    private javax.swing.JTextField Name;
     private javax.swing.JButton RegisterNewcustomer_button1;
     private javax.swing.JButton ResetButton_Customer1;
-    private javax.swing.JTextField emp_contactregistercust;
-    private javax.swing.JTextField emp_emailregistercust;
-    private javax.swing.JTextField emp_nameregistercust;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
