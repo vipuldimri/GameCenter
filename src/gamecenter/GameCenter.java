@@ -14,7 +14,7 @@ Threading is used for getting the data from the database
 public class GameCenter 
 {
 
-    
+    static String admin= "";
     public static void main(String[] args) throws InterruptedException 
     {
         
@@ -37,7 +37,11 @@ public class GameCenter
                 backgroundthread1.join();
                 splash.setVisible(false);
                
-                //Code If Unable to connect Online Database Server 
+                //Code If Unable to connect Online Database Server
+                if(admin.equals("1"))
+                {
+                    
+                }else{
                 if(backgroundthread1.users == null || backgroundthread1.currentgamezone == null || backgroundthread1.error_flag == true || backgroundthread1.users.size() ==0 )
                 {
                         if(backgroundthread1.confiflag == true)
@@ -55,6 +59,7 @@ public class GameCenter
                       JOptionPane.ERROR_MESSAGE);
                       System.exit(0);
                       //break; this break is Mandatory Do not Comment this
+                }
                 }
                 //Sending Users and stall details to the login screen after Getting Users and GameZone Data 
                 LoginScreen l = new LoginScreen(backgroundthread1.users,backgroundthread1.currentgamezone,backgroundthread1.passwordcheck);
