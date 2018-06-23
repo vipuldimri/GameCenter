@@ -29,7 +29,7 @@ public class UserImplements implements UserInterface
     public ArrayList<User> getAllUsers(String GameZoneName) throws Exception
     {
     
-        final String GetAllUser = "SELECT * FROM GameZoneDB."+GameZoneName+"_users";
+        final String GetAllUser = "SELECT * FROM GameZone."+GameZoneName+"_users";
         ArrayList<User> users = new ArrayList<>();
         
                    Statement stmt=conn.createStatement();  
@@ -48,7 +48,7 @@ public class UserImplements implements UserInterface
     public Stall getGameZoneDetails(int GameZoneID)
     {
         
-         final String Query = "SELECT * FROM GameZoneDB.gamezone where ID = "+GameZoneID+";";
+         final String Query = "SELECT * FROM GameZone.gamezone where ID = "+GameZoneID+";";
         
          Stall currentgamezone = null ;
          
@@ -75,7 +75,7 @@ public class UserImplements implements UserInterface
     public boolean AddEmp(User user,String GameZoneName) throws Exception
     {
              try{
-            final String AddEmp = "INSERT INTO GameZoneDB."+GameZoneName+"_users (Name,Address,Contact,Email,Type,GameZoneID,Password,UserName) VALUES(?,?,?,?,?,?,?,?)";
+            final String AddEmp = "INSERT INTO GameZone."+GameZoneName+"_users (Name,Address,Contact,Email,Type,GameZoneID,Password,UserName) VALUES(?,?,?,?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(AddEmp);
             pstmt.setString(1, user.getName());
             pstmt.setString(2, user.getAddress());
@@ -99,7 +99,7 @@ public class UserImplements implements UserInterface
     public boolean UpdateEmp(User user,String GameZoneName)throws Exception
     {
         
-        String q ="UPDATE `GameZoneDB`.`"+GameZoneName+"_users"+"` \n" +
+        String q ="UPDATE `GameZone`.`"+GameZoneName+"_users"+"` \n" +
 "SET \n" +
 "`Name` =? ,\n" +
 "`Address` =? ,\n" +
@@ -132,7 +132,7 @@ public class UserImplements implements UserInterface
     @Override
     public boolean DeleteEmp(int id,String GameZoneName) throws Exception
     {
-        String query = "DELETE FROM `GameZoneDB`.`"+GameZoneName+"_users"+"` WHERE ID = ?;";
+        String query = "DELETE FROM `GameZone`.`"+GameZoneName+"_users"+"` WHERE ID = ?;";
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setInt(1, id);
 
@@ -144,7 +144,7 @@ public class UserImplements implements UserInterface
     @Override
     public ArrayList<User> getAllUsers(String GameZoneName, ArrayList<User> old)throws Exception
     {
-        final String GetAllUser = "SELECT * FROM GameZoneDB."+GameZoneName+"_users";
+        final String GetAllUser = "SELECT * FROM GameZone."+GameZoneName+"_users";
       
                    old.clear();
                    Statement stmt=conn.createStatement();  
@@ -163,7 +163,7 @@ public class UserImplements implements UserInterface
     @Override
     public HashMap<String, Boolean> getUserNames(String GameZoneName) throws Exception 
     {
-          final String GetAllUser = "SELECT * FROM GameZoneDB."+GameZoneName+"_users";
+          final String GetAllUser = "SELECT * FROM GameZone."+GameZoneName+"_users";
           HashMap<String,Boolean> passwordcheck = new HashMap<>();
         
                    Statement stmt=conn.createStatement();  
@@ -181,7 +181,7 @@ public class UserImplements implements UserInterface
     public HashMap<String, Boolean> getUserNames(String GameZoneName,HashMap<String,Boolean> old) throws Exception 
     {
           old.clear();
-          final String GetAllUser = "SELECT * FROM GameZoneDB."+GameZoneName+"_users";
+          final String GetAllUser = "SELECT * FROM GameZone."+GameZoneName+"_users";
           
         
                    Statement stmt=conn.createStatement();  

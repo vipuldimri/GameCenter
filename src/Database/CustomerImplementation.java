@@ -31,7 +31,7 @@ public class CustomerImplementation implements CustomerInterface
     {
         
         
-        final String Register = "INSERT INTO `GameZoneDB`.`"+TableName+"`(`Name`,`Contact`,`EmailId`)VALUES(?,?,?);";
+        final String Register = "INSERT INTO `GameZone`.`"+TableName+"`(`Name`,`Contact`,`EmailId`)VALUES(?,?,?);";
         
              PreparedStatement pstmt = conn.prepareStatement(Register);
              pstmt.setString(1, cust.getName());
@@ -52,7 +52,7 @@ public class CustomerImplementation implements CustomerInterface
     public ArrayList<Customers> getCust(String TableName) throws Exception {
         ArrayList<Customers> custlist = new ArrayList<>();
         
-        String Query ="SELECT * FROM GameZoneDB."+TableName+";";
+        String Query ="SELECT * FROM GameZone."+TableName+";";
         Statement stmt=conn.createStatement();  
         ResultSet rs = stmt.executeQuery(Query);
         while(rs.next())  
@@ -69,7 +69,7 @@ public class CustomerImplementation implements CustomerInterface
     {
        
         old.clear();
-        String Query ="SELECT * FROM GameZoneDB."+TableName+";";
+        String Query ="SELECT * FROM GameZone."+TableName+";";
         Statement stmt=conn.createStatement();  
         ResultSet rs = stmt.executeQuery(Query);
         while(rs.next())  

@@ -9,7 +9,7 @@ import java.sql.Statement;
 public class StallImplements implements StallInterface
 {
  
-   static final String GetGameZones = "SELECT * from GameZoneDB.gamezone;";
+   static final String GetGameZones = "SELECT * from GameZone.gamezone;";
  
     public String Errormessage ;
  
@@ -67,7 +67,7 @@ public class StallImplements implements StallInterface
     @Override
     public ArrayList<Games> GetGames(String GameZoneName) throws Exception 
     {
-        String Query="SELECT * FROM GameZoneDB."+GameZoneName+"_games  WHERE Date = curdate();";
+        String Query="SELECT * FROM GameZone."+GameZoneName+"_games  WHERE Date = curdate();";
         ArrayList<Games> gameslist = new ArrayList<>();
         Statement stmt=conn.createStatement();  
         ResultSet rs = stmt.executeQuery(Query);
@@ -142,7 +142,7 @@ public class StallImplements implements StallInterface
     @Override
     public String GetAmount(String GameZoneName,String gamename) throws Exception 
     {
-          //string Query="SELECT * FROM GameZoneDB."+GameZoneName+"_games  WHERE Date = curdate();";
+          //string Query="SELECT * FROM GameZone."+GameZoneName+"_games  WHERE Date = curdate();";
           String queryforgettingoldamount = "SELECT Amount from "+GameZoneName+"_games WHERE GameName = '"+gamename+"';";
 
                    String amount = "";
@@ -186,7 +186,7 @@ public class StallImplements implements StallInterface
     public ArrayList<Games> GetGamesPerticularDate(String GameZoneName, Date date) throws Exception {
        
         java.sql.Date d = new java.sql.Date(date.getTime());
-        String Query="SELECT * FROM GameZoneDB."+GameZoneName+"_games  WHERE Date = '"+d+"';";
+        String Query="SELECT * FROM GameZone."+GameZoneName+"_games  WHERE Date = '"+d+"';";
         
         ArrayList<Games> gameslist = new ArrayList<>();
         Statement stmt=conn.createStatement();  
@@ -209,7 +209,7 @@ public class StallImplements implements StallInterface
         java.sql.Date edate = new java.sql.Date(Enddate.getTime());
         
         
-        String Query="SELECT * FROM GameZoneDB."+GameZoneName+"_games  WHERE Date >= '"+sdate+"' AND Date <= '"+edate+"';";
+        String Query="SELECT * FROM GameZone."+GameZoneName+"_games  WHERE Date >= '"+sdate+"' AND Date <= '"+edate+"';";
        System.out.println(Query);
         ArrayList<Games> gameslist = new ArrayList<>();
         Statement stmt=conn.createStatement();  
@@ -271,7 +271,7 @@ public class StallImplements implements StallInterface
     @Override
     public void AddNewGames(String GameZoneName, String Game) throws Exception 
     {
-        String Query="SELECT * FROM GameZoneDB."+GameZoneName+"_games  WHERE Date = curdate();";
+        String Query="SELECT * FROM GameZone."+GameZoneName+"_games  WHERE Date = curdate();";
         ArrayList<Games> gameslist = new ArrayList<>();
         Statement stmt=conn.createStatement();  
         ResultSet rs = stmt.executeQuery(Query);

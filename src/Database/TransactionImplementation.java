@@ -61,7 +61,7 @@ public class TransactionImplementation implements TransactionInterface
         
         ArrayList<Recharge> transactiondetails = new ArrayList<>();
         
-        TransDetails = "SELECT * FROM GameZoneDB."+TableName+" WHERE MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE()) ORDER BY  Date desc" ;
+        TransDetails = "SELECT * FROM GameZone."+TableName+" WHERE MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE()) ORDER BY  Date desc" ;
         
                    Statement stmt=conn.createStatement();  
                    ResultSet rs = stmt.executeQuery(TransDetails);
@@ -90,7 +90,7 @@ public class TransactionImplementation implements TransactionInterface
     {
            
                    old.clear();
-                   TransDetails = "SELECT * FROM GameZoneDB."+TableName+"  WHERE MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE()) ORDER BY  Date desc";
+                   TransDetails = "SELECT * FROM GameZone."+TableName+"  WHERE MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE()) ORDER BY  Date desc";
                    Statement stmt=conn.createStatement();  
                    ResultSet rs = stmt.executeQuery(TransDetails);
                    while(rs.next())  
@@ -117,7 +117,7 @@ public class TransactionImplementation implements TransactionInterface
     {
         ArrayList<Recharge> transactiondetails = new ArrayList<>();
         
-        TransDetails = "SELECT * FROM GameZoneDB."+TableName+" WHERE DATE(Date)>= '"+Start+"' AND DATE(Date) <= '"+End+"'" ;
+        TransDetails = "SELECT * FROM GameZone."+TableName+" WHERE DATE(Date)>= '"+Start+"' AND DATE(Date) <= '"+End+"'" ;
         
                    Statement stmt=conn.createStatement();  
                    ResultSet rs = stmt.executeQuery(TransDetails);
@@ -145,7 +145,7 @@ public class TransactionImplementation implements TransactionInterface
     {
      ArrayList<OtherTrasactions> transactiondetails = new ArrayList<>();
         
-        TransDetails = "SELECT * FROM GameZoneDB."+TabName+" WHERE MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE()) ORDER BY  Date desc" ;
+        TransDetails = "SELECT * FROM GameZone."+TabName+" WHERE MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE()) ORDER BY  Date desc" ;
         
                    Statement stmt=conn.createStatement();  
                    ResultSet rs = stmt.executeQuery(TransDetails);
@@ -175,7 +175,7 @@ public class TransactionImplementation implements TransactionInterface
     public ArrayList<OtherTrasactions> GetOthertrasactions(String TableName, ArrayList<OtherTrasactions> old) throws Exception {
                
             old.clear();
-            TransDetails = "SELECT * FROM GameZoneDB."+TableName+"  WHERE MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE()) ORDER BY  Date desc";
+            TransDetails = "SELECT * FROM GameZone."+TableName+"  WHERE MONTH(Date) = MONTH(CURRENT_DATE()) AND YEAR(Date) = YEAR(CURRENT_DATE()) ORDER BY  Date desc";
             Statement stmt=conn.createStatement();  
             ResultSet rs = stmt.executeQuery(TransDetails);
             while(rs.next())  
@@ -205,7 +205,7 @@ public class TransactionImplementation implements TransactionInterface
     {
         ArrayList<OtherTrasactions> transactiondetails = new ArrayList<>();
         
-         TransDetails = "SELECT * FROM GameZoneDB."+TableName+" WHERE DATE(Date)>= '"+Start+"' AND DATE(Date) <= '"+End+"'" ;
+         TransDetails = "SELECT * FROM GameZone."+TableName+" WHERE DATE(Date)>= '"+Start+"' AND DATE(Date) <= '"+End+"'" ;
                    Statement stmt=conn.createStatement();  
                    ResultSet rs = stmt.executeQuery(TransDetails);
                    while(rs.next())  

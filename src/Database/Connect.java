@@ -9,7 +9,7 @@ public class Connect
     {
         
                    conn = null;
-                   String urlnew ="jdbc:mysql://gamezone2.cn406nlqr1z7.us-east-2.rds.amazonaws.com:3306/GameZoneDB";
+   
 	          String url =  "jdbc:mysql://gamezone.cw0b5ff1vv8q.us-east-2.rds.amazonaws.com:3306/GameZone";
 	           Class.forName("com.mysql.jdbc.Driver");
 	           conn = DriverManager.getConnection (url,"vasant","gamezone");

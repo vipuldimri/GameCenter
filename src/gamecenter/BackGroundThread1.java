@@ -49,13 +49,13 @@ public class BackGroundThread1 extends Thread
         {
             String Gamezonename = "";
             String Id="";
-            String admin="";
+           
             try 
 		{
 			Properties prop2 = new Properties();
 			prop2.load(new FileInputStream("c://stark//config.properties"));
 			Id = prop2.getProperty("ID");
-                        admin = prop2.getProperty("admin");
+                      
                         Gamezonename = prop2.getProperty("gamezonename");
 		
 		}catch(Exception eta)
@@ -63,18 +63,14 @@ public class BackGroundThread1 extends Thread
 		   error_flag = true;
                    confiflag = true;
 		}
-            if(admin.endsWith("1"))
-            {
-                GameCenter.admin = "1";
-            }else{
+ 
             UserInterface Dao   = UserFactory.getInstance();
             users = Dao.getAllUsers(Gamezonename);   ///change this according to gamezone
             //above lines gets all the users for current GameZone;
             int id =  Integer.parseInt(Id);
             currentgamezone = Dao.getGameZoneDetails(id) ; //chnage this according to gamezone id;
-            
             passwordcheck = Dao.getUserNames(Gamezonename); //chnage this according to gamezone
-            }
+            
         } 
         catch (Exception ex) 
         {
