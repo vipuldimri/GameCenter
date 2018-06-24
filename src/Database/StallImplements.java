@@ -1,14 +1,23 @@
 
 package Database;
-import static Database.Connect.conn;
 import java.util.*;
 import gamecenter.*;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 public class StallImplements implements StallInterface
 {
  
+    
+       
+    Connection conn;
+    StallImplements()
+    {
+        
+         conn = Connect.getconnection();
+    }
+    
    static final String GetGameZones = "SELECT * from GameZone.gamezone;";
  
     public String Errormessage ;
@@ -158,6 +167,8 @@ public class StallImplements implements StallInterface
     @Override
     public boolean UpdateAmount(String GameZoneName, String Amount,String GameName) throws Exception 
     {
+        
+            
             final String UpdateAmount = "UPDATE "+GameZoneName+"_games SET Amount = '"+Amount+"' WHERE GameName = '"+GameName+"' AND Date = curdate()";
             PreparedStatement pstmt = conn.prepareStatement(UpdateAmount);
             pstmt.executeUpdate();
